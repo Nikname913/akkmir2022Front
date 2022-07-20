@@ -1,0 +1,189 @@
+/* eslint-disable no-unused-vars */
+import React from 'react'
+import { Link } from "react-router-dom"
+import css from '../../styles/mobile/mobileStyles'
+import Input from '../comps/input/Input.jsx'
+import Button from '../comps/button/Button.jsx'
+import sravnenieImg from '../../img/sravnenie.png'
+import likeImg from '../../img/like.png'
+
+const { Wrapper, ContentLine } = css.HeaderStyles
+
+const MobileHeader = (props) => {
+
+  const { screen = 420 } = props
+
+  return (
+    <React.Fragment>
+      <Wrapper 
+        style={{ 
+          marginTop: '20px', 
+          marginLeft: '20px',
+          borderTopRightRadius: '4px',
+          borderTopLeftRadius: '4px'  
+        }}
+      > 
+        <ContentLine width={screen}>
+
+          <Input
+            params={{ width: screen - ( 40 + 40 + 12 + 12 + 8 + 8 )}}
+            type={"text"}
+            placeholder={"найти товар или услугу"}
+            inputCss={{ border: 'none' }}
+            css={{}}
+          />
+          <Button  
+            params={{
+              width: 44,
+              height: 44,
+              background: 'white'
+            }}
+            inner={""}
+            css={{
+              fontSize: '13px',
+              marginLeft: '8px',
+              borderRadius: '14px'
+            }}
+            children={
+              <img 
+                alt={""}
+                src={sravnenieImg}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '17px',
+                  left: 0,
+                  marginLeft: '12px',
+                  top: '50%',
+                  marginTop: '-9px'
+                }}
+              />
+            }
+          />
+          <Button  
+            params={{
+              width: 44,
+              height: 44,
+              background: 'white'
+            }}
+            inner={""}
+            css={{
+              fontSize: '13px',
+              marginLeft: '8px',
+              borderRadius: '14px'
+            }}
+            children={
+              <img 
+                alt={""}
+                src={likeImg}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '17px',
+                  left: 0,
+                  marginLeft: '13px',
+                  top: '50%',
+                  marginTop: '-7px'
+                }}
+              />
+            }
+          />
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '12px' }}>
+
+          <Button  
+            params={{
+              width: 24,
+              height: 24,
+              background: '#FFB600'
+            }}
+            inner={""}
+            css={{
+              fontSize: '13px',
+              borderRadius: '12px'
+            }}
+          />
+          <Button  
+            params={{
+              width: 24,
+              height: 24,
+              background: '#FFB600'
+            }}
+            inner={""}
+            css={{
+              fontSize: '13px',
+              marginLeft: '8px',
+              borderRadius: '12px'
+            }}
+          />
+
+          <Link style={{ textDecoration: 'none', color: 'black' }} to="/home"><Button  
+            params={{
+              width: 90,
+              height: 24,
+              background: '#FFB600'
+            }}
+            inner={"АККМИР"}
+            css={{
+              fontSize: '12px',
+              marginLeft: '8px',
+              borderRadius: '12px',
+              color: '#565656',
+              fontWeight: 'bold',
+              letterSpacing: 1,
+              fontStyle: 'italic',
+              lineHeight: '24px'
+            }}
+          /></Link>
+
+          <Button  
+            params={{
+              width: screen - ( 24 + 24 + 8 + 8 + 90 + 8 + 90 + 8 + 100 + 26 ),
+              height: 24,
+              background: '#565656'
+            }}
+            inner={""}
+            css={{ borderRadius: '12px', opacity: '0' }}
+          />
+
+          <Button  
+            params={{
+              width: 90,
+              height: 24,
+              background: 'white'
+            }}
+            inner={"позвоните"}
+            css={{
+              fontSize: '11px',
+              marginLeft: '8px',
+              borderRadius: '12px',
+              color: 'black',
+              lineHeight: '24px'
+            }}
+          />
+          <Button  
+            params={{
+              width: 100,
+              height: 24,
+              background: 'white'
+            }}
+            inner={"екатеринбург"}
+            css={{
+              fontSize: '11px',
+              marginLeft: '8px',
+              borderRadius: '12px',
+              color: 'black',
+              lineHeight: '24px'
+            }}
+          />
+
+        </ContentLine>
+
+      </Wrapper>
+    </React.Fragment>
+  )
+
+}
+
+export default MobileHeader
