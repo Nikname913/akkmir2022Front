@@ -17,7 +17,7 @@ const css = {
     transition: all 400ms;
   `,
   ShadowClose: styled.span`
-    dislay: block;
+    display: block;
     position: absolute;
     width: 30px;
     height: 30px;
@@ -26,6 +26,34 @@ const css = {
     top: 0;
     margin-top: 16px;
     cursor: pointer;
+  `,
+  MessageWindow: styled.div`
+    display: block;
+    position: fixed;
+    width: 450px;
+    height: 300px;
+    top: 50%;
+    margin-top: -150px;
+    left: 50%; 
+    margin-left: -225px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    padding-top: 30px;
+    cursor: pointer;
+    box-shadow: 10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%);
+  `,
+  MessageWindowImg: styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #2BC631;
+    margin: 0 auto;
   `
 
 }

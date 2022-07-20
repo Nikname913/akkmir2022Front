@@ -13,25 +13,25 @@ export const makeOrderReducer = createSlice({
   },
   reducers: {
 
-    setNumber:       (state, action) => {
+    setNumber: (state, action) => {
       state.number = action.payload
     },
-    setModel:        (state, action) => {
+    setModel: (state, action) => {
       state.model = action.payload
     },
-    setName:         (state, action) => {
+    setName: (state, action) => {
       state.name = action.payload
     },
-    setEmail:        (state, action) => {
+    setEmail: (state, action) => {
       state.email = action.payload
     },
-    setPaytype:      (state, action) => {
+    setPaytype: (state, action) => {
       state.paytype = action.payload
     },
     setDiliverytype: (state, action) => {
       state.diliverytype = action.payload
     },
-    setAddress:      (state, action) => {
+    setAddress: (state, action) => {
       state.address = action.payload
     },
 

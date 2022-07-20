@@ -11,6 +11,7 @@ import MobileScreen from './bricks/mobile/Screen'
 import MobileFooter from './bricks/mobile/Footer'
 import MobileMenu from './bricks/mobile/views/Menu'
 import ModalWindow from './services/modal.service'
+import Message from './services/message.service'
 import { useSelector } from 'react-redux'
 import Rds from './appStore/reducers/storageReducers/mainReducer'
 
@@ -22,6 +23,7 @@ const App = () => {
 
   const [ SCREEN, SETSCREEN ] = useState(3000)
   const showModalWindow = useSelector(state => state.main.modalShow)
+  const showMessageWindow = useSelector(state => state.main.messageShow)
   const isMobile = useSelector(state => state.main.mobile)
   
   useEffect(() => { Rds.initStore() },[])
@@ -38,6 +40,7 @@ const App = () => {
         <Footer></Footer>
 
         { showModalWindow && <ModalWindow></ModalWindow> }
+        { showMessageWindow && <Message></Message> }
 
       </React.Fragment> : <React.Fragment>
 

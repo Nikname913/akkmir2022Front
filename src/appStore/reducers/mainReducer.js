@@ -3,10 +3,11 @@ export const mainReducer = createSlice({
 
   name: 'main',
   initialState: {
-    auth: null,
     actualOrder: [],
     modalShow: false,
     modalContent: false,
+    messageShow: false,
+    messageContent: false,
     productPageDiscriptionFork: 0,
     catalogMenu: [
       { id: '001', 
@@ -135,35 +136,41 @@ export const mainReducer = createSlice({
   },
   reducers: {
 
-    reducerOne:         (state, action) => {},
-    reducerTwo:         (state, action) => {},
+    reducerOne: (state, action) => {},
+    reducerTwo: (state, action) => {},
     productPageReducer: (state, action) => {
 
       state.productPageDiscriptionFork = action.payload
 
     },
-    setInfoPageTitle:   (state, action) => {
+    setInfoPageTitle: (state, action) => {
       state.infoPageTitle = action.payload
     },
-    setOrdersCount:     (state, action) => {
+    setOrdersCount: (state, action) => {
       state.ordersCount = action.payload
     },
-    setSravnenieCount:  (state, action) => {
+    setSravnenieCount: (state, action) => {
       state.sravnenieCount = action.payload
     },
-    setActualItem:      (state, action) => {
+    setActualItem: (state, action) => {
       state.actualItem = action.payload
     },
-    setActualCategory:  (state, action) => {
+    setActualCategory: (state, action) => {
       state.actualCategory = action.payload
     },
-    setModalShow:       (state, action) => {
+    setModalShow: (state, action) => {
       state.modalShow = action.payload
     },
-    setModalContent:    (state, action) => {
+    setModalContent: (state, action) => {
       state.modalContent = action.payload
     },
-    setMobile:          (state, action) => {
+    setMessageShow: (state, action) => {
+      state.messageShow = action.payload
+    },
+    setMessageContent: (state, action) => {
+      state.messageContent = action.payload
+    },
+    setMobile: (state, action) => {
       state.mobile = true
     }
     
@@ -179,6 +186,8 @@ export const { reducerOne,
   setActualCategory,
   setModalShow,
   setModalContent,
+  setMessageShow,
+  setMessageContent,
   setMobile,
   setInfoPageTitle } = mainReducer.actions
 export default mainReducer.reducer
