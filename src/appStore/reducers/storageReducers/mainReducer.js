@@ -89,6 +89,13 @@ class Reducer {
     localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
 
   }
+
+  removeAllOrders() {
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(this.#startStore))
+
+  }
+
 }
 
 const Rds = new Reducer()

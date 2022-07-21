@@ -2,16 +2,19 @@
 import React from 'react'
 import css from '../styles/modal-window'
 import success from '../img/success.png'
+import { useSelector, useDispatch } from 'react-redux'
+import { setMessageShow } from '../appStore/reducers/mainReducer'
+
+const { MessageWindow, MessageWindowImg } = css
 
 const Message = (props) => {
 
-  const { MessageWindow, MessageWindowImg } = css
-  const { title = 'Примерный заголовок сообщения', 
-          message = 'Примерный текст сообщения, которое будет выводиться в окне, в те моменты когда ничего полезного в нем выводиться не будет' } = props 
+  const dispatch = useDispatch()
+  const { title, message } = useSelector(state => state.main.messageContent)
 
   return (
     <React.Fragment>
-      <MessageWindow>
+      <MessageWindow onClick={() => dispatch(setMessageShow(false))}>
 
         <MessageWindowImg>
           <img

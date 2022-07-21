@@ -44,6 +44,7 @@ const Main = () => {
       {/* root page here */}
       {/* root page here */}
 
+      <Route path="/success-order" element={<InfoPage/>} />
       <Route path="/" element={<MainPage/>} />
     </Routes>
   )

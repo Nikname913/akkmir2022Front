@@ -59,7 +59,7 @@ const ReactSelect = (props) => {
 
   const { 
     params, 
-    placeholder = 'выберите тип оплаты',
+    placeholder = 'Выберите тип оплаты',
     data = null } = props
 
   return (

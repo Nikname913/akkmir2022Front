@@ -31,7 +31,7 @@ const css = {
     display: block;
     position: fixed;
     width: 450px;
-    height: 300px;
+    height: 280px;
     top: 50%;
     margin-top: -150px;
     left: 50%; 

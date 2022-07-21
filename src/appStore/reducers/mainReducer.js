@@ -6,8 +6,11 @@ export const mainReducer = createSlice({
     actualOrder: [],
     modalShow: false,
     modalContent: false,
-    messageShow: false,
-    messageContent: false,
+    messageShow: true,
+    messageContent: {
+      title: '-- -- -- --',
+      message: '-- -- -- --'
+    },
     productPageDiscriptionFork: 0,
     catalogMenu: [
       { id: '001', 

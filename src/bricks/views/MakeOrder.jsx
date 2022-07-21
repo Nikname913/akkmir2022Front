@@ -8,7 +8,19 @@ import ReactSelect from '../comps/ReactSelect'
 import Button from '../comps/button/Button.jsx'
 import OrderItemsLine from '../comps/OrderItemsLine'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setMessageShow, 
+  setMessageContent, 
+  setInfoPageTitle,
+  setOrdersCount } from '../../appStore/reducers/mainReducer'
+import { setNumber,
+  setModel,
+  setName,
+  setEmail,
+  setPaytype,
+  setDiliverytype,
+  setAddress } from '../../appStore/reducers/makeOrderReducer'
+import { useNavigate } from 'react-router-dom'
 
 const MakeOrderWrapper = css.OrderWrapper
 const Form = css.OrderWrapperForm
@@ -29,6 +41,9 @@ const MakeOrder = () => {
   const paytype = useSelector(state => state.newOrder.paytype)
   const diliverytype = useSelector(state => state.newOrder.diliverytype)
   const address = useSelector(state => state.newOrder.address)
+
+  const dispatch = useDispatch()
+  let navigate = useNavigate()
 
   function dataValidate(param) {
 
@@ -64,6 +79,27 @@ const MakeOrder = () => {
         dataValidate(userPaytype)      + 
         dataValidate(userDiliverytype) + 
         dataValidate(userAddress)
+
+      dispatch(setNumber(null))
+      dispatch(setModel(null))
+      dispatch(setName(null))
+      dispatch(setEmail(null))
+      dispatch(setPaytype(null))
+      dispatch(setDiliverytype(null))
+      dispatch(setAddress(null))
+
+      Rds.removeAllOrders()
+      dispatch(setOrdersCount(0))
+      dispatch(setInfoPageTitle('Заказ успешно оформлен'))
+      navigate('../success-order')
+
+    } else {
+
+      dispatch(setMessageContent({
+        title: 'Ошибка заполнения формы',
+        message: 'Пожалуйста, заполните обязательные поля и попробуйте офрмить заказ повторно'
+      }))
+      dispatch(setMessageShow(true))
 
     }
   }
@@ -336,6 +372,15 @@ const MakeOrder = () => {
                   marginRight: '24px',
                   boxShadow: '0px 0px 1.5px grey',
                   marginBottom: '18px'
+                }}
+                action={() => {
+                  
+                  dispatch(setMessageContent({
+                    title: 'Данная функция в разработке',
+                    message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована'
+                  }))
+                  dispatch(setMessageShow(true))
+
                 }}
               />
 
