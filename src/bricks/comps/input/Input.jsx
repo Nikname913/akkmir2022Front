@@ -89,7 +89,6 @@ const Input = (props) => {
           fontSize: '13px',
           paddingLeft: '12px'
         } : {
-          ...inputCss,
           display: 'block',
           width: '100%',
           height: '44px',
@@ -97,7 +96,8 @@ const Input = (props) => {
           borderRadius: '8px',
           boxShadow: '0px 0px 1.5px grey',
           fontSize: '13px',
-          paddingLeft: '12px'
+          paddingLeft: '12px',
+          ...inputCss,
         }}
       />
 

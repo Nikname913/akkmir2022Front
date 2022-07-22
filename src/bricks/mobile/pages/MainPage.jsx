@@ -7,12 +7,15 @@ import CardPreview from '../views/CardPreview'
 import AdressCard from '../views/AdressCard'
 import AboutCard from '../views/AboutCard'
 import Button from '../../comps/button/Button.jsx'
+import ReactSelect from '../../comps/ReactSelect'
+import { useSelector } from 'react-redux'
+
 import caricon from '../../../img/caricon.png'
 import mobileShop from '../../../img/mobileShop.png'
 import mobileService from '../../../img/mobileService.png'
 import mobileCatalog from '../../../img/mobileCatalog.png'
-import ReactSelect from '../../comps/ReactSelect'
-import { useSelector } from 'react-redux'
+import arrowRight from '../../../img/arrowRight.png'
+import change from '../../../img/change.png'
 
 const { Wrapper, 
   ContentLine, 
@@ -20,6 +23,7 @@ const { Wrapper,
   DiliveryBanner, 
   SelectAkkum,
   LogoBlock,
+  CatalogTagBlock,
   CatalogMenu,
   CatalogMenuItem,
   PopularScrollWrapper } = css.ScreenStyles
@@ -187,7 +191,29 @@ const MainPage = (props) => {
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <SelectAkkum width={screen}>
-            <h4 style={{ marginBottom: '1px', marginTop: '0px', textAlign: 'center' }}>Подбор аккумулятора</h4>
+              
+
+            <img 
+              style={{ 
+                display: 'block', 
+                position: 'absolute',
+                width: '19px',
+                left: '0px',
+                marginLeft: '19px'
+              }} 
+              src={change} 
+              alt={""}
+            />  
+            <h4 
+              style={{ 
+                marginBottom: '1px', 
+                marginTop: '0px', 
+                textAlign: 'center',
+                cursor : 'pointer',
+              }}
+            >
+            
+              Подбор аккумулятора</h4>
           </SelectAkkum>
 
         </ContentLine>
@@ -293,7 +319,7 @@ const MainPage = (props) => {
             >
               <ReactSelect 
                 params={{ width: 166 }}
-                placeholder={"выберите марку"}
+                placeholder={"Выберите марку"}
                 data={[
                   { value: 'card', label: '---' },
                   { value: 'cash', label: '---' },
@@ -303,7 +329,7 @@ const MainPage = (props) => {
               <div style={{ width: '12px' }}></div>
               <ReactSelect 
                 params={{ width: 166 }}
-                placeholder={"модель авто"}
+                placeholder={"Модель авто"}
                 data={[
                   { value: 'card', label: '---' },
                   { value: 'cash', label: '---' },
@@ -318,11 +344,12 @@ const MainPage = (props) => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 position: 'relative',
+                marginBottom: '12px'
               }}
             >
               <ReactSelect 
                 params={{ width: 166 }}
-                placeholder={"поколение авто"}
+                placeholder={"Поколение авто"}
                 data={[
                   { value: 'card', label: '---' },
                   { value: 'cash', label: '---' },
@@ -332,13 +359,56 @@ const MainPage = (props) => {
               <div style={{ width: '12px' }}></div>
               <ReactSelect 
                 params={{ width: 166 }}
-                placeholder={"объем двигателя"}
+                placeholder={"Двигатель авто"}
                 data={[
                   { value: 'card', label: '---' },
                   { value: 'cash', label: '---' },
                   { value: 'online', label: '---' }
                 ]}
               />
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"Показать"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px',
+                  marginRight: '10px'
+                }}
+              />
+
+              <Button  
+                params={{
+                  width: 174,
+                  height: 35,
+                  background: '#2BC631'
+                }}
+                inner={"Подбор специалистом"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px'
+                }}
+              />
+
             </div>
 
           </SelectAkkum>
@@ -351,7 +421,14 @@ const MainPage = (props) => {
           <LogoBlock style={{ fontWeight: 'bold' }}>VARTA</LogoBlock>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '38px' }}>
+        <ContentLine width={screen} style={{ marginTop: '8px', marginBottom: '2px', minHeight: '0px' }}>
+
+          <CatalogTagBlock>для легковых</CatalogTagBlock>
+          <CatalogTagBlock>для грузовых</CatalogTagBlock>
+          <CatalogTagBlock>для мотоциклов</CatalogTagBlock>
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '30px' }}>
 
           <CatalogMenu width={screen}>
 
@@ -360,7 +437,7 @@ const MainPage = (props) => {
                 style={{ 
                   display: 'block', 
                   position: 'relative',
-                  width: '34px'
+                  width: '30px'
                 }} 
                 src={mobileCatalog} 
                 alt={""}
@@ -381,7 +458,7 @@ const MainPage = (props) => {
                 style={{ 
                   display: 'block', 
                   position: 'relative',
-                  width: '34px'
+                  width: '30px'
                 }} 
                 src={mobileCatalog} 
                 alt={""}
@@ -395,14 +472,14 @@ const MainPage = (props) => {
                   top: '100%',
                   marginTop: '8px' 
                 }}
-              >Спец жидкости</span>
+              >Жидкости</span>
             </CatalogMenuItem>
             <CatalogMenuItem width={screen}>
               <img 
                 style={{ 
                   display: 'block', 
                   position: 'relative',
-                  width: '34px'
+                  width: '30px'
                 }} 
                 src={mobileCatalog} 
                 alt={""}
@@ -416,14 +493,14 @@ const MainPage = (props) => {
                   top: '100%',
                   marginTop: '8px' 
                 }}
-              >Электроника</span>
+              >Электро</span>
             </CatalogMenuItem>
             <CatalogMenuItem width={screen}>
               <img 
                 style={{ 
                   display: 'block', 
                   position: 'relative',
-                  width: '34px'
+                  width: '30px'
                 }} 
                 src={mobileCatalog} 
                 alt={""}
@@ -444,7 +521,7 @@ const MainPage = (props) => {
                 style={{ 
                   display: 'block', 
                   position: 'relative',
-                  width: '34px'
+                  width: '30px'
                 }} 
                 src={mobileCatalog} 
                 alt={""}
@@ -458,15 +535,45 @@ const MainPage = (props) => {
                   top: '100%',
                   marginTop: '8px' 
                 }}
-              >Инструменты</span>
+              >Инструмент</span>
             </CatalogMenuItem>
 
           </CatalogMenu>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '5px', marginBottom: '6px' }}>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginTop: '5px', 
+            marginBottom: '6px', 
+            justifyContent: 'space-between' 
+          }}
+        >
 
           <h4>Популярные товары</h4>
+          <span
+            style={{
+              display: 'block',
+              position: 'relative',
+              fontSize: '13px',
+              color: 'grey',
+              cursor: 'pointer',
+              paddingRight: '33px'
+            }}
+          >
+            <img 
+              style={{ 
+                display: 'block', 
+                position: 'absolute',
+                width: '18px',
+                left: '100%',
+                marginLeft: '-24px',
+                marginTop: '1px'
+              }} 
+              src={arrowRight} 
+              alt={""}
+            />
+            Смотреть все</span>
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>

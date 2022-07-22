@@ -6,6 +6,8 @@ import MainPage from './pages/MainPage'
 import OrderPage from './pages/OrderPage'
 import ProductPage from './pages/ProductPage'
 import CabinetPage from './pages/CabinetPage'
+import ChangePage from './pages/ChangePage'
+import CatalogPage from './pages/CatalogPage'
 
 const MobileScreen = (props) => {
 
@@ -14,12 +16,12 @@ const MobileScreen = (props) => {
   return (
     <Routes>
       <Route 
-        path="/modal-catalog" 
-        element={<ProductPage screen={screen}/>} 
+        path="/catalog" 
+        element={<CatalogPage screen={screen}/>} 
       />
       <Route 
         path="/order" 
-        element={<ProductPage screen={screen}/>} 
+        element={<OrderPage screen={screen}/>} 
       />
       <Route 
         path="/product" 
@@ -27,7 +29,7 @@ const MobileScreen = (props) => {
       />
       <Route 
         path="/cabinet" 
-        element={<ProductPage screen={screen}/>} 
+        element={<CabinetPage screen={screen}/>} 
       />
       <Route 
         path="/home" 

@@ -111,6 +111,19 @@ const css = {
       cursor: pointer;
       box-shadow: 22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18);
     `,
+    CatalogTagBlock: styled.span`
+      display: block;
+      position: relative;
+      height: auto;
+      border-radius: 12px;
+      margin-right: 12px;
+      background-color: white;
+      font-size: 13px;
+      border: 1px solid #D3D3D3;
+      color: grey;
+      cursor: pointer;
+      padding: 4px 12px 5px;
+    `,
     CatalogMenu: styled.div`
       display: flex;
       flex-direction: row;
@@ -151,7 +164,7 @@ const css = {
       ProductPhoto: styled.div`
         display: flex;
         flex-direction: row;
-        aling-items: center;
+        align-items: center;
         justify-content: space-around;
         position: relative;
         width: 100%;
@@ -196,7 +209,35 @@ const css = {
         padding-left: 12px;
         padding-right: 12px;
       `
-    } 
+    },
+    CatalogPage: {
+      CatalogItem: styled.div`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        width: ${props => props.width}px;
+        height: ${props => props.height}px;
+        margin-bottom: ${props => props.marginBottom}px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18);
+        cursor: pointer;
+        padding: 10px;
+        padding-bottom: 12px;
+      `,
+      CatalogLastItem: styled.div`
+        display: block;
+        position: relative;
+        width: ${props => props.width}px;
+        height: ${props => props.height}px;
+        margin-bottom: ${props => props.marginBottom}px;
+        border-radius: 10px;
+        background-color: #565656;
+        cursor: pointer;
+      `
+    }
 
   },
   FooterStyles: {

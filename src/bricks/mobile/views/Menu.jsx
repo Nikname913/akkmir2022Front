@@ -16,28 +16,30 @@ const MobileMenu = (props) => {
     <React.Fragment>
       <Wrapper style={{ marginLeft: '20px' }}>
 
-        <Link style={{ textDecoration: 'none', color: 'black' }} to="/home"><MenuItem width={screen}>
-          <img 
-            src={cabinet} 
-            alt={""}
-            style={{
-              display: 'block',
-              position: 'absolute',
-              width: '20px',
-              marginBottom: '16px'
-            }}
-          />
-          <span 
-            style={{ 
-              fontSize: '11px', 
-              textAlign: 'center',
-              width: '100%',
-              display: 'block',
-            }}
-          >
-            
-            Главная</span>
-        </MenuItem></Link>
+        <Link style={{ textDecoration: 'none', color: 'black' }} to="/home">
+          <MenuItem width={screen}>
+            <img 
+              src={cabinet} 
+              alt={""}
+              style={{
+                display: 'block',
+                position: 'absolute',
+                width: '20px',
+                marginBottom: '16px'
+              }}
+            />
+            <span 
+              style={{ 
+                fontSize: '11px', 
+                textAlign: 'center',
+                width: '100%',
+                display: 'block',
+              }}
+            >
+              
+              Главная</span>
+          </MenuItem>
+        </Link>
         <MenuItem width={screen}>
           <img 
             src={cabinet} 
@@ -60,41 +62,43 @@ const MobileMenu = (props) => {
             
             Магазины</span>
         </MenuItem>
-        <MenuItem width={screen}>
-          <span
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              position: 'absolute',
-              width: '48px',
-              height: '48px',
-              backgroundColor: '#565656',
-              borderRadius: '4px',
-              marginBottom: '20px' 
-            }}
-          >
-            <img 
-              src={catalog} 
-              alt={""}
+        <Link style={{ textDecoration: 'none', color: 'black' }} to="/catalog">
+          <MenuItem width={screen}>
+            <span
               style={{
-                display: 'block',
-                width: '22px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'absolute',
+                width: '48px',
+                height: '48px',
+                backgroundColor: '#565656',
+                borderRadius: '4px',
+                marginBottom: '20px' 
               }}
-            />
-          </span>
-          <span 
-            style={{ 
-              fontSize: '11px', 
-              textAlign: 'center',
-              width: '100%',
-              display: 'block'
-            }}
-          >
-            
-            Каталог</span>
-        </MenuItem>
+            >
+              <img 
+                src={catalog} 
+                alt={""}
+                style={{
+                  display: 'block',
+                  width: '22px',
+                }}
+              />
+            </span>
+            <span 
+              style={{ 
+                fontSize: '11px', 
+                textAlign: 'center',
+                width: '100%',
+                display: 'block'
+              }}
+            >
+              
+              Каталог</span>
+          </MenuItem>
+        </Link>
         <MenuItem width={screen}>
           <span
             style={{

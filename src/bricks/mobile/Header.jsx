@@ -6,6 +6,7 @@ import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
 import sravnenieImg from '../../img/sravnenie.png'
 import likeImg from '../../img/like.png'
+import search from '../../img/search.png'
 
 const { Wrapper, ContentLine } = css.HeaderStyles
 
@@ -25,11 +26,23 @@ const MobileHeader = (props) => {
       > 
         <ContentLine width={screen}>
 
+          <img
+            style={{
+              display: 'block',
+              position: 'absolute',
+              width: '22px',
+              left: '0px',
+              marginLeft: '22px'
+            }}
+            src={search}
+            alt={""}
+          />
+
           <Input
             params={{ width: screen - ( 40 + 40 + 12 + 12 + 8 + 8 )}}
             type={"text"}
-            placeholder={"найти товар или услугу"}
-            inputCss={{ border: 'none' }}
+            placeholder={"Найти товар или услугу"}
+            inputCss={{ border: 'none', paddingLeft: '42px' }}
             css={{}}
           />
           <Button  
@@ -153,7 +166,7 @@ const MobileHeader = (props) => {
               height: 24,
               background: 'white'
             }}
-            inner={"позвоните"}
+            inner={"Позвоните"}
             css={{
               fontSize: '11px',
               marginLeft: '8px',
@@ -168,7 +181,7 @@ const MobileHeader = (props) => {
               height: 24,
               background: 'white'
             }}
-            inner={"екатеринбург"}
+            inner={"Екатеринбург"}
             css={{
               fontSize: '11px',
               marginLeft: '8px',

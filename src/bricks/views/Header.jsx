@@ -7,14 +7,17 @@ import { Link } from "react-router-dom"
 import css from '../../styles/header'
 import Button from '../comps/button/Button.jsx'
 import StartCatalog from './StartCatalog'
+
 import cabinet from '../../img/cabinet.png'
 import geonumber from '../../img/geonumber.png'
 import catalog from '../../img/menuMenu.png'
 import tools from '../../img/menuTools.png'
+import search from '../../img/search.png'
 import byClickImage from '../../img/byClickGrey.png'
 import sravnenieImg from '../../img/sravnenie.png'
 import likeImg from '../../img/like.png'
 import glushImg from '../../img/glushka.png'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount, setMobile, setInfoPageTitle } from '../../appStore/reducers/mainReducer'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
@@ -277,6 +280,19 @@ const Header = () => {
               width: '70%'
             }}
           >
+
+            <img
+              style={{
+                display: 'block',
+                position: 'absolute',
+                width: '19px',
+                left: '0px',
+                marginLeft: '40px'
+              }}
+              src={search}
+              alt={""}
+            />
+
             <input
               type="text"
               placeholder="Найти товар или услугу"
@@ -288,7 +304,7 @@ const Header = () => {
                 borderRadius: '12px',
                 height: '36px',
                 width: '55%',
-                paddingLeft: '14px',
+                paddingLeft: '40px',
                 marginLeft: '30px'
               }}
             />
