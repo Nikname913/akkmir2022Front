@@ -45,7 +45,6 @@ const MainPage = (props) => {
       >
 
         <ContentLine width={screen} style={{ marginTop: '12px', marginBottom: '6px' }}>
-
           <UpMenuBlock width={screen} style={{ marginRight: '12px', cursor: 'pointer' }}>
 
             <span
@@ -135,7 +134,6 @@ const MainPage = (props) => {
               Автосервисы</p>
 
           </UpMenuBlock>
-
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 

@@ -228,7 +228,10 @@ const css = {
         padding-bottom: 12px;
       `,
       CatalogLastItem: styled.div`
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
         position: relative;
         width: ${props => props.width}px;
         height: ${props => props.height}px;
@@ -236,6 +239,8 @@ const css = {
         border-radius: 10px;
         background-color: #565656;
         cursor: pointer;
+        padding: 10px;
+        padding-bottom: 12px;
       `
     }
 
@@ -310,7 +315,7 @@ const css = {
       display: block;
       position: relative;
       box-sizing: border-box;
-      width: 140px;
+      width: ${props => props.width ? props.width : 140}px;
       height: auto;
       min-height: 40px;
       border-radius: 4px;

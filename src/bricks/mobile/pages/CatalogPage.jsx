@@ -4,10 +4,14 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
 import { useSelector, useDispatch } from 'react-redux'
+import CardPreview from '../views/CardPreview'
 import image from '../../../img/category.png'
+import changeWhite from '../../../img/changeWhite.png'
+import arrowRight from '../../../img/arrowRight.png'
 
 const { Wrapper, 
   ContentLine,
+  PopularScrollWrapper,
   CatalogPage: {
     CatalogItem,
     CatalogLastItem
@@ -16,6 +20,7 @@ const { Wrapper,
 const CatalogPage = (props) => {
 
   const mainMenu = useSelector(state => state.main.catalogMenu)
+  const popularItems = useSelector(state => state.catalog.popular)
   const dispatch = useDispatch()
   const { screen = 420 } = props
 
@@ -38,7 +43,6 @@ const CatalogPage = (props) => {
           width={screen} 
           style={{ 
             marginTop: '12px', 
-            marginBottom: '12px',
             flexWrap: 'wrap',
             alignContent: 'space-between',
             justifyContent: 'space-between',
@@ -62,7 +66,8 @@ const CatalogPage = (props) => {
                       style={{
                         display: 'block',
                         width: '60px',
-                        margin: '0 auto'
+                        margin: '0 auto',
+                        marginBottom: '6px'
                       }}
                     />
 
@@ -72,8 +77,9 @@ const CatalogPage = (props) => {
                         position: 'relative',
                         width: '100%',
                         lineHeight: '18px',
-                        fontSize: '13px',
+                        fontSize: '12px',
                         textAlign: 'center',
+                        fontWeight: 'bold',
                       }}
                     >
                     
@@ -87,8 +93,128 @@ const CatalogPage = (props) => {
             <CatalogLastItem  
               width={screen * 0.3} 
               height={screen * 0.3}
-              marginBottom={(screen - (screen * 0.93)) / 3}>
+              marginBottom={(screen - (screen * 0.93)) / 3}
+            >
+
+              <img 
+                src={changeWhite} 
+                alt={""}
+                style={{
+                  display: 'block',
+                  width: '30px',
+                  margin: '0 auto',
+                  marginBottom: '12px'
+                }}
+              />
+
+              <span
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '100%',
+                  lineHeight: '18px',
+                  fontSize: '12px',
+                  textAlign: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                }}
+              >
+              
+                Подбор аккумуляторов</span>
+
             </CatalogLastItem>
+
+        </ContentLine>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginTop: '0px', 
+            marginBottom: '4px', 
+            justifyContent: 'space-between' 
+          }}
+        >
+
+          <h4>Популярные товары</h4>
+          <span
+            style={{
+              display: 'block',
+              position: 'relative',
+              fontSize: '13px',
+              color: 'grey',
+              cursor: 'pointer',
+              paddingRight: '33px'
+            }}
+          >
+            <img 
+              style={{ 
+                display: 'block', 
+                position: 'absolute',
+                width: '18px',
+                left: '100%',
+                marginLeft: '-24px',
+                marginTop: '1px'
+              }} 
+              src={arrowRight} 
+              alt={""}
+            />
+            Смотреть все</span>
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { popularItems ? popularItems.map((item, index) => {
+
+              if ( index < 2 ) {
+                return (
+                  <React.Fragment>
+                    <CardPreview itemID={item.itemID}></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { popularItems ? popularItems.map((item, index) => {
+
+              if ( index < 2 ) {
+                return (
+                  <React.Fragment>
+                    <CardPreview itemID={item.itemID}></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
+
+          <PopularScrollWrapper>
+
+            { popularItems ? popularItems.map((item, index) => {
+
+              if ( index < 2 ) {
+                return (
+                  <React.Fragment>
+                    <CardPreview itemID={item.itemID}></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
 
         </ContentLine>
 

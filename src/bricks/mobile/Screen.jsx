@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import OrderPage from './pages/OrderPage'
@@ -15,6 +15,10 @@ const MobileScreen = (props) => {
 
   return (
     <Routes>
+      <Route 
+        path="/change" 
+        element={<ChangePage screen={screen}/>} 
+      />
       <Route 
         path="/catalog" 
         element={<CatalogPage screen={screen}/>} 

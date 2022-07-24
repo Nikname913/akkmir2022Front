@@ -1,12 +1,315 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import css from '../../../styles/mobile/mobileStyles'
+import Button from '../../comps/button/Button.jsx'
+import ReactSelect from '../../comps/ReactSelect'
+import CardPreview from '../views/CardPreview'
+import { useSelector } from 'react-redux'
 
-const ChangePage = () => {
+const { Wrapper, 
+  ContentLine,
+  SelectAkkum } = css.ScreenStyles
+
+const ChangePage = (props) => {
+
+  const { screen = 420 } = props
+  const catalog = useSelector(state => state.catalog.catalog)
 
   return (
-    <React.Fragment></React.Fragment>
+    <React.Fragment>
+      <Wrapper 
+        style={{ 
+          marginLeft: '20px', 
+          borderRadius: '0px',
+          borderTopRightRadius: '0px',
+          borderTopLeftRadius: '0px' 
+        }}
+      >
+
+        <ContentLine width={screen} style={{ marginTop: '10px', marginBottom: '8px' }}>
+          
+          <h2 style={{ color: '#565656' }}>Каталог товаров</h2>
+        
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <SelectAkkum width={screen}>
+            <h4 style={{ marginBottom: '18px', marginTop: '2px' }}>Подбор аккумулятора</h4>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"По характеристикам"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px',
+                  marginRight: '10px'
+                }}
+              />
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"По характеристикам"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px'
+                }}
+              />
+
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"Автомобильные"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px',
+                  marginRight: '10px'
+                }}
+              />
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"Грузовые авто"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px'
+                }}
+              />
+
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+              <ReactSelect 
+                params={{ width: 166 }}
+                placeholder={"Выберите марку"}
+                data={[
+                  { value: 'card', label: '---' },
+                  { value: 'cash', label: '---' },
+                  { value: 'online', label: '---' }
+                ]}
+              />
+              <div style={{ width: '12px' }}></div>
+              <ReactSelect 
+                params={{ width: 166 }}
+                placeholder={"Модель авто"}
+                data={[
+                  { value: 'card', label: '---' },
+                  { value: 'cash', label: '---' },
+                  { value: 'online', label: '---' }
+                ]}
+              />
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+              <ReactSelect 
+                params={{ width: 166 }}
+                placeholder={"Поколение авто"}
+                data={[
+                  { value: 'card', label: '---' },
+                  { value: 'cash', label: '---' },
+                  { value: 'online', label: '---' }
+                ]}
+              />
+              <div style={{ width: '12px' }}></div>
+              <ReactSelect 
+                params={{ width: 166 }}
+                placeholder={"Двигатель авто"}
+                data={[
+                  { value: 'card', label: '---' },
+                  { value: 'cash', label: '---' },
+                  { value: 'online', label: '---' }
+                ]}
+              />
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'relative',
+                marginBottom: '12px'
+              }}
+            >
+
+              <Button  
+                params={{
+                  width: 154,
+                  height: 35,
+                  background: '#2E2E2E'
+                }}
+                inner={"Показать"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px',
+                  marginRight: '10px'
+                }}
+              />
+
+              <Button  
+                params={{
+                  width: 174,
+                  height: 35,
+                  background: '#2BC631'
+                }}
+                inner={"Подбор специалистом"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  borderRadius: '12px'
+                }}
+              />
+
+            </div>
+
+          </SelectAkkum>
+
+        </ContentLine>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginTop: '5px', 
+            marginBottom: '6px', 
+            justifyContent: 'space-between' 
+          }}
+        >
+
+          <h4>Результаты подбора товаров</h4>
+
+        </ContentLine>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginTop: '6px', 
+            marginBottom: '0px',
+            flexWrap: 'wrap', 
+          }}
+        >
+
+          { catalog ? catalog.map((item, index) => {
+
+              if ( index < 20 ) {
+                return (
+                  <React.Fragment>
+                    <CardPreview itemID={item.itemID}></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+        </ContentLine>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginBottom: '0px',
+            marginTop: '-7px',
+            justifyContent: 'space-around', 
+          }}
+        >
+          <span
+            style={{
+              fontSize: '13px',
+              color: '#C4C4C4'
+            }}
+          >
+          
+            Показать еще</span>
+        </ContentLine>
+        <ContentLine 
+          width={screen} 
+          style={{ 
+            marginBottom: '12px',
+            marginTop: '-7px',
+            justifyContent: 'space-around', 
+          }}
+        >
+
+          <span
+            style={{
+              fontSize: '13px',
+              color: '#C4C4C4',
+              backgroundColor: '#414141',
+              width: '22px',
+              height: '30px',
+              textAlign: 'center',
+              lineHeight: '31px',
+              borderRadius: '10px',
+              cursor: 'pointer'
+            }}
+          >
+            
+            0</span>
+        </ContentLine>
+
+      </Wrapper>
+    </React.Fragment>
   )
 
 }
