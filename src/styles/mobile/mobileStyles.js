@@ -33,7 +33,6 @@ const css = {
     `,
   },
   ScreenStyles: {
-
     Wrapper: styled.section`
       display: flex;
       flex-direction: column;
@@ -243,7 +242,6 @@ const css = {
         padding-bottom: 12px;
       `
     }
-
   },
   FooterStyles: {
     Wrapper: styled.section`
@@ -339,12 +337,12 @@ const css = {
       display: block;
       position: relative;
       box-sizing: border-box;
-      width: 80%;
+      width: 100%;
       height: auto;
       min-height: 40px;
       border-radius: 8px;
       margin-right: 14px;
-      margin-bottom: 13px;
+      margin-bottom: ${ props => props.marbo ? props.marbo : 12 }px;
       padding-left: 15px;
       padding-bottom: 14px;
       background-color: white;

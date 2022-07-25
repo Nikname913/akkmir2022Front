@@ -8,6 +8,7 @@ import ProductPage from './pages/ProductPage'
 import CabinetPage from './pages/CabinetPage'
 import ChangePage from './pages/ChangePage'
 import CatalogPage from './pages/CatalogPage'
+import ShopListPage from './pages/ShopListPage'
 
 const MobileScreen = (props) => {
 
@@ -15,6 +16,10 @@ const MobileScreen = (props) => {
 
   return (
     <Routes>
+      <Route 
+        path="/shops" 
+        element={<ShopListPage screen={screen}/>} 
+      />
       <Route 
         path="/change" 
         element={<ChangePage screen={screen}/>} 

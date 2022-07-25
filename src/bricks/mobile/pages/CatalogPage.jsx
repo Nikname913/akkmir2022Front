@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import { useSelector, useDispatch } from 'react-redux'
 import CardPreview from '../views/CardPreview'
@@ -90,39 +90,41 @@ const CatalogPage = (props) => {
 
             }) : null }
 
-            <CatalogLastItem  
-              width={screen * 0.3} 
-              height={screen * 0.3}
-              marginBottom={(screen - (screen * 0.93)) / 3}
-            >
-
-              <img 
-                src={changeWhite} 
-                alt={""}
-                style={{
-                  display: 'block',
-                  width: '30px',
-                  margin: '0 auto',
-                  marginBottom: '12px'
-                }}
-              />
-
-              <span
-                style={{
-                  display: 'block',
-                  position: 'relative',
-                  width: '100%',
-                  lineHeight: '18px',
-                  fontSize: '12px',
-                  textAlign: 'center',
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}
+            <Link style={{ textDecoration: 'none', color: 'black' }} to="/change">
+              <CatalogLastItem  
+                width={screen * 0.3} 
+                height={screen * 0.3}
+                marginBottom={(screen - (screen * 0.93)) / 3}
               >
-              
-                Подбор аккумуляторов</span>
 
-            </CatalogLastItem>
+                <img 
+                  src={changeWhite} 
+                  alt={""}
+                  style={{
+                    display: 'block',
+                    width: '30px',
+                    margin: '0 auto',
+                    marginBottom: '12px'
+                  }}
+                />
+
+                <span
+                  style={{
+                    display: 'block',
+                    position: 'relative',
+                    width: '100%',
+                    lineHeight: '18px',
+                    fontSize: '12px',
+                    textAlign: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                  }}
+                >
+                
+                  Подбор аккумуляторов</span>
+
+              </CatalogLastItem>
+            </Link>
 
         </ContentLine>
         <ContentLine 

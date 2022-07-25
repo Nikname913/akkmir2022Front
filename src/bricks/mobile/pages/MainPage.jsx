@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
+import { Link } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import CardPreview from '../views/CardPreview'
 import AdressCard from '../views/AdressCard'
@@ -187,32 +188,32 @@ const MainPage = (props) => {
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
-
-          <SelectAkkum width={screen}>
+          
+          <Link style={{ textDecoration: 'none', color: 'black' }} to="/change">
+            <SelectAkkum width={screen}>
+              <img 
+                style={{ 
+                  display: 'block', 
+                  position: 'absolute',
+                  width: '19px',
+                  left: '0px',
+                  marginLeft: '19px'
+                }} 
+                src={change} 
+                alt={""}
+              />  
+              <h4 
+                style={{ 
+                  marginBottom: '1px', 
+                  marginTop: '0px', 
+                  textAlign: 'center',
+                  cursor : 'pointer',
+                }}
+              >
               
-
-            <img 
-              style={{ 
-                display: 'block', 
-                position: 'absolute',
-                width: '19px',
-                left: '0px',
-                marginLeft: '19px'
-              }} 
-              src={change} 
-              alt={""}
-            />  
-            <h4 
-              style={{ 
-                marginBottom: '1px', 
-                marginTop: '0px', 
-                textAlign: 'center',
-                cursor : 'pointer',
-              }}
-            >
-            
-              Подбор аккумулятора</h4>
-          </SelectAkkum>
+                Подбор аккумулятора</h4>
+            </SelectAkkum>
+          </Link>
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
