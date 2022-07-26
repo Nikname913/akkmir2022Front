@@ -241,6 +241,55 @@ const css = {
         padding: 10px;
         padding-bottom: 12px;
       `
+    },
+    OrderPage: {
+      OrdersWrapper: styled.div`
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+        background-color: white;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.11);
+        border-radius: 10px;
+        padding-top: 18px;
+        padding-bottom: 8px;
+      `,
+      OrdersWrapperContentLine: styled.div`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        width: 100%;
+        padding-left: 10px;
+        margin-bottom: 10px;
+      `,
+      OrderIndex: styled.span`
+        display: block;
+        position: relative;
+        width: 24px;
+        height: 24px;
+        background-color: #F7F7F7;
+        color: #565656;
+        border-radius: 50%;
+        font-size: 11px;
+        text-align: center;
+        line-height: 24px;
+        margin-right: 8px;
+        font-weight: bold;
+      `,
+      OrderCoastBlock: styled.div`
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: relative;
+        width: 80px;
+        height: auto;
+        margin-left: 12px;
+      `
+
     }
   },
   FooterStyles: {
