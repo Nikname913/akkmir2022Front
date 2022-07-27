@@ -10,7 +10,7 @@ const { MessageWindow, MessageWindowImg } = css
 const Message = (props) => {
 
   const dispatch = useDispatch()
-  const { title, message } = useSelector(state => state.main.messageContent)
+  const { title, message, children = null } = useSelector(state => state.main.messageContent)
 
   return (
     <React.Fragment>
@@ -38,10 +38,11 @@ const Message = (props) => {
         >
         
           { title }</h2>
+
         <span
           style={{
             display: 'block',
-            position:'relative',
+            position: 'relative',
             width: '100%',
             paddingLeft: '30px',
             paddingRight: '30px',
@@ -53,6 +54,7 @@ const Message = (props) => {
         >
         
           { message }</span>
+          { children && children }
 
       </MessageWindow>
     </React.Fragment>

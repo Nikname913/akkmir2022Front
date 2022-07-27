@@ -6,7 +6,7 @@ export const mainReducer = createSlice({
     actualOrder: [],
     modalShow: false,
     modalContent: false,
-    messageShow: true,
+    messageShow: false,
     messageContent: {
       title: '-- -- -- --',
       message: '-- -- -- --'

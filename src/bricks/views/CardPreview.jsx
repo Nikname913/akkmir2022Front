@@ -125,11 +125,12 @@ const CardPreview = (props) => {
       { description && description.map((item, index) => {
 
         return (
-          <React.Fragment>
+          <React.Fragment key={index}>
+
             { index < 2 && <p key={index + 640} style={{ color: 'grey', fontSize: '14px', lineHeight: '22px' }}>{ item }</p> }
+          
           </React.Fragment>
         )
-
       })}
 
       <Button  

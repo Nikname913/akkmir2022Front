@@ -4,11 +4,16 @@ class Reducer {
     orders: [],
     ordersCount: 0,
     authSuccess: false,
+    authToken: null,
     authData: {
       user: null,
       password: null
     }
   }
+
+  // ----------------------------------------------------------------
+  // метод инициации стора
+  // ----------------------------------------------------------------
 
   initStore() {
 
@@ -16,6 +21,10 @@ class Reducer {
       && localStorage.setItem('akkmirLocalStore', JSON.stringify(this.#startStore))
 
   }
+
+  // ----------------------------------------------------------------
+  // методы работы с хранилещем заказов
+  // ----------------------------------------------------------------
 
   getOrdersCount() {
 
@@ -93,6 +102,25 @@ class Reducer {
   removeAllOrders() {
 
     localStorage.setItem('akkmirLocalStore', JSON.stringify(this.#startStore))
+
+  }
+
+  // ----------------------------------------------------------------
+  // методы работы с авторизацией и регистрацией
+  // ----------------------------------------------------------------
+
+  getAuthStatus() {
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    return store.authSuccess
+
+  }
+
+  getAuthUserData() {
+
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    return store.authData
 
   }
 

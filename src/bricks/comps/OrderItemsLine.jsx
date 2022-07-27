@@ -25,7 +25,7 @@ const OrderItemsLine = (props) => {
       { data.map((item, index) => {
 
         return (
-          <Item>
+          <Item key={index}>
             <Icon>{ index + 1 }</Icon>
             <ImageWrapper>
 

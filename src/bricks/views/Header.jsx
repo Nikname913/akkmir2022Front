@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/style-prop-object */
@@ -19,7 +20,10 @@ import likeImg from '../../img/like.png'
 import glushImg from '../../img/glushka.png'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setOrdersCount, setMobile, setInfoPageTitle } from '../../appStore/reducers/mainReducer'
+import { setOrdersCount, 
+  setMobile, 
+  setInfoPageTitle } from '../../appStore/reducers/mainReducer'
+import { useNavigate } from 'react-router-dom'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 
 const Head = css.Header
@@ -36,6 +40,20 @@ const Header = () => {
   const orders = useSelector(state => state.main.ordersCount)
   const sravnenie = useSelector(state => state.main.sravnenieCount)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  function authValidation() {
+
+    if ( Rds.getAuthStatus() === false ) {
+
+      {/* технический долг, вынести логику в useRef */}
+      {/* или другое более подходящее решение" */}
+
+      document.getElementById('googleAuth').style.display = 'block'
+
+    } else { navigate('../cabinet') }
+
+  }
 
   useEffect(() => {
 
@@ -105,35 +123,66 @@ const Header = () => {
 
           </LogoContentWrapper>
           <LogoContentWrapper style={{ justifyContent: 'space-between' }}>
+            
+            { Rds.getAuthStatus() === true ?
 
-            <Link style={{ textDecoration: 'none', color: 'black' }} to="/cabinet"><Button  
-              params={{
-                width: 200,
-                height: 30,
-                background: 'white'
-              }}
-              inner={"Личный кабинет"}
-              css={{
-                fontSize: '13px',
-                boxShadow: 'none',
-                borderRadius: '15px'
-              }}
-              children={
-                <img
-                  style={{
-                    display: 'block',
-                    position: 'absolute',
-                    width: '22px',
-                    height: '22px',
-                    top: '50%',
-                    marginTop: '-11px',
-                    marginLeft: '10px'
+              <Link style={{ textDecoration: 'none', color: 'black' }} to="/cabinet">
+                <Button  
+                  params={{
+                    width: 200,
+                    height: 30,
+                    background: 'white'
                   }}
-                  src={cabinet}
-                  alt={""}
-                />
-              }
-            /></Link>
+                  inner={"Личный кабинет"}
+                  css={{
+                    fontSize: '13px',
+                    boxShadow: 'none',
+                    borderRadius: '15px'
+                  }}
+                  children={
+                    <img
+                      style={{
+                        display: 'block',
+                        position: 'absolute',
+                        width: '22px',
+                        height: '22px',
+                        top: '50%',
+                        marginTop: '-11px',
+                        marginLeft: '10px'
+                      }}
+                      src={cabinet}
+                      alt={""}
+                    />
+                  }/>
+              </Link> : <Button  
+                params={{
+                  width: 200,
+                  height: 30,
+                  background: 'white'
+                }}
+                inner={"Личный кабинет"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  borderRadius: '15px'
+                }}
+                action={authValidation}
+                children={
+                  <img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '22px',
+                      height: '22px',
+                      top: '50%',
+                      marginTop: '-11px',
+                      marginLeft: '10px'
+                    }}
+                    src={cabinet}
+                    alt={""}/>
+                }/> 
+            }
+
             <Button  
               params={{
                 width: 200,

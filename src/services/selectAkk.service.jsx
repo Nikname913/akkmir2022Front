@@ -239,10 +239,11 @@ const SelectAkk = () => {
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginTop: '20px' }}>
 
-          {[ null, null, null, null, null, null, null, null, null, null, null, null, null ].map(item => {
+          {[ null, null, null, null, null, null, null, null, null, null, null, null, null ].map((item, index) => {
 
             return (
               <img 
+                key={index}
                 src={hondalogo} 
                 alt={""}
                 style={{
