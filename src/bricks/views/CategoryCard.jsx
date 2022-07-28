@@ -52,10 +52,10 @@ const CatCard = (props) => {
 
         <CardTags>
 
-          { tags ? tags.map(item => {
+          { tags ? tags.map((item, index) => {
 
             return (
-              <Link style={{ textDecoration: 'none', color: 'black' }} to="/catalog">
+              <Link key={index} style={{ textDecoration: 'none', color: 'black' }} to="/catalog">
                 <span 
                   style={{ 
                     backgroundColor: '#F3F3F3', 

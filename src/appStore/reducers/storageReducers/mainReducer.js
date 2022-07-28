@@ -117,10 +117,11 @@ class Reducer {
 
   }
 
-  getAuthUserData() {
+  getAuthUserToken() {
 
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
     let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
-    return store.authData
+    return store.authToken
 
   }
 

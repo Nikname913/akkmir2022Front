@@ -48,7 +48,7 @@ const CabinetPage = () => {
         { popularItems ? popularItems.map((item, index) => {
 
           return (
-            <React.Fragment>
+            <React.Fragment key={index}>
               <CardPreview
                 params={{ width: 15.833333, mleft: 0 }}
                 image={null}

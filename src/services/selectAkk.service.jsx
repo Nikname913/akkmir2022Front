@@ -548,6 +548,7 @@ const SelectAkk = () => {
 
                   return (
                     <span 
+                      key={index}
                       style={{ 
                         color: 'grey', 
                         fontSize: '13px', 
@@ -574,6 +575,7 @@ const SelectAkk = () => {
 
                   return (
                     <span 
+                      key={index}
                       style={{ 
                         color: 'grey', 
                         fontSize: '13px', 
@@ -600,6 +602,7 @@ const SelectAkk = () => {
 
                   return (
                     <span 
+                      key={index}
                       style={{ 
                         color: 'grey', 
                         fontSize: '13px', 
@@ -626,6 +629,7 @@ const SelectAkk = () => {
 
                   return (
                     <span 
+                      key={index}
                       style={{ 
                         color: 'grey', 
                         fontSize: '13px', 
@@ -652,6 +656,7 @@ const SelectAkk = () => {
 
                   return (
                     <span 
+                      key={index}
                       style={{ 
                         color: 'grey', 
                         fontSize: '13px', 
@@ -732,10 +737,11 @@ const SelectAkk = () => {
                 position: 'relative'
               }}>
 
-                { ['..........'][0].split('.').map(item => {
+                { ['..........'][0].split('.').map((item, index) => {
 
                   return (
                     <Button
+                      key={index}
                       inner={'no model'}
                       params={{
                         width: '',

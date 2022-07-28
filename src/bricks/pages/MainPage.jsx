@@ -7,6 +7,7 @@ import SelectAkk from '../../services/selectAkk.service'
 import CardPreview from '../views/CardPreview'
 import CategoryCard from '../views/CategoryCard'
 import { useSelector, useDispatch } from 'react-redux'
+import ReactSelect from 'react-select'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -61,10 +62,11 @@ const MainPage = () => {
           'тяговые аккумуляторы', 
           'промышленные', 
           'для спецтехники', 
-          'для электросамокатов'].map(item => {
+          'для электросамокатов'].map((item, index) => {
 
           return (
             <Button
+              key={index}
               inner={item}
               params={{
                 background: 'transparent'
@@ -163,12 +165,13 @@ const MainPage = () => {
           ? mainMenu.map((item, index) => {
 
             return (
-              <CategoryCard 
-                catid={item.id}
-                title={item.label}
-                tags={item.tags}
-                key={index}
-              />
+              <React.Fragment key={index}>
+                <CategoryCard 
+                  catid={item.id}
+                  title={item.label}
+                  tags={item.tags}
+                />
+              </React.Fragment>
             )
 
           }) : null }

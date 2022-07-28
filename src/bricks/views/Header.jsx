@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import css from '../../styles/header'
 import Button from '../comps/button/Button.jsx'
 import StartCatalog from './StartCatalog'
+import * as jose from 'jose'
 
 import cabinet from '../../img/cabinet.png'
 import geonumber from '../../img/geonumber.png'
@@ -37,12 +38,14 @@ const MainContentWrapper = css.HeaderMainContentWrapper
 const Header = () => {
 
   const [ showModalCatalog, setShowModalCatalog ] = useState('page')
+  const [ authUserName, setAuthUserName ] = useState('Личный кабинет')
+
   const orders = useSelector(state => state.main.ordersCount)
   const sravnenie = useSelector(state => state.main.sravnenieCount)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  function authValidation() {
+  async function authValidation() {
 
     if ( Rds.getAuthStatus() === false ) {
 
@@ -51,15 +54,23 @@ const Header = () => {
 
       document.getElementById('googleAuth').style.display = 'block'
 
-    } else { navigate('../cabinet') }
+    } else { 
+      
+      const [ header, payload ] = Rds.getAuthUserToken().split('.')
+      false && console.log(window.atob(header))
+      false && console.log(window.atob(payload))
+      
+      const data = JSON.parse(window.atob(payload))
+      const user = data.name
+
+      setAuthUserName(user)
+      navigate('../cabinet') 
+      
+    }
 
   }
 
-  useEffect(() => {
-
-    dispatch(setOrdersCount(Rds.getOrdersCount()))
-
-  },[])
+  useEffect(() => { dispatch(setOrdersCount(Rds.getOrdersCount())) },[])
 
   function showCatalog() { setShowModalCatalog('modal') }
 
@@ -71,23 +82,45 @@ const Header = () => {
 
         <HeadMenu>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/modal-catalog">
-            <MenuButton style={{ fontWeight: 'bold' }}>Подбор аккумулятора</MenuButton>
+            <MenuButton style={{ fontWeight: 'bold' }}>
+              
+              Подбор аккумулятора</MenuButton>
           </Link>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/oplata-i-dostavka">
-            <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setInfoPageTitle('Оплата и доставка'))}>Оплата и доставка</MenuButton>
+            <MenuButton 
+              style={{ fontWeight: 'bold' }} 
+              onClick={() => dispatch(setInfoPageTitle('Оплата и доставка'))}
+            >
+            
+              Оплата и доставка</MenuButton>
           </Link>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/novosti">
-            <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setInfoPageTitle('Новости нашей компании'))}>Новости</MenuButton>
+            <MenuButton  
+              style={{ fontWeight: 'bold' }} 
+              onClick={() => dispatch(setInfoPageTitle('Новости нашей компании'))}
+            >
+            
+              Новости</MenuButton>
           </Link>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/accii">
-            <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setInfoPageTitle('Наши акции'))}>Акции</MenuButton>
+            <MenuButton 
+              style={{ fontWeight: 'bold' }} 
+              onClick={() => dispatch(setInfoPageTitle('Наши акции'))}
+            >
+            
+              Акции</MenuButton>
           </Link>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/o-kompanii">
-            <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setInfoPageTitle('О компании'))}>О компании</MenuButton>
+            <MenuButton 
+              style={{ fontWeight: 'bold' }} 
+              onClick={() => dispatch(setInfoPageTitle('О компании'))}
+            >
+            
+              О компании</MenuButton>
           </Link>
+          <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setMobile())}>
           
-          <MenuButton style={{ fontWeight: 'bold' }} onClick={() => dispatch(setMobile())}>MOBILE</MenuButton>
-        
+            MOBILE</MenuButton>
         </HeadMenu>
         <LogoContent>
           <LogoContentWrapper>
@@ -133,7 +166,7 @@ const Header = () => {
                     height: 30,
                     background: 'white'
                   }}
-                  inner={"Личный кабинет"}
+                  inner={authUserName}
                   css={{
                     fontSize: '13px',
                     boxShadow: 'none',
