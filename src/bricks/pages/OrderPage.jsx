@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useEffect } from 'react'
 import MakeOrder from '../views/MakeOrder'
 import CardPreview from '../views/CardPreview'
 import css from '../../styles/pages/order-page'
@@ -13,6 +13,7 @@ const Banner = css.MainContentLineBanner
 const OrderPage = () => {
 
   const popularItems = useSelector(state => state.catalog.popular)
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>

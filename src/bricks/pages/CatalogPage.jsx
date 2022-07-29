@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from '../../styles/pages/catalog-page'
 import ReactSelect from '../comps/ReactSelect'
 import Input from '../comps/input/Input.jsx'
@@ -19,6 +19,7 @@ const CatalogPage = () => {
   const items = useSelector(state => state.catalog.catalog)
   const actualCategory = useSelector(state => state.main.actualCategory)
   const dispatch = useDispatch()
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>

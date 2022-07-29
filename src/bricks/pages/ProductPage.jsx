@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from '../../styles/pages/product-page'
 import CardView from '../views/CardView'
 import CardPreview from '../views/CardPreview'
@@ -13,6 +13,7 @@ const ProductPage = () => {
 
   const items = useSelector(state => state.catalog.catalog)
   const itemLocal = useSelector(state => state.main.actualItem)
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>

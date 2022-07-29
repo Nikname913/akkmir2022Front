@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from '../../styles/pages/cabinet-page'
 import cssMain from '../../styles/pages/main-page'
 import CabinetComponent from '../views/CabinetComponent'
@@ -15,6 +15,7 @@ const CabinetPage = () => {
 
   const popularItems = useSelector(state => state.catalog.popular)
   const dispatch = useDispatch()
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>

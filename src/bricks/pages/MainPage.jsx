@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from '../../styles/pages/main-page'
 import Button from '../comps/button/Button.jsx'
 import SelectAkk from '../../services/selectAkk.service'
@@ -19,6 +19,7 @@ const MainPage = () => {
   const mainMenu = useSelector(state => state.main.catalogMenu)
   const popularItems = useSelector(state => state.catalog.popular)
   const dispatch = useDispatch()
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>

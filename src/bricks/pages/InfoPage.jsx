@@ -1,6 +1,6 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect } from 'react'
 import css from '../../styles/pages/info-page'
 import { useSelector } from 'react-redux'
 
@@ -10,6 +10,7 @@ const ContentLine = css.MainContentLine
 const InfoPage = () => {
 
   const title = useSelector(state => state.main.infoPageTitle)
+  useEffect(() => document.documentElement.scrollTop = 0)
 
   return (
     <Main>
