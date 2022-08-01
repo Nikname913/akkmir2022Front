@@ -6,8 +6,7 @@ import Button from '../comps/button/Button.jsx'
 import SelectAkk from '../../services/selectAkk.service'
 import CardPreview from '../views/CardPreview'
 import CategoryCard from '../views/CategoryCard'
-import { useSelector, useDispatch } from 'react-redux'
-import ReactSelect from 'react-select'
+import { useSelector } from 'react-redux'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -18,8 +17,15 @@ const MainPage = () => {
 
   const mainMenu = useSelector(state => state.main.catalogMenu)
   const popularItems = useSelector(state => state.catalog.popular)
-  const dispatch = useDispatch()
+
   useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => {
+
+    fetch('/products')
+      .then(res => res.json())
+      .then(data => console.log(data))
+
+  },[])
 
   return (
     <Main>

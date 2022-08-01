@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
@@ -23,18 +23,6 @@ const ProductPage = (props) => {
   const { screen = 420, amperHour = 60 } = props
   const [ amper, setAmper ] = useState(amperHour)
   const popularItems = useSelector(state => state.catalog.popular)
-
-  useEffect(() => {
-
-    fetch('http://localhost:9000/catalog')
-      .then(res => res.json())
-      .then(data => {
-
-        console.log(data)
-
-      })
-
-  },[])
 
   return (
     <React.Fragment>
