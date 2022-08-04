@@ -3,6 +3,7 @@ export const catalogReducer = createSlice({
 
   name: 'catalog',
   initialState: {
+    generalCatalog: '',
     catalog: [
       { id: '0001',
         itemID: 'oil0001',
@@ -166,13 +167,13 @@ export const catalogReducer = createSlice({
   },
   reducers: {
 
-    reducerOne:   (state, action) => {},
-    reducerTwo:   (state, action) => {},
-    reducerThree: (state, action) => {}
-    
-  }
+    generalCatalogReducer: (state, action) => {
 
+      state.generalCatalog = action.payload
+
+    }
+  }
 })
 
-export const { reducerOne, reducerTwo, reducerThree } = catalogReducer.actions
+export const { generalCatalogReducer } = catalogReducer.actions
 export default catalogReducer.reducer

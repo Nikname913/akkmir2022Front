@@ -26,8 +26,8 @@ const CardInfo = () => {
       { productPageDiscriptionFork === 1 ? 
         <React.Fragment>
 
-          <h5 style={{ fontSize: '16px', marginBottom: '16px'  }}>Аккумуляторы ZEUS RED</h5>
-          <p style={{ fontSize: '14px', lineHeight: '26px', width: '86%' }}>
+          <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>Аккумуляторы ZEUS RED</h5>
+          <p style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
     
             Премиальные аккумуляторные батареи ZEUS RED обладают повышенными пусковыми характеристиками.
             <br/>
@@ -58,15 +58,15 @@ const CardInfo = () => {
           <AdressBlock>
 
             <ContentLine>
-              <Cell1><h5 style={{ fontSize: '15px' }}>Адреса:</h5></Cell1>
+              <Cell1><h5 style={{ fontSize: '15px', lineHeight: '18px' }}>Адреса магазинов:</h5></Cell1>
               <Cell2></Cell2>
-              <Cell3><h5 style={{ fontSize: '15px' }}>Наличие:</h5></Cell3>
-              <Cell4><h5 style={{ fontSize: '15px' }}>Оформить самовывоз:</h5></Cell4>
+              <Cell3><h5 style={{ fontSize: '15px', lineHeight: '18px' }}>Наличие:</h5></Cell3>
+              <Cell4><h5 style={{ fontSize: '15px', lineHeight: '18px' }}>Оформить самовывоз:</h5></Cell4>
             </ContentLine>
             <ContentLine>
               <Cell1>
-                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '4px' }}>Аппаратная, 3</p>
-                <p style={{ fontSize: '13px', marginBottom: '4px' }}>Звоните: +7(343)261-61-62</p>
+                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '10px' }}>Аппаратная, 3</p>
+                <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните: +7(343)261-61-62</p>
                 <p style={{ fontSize: '13px' }}>Мы работаем: с 09:00 до 19:00</p>
               </Cell1>
               <Cell2>
@@ -86,7 +86,7 @@ const CardInfo = () => {
                 <p style={{ fontSize: '13px', paddingLeft: '19px' }}>Открыто</p>
               </Cell2>
               <Cell3>
-                <p style={{ fontSize: '13px', color: 'grey' }}>в наличии: 
+                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии: 
                 <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3шт</i></p>
               </Cell3>
               <Cell4><CellButton>
@@ -107,8 +107,8 @@ const CardInfo = () => {
             </ContentLine>
             <ContentLine>
               <Cell1>
-                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '4px' }}>Патриса Лулумбы, 4в</p>
-                <p style={{ fontSize: '13px', marginBottom: '4px' }}>Звоните: +7(343)261-61-62</p>
+                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '10px' }}>Патриса Лулумбы, 4в</p>
+                <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните: +7(343)261-61-62</p>
                 <p style={{ fontSize: '13px' }}>Мы работаем: с 09:00 до 21:00</p>
               </Cell1>
               <Cell2>
@@ -128,7 +128,7 @@ const CardInfo = () => {
                 <p style={{ fontSize: '13px', paddingLeft: '19px' }}>Открыто</p>
               </Cell2>
               <Cell3>
-                <p style={{ fontSize: '13px', color: 'grey' }}>в наличии: 
+                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии: 
                 <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3шт</i></p>
               </Cell3>
               <Cell4><CellButton>
@@ -149,8 +149,8 @@ const CardInfo = () => {
             </ContentLine>
             <ContentLine>
               <Cell1>
-                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '4px' }}>Щербакова, 216</p>
-                <p style={{ fontSize: '13px', marginBottom: '4px' }}>Звоните: +7(343)261-61-62</p>
+                <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '10px' }}>Щербакова, 216</p>
+                <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните: +7(343)261-61-62</p>
                 <p style={{ fontSize: '13px' }}>Мы работаем: с 09:00 до 21:00</p>
               </Cell1>
               <Cell2>

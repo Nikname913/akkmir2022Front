@@ -31,30 +31,40 @@ const CardPreview = (props) => {
   const [ makeOrderInner, setMakeOrderInner ] = useState('В корзину')
 
   function ordersCount() {
-
-    Rds.setOrdersCount()
-    dispatch(setOrdersCount(Rds.getOrdersCount()))
-
+    if ( coast1 !== '--' ) {
+      Rds.setOrdersCount()
+      dispatch(setOrdersCount(Rds.getOrdersCount()))
+    }
   }
 
   function ordersData(param) {
-
-    Rds.makeNewOrder({ itemID: param })
-    setMakeOrderInner('Добавлено')
-    setMakeOrder(true)
-
+    if ( coast1 !== '--' ) {
+      Rds.makeNewOrder({ itemID: param })
+      setMakeOrderInner('Добавлено')
+      setMakeOrder(true)
+    }
   }
 
   return (
-    <Card styles={params} itemid={itemID}>
+    <Card 
+      styles={params} 
+      itemid={itemID}
+      style={ coast1 === '--' ? { filter: 'grayscale(1)', marginBottom: '13px' } : { marginBottom: '13px' }} 
+    >
 
       { false ? <img src={image} alt={""}/> : 
         
         <FakeImage styles={params}>
 
-          <img style={{ display: 'block', width: '90%' }} src={imageItem} alt={""}/>
+          <img 
+            style={ coast1 !== '--' 
+            ? { display: 'block', width: '90%' }
+            : { display: 'block', width: '90%', filter: 'grayscale(1)' }} 
+            src={imageItem} 
+            alt={""}
+          />
 
-          <Labels>
+          { coast1 !== '--' && <Labels>
 
             <Button  
               params={{
@@ -102,7 +112,7 @@ const CardPreview = (props) => {
               }}
             />
 
-          </Labels>
+          </Labels> }
         </FakeImage> 
         
       }
@@ -113,7 +123,9 @@ const CardPreview = (props) => {
           marginBottom: '10px',
           marginTop: '10px', 
           width: '90%',
-          lineHeight: '22px' 
+          height: '44px',
+          lineHeight: '22px',
+          overflow: 'hidden'
         }}
         onClick={() => dispatch(setActualItem(itemID))}
       ><Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/product">
@@ -150,34 +162,53 @@ const CardPreview = (props) => {
         }}
       />
 
+      { coast1 !== '--' ? <CoastWrapper>
+
+        <span 
+          style={{ 
+            display: 'block', 
+            fontSize: '20px', 
+            fontWeight: 'bold',
+            marginRight: '30px',
+            width: '90%'
+          }}
+        >
+          
+          { coast1 && coast1 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}> Рублей</i>
+          
+        </span>
+        <span 
+          style={{ 
+            display: 'block', 
+            fontSize: '20px', 
+            fontWeight: 'bold', 
+            color: 'grey',
+            width: '90%'
+          }}
+        >
+          
+          { coast2 && coast2 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}>Рублей</i>
+          
+        </span>
+
+      </CoastWrapper> : 
       <CoastWrapper>
 
         <span 
           style={{ 
             display: 'block', 
-            fontSize: '26px', 
-            fontWeight: '500',
-            marginRight: '30px' 
-          }}
-        >
-          
-          { coast1 && coast1 }*
-          
-        </span>
-        <span 
-          style={{ 
-            display: 'block', 
-            fontSize: '26px', 
-            fontWeight: '500', 
+            fontSize: '20px', 
+            fontWeight: 'bold', 
             color: 'grey' 
           }}
         >
           
-          { coast2 && coast2 }**
+          Извините, пока нет в продаже
           
         </span>
+        
+      </CoastWrapper> }
 
-      </CoastWrapper>
       <CoastWrapper style={{ marginTop: '20px', justifyContent: 'space-between' }}>
 
         { false ? <Link style={{ textDecoration: 'none', color: 'black' }} to="/product"><Button  

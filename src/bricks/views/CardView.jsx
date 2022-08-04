@@ -308,7 +308,7 @@ const CardView = (props) => {
                     fontSize: '18px'
                   }}
                   onClick={decrCount}
-                >{"-"}</span>
+                >{""}</span>
                 <div
                   style={{
                     display: 'flex',
@@ -352,7 +352,7 @@ const CardView = (props) => {
                     fontSize: '16px'
                   }}
                   onClick={incrCount}
-                >{"+"}</span>
+                >{""}</span>
               </div>
               <div>
                 <span style={{ fontSize: '13px' }}>Скидка: </span>

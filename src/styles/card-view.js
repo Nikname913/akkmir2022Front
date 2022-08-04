@@ -116,7 +116,7 @@ const css = {
       justify-content: flex-start;
       width: 100%;
       height: auto;
-      margin-bottom: 18px;
+      margin-bottom: 23px;
     `,
     AdressBlockContentCell1: styled.span`
       display: block;
