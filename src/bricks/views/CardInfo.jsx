@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import css from '../../styles/card-view'
 import { useSelector, useDispatch } from 'react-redux'
 import byClickImage from '../../img/byClickGrey.png'
@@ -15,10 +16,26 @@ const Cell3 = css.CardInfo.AdressBlockContentCell3
 const Cell4 = css.CardInfo.AdressBlockContentCell4
 const CellButton = css.CardInfo.Cell4Button
 
-const CardInfo = () => {
+const CardInfo = (props) => {
+
+  const { descr = '', title = '' } = props
+  const descrTag = useRef()
 
   const productPageDiscriptionFork = useSelector(state => state.main.productPageDiscriptionFork)
   const dispatch = useDispatch()
+  useEffect(() => {
+
+    if ( descr !== '' ) {
+
+      const parcer = new DOMParser()
+      const descrHTML = parcer.parseFromString(descr, 'text/html')
+      const content = descrHTML.body.innerHTML
+
+      productPageDiscriptionFork === 1 ? descrTag.current.innerHTML = content : null
+
+    }
+
+  },[ productPageDiscriptionFork ])
 
   return (
     <React.Fragment>
@@ -26,28 +43,34 @@ const CardInfo = () => {
       { productPageDiscriptionFork === 1 ? 
         <React.Fragment>
 
-          <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>Аккумуляторы ZEUS RED</h5>
-          <p style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
-    
-            Премиальные аккумуляторные батареи ZEUS RED обладают повышенными пусковыми характеристиками.
-            <br/>
-            Предназначены как для современных автомобилей с мощными бензиновыми или дизельными двигателями, оснащённых большим количеством электрооборудования, так и для автомобилей со стандартными характеристиками.
-            <br/>
-            Аккумуляторы ZEUS RED характеризуются увеличенным током для запуска двигателя, дополнительной мощностью при запуске в зимний период, минимальным расходом воды, повышенной устойчивостью к глубокому разряду и увеличенным сроком службы.
-            <br/>
-            Особенности конструкции аккумуляторов ZEUS RED:
-            <br/>
-            * углеродно графитовая композиция в составе активной массы обеспечивает высокие пусковые токи при пониженных температурах и улучшенный приём заряда
-            <br/>
-            * специальная добавка в составе электролита повышает устойчивость к глубоким разрядам
-            <br/>
-            * отрицательные электроды просечного-растяжного типа на основе Pb-Ca-Sn сплавов
-            <br/>
-            * увеличенное количество электродов
-            <br/>
-            * крышка оснащена фильтрами-пламегасителями
-            <br/>
-            * ударопрочный и морозостойкий корпус
+          <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>
+            
+            { title ? title : 'Аккумуляторы ZEUS RED' }
+            
+          </h5>
+          <p ref={descrTag} style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
+
+            { descr ? <React.Fragment></React.Fragment> : <React.Fragment>
+              Премиальные аккумуляторные батареи ZEUS RED обладают повышенными пусковыми характеристиками.
+              <br/>
+              Предназначены как для современных автомобилей с мощными бензиновыми или дизельными двигателями, оснащённых большим количеством электрооборудования, так и для автомобилей со стандартными характеристиками.
+              <br/>
+              Аккумуляторы ZEUS RED характеризуются увеличенным током для запуска двигателя, дополнительной мощностью при запуске в зимний период, минимальным расходом воды, повышенной устойчивостью к глубокому разряду и увеличенным сроком службы.
+              <br/>
+              Особенности конструкции аккумуляторов ZEUS RED:
+              <br/>
+              * углеродно графитовая композиция в составе активной массы обеспечивает высокие пусковые токи при пониженных температурах и улучшенный приём заряда
+              <br/>
+              * специальная добавка в составе электролита повышает устойчивость к глубоким разрядам
+              <br/>
+              * отрицательные электроды просечного-растяжного типа на основе Pb-Ca-Sn сплавов
+              <br/>
+              * увеличенное количество электродов
+              <br/>
+              * крышка оснащена фильтрами-пламегасителями
+              <br/>
+              * ударопрочный и морозостойкий корпус
+            </React.Fragment> }
           
           </p>
 

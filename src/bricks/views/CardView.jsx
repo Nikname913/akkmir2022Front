@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import css from '../../styles/card-view'
 import CardInfo from './CardInfo'
 import Button from '../comps/button/Button.jsx'
@@ -34,10 +34,32 @@ const CardView = (props) => {
   const discrFork = useSelector(state => state.main.productPageDiscriptionFork)
   const actualItem = useSelector(state => state.main.actualItem)
   const dispatch = useDispatch()
-  const { coast = null } = props
+  const { coast = null, descr = '', title = '', properties = [] } = props
 
   function incrCount() { setPowerCount(prev => prev += 10) }
   function decrCount() { setPowerCount(prev => prev > 0 ? prev = prev - 10 : prev = 0) }
+
+  function propertiesConfig() {
+
+    const props = properties[0].property
+    let returnedPropsArray = []
+
+    props.forEach(prop => {
+
+      let propID = prop.id[0]
+      if ( propID === 'brand'                               || 
+           propID === 'manufacturer'                        || 
+           propID ==='05b9c35b-f76d-11e7-8dcf-0015179b1da1' ||
+           propID ==='69170251-f76d-11e7-8dcf-0015179b1da1' 
+          ) { returnedPropsArray.push(prop) } else {
+
+            returnedPropsArray.push({ id: ['-----'], value: ['-----'] })
+
+      }     
+
+    }); return returnedPropsArray
+
+  }
 
   function ordersCount() {
 
@@ -72,6 +94,8 @@ const CardView = (props) => {
     dispatch(setModalShow(true))
 
   }
+
+  useEffect(() => propertiesConfig())
 
   function contentModal() {
 
@@ -201,12 +225,17 @@ const CardView = (props) => {
           </ItemDescriptionLine>
 
         </ItemDescription>
-
         <OrderForm>
 
           <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого:</h6>
-          <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ coast } RUB</h6>
-
+          <h6 
+            style={coast === '--' 
+              ? { fontSize: '18px', marginBottom: '10px', color: 'grey' }
+              : { fontSize: '18px', marginBottom: '10px' }}>
+          
+            { coast === '--' ? 'Нет в наличии' : `${coast} RUB` }
+            
+          </h6>
           <p 
             style={{ 
               color: 'grey', 
@@ -216,10 +245,7 @@ const CardView = (props) => {
             }}
           >
             
-            Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров и характеристик
-            
-          </p>
-
+            Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров и характеристик</p>
           <div
             style={{
               display: 'block',
@@ -500,9 +526,7 @@ const CardView = (props) => {
           </p>
 
         </OrderForm>
-      
       </LevelOne>
-
       <LevelTwo>
         
         <Button  
@@ -575,7 +599,7 @@ const CardView = (props) => {
           : { flexDirection: 'row' }}
       >
         
-        <CardInfo/>
+        <CardInfo descr={descr} title={title}/>
 
       </LevelThree>
     </Card>

@@ -102,7 +102,7 @@ const OrderPage = () => {
                     +item.pre_order_prices[0].region[0].price[0] === 0
                       ? '--' : item.pre_order_prices[0].region[0].price[0]
                   }
-                  itemID={'oil0006'}
+                  itemID={item.id[0]}
                 />
                 { index < 5 && <span 
                   style={{ 

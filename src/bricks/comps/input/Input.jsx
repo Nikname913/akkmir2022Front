@@ -32,6 +32,16 @@ const Input = (props) => {
     switch(dispatchType) {
 
       case 'number':
+
+        if ( event.target.value.length === 0 ) event.target.value = '+7'
+        if ( event.target.value === '+' ) event.target.value = '+7'
+        if ( /\D/.test(event.key) ) {
+          
+          if ( event.key !== 'Backspace' ) { event.preventDefault() }
+          else { if ( event.target.value === '+7') event.target.value = '' }
+        
+        }
+
         dispatch(setNumber(event.target.value))
         break
 
@@ -78,7 +88,7 @@ const Input = (props) => {
         placeholder={placeholder}
         maxLength={maxlength}
         disabled={disabled}
-        onKeyUp={dispatcher}
+        onKeyDown={dispatcher}
         style={ !inputCss ? {
           display: 'block',
           width: '100%',

@@ -4,11 +4,13 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import OrderPage from './pages/OrderPage'
+import OrderSuccessPage from './pages/OrderSuccessPage'
 import ProductPage from './pages/ProductPage'
 import CabinetPage from './pages/CabinetPage'
 import ModalCatalogPage from './pages/ModalCatalogPage'
 import CatalogPage from './pages/CatalogPage'
 import InfoPage from './pages/InfoPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 const Main = () => {
 
@@ -17,6 +19,7 @@ const Main = () => {
       <Route path="/modal-catalog" element={<ModalCatalogPage/>} />
       <Route path="/catalog" element={<CatalogPage/>} />
       <Route path="/order" element={<OrderPage/>} />
+      <Route path="/order-success" element={<OrderSuccessPage/>} />
       <Route path="/product" element={<ProductPage/>} />
       <Route path="/cabinet" element={<CabinetPage/>} />
       <Route path="/home" element={<MainPage/>} />
@@ -46,6 +49,7 @@ const Main = () => {
 
       <Route path="/success-order" element={<InfoPage/>} />
       <Route path="/" element={<MainPage/>} />
+      <Route path="*" element={<NotFoundPage/>} />
     </Routes>
   )
 

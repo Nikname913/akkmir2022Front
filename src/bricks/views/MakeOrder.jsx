@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+import React, { useState } from 'react'
 import css from '../../styles/make-order'
 import Input from '../comps/input/Input.jsx'
 import ReactSelect from '../comps/ReactSelect'
@@ -33,6 +33,8 @@ const OrderForm = css.OrderWrapperDataForm
 const MapWrapper = css.MapWrapper
 
 const MakeOrder = () => {
+
+  const [ summaryCoast, setSummaryCoast ] = useState(0)
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -91,13 +93,14 @@ const MakeOrder = () => {
       Rds.removeAllOrders()
       dispatch(setOrdersCount(0))
       dispatch(setInfoPageTitle('Заказ успешно оформлен'))
-      navigate('../success-order')
+      navigate('../order-success')
 
     } else {
 
       dispatch(setMessageContent({
         title: 'Ошибка заполнения формы',
-        message: 'Пожалуйста, заполните обязательные поля и попробуйте оформить заказ повторно'
+        message: 'Пожалуйста, заполните обязательные поля и попробуйте оформить заказ повторно',
+        type: 'error'
       }))
       dispatch(setMessageShow(true))
 
@@ -140,7 +143,6 @@ const MakeOrder = () => {
             title={"Мобильный телефон*"}
             css={{ marginTop: '14px' }}
             dispatchType={"number"}
-
           />
           <Input
             params={{ width: 300 }}
@@ -313,7 +315,7 @@ const MakeOrder = () => {
           <OrderItems>
 
             <Items>
-              <OrderItemsLine data={Rds.getOrdersData()}/>
+              <OrderItemsLine data={Rds.getOrdersData()} setSC={setSummaryCoast}/>
               <DiliveryCoast>
 
                 <p style={{ display: 'block', fontSize: '14px' }}>Доставка</p>
@@ -325,10 +327,10 @@ const MakeOrder = () => {
             <OrderForm>
 
               <h6 style={{ fontSize: '15px', marginBottom: '10px', color: 'grey' }}>Итого:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '26px', color: 'grey' }}>3550 RUB</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '26px', color: 'grey' }}>{ summaryCoast } RUB</h6>
 
               <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого со скидкой:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>3150 RUB</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ summaryCoast } RUB</h6>
 
               <p 
                 style={{ 
@@ -377,7 +379,8 @@ const MakeOrder = () => {
                   
                   dispatch(setMessageContent({
                     title: 'Данная функция в разработке',
-                    message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована'
+                    message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована',
+                    type: 'error',
                   }))
                   dispatch(setMessageShow(true))
 

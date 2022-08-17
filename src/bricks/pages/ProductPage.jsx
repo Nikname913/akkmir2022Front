@@ -21,7 +21,7 @@ const ProductPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0, [])
 
   return (
     <React.Fragment>
@@ -37,9 +37,9 @@ const ProductPage = () => {
       <Main>
         <ContentLine style={{ marginBottom: '38px', marginTop: '0px', position: 'relative' }}>
 
-          { items.map(item => {
+          { generalCatalog.map(item => {
 
-            if ( item.itemID === itemLocal ) {
+            if ( item.id[0] === itemLocal ) {
 
               return (
                 <h2>{ item.name }</h2>
@@ -61,17 +61,24 @@ const ProductPage = () => {
 
         </ContentLine>
         <ContentLine>
-          
-          { items.map(item => {
+          { generalCatalog.map(item => {
 
-            if ( item.itemID === itemLocal ) {
+            console.log(item)
+            console.log('--------------------------------')
+
+            if ( item.id[0] === itemLocal ) {
 
               return (
-                <CardView coast={item.coast1}/>
+                <CardView 
+                  title={item.name[0]}
+                  descr={item.description[0]}
+                  properties={item.properties}
+                  coast={+item.pre_order_prices[0].region[0].price[0] === 0
+                    ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                />
               )
 
           }})}
-
         </ContentLine>
         <ContentLine style={{ marginBottom: '38px', marginTop: '16px' }}>
 
@@ -133,7 +140,7 @@ const ProductPage = () => {
                     +item.pre_order_prices[0].region[0].price[0] === 0
                       ? '--' : item.pre_order_prices[0].region[0].price[0]
                   }
-                  itemID={'oil0006'}
+                  itemID={item.id[0]}
                 />
                 { index < 5 && <span 
                   style={{ 
@@ -210,7 +217,7 @@ const ProductPage = () => {
                     +item.pre_order_prices[0].region[0].price[0] === 0
                       ? '--' : item.pre_order_prices[0].region[0].price[0]
                   }
-                  itemID={'oil0006'}
+                  itemID={item.id[0]}
                 />
                 { index < 5 && <span 
                   style={{ 

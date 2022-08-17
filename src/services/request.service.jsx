@@ -3,7 +3,7 @@
 /* eslint-disable react/style-prop-object */
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { generalCatalogReducer } from '../appStore/reducers/catalogReducer'
+import { generalCatalogReducer, orderProductsReducer } from '../appStore/reducers/catalogReducer'
 
 const RequestActionsComponent = (props) => {
 
@@ -25,14 +25,25 @@ const RequestActionsComponent = (props) => {
       case 'GET':
 
         const response = await fetch(urlstring)
+        let data = null
 
         if ( response.status === 200 ) {
 
-          const data = await fetch(urlstring).then(res => res.json())
+          if ( callbackAction === 'GET_ORDERED_PRODUCTS' ) {
+            
+            data = await fetch(urlstring).then(res => res.text())
+            
+          } else {
+
+            data = await fetch(urlstring).then(res => res.json())
+
+          }
 
           dispatch(
             callbackAction === 'GET_CATALOG' 
             ? generalCatalogReducer(JSON.stringify(data))
+            : callbackAction === 'GET_ORDERED_PRODUCTS'
+            ? orderProductsReducer(data)
             : callbackAction === 'GET_POPULAR'
             ? generalCatalogReducer(JSON.stringify(data))
             : null

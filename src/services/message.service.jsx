@@ -2,6 +2,7 @@
 import React from 'react'
 import css from '../styles/modal-window'
 import success from '../img/success.png'
+import error from '../img/error.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMessageShow } from '../appStore/reducers/mainReducer'
 
@@ -10,13 +11,13 @@ const { MessageWindow, MessageWindowImg } = css
 const Message = (props) => {
 
   const dispatch = useDispatch()
-  const { title, message, children = null } = useSelector(state => state.main.messageContent)
+  const { title, message, children = null, type = 'success' } = useSelector(state => state.main.messageContent)
 
   return (
     <React.Fragment>
       <MessageWindow onClick={() => dispatch(setMessageShow(false))}>
 
-        <MessageWindowImg>
+        { type === 'success' && <MessageWindowImg>
           <img
             style={{
               display: 'block',
@@ -25,7 +26,17 @@ const Message = (props) => {
             src={success}
             alt={""}
           />
-        </MessageWindowImg>
+        </MessageWindowImg> }
+        { type === 'error' && <MessageWindowImg style={{ backgroundColor: 'transparent' }}>
+          <img
+            style={{
+              display: 'block',
+              width: '70px',
+            }}
+            src={error}
+            alt={""}
+          />
+        </MessageWindowImg> }
         <h2
           style={{
             display: 'block',
@@ -59,7 +70,6 @@ const Message = (props) => {
       </MessageWindow>
     </React.Fragment>
   )
-
 }
 
 export default Message

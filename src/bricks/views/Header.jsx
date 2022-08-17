@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import css from '../../styles/header'
 import Button from '../comps/button/Button.jsx'
 import StartCatalog from './StartCatalog'
-import * as jose from 'jose'
+import HeaderSearch from '../../services/search.service'
 
 import cabinet from '../../img/cabinet.png'
 import geonumber from '../../img/geonumber.png'
@@ -375,21 +375,7 @@ const Header = () => {
               alt={""}
             />
 
-            <input
-              type="text"
-              placeholder="Найти товар или услугу"
-              maxLength="100"
-              style={{
-                border: 'none',
-                outline: 'none',
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                height: '36px',
-                width: '55%',
-                paddingLeft: '40px',
-                marginLeft: '30px'
-              }}
-            />
+            <HeaderSearch></HeaderSearch>
 
             <Button  
               params={{

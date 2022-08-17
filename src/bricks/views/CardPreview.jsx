@@ -1,7 +1,7 @@
 /* eslint-disable no-dupe-keys */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import css from '../../styles/card-preview'
 import Button from '../comps/button/Button.jsx'
@@ -43,7 +43,10 @@ const CardPreview = (props) => {
       setMakeOrderInner('Добавлено')
       setMakeOrder(true)
     }
+
   }
+
+  useEffect(() => false && console.log(itemID))
 
   return (
     <Card 
@@ -56,68 +59,75 @@ const CardPreview = (props) => {
         
         <FakeImage styles={params}>
 
-          <img 
+          { itemID.indexOf('oil') < 0 ? <img 
             style={ coast1 !== '--' 
             ? { display: 'block', width: '90%' }
             : { display: 'block', width: '90%', filter: 'grayscale(1)' }} 
             src={imageItem} 
             alt={""}
-          />
+          /> : <img 
+            style={{ display: 'block', width: '90%', filter: 'grayscale(1)' }} 
+            src={imageItem} 
+            alt={""}
+          /> }
 
-          { coast1 !== '--' && <Labels>
+          { itemID.indexOf('oil') < 0 && <React.Fragment>
 
-            <Button  
-              params={{
-                width: 118,
-                height: 24,
-                background: 'rgb(43, 198, 49)',
-              }}
-              inner={"наш бестселлер"}
-              css={{
-                fontSize: '12px',
-                color: 'white',
-                marginBottom: '8px',
-                borderRadius: '15px',
-                boxShadow: 'none'
-              }}
-            />
-            <Button  
-              params={{
-                width: 150,
-                height: 24,
-                background: 'rgb(43, 198, 49)',
-              }}
-              inner={"лучший товар недели"}
-              css={{
-                fontSize: '12px',
-                color: 'white',
-                marginBottom: '8px',
-                borderRadius: '15px',
-                boxShadow: 'none'
-              }}
-            />
-            <Button  
-              params={{
-                width: 124,
-                height: 24,
-                background: 'rgb(214, 46, 43)',
-              }}
-              inner={"хорошая скидка"}
-              css={{
-                fontSize: '12px',
-                color: 'white',
-                marginBottom: '8px',
-                borderRadius: '15px',
-                boxShadow: 'none'
-              }}
-            />
+            { coast1 !== '--' && <Labels>
 
-          </Labels> }
+              <Button  
+                params={{
+                  width: 118,
+                  height: 24,
+                  background: 'rgb(43, 198, 49)',
+                }}
+                inner={"наш бестселлер"}
+                css={{
+                  fontSize: '12px',
+                  color: 'white',
+                  marginBottom: '8px',
+                  borderRadius: '15px',
+                  boxShadow: 'none'
+                }}
+              />
+              <Button  
+                params={{
+                  width: 150,
+                  height: 24,
+                  background: 'rgb(43, 198, 49)',
+                }}
+                inner={"лучший товар недели"}
+                css={{
+                  fontSize: '12px',
+                  color: 'white',
+                  marginBottom: '8px',
+                  borderRadius: '15px',
+                  boxShadow: 'none'
+                }}
+              />
+              <Button  
+                params={{
+                  width: 124,
+                  height: 24,
+                  background: 'rgb(214, 46, 43)',
+                }}
+                inner={"хорошая скидка"}
+                css={{
+                  fontSize: '12px',
+                  color: 'white',
+                  marginBottom: '8px',
+                  borderRadius: '15px',
+                  boxShadow: 'none'
+                }}
+              />
+
+            </Labels> }
+          </React.Fragment> }
         </FakeImage> 
         
       }
 
-      <h5 
+      { itemID.indexOf('oil') < 0 ? <h5 
         style={{ 
           fontSize: '15px', 
           marginBottom: '10px',
@@ -132,116 +142,237 @@ const CardPreview = (props) => {
           
           { title }
           
-      </Link></h5>
+      </Link></h5> : <h5 
+        style={{ 
+          fontSize: '15px', 
+          marginBottom: '10px',
+          marginTop: '10px', 
+          width: '90%',
+          height: '44px',
+          lineHeight: '22px',
+          overflow: 'hidden',
+          backgroundColor: 'grey',
+          borderRadius: '6px',
+          opacity: '0.8'
+        }}
+        onClick={() => dispatch(setActualItem(itemID))}
+      >{ false }</h5> }
 
       { description && description.map((item, index) => {
 
-        return (
-          <React.Fragment key={index}>
+        if ( itemID.indexOf('oil') < 0 ) {
 
-            { index < 2 && <p key={index + 640} style={{ color: 'grey', fontSize: '14px', lineHeight: '22px' }}>{ item }</p> }
-          
-          </React.Fragment>
-        )
+          return (
+            <React.Fragment key={index}>
+
+              { index < 2 && 
+              
+                <p key={index + 640} 
+                  style={{ color: 'grey', 
+                    fontSize: '14px', 
+                    lineHeight: '22px' 
+                  }}>{ item }</p> }
+            
+            </React.Fragment>
+          )
+
+        } else {
+
+          return (
+            <React.Fragment key={index}>
+
+              { index < 2 && 
+                
+                <p key={index + 640} 
+                  style={{ backgroundColor: 'grey', 
+                    fontSize: '14px', 
+                    lineHeight: '22px', 
+                    height: '20px', 
+                    marginBottom: '8px', 
+                    borderRadius: '6px', 
+                    opacity: '0.8' 
+                  }}>{ false }</p> }
+            
+            </React.Fragment>
+          )
+
+        }
+
       })}
 
-      <Button  
-        params={{
-          width: 180,
-          height: 26,
-          background: '#F4F4F4'
-        }}
-        inner={"в наличии в 10 магазинах"}
-        css={{
-          fontSize: '12px',
-          color: '#858585',
-          marginTop: '10px',
-          marginBottom: '20px',
-          boxShadow: 'none',
-          borderRadius: '15px'
-        }}
-      />
-
-      { coast1 !== '--' ? <CoastWrapper>
-
-        <span 
-          style={{ 
-            display: 'block', 
-            fontSize: '20px', 
-            fontWeight: 'bold',
-            marginRight: '30px',
-            width: '90%'
+      { itemID.indexOf('oil') < 0 && 
+      
+        <Button  
+          params={{
+            width: 180,
+            height: 26,
+            background: '#F4F4F4'
           }}
-        >
-          
-          { coast1 && coast1 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}> Рублей</i>
-          
-        </span>
-        <span 
-          style={{ 
-            display: 'block', 
-            fontSize: '20px', 
-            fontWeight: 'bold', 
-            color: 'grey',
-            width: '90%'
+          inner={"в наличии в 10 магазинах"}
+          css={{
+            fontSize: '12px',
+            color: '#858585',
+            marginTop: '10px',
+            marginBottom: '20px',
+            boxShadow: 'none',
+            borderRadius: '15px'
           }}
-        >
-          
-          { coast2 && coast2 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}>Рублей</i>
-          
-        </span>
+        /> }
 
-      </CoastWrapper> : 
-      <CoastWrapper>
+      { itemID.indexOf('oil') < 0 ? <React.Fragment>
 
-        <span 
-          style={{ 
-            display: 'block', 
-            fontSize: '20px', 
-            fontWeight: 'bold', 
-            color: 'grey' 
-          }}
-        >
+        { coast1 !== '--' ? <CoastWrapper>
+
+          <span 
+            style={{ 
+              display: 'block', 
+              fontSize: '20px', 
+              fontWeight: 'bold',
+              marginRight: '30px',
+              width: '90%'
+            }}
+          >
+            
+            { coast1 && coast1 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}> Рублей</i>
+            
+          </span>
+          <span 
+            style={{ 
+              display: 'block', 
+              fontSize: '20px', 
+              fontWeight: 'bold', 
+              color: 'grey',
+              width: '90%'
+            }}
+          >
+            
+            { coast2 && coast2 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}>Рублей</i>
+            
+          </span>
+
+        </CoastWrapper> : 
+        <CoastWrapper>
+
+          <span 
+            style={{ 
+              display: 'block', 
+              fontSize: '20px', 
+              fontWeight: 'bold', 
+              color: 'grey' 
+            }}
+          >
+            
+            Извините, пока нет в продаже
+            
+          </span>
           
-          Извините, пока нет в продаже
-          
-        </span>
-        
-      </CoastWrapper> }
+        </CoastWrapper> }
+
+      </React.Fragment> : <React.Fragment>
+
+        <CoastWrapper>
+
+          <span 
+            style={{ 
+              display: 'block', 
+              fontSize: '20px', 
+              fontWeight: 'bold',
+              marginRight: '30px',
+              width: '90%',
+              marginTop: '12px'
+            }}
+          >
+            
+            100 <i style={{ fontStyle: 'normal', fontSize: '16px' }}> Рублей</i>
+            
+          </span>
+          <span 
+            style={{ 
+              display: 'block', 
+              fontSize: '20px', 
+              fontWeight: 'bold', 
+              color: 'grey',
+              width: '90%'
+            }}
+          >
+            
+            100 <i style={{ fontStyle: 'normal', fontSize: '16px' }}>Рублей</i>
+            
+          </span>
+
+        </CoastWrapper>
+
+      </React.Fragment> }
 
       <CoastWrapper style={{ marginTop: '20px', justifyContent: 'space-between' }}>
 
-        { false ? <Link style={{ textDecoration: 'none', color: 'black' }} to="/product"><Button  
-          params={{
-            height: 36,
-            background: '#2E2E2E',
-          }}
-          inner={"В корзину"}
-          css={{
-            fontSize: '13px',
-            boxShadow: 'none',
-            color: 'white',
-            paddingRight: '20px',
-            paddingLeft: '20px'
-          }}
-        /></Link> : <Button  
-          params={{
-            height: 36,
-            background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
-          }}
-          inner={makeOrderInner}
-          css={{
-            fontSize: '13px',
-            boxShadow: 'none',
-            color: 'white',
-            paddingRight: '20px',
-            paddingLeft: '20px'
-          }}
-          action={() => {
-            ordersCount()
-            ordersData(itemID)
-          }}
-        /> }
+        { itemID.indexOf('oil') < 0 ? <React.Fragment>
+
+          { false ? <Link style={{ textDecoration: 'none', color: 'black' }} to="/product"><Button  
+            params={{
+              height: 36,
+              background: '#2E2E2E',
+            }}
+            inner={"В корзину"}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              paddingRight: '20px',
+              paddingLeft: '20px'
+            }}
+          /></Link> : <Button  
+            params={{
+              height: 36,
+              background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
+            }}
+            inner={makeOrderInner}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              paddingRight: '20px',
+              paddingLeft: '20px'
+            }}
+            action={() => {
+              ordersCount()
+              ordersData(itemID)
+            }}
+          />}
+
+        </React.Fragment> : <React.Fragment>
+
+          { false ? <Link style={{ textDecoration: 'none', color: 'black' }} to="/product"><Button  
+            params={{
+              height: 36,
+              background: '#2E2E2E',
+            }}
+            inner={"В корзину"}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              paddingRight: '20px',
+              paddingLeft: '20px'
+            }}
+          /></Link> : <Button  
+            params={{
+              height: 36,
+              background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
+            }}
+            inner={makeOrderInner}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              paddingRight: '20px',
+              paddingLeft: '20px',
+              color: 'transparent'
+            }}
+          />}
+
+        </React.Fragment> }
+
         <Button  
           params={{
             width: 36,
