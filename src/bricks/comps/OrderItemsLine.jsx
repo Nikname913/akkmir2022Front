@@ -22,7 +22,7 @@ const Counter = css.ItemOneLineComps.Counter
 
 const OrderItemsLine = (props) => {
 
-  const { data, setSC } = props
+  const { data, setSC, setCOD } = props
   const orderedProducts = useSelector(state => state.catalog.orderProducts)
   const orderCount = useSelector(state => state.main.ordersCount)
   const dispatch = useDispatch()
@@ -56,32 +56,33 @@ const OrderItemsLine = (props) => {
   {/* технический долг, потом все вынестии в стейт */}
   {/* либо в глобальный стор приложения */}
 
-  {/* технический долг, подсчет цены должен быть в реальном времени */}
-
   useEffect(() => { 
     
     let totalSumm = 0
+    let productNames = ''
+
+    console.log('---------- orderedProducts ----------')
     console.log(orderedProducts)
 
-    orderedProducts.split('**').forEach((product, index) => {
+    orderedProducts.split('**').forEach(product => {
 
       // eslint-disable-next-line use-isnan
       if ( Number(product.split('::')[3]) * Number(product.split('::')[2]) ) {
 
         totalSumm = totalSumm + Number(product.split('::')[3]) * Number(product.split('::')[2])
+        productNames = productNames + product.split('::')[1] + ' - ' + product.split('::')[2] + ' шт. '
 
       }
 
     })
-    setSC(totalSumm) 
+
+    setSC(totalSumm)
+    setCOD(productNames) 
   
   },[ orderedProducts ])
 
-  {/* технический долг, подсчет цены должен быть в реальном времени */}
-
   return (
     <React.Fragment>
-
       <RequestComponent
         make={false}
         callbackAction={'GET_ORDERED_PRODUCTS'}
@@ -98,7 +99,7 @@ const OrderItemsLine = (props) => {
           summary = summary + Number(item.split('::')[3]) * Number(item.split('::')[2])
 
           return (
-            <React.Fragment>
+            <React.Fragment key={index}>
               { !removeProductsId.split('**').includes(item.split('::')[0]) && <Item key={index}>
                 <Icon>{ index + 1 }</Icon>
                 <ImageWrapper>

@@ -33,7 +33,7 @@ const RequestActionsComponent = (props) => {
             
             data = await fetch(urlstring).then(res => res.text())
             
-          } else {
+          } else if ( callbackAction === 'SEND_ORDER_TO_TELEGRAM' ) { } else {
 
             data = await fetch(urlstring).then(res => res.json())
 

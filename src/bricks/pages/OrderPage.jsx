@@ -81,7 +81,7 @@ const OrderPage = () => {
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
-            return <React.Fragment>{
+            return <React.Fragment key={index}>{
               index < 6 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}

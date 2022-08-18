@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import css from '../../styles/make-order'
 import Input from '../comps/input/Input.jsx'
 import ReactSelect from '../comps/ReactSelect'
 import Button from '../comps/button/Button.jsx'
+import RequestComponent from '../../services/request.service'
 import OrderItemsLine from '../comps/OrderItemsLine'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 import { useSelector, useDispatch } from 'react-redux'
@@ -35,6 +37,9 @@ const MapWrapper = css.MapWrapper
 const MakeOrder = () => {
 
   const [ summaryCoast, setSummaryCoast ] = useState(0)
+  const [ configOrdersData, setConfigOrdersData ] = useState(null)
+  const [ sendOrderToTelegram, setSendOrderToTelegram ] = useState(false)
+  const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -64,23 +69,26 @@ const MakeOrder = () => {
       let userPaytype
       let userDiliverytype
       let userAddress
+      let orderSumm
+      let orderBody
 
-      let message = `
-        Заявка с сайта, покупка. Номер клиента: ${number}. 
-        Модель транспортного средства: ${model}. 
-      `
+      let message = `Заявка с сайта, покупка. Номер клиента: ${number}. Модель транспортного средства: ${model}. `
       name ? userName = `Имя пользователя: ${name}. ` : null
       email ? userMail = `Почта пользователя: ${email}. ` : null
       paytype ? userPaytype = `Выбранный вариант оплаты: ${paytype}. ` : null
       diliverytype ? userDiliverytype = `Выбранный вариант получения: ${diliverytype}. ` : null
       address ? userAddress = `Адрес доставки: ${address}. ` : null
+      summaryCoast ? orderSumm = `Сумма заказа: ${summaryCoast} руб. ` : null
+      configOrdersData ? orderBody = `Данные о заказе: ${configOrdersData}` : null
 
       message = message                + 
         dataValidate(userName)         + 
         dataValidate(userMail)         + 
         dataValidate(userPaytype)      + 
         dataValidate(userDiliverytype) + 
-        dataValidate(userAddress)
+        dataValidate(userAddress)      +
+        dataValidate(orderSumm)        +
+        dataValidate(orderBody)      
 
       dispatch(setNumber(null))
       dispatch(setModel(null))
@@ -90,10 +98,12 @@ const MakeOrder = () => {
       dispatch(setDiliverytype(null))
       dispatch(setAddress(null))
 
+      setOrderDataTelegram(message)
+      setSendOrderToTelegram(true)
+
       Rds.removeAllOrders()
       dispatch(setOrdersCount(0))
       dispatch(setInfoPageTitle('Заказ успешно оформлен'))
-      navigate('../order-success')
 
     } else {
 
@@ -107,8 +117,23 @@ const MakeOrder = () => {
     }
   }
 
+  useEffect(() => {
+
+    sendOrderToTelegram && navigate('../order-success')
+
+  }, [ sendOrderToTelegram ])
+
   return (
     <React.Fragment>
+      { sendOrderToTelegram && <RequestComponent
+        make={false}
+        callbackAction={'SEND_ORDER_TO_TELEGRAM'}
+        requestData={{
+          type: 'GET',
+          urlstring: `http://tebot.ck23435.tmweb.ru/akkmirbott.php?actionType=SEND_ORDER_TO_AKKMIR&getData=${orderDataTelegram}`,
+        }}
+      /> }
+
       <MakeOrderWrapper style={{ overflow: 'hidden' }}>
         <span
           style={{
@@ -124,11 +149,7 @@ const MakeOrder = () => {
 
         <Form>
           <h5 style={{ fontSize: '18px', marginBottom: '12px'  }}>Контактная информация</h5>
-          <p style={{ fontSize: '13px', lineHeight: '20px' }}>
-            
-            Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохраниться в личном кабинете
-            
-          </p>
+          <p style={{ fontSize: '13px', lineHeight: '20px' }}>Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохраниться в личном кабинете</p>
 
           <Input
             params={{ width: 300 }}
@@ -315,7 +336,11 @@ const MakeOrder = () => {
           <OrderItems>
 
             <Items>
-              <OrderItemsLine data={Rds.getOrdersData()} setSC={setSummaryCoast}/>
+              <OrderItemsLine 
+                data={Rds.getOrdersData()} 
+                setSC={setSummaryCoast}
+                setCOD={setConfigOrdersData}
+              />
               <DiliveryCoast>
 
                 <p style={{ display: 'block', fontSize: '14px' }}>Доставка</p>
