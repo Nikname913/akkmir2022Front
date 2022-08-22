@@ -12,6 +12,7 @@ export const mainReducer = createSlice({
       message: '-- -- -- --'
     },
     productPageDiscriptionFork: 0,
+    catalogMenuRemote: '',
     catalogMenu: [
       { id: '001', 
         label: 'Аккумуляторы',
@@ -175,6 +176,9 @@ export const mainReducer = createSlice({
     },
     setMobile: (state, action) => {
       state.mobile = true
+    },
+    setCatalogMenuRemote: (state, action) => {
+      state.catalogMenuRemote = action.payload
     }
     
   }
@@ -192,5 +196,6 @@ export const { reducerOne,
   setMessageShow,
   setMessageContent,
   setMobile,
-  setInfoPageTitle } = mainReducer.actions
+  setInfoPageTitle,
+  setCatalogMenuRemote } = mainReducer.actions
 export default mainReducer.reducer

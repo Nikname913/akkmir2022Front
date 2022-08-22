@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { generalCatalogReducer, orderProductsReducer } from '../appStore/reducers/catalogReducer'
+import { setCatalogMenuRemote } from '../appStore/reducers/mainReducer'
 
 const RequestActionsComponent = (props) => {
 
@@ -39,13 +40,19 @@ const RequestActionsComponent = (props) => {
 
           }
 
-          dispatch(
+          callbackAction === 'NON_ACTION' && console.log(data)
+          callbackAction === 'GET_CATEGORIESS' && console.log(data)
+          callbackAction === 'GET_CATALOGG' && console.log(data)
+
+          callbackAction !== 'NON_ACTION' && dispatch(
             callbackAction === 'GET_CATALOG' 
             ? generalCatalogReducer(JSON.stringify(data))
             : callbackAction === 'GET_ORDERED_PRODUCTS'
             ? orderProductsReducer(data)
             : callbackAction === 'GET_POPULAR'
             ? generalCatalogReducer(JSON.stringify(data))
+            : callbackAction === 'GET_CATEGORIES'
+            ? setCatalogMenuRemote(JSON.stringify(data))
             : null
           )
       

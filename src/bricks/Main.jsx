@@ -9,6 +9,7 @@ import ProductPage from './pages/ProductPage'
 import CabinetPage from './pages/CabinetPage'
 import ModalCatalogPage from './pages/ModalCatalogPage'
 import CatalogPage from './pages/CatalogPage'
+import SearchPage from './pages/SearchPage'
 import InfoPage from './pages/InfoPage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -17,7 +18,9 @@ const Main = () => {
   return (
     <Routes>
       <Route path="/modal-catalog" element={<ModalCatalogPage/>} />
+      <Route path="/catalog/:category" element={<CatalogPage/>} />
       <Route path="/catalog" element={<CatalogPage/>} />
+      <Route path="/search/:query" element={<SearchPage/>} />
       <Route path="/order" element={<OrderPage/>} />
       <Route path="/order-success" element={<OrderSuccessPage/>} />
       <Route path="/product" element={<ProductPage/>} />

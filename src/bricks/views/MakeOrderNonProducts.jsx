@@ -1,17 +1,14 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/style-prop-object */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import css from '../../styles/make-order'
 
 const MakeOrderWrapper = css.OrderWrapper
 
-const NotFround = () => {
+const MakeOrderNonProducts = () => {
 
   return (
     <React.Fragment>
-      <MakeOrderWrapper 
+      <MakeOrderWrapper
         style={{ 
           overflow: 'hidden', 
           flexDirection: 'column', 
@@ -24,11 +21,11 @@ const NotFround = () => {
             position: 'absolute',
             width: '100%',
             height: '12px',
-            backgroundColor: '#D62E2B',
+            backgroundColor: '#2BC631',
             top: '0px',
             left: '0px'
           }}
-        />
+        ></span>
         <span
           style={{
             fontSize: '140px',
@@ -38,7 +35,7 @@ const NotFround = () => {
           }}
         >
         
-          404</span>
+          ...</span>
         <h3 style={{ fontSize: '22px', marginTop: '24px' }}>Ой!</h3>
         <span
           style={{
@@ -47,8 +44,7 @@ const NotFround = () => {
           }}
         >
         
-          Возможно, страница еще находится в разработке</span>
-
+          Корзина пуста</span>
         <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/home">
           <div
             style={{
@@ -86,6 +82,7 @@ const NotFround = () => {
       </MakeOrderWrapper>
     </React.Fragment>
   )
+
 }
 
-export default NotFround
+export default MakeOrderNonProducts

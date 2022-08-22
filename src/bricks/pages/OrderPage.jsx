@@ -2,6 +2,7 @@
 /* eslint-disable react/style-prop-object */
 import React, { useEffect } from 'react'
 import MakeOrder from '../views/MakeOrder'
+import MakeOrderNonProducts from '../views/MakeOrderNonProducts'
 import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
 import css from '../../styles/pages/order-page'
@@ -14,11 +15,12 @@ const Banner = css.MainContentLineBanner
 const OrderPage = () => {
 
   const popularItems = useSelector(state => state.catalog.popular)
+  const orders = useSelector(state => state.main.ordersCount)
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <React.Fragment>
@@ -39,7 +41,7 @@ const OrderPage = () => {
         </ContentLine>
         <ContentLine style={{ marginBottom: '15px' }}>
           
-          <MakeOrder/>
+          { Number(orders) > 0 ? <MakeOrder/> : <MakeOrderNonProducts/> }
         
         </ContentLine>
         <ContentLine style={{ marginBottom: '38px', marginTop: '0px' }}>

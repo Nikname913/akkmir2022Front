@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
@@ -18,6 +19,7 @@ const Banner = css.MainContentLineBanner
 const MainPage = () => {
 
   const mainMenu = useSelector(state => state.main.catalogMenu)
+  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
   const popularItems = useSelector(state => state.catalog.popular)
   
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -25,7 +27,7 @@ const MainPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <React.Fragment>
@@ -35,6 +37,15 @@ const MainPage = () => {
         requestData={{
           type: 'GET',
           urlstring: '/products',
+        }}
+      />
+
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_CATEGORIES'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/categories',
         }}
       />
 
@@ -161,7 +172,7 @@ const MainPage = () => {
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
-            return <React.Fragment>{
+            return <React.Fragment key={index}>{
               index < 6 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
@@ -218,8 +229,7 @@ const MainPage = () => {
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
 
-          { mainMenu 
-            ? mainMenu.map((item, index) => {
+          { !mainMenuRemote ? mainMenu.map((item, index) => {
 
               return (
                 <React.Fragment key={index}>
@@ -231,7 +241,31 @@ const MainPage = () => {
                 </React.Fragment>
               )
 
-            }) : null }
+            }) : JSON.parse(mainMenuRemote)[0].group.map((item, index) => {
+
+              if ( item.parent_id[0] === '' && item.priority[0] !== '0' ) {
+
+                const ID = item.id[0]
+                let idsArray = [ ID ]  
+
+                JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
+
+                  if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
+
+                })
+
+                return (
+                  <React.Fragment key={index}>
+                    <CategoryCard 
+                      catid={idsArray}
+                      title={item.name[0]}
+                      tags={['Загрузка тега', 'Загрузка тега', 'Загрузка тега', 'Загрузка тега', 'Загрузка тега']}
+                    />
+                  </React.Fragment>
+                )
+
+              }
+            })}
 
         </ContentLine>
       </Main>

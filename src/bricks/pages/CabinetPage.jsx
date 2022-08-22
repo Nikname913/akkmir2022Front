@@ -19,7 +19,7 @@ const CabinetPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <Main>

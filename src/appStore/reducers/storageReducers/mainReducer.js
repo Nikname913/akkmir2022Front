@@ -46,6 +46,19 @@ class Reducer {
 
   }
 
+  decrementOrdersCount(props) {
+
+    const { decr } = props
+
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    let count = store.ordersCount
+    let decrCount = count - decr
+    store.ordersCount = decrCount
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
+
+  }
+
   getOrdersData() {
 
     !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore() 

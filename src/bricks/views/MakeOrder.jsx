@@ -72,7 +72,7 @@ const MakeOrder = () => {
       let orderSumm
       let orderBody
 
-      let message = `Заявка с сайта, покупка. Номер клиента: ${number}. Модель транспортного средства: ${model}. `
+      let message = `Заявка с сайта, покупка. Номер клиента:${number}. Модель транспортного средства: ${model}. `
       name ? userName = `Имя пользователя: ${name}. ` : null
       email ? userMail = `Почта пользователя: ${email}. ` : null
       paytype ? userPaytype = `Выбранный вариант оплаты: ${paytype}. ` : null

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React, { useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import css from '../styles/search-service'
 import image from '../img/category.png'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,6 +15,7 @@ const { ResultsWindow, ResultProductCard } = css
 const HeaderSearch = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const searchResults = useSelector(state => state.searchDinamic.products)
   const showResults = useSelector(state => state.searchDinamic.showResults)
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -23,7 +25,10 @@ const HeaderSearch = () => {
   function getResults(e) {
 
     let val = e.target.value
+    let keyValue = e.key
     let resultsArray = []
+
+    keyValue === 'Enter' && navigate(`../search/${val}`)
 
     if ( val.length > 2 ) {
 

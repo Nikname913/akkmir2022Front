@@ -140,7 +140,7 @@ const CardPreview = (props) => {
         onClick={() => dispatch(setActualItem(itemID))}
       ><Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/product">
           
-          { title }
+          { title[0] }
           
       </Link></h5> : <h5 
         style={{ 

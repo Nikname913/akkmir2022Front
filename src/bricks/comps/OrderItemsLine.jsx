@@ -44,6 +44,12 @@ const OrderItemsLine = (props) => {
 
   }
 
+  function decrementCounter(param) {
+
+    Rds.decrementOrdersCount({ decr: param })
+
+  }
+
   {/* технический долг, потом все вынестии в стейт */}
   {/* либо в глобальный стор приложения */}
 
@@ -133,6 +139,7 @@ const OrderItemsLine = (props) => {
 
                     orCount = Number(orCount) - Number(item.split('::')[2])
                     dispatch(setOrdersCount(orCount))
+                    decrementCounter(orCount)
                     
                   }}
                 >

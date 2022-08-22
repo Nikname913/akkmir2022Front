@@ -10,7 +10,7 @@ const ContentLine = css.MainContentLine
 const InfoPage = () => {
 
   const title = useSelector(state => state.main.infoPageTitle)
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <Main>

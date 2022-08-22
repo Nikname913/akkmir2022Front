@@ -8,7 +8,7 @@ const ContentLine = css.MainContentLine
 
 const ModalCatalogPage = () => {
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <Main>

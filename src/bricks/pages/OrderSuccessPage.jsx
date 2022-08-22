@@ -10,7 +10,7 @@ const Banner = css.MainContentLineBanner
 
 const OrderSuccessPage = () => {
 
-  useEffect(() => document.documentElement.scrollTop = 0)
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <React.Fragment>

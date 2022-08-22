@@ -284,7 +284,16 @@ const CardView = (props) => {
                   cursor: 'pointer'
                 }}
               ></span>
-              <span style={{ fontSize: '13px', width: '190px', lineHeight: '18px' }}>Сдать свой аккумулятор и получить скидку</span>
+              <span 
+                style={{ 
+                  fontSize: '13px', 
+                  width: '190px', 
+                  lineHeight: '18px' 
+                }}
+              >
+              
+                Сдать свой аккумулятор и получить скидку
+              </span>
             </div>
             <span 
               style={{ 
@@ -480,12 +489,13 @@ const CardView = (props) => {
                   }}
                 />
 
-                { Rds.getOrdersData().map(item => {
+                { Rds.getOrdersData().map((item, index) => {
 
                   if ( item.id === actualItem ) {
 
                     return (
                       <span
+                        key={index}
                         style={{
                           display: 'block',
                           position: 'absolute',
@@ -503,27 +513,19 @@ const CardView = (props) => {
                           color: 'grey'
                         }}
                       >
+                        
                         { item.count }
+                      
                       </span>
-                    )
-                  }
+                    )}
                 })}
 
               </React.Fragment>
             }
           />
 
-          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>
-            
-            В наличии в 3 магазинах
-            
-          </p>
-
-          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>
-            
-            Доставка в екатеринбург сегодня
-            
-          </p>
+          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
+          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>Доставка в екатеринбург сегодня</p>
 
         </OrderForm>
       </LevelOne>

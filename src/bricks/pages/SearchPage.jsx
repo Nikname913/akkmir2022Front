@@ -10,37 +10,39 @@ import Button from '../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
 import arrowImg from '../../img/arrow.png'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { refreshResults, setShowResults } from '../../appStore/reducers/searchDinamicReducer'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
 const PodborWindow = css.PodborWindow
 const PodborWindowContentLine = css.PodborWindowContentLine
 
-const CatalogPage = () => {
+const SearchPage = () => {
 
   const items = useSelector(state => state.catalog.catalog)
-  const actualCategory = useSelector(state => state.main.actualCategory)
   const params = useParams()
-  const catalogCategory = params.category
+  const dispatch = useDispatch()
+  const searchParam = params.query
 
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
   
-  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
-
   jsonCatalog 
     ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
-        item => actualCategory.id.includes(item.groups[0].id[0].toLowerCase())
+        item => item.name[0].toLowerCase().indexOf(searchParam.toLowerCase()) !== -1
       ) : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[])
-  useEffect(() => false && console.log(catalogCategory),[])
-  useEffect(() => false && console.log(actualCategory),[])
+  useEffect(() => document.documentElement.scrollTop = 0,[],[])
+  useEffect(() => {
+
+    dispatch(refreshResults(JSON.stringify([])))
+    dispatch(setShowResults(false))
+
+  },[])
 
   return (
     <React.Fragment>
-
       <RequestComponent
         make={false}
         callbackAction={'GET_CATALOG'}
@@ -523,7 +525,7 @@ const CatalogPage = () => {
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginTop: '2px', marginBottom: '27px' }}>
 
-          <h2>{ actualCategory.label }</h2>
+          <h2>Результаты поиска: { searchParam }</h2>
           <div 
             style={{
               position: 'relative',
@@ -756,4 +758,4 @@ const CatalogPage = () => {
   )
 }
 
-export default CatalogPage
+export default SearchPage
