@@ -33,7 +33,7 @@ const SearchPage = () => {
         item => item.name[0].toLowerCase().indexOf(searchParam.toLowerCase()) !== -1
       ) : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[],[])
+  useEffect(() => document.documentElement.scrollTop = 0,[])
   useEffect(() => {
 
     dispatch(refreshResults(JSON.stringify([])))

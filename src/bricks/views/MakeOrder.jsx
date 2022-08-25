@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/style-prop-object */
@@ -39,6 +40,7 @@ const MakeOrder = () => {
   const [ summaryCoast, setSummaryCoast ] = useState(0)
   const [ configOrdersData, setConfigOrdersData ] = useState(null)
   const [ sendOrderToTelegram, setSendOrderToTelegram ] = useState(false)
+  const [ emailFromAuth, setEmailFromAuth ] = useState('') 
   const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
 
   const number = useSelector(state => state.newOrder.number)
@@ -62,7 +64,7 @@ const MakeOrder = () => {
 
   function orderController() {
 
-    if ( number && model ) {
+    if ( number ) {
 
       let userName
       let userMail
@@ -101,10 +103,6 @@ const MakeOrder = () => {
       setOrderDataTelegram(message)
       setSendOrderToTelegram(true)
 
-      Rds.removeAllOrders()
-      dispatch(setOrdersCount(0))
-      dispatch(setInfoPageTitle('Заказ успешно оформлен'))
-
     } else {
 
       dispatch(setMessageContent({
@@ -116,10 +114,36 @@ const MakeOrder = () => {
 
     }
   }
-
+  
   useEffect(() => {
 
-    sendOrderToTelegram && navigate('../order-success')
+    if ( Rds.getAuthStatus() === false ) {
+
+      {/* технический долг, вынести логику в useRef */}
+      {/* или другое более подходящее решение" */}
+
+    } else { 
+      
+      const [ header, payload ] = Rds.getAuthUserToken().split('.')
+      false && console.log(window.atob(header))
+      false && console.log(window.atob(payload))
+      
+      const data = JSON.parse(window.atob(payload))
+      const email = data.email
+
+      setEmailFromAuth(email)
+      dispatch(setEmail(email))
+      
+    }
+
+    if ( sendOrderToTelegram === true ) {
+
+      Rds.removeAllOrders()
+      dispatch(setOrdersCount(0))
+      dispatch(setInfoPageTitle('Заказ успешно оформлен'))
+      navigate('../order-success')
+
+    }
 
   }, [ sendOrderToTelegram ])
 
@@ -171,9 +195,7 @@ const MakeOrder = () => {
             placeholder={"Mitsubishi"}
             inputCss={{ 
               border: 'none',
-              borderRight: model 
-                ? '6px solid rgb(43, 198, 49)' 
-                : '6px solid rgb(214, 46, 43)'
+              borderRight: '6px solid #F7F7F7'
             }}
             title={"Марка транспортного средства*"}
             css={{ marginTop: '14px' }}
@@ -194,7 +216,7 @@ const MakeOrder = () => {
           <Input
             params={{ width: 300 }}
             type={"text"}
-            placeholder={"example@mail.com"}
+            placeholder={ emailFromAuth ? emailFromAuth : "example@mail.com"}
             inputCss={{ 
               border: 'none',
               borderRight: '6px solid #F7F7F7'
@@ -412,17 +434,8 @@ const MakeOrder = () => {
                 }}
               />
 
-              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>
-                
-                В наличии в 3 магазинах
-                
-              </p>
-
-              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>
-                
-                Доставка в Екатеринбург сегодня
-                
-              </p>
+              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
+              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>Доставка в Екатеринбург сегодня</p>
 
             </OrderForm>
 

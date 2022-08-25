@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { generalCatalogReducer, orderProductsReducer } from '../appStore/reducers/catalogReducer'
-import { setCatalogMenuRemote } from '../appStore/reducers/mainReducer'
+import { setCatalogMenuRemote, setCatalogPropsRemote } from '../appStore/reducers/mainReducer'
 
 const RequestActionsComponent = (props) => {
 
@@ -53,6 +53,8 @@ const RequestActionsComponent = (props) => {
             ? generalCatalogReducer(JSON.stringify(data))
             : callbackAction === 'GET_CATEGORIES'
             ? setCatalogMenuRemote(JSON.stringify(data))
+            : callbackAction === 'GET_PROPS'
+            ? setCatalogPropsRemote(JSON.stringify(data))
             : null
           )
       

@@ -63,6 +63,8 @@ const Header = () => {
       const data = JSON.parse(window.atob(payload))
       const user = data.name
 
+      console.log(data)
+
       setAuthUserName(user)
       navigate('../cabinet') 
       

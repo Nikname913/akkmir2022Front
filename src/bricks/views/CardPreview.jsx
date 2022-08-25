@@ -130,7 +130,7 @@ const CardPreview = (props) => {
       { itemID.indexOf('oil') < 0 ? <h5 
         style={{ 
           fontSize: '15px', 
-          marginBottom: '10px',
+          marginBottom: '8px',
           marginTop: '10px', 
           width: '90%',
           height: '44px',
@@ -148,7 +148,7 @@ const CardPreview = (props) => {
           marginBottom: '10px',
           marginTop: '10px', 
           width: '90%',
-          height: '44px',
+          height: '66px',
           lineHeight: '22px',
           overflow: 'hidden',
           backgroundColor: 'grey',

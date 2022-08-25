@@ -190,7 +190,7 @@ const CabinetComponent = (props) => {
                 color: 'grey',
                 fontSize: '13px',
                 marginTop: '2px',
-                marginBottom: '8px',
+                marginBottom: '16px',
                 width: '80%',
                 lineHeight: '18px'
               }}
@@ -218,7 +218,7 @@ const CabinetComponent = (props) => {
                 params={{
                   width: 140,
                   height: 36,
-                  background: 'transparent',
+                  background: '#F4F4F4',
                 }}
                 inner={"Адрес 2"}
                 css={{
@@ -232,7 +232,7 @@ const CabinetComponent = (props) => {
                 params={{
                   width: 140,
                   height: 36,
-                  background: 'transparent',
+                  background: '#F4F4F4',
                 }}
                 inner={"Адрес 3"}
                 css={{
@@ -348,7 +348,7 @@ const CabinetComponent = (props) => {
             <OrderContentLeftLine>
 
               <LeftBlockContentLineCellOrder>19564</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
+              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px', lineHeight: '23px' }}>
                 
                 <img 
                   style={{ 
@@ -375,7 +375,7 @@ const CabinetComponent = (props) => {
             <OrderContentLeftLine>
 
               <LeftBlockContentLineCellOrder>19565</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
+              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px', lineHeight: '23px' }}>
                 
                 <img 
                   style={{ 
@@ -402,7 +402,7 @@ const CabinetComponent = (props) => {
             <OrderContentLeftLine>
 
               <LeftBlockContentLineCellOrder>19566</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
+              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px', lineHeight: '23px' }}>
                 
                 <img 
                   style={{ 
@@ -429,223 +429,7 @@ const CabinetComponent = (props) => {
             <OrderContentLeftLine>
 
               <LeftBlockContentLineCellOrder>19568</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>30.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold' }}>Доставлен</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19564</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>25.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: 'grey' }}>Ожидание оплаты</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19565</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>26.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: '#2BC631' }}>В обработке</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19566</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>28.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: '#2BC631' }}>В обработке</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19568</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>30.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold' }}>Доставлен</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19564</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>25.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: 'grey' }}>Ожидание оплаты</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19565</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>26.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: '#2BC631' }}>В обработке</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19566</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
-                
-                <img 
-                  style={{ 
-                    display: 'block', 
-                    width: '40px', 
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    left: '0',
-                    top: '50%',
-                    marginTop: '-20px'
-                  }} 
-                  src={akkum} 
-                  alt={""}
-                />
-                Автомобильный аккумулятор ZEUS RED LB 50 Ач п.п.
-                
-              </LeftBlockContentLineCellItem>
-              <LeftBlockContentLineCellDate>28.05.22</LeftBlockContentLineCellDate>
-              <LeftBlockContentLineCellStatus style={{ fontWeight: 'bold', color: '#2BC631' }}>В обработке</LeftBlockContentLineCellStatus>
-              <LeftBlockContentLineCellCount>2 шт.</LeftBlockContentLineCellCount>
-              <LeftBlockContentLineCellSumm>8800</LeftBlockContentLineCellSumm>
-
-            </OrderContentLeftLine>
-            <OrderContentLeftLine>
-
-              <LeftBlockContentLineCellOrder>19568</LeftBlockContentLineCellOrder>
-              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px' }}>
+              <LeftBlockContentLineCellItem style={{ paddingLeft: '52px', lineHeight: '23px' }}>
                 
                 <img 
                   style={{ 

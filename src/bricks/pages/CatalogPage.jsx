@@ -27,12 +27,18 @@ const CatalogPage = () => {
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
   
-  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
+  if ( !catalogCategory ) {
+
+    jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
+
+  } else {
 
   jsonCatalog 
     ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
         item => actualCategory.id.includes(item.groups[0].id[0].toLowerCase())
       ) : generalCatalog = null
+
+  }
 
   useEffect(() => document.documentElement.scrollTop = 0,[])
   useEffect(() => false && console.log(catalogCategory),[])
@@ -523,7 +529,7 @@ const CatalogPage = () => {
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginTop: '2px', marginBottom: '27px' }}>
 
-          <h2>{ actualCategory.label }</h2>
+          <h2>{ catalogCategory ? catalogCategory : 'Все товары' }</h2>
           <div 
             style={{
               position: 'relative',

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import css from '../styles/search-service'
@@ -28,7 +28,14 @@ const HeaderSearch = () => {
     let keyValue = e.key
     let resultsArray = []
 
-    keyValue === 'Enter' && navigate(`../search/${val}`)
+    if ( keyValue === 'Enter' ) { 
+      
+      e.target.value = ''
+      dispatch(refreshResults(JSON.stringify([])))
+      dispatch(setShowResults(false)) 
+      navigate(`../search/${val}`)
+    
+    }
 
     if ( val.length > 2 ) {
 

@@ -180,16 +180,8 @@ export const catalogReducer = createSlice({
   },
   reducers: {
 
-    generalCatalogReducer: (state, action) => {
-
-      state.generalCatalog = action.payload
-
-    },
-    orderProductsReducer: (state, action) => {
-
-      state.orderProducts = action.payload
-
-    },
+    generalCatalogReducer: (state, action) => { state.generalCatalog = action.payload },
+    orderProductsReducer: (state, action) => { state.orderProducts = action.payload },
     removeProductFromOrder: (state, action) => {
 
       let newArr = []

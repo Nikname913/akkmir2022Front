@@ -21,7 +21,7 @@ const ProductPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[], [])
+  useEffect(() => document.documentElement.scrollTop = 0,[])
 
   return (
     <React.Fragment>
@@ -63,8 +63,8 @@ const ProductPage = () => {
         <ContentLine>
           { generalCatalog.map(item => {
 
-            console.log(item)
-            console.log('--------------------------------')
+            false && console.log(item)
+            false && console.log('--------------------------------')
 
             if ( item.id[0] === itemLocal ) {
 

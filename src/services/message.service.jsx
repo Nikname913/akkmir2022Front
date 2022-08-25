@@ -58,7 +58,7 @@ const Message = (props) => {
             paddingLeft: '30px',
             paddingRight: '30px',
             fontSize: '14px',
-            lineHeight: '20px',
+            lineHeight: '24px',
             textAlign: 'center',
             marginTop: '20px',
           }}

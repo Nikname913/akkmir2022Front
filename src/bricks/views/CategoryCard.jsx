@@ -4,8 +4,8 @@
 import React from 'react'
 import css from '../../styles/category-card'
 import image from '../../img/category.png'
-import { Link, useNavigate } from "react-router-dom"
-import { useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
 
 const Card = css.Card
@@ -14,6 +14,7 @@ const CardTags = css.CardTags
 const CatCard = (props) => {
 
   const { title, img = image, tags = null, catid } = props
+  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -23,10 +24,17 @@ const CatCard = (props) => {
 
   }
 
+  function selectSubCategory(props) {
+
+    const { id, label } = props
+    dispatch(setActualCategory({ id, label}))
+
+  }
+
   return (
     <React.Fragment>
 
-      <Card onClick={selectCategory}>
+      <Card>
         <img 
           src={img} 
           alt={""}
@@ -40,13 +48,17 @@ const CatCard = (props) => {
 
         <h5 
           style={{ 
-            fontSize: '16px',
+            fontSize: '20px',
             marginTop: '12px', 
             marginBottom: '16px', 
             textAlign: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            lineHeight: '26px'
           }}
-          onClick={() => navigate(`../catalog/${title}`)}
+          onClick={() => {
+            navigate(`../catalog/${title}`)
+            selectCategory()
+          }}
         >{title}</h5>
 
         <CardTags>
@@ -66,10 +78,17 @@ const CatCard = (props) => {
                   paddingLeft: '16px',
                   paddingRight: '16px',
                   marginRight: '6px',
-                  marginBottom: '6px'
+                  marginBottom: '6px',
+                  cursor: 'pointer'
                 }}
-                onClick={() => navigate(`../catalog/${title}`)}
-              >{item}</span>
+                onClick={() => {
+                  navigate(`../catalog/${item[1]}`)
+                  selectSubCategory({
+                    id: item[0],
+                    label: item[1],
+                  })
+                }}
+              >{item[1]}</span>
             )
 
           }) : null }

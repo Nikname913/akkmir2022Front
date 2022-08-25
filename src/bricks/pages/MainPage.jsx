@@ -49,6 +49,15 @@ const MainPage = () => {
         }}
       />
 
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_PROPS'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/props',
+        }}
+      />
+
       <Main>
         <ContentLine style={{ justifyContent: 'space-between', marginBottom: '32px' }}>
 
@@ -247,10 +256,12 @@ const MainPage = () => {
 
                 const ID = item.id[0]
                 let idsArray = [ ID ]  
+                let tagsArray = []
 
                 JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
 
                   if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
+                  if ( itemm.parent_id[0] === ID ) tagsArray.push([itemm.id[0], itemm.name[0]])
 
                 })
 
@@ -259,7 +270,7 @@ const MainPage = () => {
                     <CategoryCard 
                       catid={idsArray}
                       title={item.name[0]}
-                      tags={['Загрузка тега', 'Загрузка тега', 'Загрузка тега', 'Загрузка тега', 'Загрузка тега']}
+                      tags={tagsArray}
                     />
                   </React.Fragment>
                 )

@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import css from '../../styles/card-view'
 import CardInfo from './CardInfo'
 import Button from '../comps/button/Button.jsx'
@@ -12,7 +12,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { productPageReducer, 
   setModalContent, 
   setModalShow,
-  setOrdersCount } from '../../appStore/reducers/mainReducer'
+  setOrdersCount,
+  setMessageShow, 
+  setMessageContent } from '../../appStore/reducers/mainReducer'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 
 const Card = css.CardWrapper
@@ -28,13 +30,15 @@ const LevelThree = css.CardWrapperDowmMiddleLevel
 
 const CardView = (props) => {
 
+  const { coast = null, descr = '', title = '', properties = [] } = props
+  const discrFork = useSelector(state => state.main.productPageDiscriptionFork)
+  const actualItem = useSelector(state => state.main.actualItem)
+  const propsRemote = useSelector(state => state.main.catalogPropsRemote)
   const [ powerCount, setPowerCount ] = useState(60)
   const [ makeOrder, setMakeOrder ] = useState(false)
   const [ makeOrderInner, setMakeOrderInner ] = useState('Добавить в корзину')
-  const discrFork = useSelector(state => state.main.productPageDiscriptionFork)
-  const actualItem = useSelector(state => state.main.actualItem)
+  const [ productProps, ] = useState(propertiesConfig())
   const dispatch = useDispatch()
-  const { coast = null, descr = '', title = '', properties = [] } = props
 
   function incrCount() { setPowerCount(prev => prev += 10) }
   function decrCount() { setPowerCount(prev => prev > 0 ? prev = prev - 10 : prev = 0) }
@@ -46,18 +50,20 @@ const CardView = (props) => {
 
     props.forEach(prop => {
 
-      let propID = prop.id[0]
-      if ( propID === 'brand'                               || 
-           propID === 'manufacturer'                        || 
-           propID ==='05b9c35b-f76d-11e7-8dcf-0015179b1da1' ||
-           propID ==='69170251-f76d-11e7-8dcf-0015179b1da1' 
-          ) { returnedPropsArray.push(prop) } else {
+      const ppropsRemote = JSON.parse(propsRemote)[0].property
+      const propID = prop.id[0]
+      const propValue = prop.value[0]
 
-            returnedPropsArray.push({ id: ['-----'], value: ['-----'] })
+      ppropsRemote.forEach(pprop => {
 
-      }     
+        if ( pprop.id[0] === propID ) returnedPropsArray.push({ id: pprop.name[0], value: propValue })
 
-    }); return returnedPropsArray
+      }) 
+
+    })
+    
+    console.log(returnedPropsArray)
+    return returnedPropsArray
 
   }
 
@@ -68,23 +74,9 @@ const CardView = (props) => {
 
   }
 
-  function ordersData(param) {
-
-    Rds.makeNewOrder({ itemID: param })
-
-  }
-
-  function addressItem() {
-
-    dispatch(productPageReducer(0))
-
-  }
-
-  function discrItem() {
-
-    dispatch(productPageReducer(1))
-
-  }
+  function ordersData(param) { Rds.makeNewOrder({ itemID: param }) }
+  function addressItem() { dispatch(productPageReducer(0)) }
+  function discrItem() { dispatch(productPageReducer(1)) }
 
   function showModal() {
 
@@ -94,8 +86,6 @@ const CardView = (props) => {
     dispatch(setModalShow(true))
 
   }
-
-  useEffect(() => propertiesConfig())
 
   function contentModal() {
 
@@ -166,63 +156,36 @@ const CardView = (props) => {
             }}
           />
 
-          <h5 style={{ fontSize: '18px', marginBottom: '12px'  }}>Характеристики аккумулятора:</h5>
+          <h5 style={{ fontSize: '18px', marginBottom: '16px'  }}>Характеристики продукта:</h5>
           
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Гарантия</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>36 месяцев</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Бренд</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>ZEUS</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Емкость Ач</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>50</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Напряжение (В)</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>12</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Полярность</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Прямая</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Производитель</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Курский аккумуляторный завод</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Пусковой ток (А)</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>480</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Размер (Д*Ш*В)</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>207*175*175</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Тип клемм</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Европейская</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Тип крепления</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Нижний бурт</p>
-          </ItemDescriptionLine>
-          <ItemDescriptionLine>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Тип транспорта</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', color: 'grey' }}>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
-            <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>Легковой</p>
-          </ItemDescriptionLine>
+          { productProps.length === 0 ? 
+          
+            <React.Fragment/> : <React.Fragment>
+
+              { productProps.map((prop, index) => {
+
+                let bgc; ( index % 2 === 0 ) ? bgc = 'rgb(247, 247, 247)' : bgc = 'transparent'
+
+                return (
+                  <ItemDescriptionLine
+                    key={index}
+                    style={{ 
+                      backgroundColor: bgc,
+                      borderRadius: '4px',
+                      paddingLeft: '10px',
+                      paddingRight: '10px',
+                      paddingBottom: '6px',
+                      paddingTop: '6px' 
+                    }}
+                  >
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>{ prop.id }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>{ prop.value }</p>
+                  </ItemDescriptionLine>
+                )
+
+              })}
+
+            </React.Fragment> }
 
         </ItemDescription>
         <OrderForm>
@@ -450,6 +413,16 @@ const CardView = (props) => {
                 }}
               />
             }
+            action={() => {
+                  
+              dispatch(setMessageContent({
+                title: 'Данная функция в разработке',
+                message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована',
+                type: 'error',
+              }))
+              dispatch(setMessageShow(true))
+
+            }}
           />
           <Button  
             params={{

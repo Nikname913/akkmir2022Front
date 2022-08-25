@@ -13,86 +13,14 @@ export const mainReducer = createSlice({
     },
     productPageDiscriptionFork: 0,
     catalogMenuRemote: '',
-    catalogMenu: [
-      { id: '001', 
-        label: 'Аккумуляторы',
-        tags: [
-          'Автомобильные',
-          'Мотоциклетные',
-          'Аккумуляторы тяговые',
-          'Клеммы и провода',
-        ]},
-      { id: '002', 
-        label: 'Масла',
-        tags: [
-          'Моторные',
-          'АКПП и ГУР',
-          'Трансмиссионные',
-          'Гидравлические',
-          'Промывочные жидкости',
-        ]},
-      { id: '003', 
-        label: 'Спецжидкости',
-        tags: [
-          'Антифризы',
-          'Тосолы',
-          'Мочевина',
-          'Стеклоомыватели',
-          'Электролит',
-          'Тормозные жидкости',
-        ]},
-      { id: '004', 
-        label: 'Автоэлектроника и питание',
-        tags: [
-          'Батарейки',
-          'Зарядные устройства',
-          'Нагрузочные вилки',
-          'Компрессоры',
-          'Измерительные приборы',
-        ]},
-      { id: '005', 
-        label: 'ИБП и стабилизаторы',
-        tags: [
-          'ИБП',
-          'Стабилизаторы',
-          'Инверторы',
-        ]},
-      { id: '006', 
-        label: 'Инструменты',
-        tags: [
-          'Ключи',
-          'Удлиннители и воротки',
-          'Отвертки',
-          'Ручной инструмент',
-          'Наборы инструментов',
-        ]},
-      { id: '007', 
-        label: 'Автокосметика',
-        tags: [
-          'Присадки',
-          'Очистители',
-          'Полироли',
-          'Смазки',
-          'Автоэмали',
-          'Размораживатели',
-        ]},
-      { id: '008', 
-        label: 'Автоаксессуары',
-        tags: [
-          'Термочехлы',
-          'Ароматизаторы',
-          'Автоаксессуары',
-          'Перчатки',
-          'Фонари',
-          'Домкраты',
-        ]}
-    ],
+    catalogPropsRemote: '',
+    catalogMenu: [],
     ordersCount: 0,
     sravnenieCount: 2,
     actualItem: null,
     actualCategory: { 
-      id: '001', 
-      label: 'Аккумуляторы' 
+      id: null, 
+      label: null 
     },
     mobile: false,
     models: [
@@ -136,16 +64,12 @@ export const mainReducer = createSlice({
       'Mazda',
       'Mercedes-Benz'
     ],
-    infoPageTitle: 'Новости нашей компании'
+    infoPageTitle: ''
   },
   reducers: {
 
-    reducerOne: (state, action) => {},
-    reducerTwo: (state, action) => {},
     productPageReducer: (state, action) => {
-
       state.productPageDiscriptionFork = action.payload
-
     },
     setInfoPageTitle: (state, action) => {
       state.infoPageTitle = action.payload
@@ -179,14 +103,15 @@ export const mainReducer = createSlice({
     },
     setCatalogMenuRemote: (state, action) => {
       state.catalogMenuRemote = action.payload
+    },
+    setCatalogPropsRemote: (state, action) => {
+      state.catalogPropsRemote = action.payload
     }
     
   }
 })
 
-export const { reducerOne, 
-  reducerTwo, 
-  productPageReducer,
+export const { productPageReducer,
   setOrdersCount,
   setSravnenieCount,
   setActualItem,
@@ -197,5 +122,6 @@ export const { reducerOne,
   setMessageContent,
   setMobile,
   setInfoPageTitle,
-  setCatalogMenuRemote } = mainReducer.actions
+  setCatalogMenuRemote,
+  setCatalogPropsRemote } = mainReducer.actions
 export default mainReducer.reducer
