@@ -173,12 +173,12 @@ const MakeOrder = () => {
 
         <Form>
           <h5 style={{ fontSize: '18px', marginBottom: '12px'  }}>Контактная информация</h5>
-          <p style={{ fontSize: '13px', lineHeight: '20px' }}>Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохраниться в личном кабинете</p>
+          <p style={{ fontSize: '13px', lineHeight: '24px' }}>Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохраниться в личном кабинете</p>
 
           <Input
             params={{ width: 300 }}
             type={"text"}
-            placeholder={"+7800.."}
+            placeholder={"+7950.."}
             inputCss={{ 
               border: 'none',
               borderRight: number 
@@ -186,13 +186,13 @@ const MakeOrder = () => {
                 : '6px solid rgb(214, 46, 43)'
             }}
             title={"Мобильный телефон*"}
-            css={{ marginTop: '14px' }}
+            css={{ marginTop: '22px' }}
             dispatchType={"number"}
           />
           <Input
             params={{ width: 300 }}
             type={"text"}
-            placeholder={"Mitsubishi"}
+            placeholder={"Lada Vesta"}
             inputCss={{ 
               border: 'none',
               borderRight: '6px solid #F7F7F7'
@@ -204,7 +204,7 @@ const MakeOrder = () => {
           <Input
             params={{ width: 300 }}
             type={"text"}
-            placeholder={"Введите ваше имя"}
+            placeholder={"Иван Иванов"}
             inputCss={{ 
               border: 'none',
               borderRight: '6px solid #F7F7F7'

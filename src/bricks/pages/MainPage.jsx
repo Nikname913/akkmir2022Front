@@ -258,12 +258,17 @@ const MainPage = () => {
                 let idsArray = [ ID ]  
                 let tagsArray = []
 
+                false && console.log('--------------------------------')
+                false && console.log('--------------------------------')
+
                 JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
 
                   if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
                   if ( itemm.parent_id[0] === ID ) tagsArray.push([itemm.id[0], itemm.name[0]])
 
                 })
+
+                false && console.log(idsArray)
 
                 return (
                   <React.Fragment key={index}>

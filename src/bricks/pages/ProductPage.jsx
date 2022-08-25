@@ -63,8 +63,8 @@ const ProductPage = () => {
         <ContentLine>
           { generalCatalog.map(item => {
 
-            false && console.log(item)
-            false && console.log('--------------------------------')
+            !false && console.log(item)
+            !false && console.log('--------------------------------')
 
             if ( item.id[0] === itemLocal ) {
 
@@ -73,6 +73,7 @@ const ProductPage = () => {
                   title={item.name[0]}
                   descr={item.description[0]}
                   properties={item.properties}
+                  group={item.groups[0].id[0]}
                   coast={+item.pre_order_prices[0].region[0].price[0] === 0
                     ? '--' : item.pre_order_prices[0].region[0].price[0]}
                 />

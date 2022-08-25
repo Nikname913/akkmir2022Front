@@ -5,7 +5,7 @@ import React from 'react'
 import css from '../../styles/category-card'
 import image from '../../img/category.png'
 import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
 
 const Card = css.Card
@@ -14,15 +14,10 @@ const CardTags = css.CardTags
 const CatCard = (props) => {
 
   const { title, img = image, tags = null, catid } = props
-  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  function selectCategory() {
-
-    dispatch(setActualCategory({ id: catid, label: title }))
-
-  }
+  function selectCategory() { dispatch(setActualCategory({ id: catid, label: title })) }
 
   function selectSubCategory(props) {
 
@@ -33,10 +28,8 @@ const CatCard = (props) => {
 
   return (
     <React.Fragment>
-
       <Card>
-        <img 
-          src={img} 
+        <img src={img} 
           alt={""}
           style={{
             display: 'block',
@@ -95,7 +88,6 @@ const CatCard = (props) => {
 
         </CardTags>
       </Card>
-
     </React.Fragment>
   )
 

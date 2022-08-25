@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useRef, useEffect } from 'react'
 import css from '../../styles/card-view'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import byClickImage from '../../img/byClickGrey.png'
 import mapImage from '../../img/mapFish.png'
 
@@ -22,7 +22,6 @@ const CardInfo = (props) => {
   const descrTag = useRef()
 
   const productPageDiscriptionFork = useSelector(state => state.main.productPageDiscriptionFork)
-  const dispatch = useDispatch()
   useEffect(() => {
 
     if ( descr !== '' ) {
@@ -41,6 +40,7 @@ const CardInfo = (props) => {
     <React.Fragment>
 
       { productPageDiscriptionFork === 1 ? 
+      
         <React.Fragment>
 
           <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>
@@ -109,8 +109,8 @@ const CardInfo = (props) => {
                 <p style={{ fontSize: '13px', paddingLeft: '19px' }}>Открыто</p>
               </Cell2>
               <Cell3>
-                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии: 
-                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3шт</i></p>
+                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии 
+                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3 шт</i></p>
               </Cell3>
               <Cell4><CellButton>
                 <img 
@@ -151,8 +151,8 @@ const CardInfo = (props) => {
                 <p style={{ fontSize: '13px', paddingLeft: '19px' }}>Открыто</p>
               </Cell2>
               <Cell3>
-                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии: 
-                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3шт</i></p>
+                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии 
+                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3 шт</i></p>
               </Cell3>
               <Cell4><CellButton>
                 <img 
@@ -193,8 +193,8 @@ const CardInfo = (props) => {
                 <p style={{ fontSize: '13px', paddingLeft: '19px' }}>Открыто</p>
               </Cell2>
               <Cell3>
-                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии: 
-                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3шт</i></p>
+                <p style={{ fontSize: '13px', color: 'grey' }}>В наличии 
+                <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> 3 шт</i></p>
               </Cell3>
               <Cell4><CellButton>
                 <img 

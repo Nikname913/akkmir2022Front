@@ -30,13 +30,16 @@ const LevelThree = css.CardWrapperDowmMiddleLevel
 
 const CardView = (props) => {
 
-  const { coast = null, descr = '', title = '', properties = [] } = props
+  const { coast = null, descr = '', title = '', properties = [], group = '' } = props
+
   const discrFork = useSelector(state => state.main.productPageDiscriptionFork)
   const actualItem = useSelector(state => state.main.actualItem)
   const propsRemote = useSelector(state => state.main.catalogPropsRemote)
   const [ powerCount, setPowerCount ] = useState(60)
   const [ makeOrder, setMakeOrder ] = useState(false)
   const [ makeOrderInner, setMakeOrderInner ] = useState('Добавить в корзину')
+  const [ tradeinAkkum, setTradeinAkkum ] = useState(false)
+  const [ installAkkum, setInstallAkkum ] = useState(false)
   const [ productProps, ] = useState(propertiesConfig())
   const dispatch = useDispatch()
 
@@ -190,11 +193,11 @@ const CardView = (props) => {
         </ItemDescription>
         <OrderForm>
 
-          <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого:</h6>
+          <h6 style={{ fontSize: '16px', marginBottom: '10px' }}>Итого цена:</h6>
           <h6 
             style={coast === '--' 
-              ? { fontSize: '18px', marginBottom: '10px', color: 'grey' }
-              : { fontSize: '18px', marginBottom: '10px' }}>
+              ? { fontSize: '24px', marginBottom: '10px', color: 'grey' }
+              : { fontSize: '24px', marginBottom: '10px' }}>
           
             { coast === '--' ? 'Нет в наличии' : `${coast} RUB` }
             
@@ -202,82 +205,32 @@ const CardView = (props) => {
           <p 
             style={{ 
               color: 'grey', 
-              lineHeight: '18px', 
+              lineHeight: '20px', 
               fontSize: '13px',
               marginBottom: '12px' 
             }}
           >
             
             Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров и характеристик</p>
-          <div
-            style={{
-              display: 'block',
-              position: 'relative',
-              width: '100%',
-              height: 'auto',
-              minHeight: '60px',
-              backgroundColor: '#F7F7F7',
-              padding: '10px',
-              paddingTop: '8px',
-              borderRadius: '4px',
-              marginBottom: '16px'
-            }}
-          >
+          
+          { true && [ '1f53350f-d52f-11ec-8174-00155d0bfb06', 
+             '8430edaa-bb83-11e6-963a-0015179b1da1', 
+             'eaab84da-d536-11ec-8174-00155d0bfb06', 
+             '7bdd4e64-bb83-11e6-963a-0015179b1da1' ].includes(group) && <React.Fragment>
+            
             <div
               style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                width: '100%',
-                marginBottom: '8px'
-              }}
-            >
-              <span
-                style={{
-                  display: 'block',
-                  position: 'relative',
-                  width: '26px',
-                  height: '26px',
-                  borderRadius: '4px',
-                  border: '1px solid #D3D3D3',
-                  backgroundColor: 'white',
-                  marginRight: '10px',
-                  cursor: 'pointer'
-                }}
-              ></span>
-              <span 
-                style={{ 
-                  fontSize: '13px', 
-                  width: '190px', 
-                  lineHeight: '18px' 
-                }}
-              >
-              
-                Сдать свой аккумулятор и получить скидку
-              </span>
-            </div>
-            <span 
-              style={{ 
                 display: 'block',
-                fontSize: '13px', 
-                width: '86%', 
-                lineHeight: '18px',
-                marginBottom: '13px',
-                color: 'grey'
-              }}
-            >
-              
-              Выберите емкость сдаваемого аккумулятора</span>
-            <div
-              style={{
                 position: 'relative',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                width: '240px',
-                marginBottom: '14px'
+                width: '100%',
+                height: 'auto',
+                minHeight: '60px',
+                backgroundColor: '#F7F7F7',
+                padding: '10px',
+                paddingTop: '8px',
+                borderRadius: '4px',
+                marginBottom: '23px',
+                marginTop: '16px'
               }}
             >
               <div
@@ -286,103 +239,203 @@ const CardView = (props) => {
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '60%',
-                  paddingRight: '12px'
+                  justifyContent: 'flex-start',
+                  width: '100%',
+                  marginBottom: '8px'
                 }}
               >
                 <span
-                  style={{
-                    display: 'block',
-                    position: 'relative',
-                    width: '22px',
-                    height: '30px',
-                    backgroundColor: 'white',
-                    border: '1px solid #D3D3D3',
-                    borderRadius: '10px',
-                    cursor: 'pointer',
-                    lineHeight: '27px',
-                    textAlign: 'center',
-                    fontSize: '18px'
-                  }}
-                  onClick={decrCount}
-                >{""}</span>
-                <div
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-around',
-                    width: '64px',
-                    height: '50px',
-                    borderRadius: '10px',
+                    position: 'relative',
+                    width: '26px',
+                    height: '26px',
+                    borderRadius: '4px',
                     border: '1px solid #D3D3D3',
-                    overflow: 'hidden'
+                    backgroundColor: 'white',
+                    marginRight: '10px',
+                    cursor: 'pointer'
+                  }}
+                  onClick={() => {
+
+                    setTradeinAkkum(prev => !prev)
+
+                  }}
+                >
+
+                  { tradeinAkkum && <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '6px',
+                      backgroundColor: 'rgb(43, 198, 49)',
+                    }}
+                  /> }
+
+                </span>
+                <span 
+                  style={{ 
+                    fontSize: '13px', 
+                    width: '190px', 
+                    lineHeight: '18px' 
+                  }}
+                >
+                
+                  Сдать свой аккумулятор и получить скидку
+                </span>
+              </div>
+              <span 
+                style={{ 
+                  display: 'block',
+                  fontSize: '13px', 
+                  width: '86%', 
+                  lineHeight: '18px',
+                  marginBottom: '13px',
+                  color: 'grey'
+                }}
+              >
+                
+                Выберите емкость сдаваемого аккумулятора</span>
+              <div
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: '240px',
+                  marginBottom: '14px'
+                }}
+              >
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '60%',
+                    paddingRight: '12px'
                   }}
                 >
                   <span
                     style={{
                       display: 'block',
                       position: 'relative',
-                      width: '60%',
-                      fontSize: '15px',
-                      color: false ? '#D3D3D3' : 'grey',
-                      textAlign: 'center'
+                      width: '22px',
+                      height: '30px',
+                      backgroundColor: 'white',
+                      border: '1px solid #D3D3D3',
+                      borderRadius: '10px',
+                      cursor: 'pointer',
+                      lineHeight: '27px',
+                      textAlign: 'center',
+                      fontSize: '18px'
+                    }}
+                    onClick={decrCount}
+                  >{""}</span>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
+                      width: '64px',
+                      height: '50px',
+                      borderRadius: '10px',
+                      border: '1px solid #D3D3D3',
+                      overflow: 'hidden'
                     }}
                   >
-                    
-                    { powerCount }
+                    <span
+                      style={{
+                        display: 'block',
+                        position: 'relative',
+                        width: '60%',
+                        fontSize: '15px',
+                        color: false ? '#D3D3D3' : 'grey',
+                        textAlign: 'center'
+                      }}
+                    >
+                      
+                      { powerCount }
 
-                  </span>
+                    </span>
+                  </div>
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '22px',
+                      height: '30px',
+                      backgroundColor: 'white',
+                      border: '1px solid #D3D3D3',
+                      borderRadius: '10px',
+                      cursor: 'pointer',
+                      lineHeight: '29px',
+                      textAlign: 'center',
+                      fontSize: '16px'
+                    }}
+                    onClick={incrCount}
+                  >{""}</span>
                 </div>
+                <div style={{ fontWeight: 'bold' }}>
+                  <span style={{ fontSize: '13px' }}>Скидка: </span>
+                  <span style={{ fontSize: '13px' }}>400р</span>
+                </div>
+              </div>
+              <div
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  width: '100%'
+                }}
+              >
                 <span
                   style={{
-                    display: 'block',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
                     position: 'relative',
-                    width: '22px',
-                    height: '30px',
-                    backgroundColor: 'white',
+                    width: '26px',
+                    height: '26px',
+                    borderRadius: '4px',
                     border: '1px solid #D3D3D3',
-                    borderRadius: '10px',
-                    cursor: 'pointer',
-                    lineHeight: '29px',
-                    textAlign: 'center',
-                    fontSize: '16px'
+                    backgroundColor: 'white',
+                    marginRight: '10px',
+                    cursor: 'pointer'
                   }}
-                  onClick={incrCount}
-                >{""}</span>
-              </div>
-              <div>
-                <span style={{ fontSize: '13px' }}>Скидка: </span>
-                <span style={{ fontSize: '13px' }}>500р</span>
+                  onClick={() => {
+
+                    setInstallAkkum(prev => !prev)
+
+                  }}
+                >
+
+                  { installAkkum && <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '6px',
+                      backgroundColor: 'rgb(43, 198, 49)',
+                    }}
+                  /> }
+
+                </span>
+                <span style={{ fontSize: '13px', width: '190px', lineHeight: '18px' }}>Мне требуется установка</span>
               </div>
             </div>
-            <div
-              style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                width: '100%'
-              }}
-            >
-              <span
-                style={{
-                  display: 'block',
-                  position: 'relative',
-                  width: '26px',
-                  height: '26px',
-                  borderRadius: '4px',
-                  border: '1px solid #D3D3D3',
-                  backgroundColor: 'white',
-                  marginRight: '10px',
-                  cursor: 'pointer'
-                }}
-              ></span>
-              <span style={{ fontSize: '13px', width: '190px', lineHeight: '18px' }}>Мне требуется установка</span>
-            </div>
-          </div>
+          </React.Fragment> }
 
           <Button  
             params={{
@@ -396,7 +449,8 @@ const CardView = (props) => {
               color: '#2E2E2E',
               marginRight: '24px',
               boxShadow: '0px 0px 1.5px grey',
-              marginBottom: '10px'
+              marginBottom: '10px',
+              marginTop: '16px'
             }}
             children={
               <img 
@@ -436,7 +490,7 @@ const CardView = (props) => {
               boxShadow: 'none',
               color: 'white',
               marginRight: '24px',
-              marginBottom: '18px'
+              marginBottom: '23px'
             }}
             action={() => { 
               
@@ -497,8 +551,8 @@ const CardView = (props) => {
             }
           />
 
-          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
-          <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>Доставка в екатеринбург сегодня</p>
+          <p style={{ color: 'grey', lineHeight: '22px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
+          <p style={{ color: 'grey', lineHeight: '22px', fontSize: '13px' }}>Доставка в екатеринбург сегодня</p>
 
         </OrderForm>
       </LevelOne>
