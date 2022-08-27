@@ -252,7 +252,14 @@ const MainPage = () => {
 
             }) : JSON.parse(mainMenuRemote)[0].group.map((item, index) => {
 
-              if ( item.parent_id[0] === '' && item.priority[0] !== '0' ) {
+              false && console.log(item.name[0])
+
+              if ( item.parent_id[0] === '' 
+              
+                && item.name[0].indexOf('Rossko') === -1
+                && item.name[0].indexOf('LC-1187') === -1
+                && item.name[0].indexOf('AP182/10') === -1 
+                && item.name[0].indexOf('PCA-035') === -1 ) {
 
                 const ID = item.id[0]
                 let idsArray = [ ID ]  

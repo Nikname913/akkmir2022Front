@@ -61,12 +61,12 @@ const CardPreview = (props) => {
 
           { itemID.indexOf('oil') < 0 ? <img 
             style={ coast1 !== '--' 
-            ? { display: 'block', width: '90%' }
-            : { display: 'block', width: '90%', filter: 'grayscale(1)' }} 
+            ? { display: 'block', width: '100%', borderRadius: '8px' }
+            : { display: 'block', width: '100%', filter: 'grayscale(1)', borderRadius: '8px' }} 
             src={imageItem} 
             alt={""}
           /> : <img 
-            style={{ display: 'block', width: '90%', filter: 'grayscale(1)' }} 
+            style={{ display: 'block', width: '100%', filter: 'grayscale(1)', borderRadius: '8px' }} 
             src={imageItem} 
             alt={""}
           /> }
@@ -92,11 +92,11 @@ const CardPreview = (props) => {
               />
               <Button  
                 params={{
-                  width: 150,
+                  width: 146,
                   height: 24,
                   background: 'rgb(43, 198, 49)',
                 }}
-                inner={"лучший товар недели"}
+                inner={"лучший за неделю"}
                 css={{
                   fontSize: '12px',
                   color: 'white',
@@ -131,7 +131,7 @@ const CardPreview = (props) => {
         style={{ 
           fontSize: '15px', 
           marginBottom: '8px',
-          marginTop: '10px', 
+          marginTop: '14px', 
           width: '90%',
           height: '44px',
           lineHeight: '22px',
@@ -146,7 +146,7 @@ const CardPreview = (props) => {
         style={{ 
           fontSize: '15px', 
           marginBottom: '10px',
-          marginTop: '10px', 
+          marginTop: '14px', 
           width: '90%',
           height: '66px',
           lineHeight: '22px',
@@ -204,18 +204,20 @@ const CardPreview = (props) => {
       
         <Button  
           params={{
-            width: 180,
+            width: 160,
             height: 26,
             background: '#F4F4F4'
           }}
-          inner={"в наличии в 10 магазинах"}
+          inner={"есть в 10 магазинах"}
           css={{
             fontSize: '12px',
             color: '#858585',
             marginTop: '10px',
             marginBottom: '20px',
             boxShadow: 'none',
-            borderRadius: '15px'
+            borderRadius: '15px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
           }}
         /> }
 

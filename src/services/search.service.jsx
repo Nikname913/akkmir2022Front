@@ -98,7 +98,8 @@ const HeaderSearch = () => {
                   marginTop: '10px',
                   marginBottom: '10px',
                   marginLeft: '10px',
-                  marginRight: '16px'
+                  marginRight: '16px',
+                  borderRadius: '8px'
                 }}
               />
               <Link style={{ width: '376px', textDecoration: 'none', color: 'black' }} to="/product">

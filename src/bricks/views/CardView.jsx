@@ -103,7 +103,11 @@ const CardView = (props) => {
         }}
       >
         <img 
-          style={{ display: 'block', cursor: 'pointer' }} 
+          style={{ 
+            display: 'block', 
+            cursor: 'pointer', 
+            width: '100%', 
+            borderRadius: '8px' }} 
           src={image} 
           alt={""}
         />
@@ -115,10 +119,15 @@ const CardView = (props) => {
   return (
     <Card>
       <LevelOne>
-        <Photo>
+        <Photo style={{ padding: '14px', paddingBottom: '12px' }}>
 
           <img 
-            style={{ display: 'block', cursor: 'pointer' }} 
+            style={{ 
+              display: 'block', 
+              cursor: 'pointer', 
+              width: '100%', 
+              boxSizing: 'border-box',
+              borderRadius: '8px' }}  
             src={image} 
             alt={""}
             onClick={showModal}
@@ -127,16 +136,16 @@ const CardView = (props) => {
 
           <PhotoGallery>
             <GalleryItem>
-              <img style={{ display: 'block', width: '60px', cursor: 'pointer' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '60px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem>
-              <img style={{ display: 'block', width: '60px', cursor: 'pointer' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '60px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem>
-              <img style={{ display: 'block', width: '60px', cursor: 'pointer' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '60px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem>
-              <img style={{ display: 'block', width: '60px', cursor: 'pointer' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '60px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
           </PhotoGallery>
 
@@ -213,7 +222,7 @@ const CardView = (props) => {
             
             Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров и характеристик</p>
           
-          { true && [ '1f53350f-d52f-11ec-8174-00155d0bfb06', 
+          { true && ![ '1f53350f-d52f-11ec-8174-00155d0bfb06', 
              '8430edaa-bb83-11e6-963a-0015179b1da1', 
              'eaab84da-d536-11ec-8174-00155d0bfb06', 
              '7bdd4e64-bb83-11e6-963a-0015179b1da1' ].includes(group) && <React.Fragment>

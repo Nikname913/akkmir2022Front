@@ -35,14 +35,16 @@ const CatCard = (props) => {
             display: 'block',
             width: '180px',
             height: '180px',
-            margin: '0 auto'
+            margin: '0 auto',
+            borderRadius: '8px',
+            marginTop: '8px'
           }}
         />
 
         <h5 
           style={{ 
             fontSize: '20px',
-            marginTop: '12px', 
+            marginTop: '15px', 
             marginBottom: '16px', 
             textAlign: 'center',
             cursor: 'pointer',

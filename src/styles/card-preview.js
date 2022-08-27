@@ -45,8 +45,8 @@ const css = {
     height: auto;
     left: 100%;
     top: 0;
-    margin-left: -150px;
-    margin-top: 0px;
+    margin-left: -158px;
+    margin-top: 8px;
   `
 
 }

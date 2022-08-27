@@ -110,7 +110,7 @@ const OrderItemsLine = (props) => {
                 <Icon>{ index + 1 }</Icon>
                 <ImageWrapper>
 
-                  <img style={{ display: 'block', width: '60px' }} src={image} alt={""}/>
+                  <img style={{ display: 'block', width: '60px', borderRadius: '4px' }} src={image} alt={""}/>
 
                 </ImageWrapper>
                 <h6 

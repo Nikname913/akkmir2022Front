@@ -37,7 +37,7 @@ const css = {
   ItemPhotoGallery: styled.div`
     display: flex;
     flex-direction: row;
-    alin-items: center;
+    align-items: center;
     justify-content: flex-start;
     position: absolute;
     width: 460px;
