@@ -9,6 +9,8 @@ import css from '../../styles/header'
 import Button from '../comps/button/Button.jsx'
 import StartCatalog from './StartCatalog'
 import HeaderSearch from '../../services/search.service'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 import cabinet from '../../img/cabinet.png'
 import geonumber from '../../img/geonumber.png'
@@ -127,16 +129,7 @@ const Header = () => {
         <LogoContent>
           <LogoContentWrapper>
 
-            { false ? <>
-              <LogoTitle>
-                <Link style={{ textDecoration: 'none', color: 'black' }} to="/home"><h1>Аккумуляторный мир</h1></Link>
-                <h4>Магазин аккумуляторов и автотоваров</h4>
-              </LogoTitle>
-              <LogoTitle>
-                <h1>Akkmir</h1>
-                <h4 style={{ letterSpacing: 2 }}>Service</h4>
-              </LogoTitle>
-            </> : <>
+            <React.Fragment>
               <Link style={{ textDecoration: 'none', color: 'black' }} to="/home">
                 <LogoTitle style={{ overflow: 'hidden', position: 'relative', width: '600px', height: '60px' }}>
                   <img
@@ -154,7 +147,7 @@ const Header = () => {
                   />
                 </LogoTitle>
               </Link>
-            </> }
+            </React.Fragment>
 
           </LogoContentWrapper>
           <LogoContentWrapper style={{ justifyContent: 'space-between' }}>
@@ -428,7 +421,7 @@ const Header = () => {
                 <React.Fragment>
                   <img 
                     alt={""}
-                    src={sravnenieImg}
+                    src={likeImg}
                     style={{
                       display: 'block',
                       position: 'absolute',
@@ -436,7 +429,7 @@ const Header = () => {
                       left: 0,
                       marginLeft: '10px',
                       top: '50%',
-                      marginTop: '-9px'
+                      marginTop: '-7px'
                     }}
                   />
                   <span
@@ -481,7 +474,7 @@ const Header = () => {
                 <React.Fragment>
                   <img 
                     alt={""}
-                    src={byClickImage}
+                    src={likeImg}
                     style={{
                       display: 'block',
                       position: 'absolute',
@@ -489,7 +482,7 @@ const Header = () => {
                       left: 0,
                       marginLeft: '10px',
                       top: '50%',
-                      marginTop: '-9px'
+                      marginTop: '-7px'
                     }}
                   />
                   <span

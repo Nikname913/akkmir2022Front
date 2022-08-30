@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
 import Select from 'react-select'
@@ -60,7 +61,26 @@ const ReactSelect = (props) => {
   const { 
     params, 
     placeholder = 'Выберите тип оплаты',
-    data = null } = props
+    data = null,
+    action = null,
+    actionType = null,
+    actionParams = null } = props
+
+    function actionsReducer(param) {
+
+      const acty = actionType
+      switch(acty) {
+
+        case 'DISCOUNT_REDUCER': 
+          action(!param)
+          break
+
+        default:
+          break
+
+      }
+
+    }
 
   return (
     <Decorate.SelectWrapper styles={params}>
@@ -77,6 +97,17 @@ const ReactSelect = (props) => {
             primary25: '#F7F7F7',
           }
         })}
+        onChange={inputValue => {
+
+          action && actionsReducer(actionParams)
+          if ( action == true ) {
+
+            if ( inputValue.label === 'сдать аккумулятор' ) actionsReducer(true)
+            if ( inputValue.label === 'не сдавать - по умолчанию' ) actionsReducer(false)
+
+          }
+
+        }}
       />
     
     </Decorate.SelectWrapper>

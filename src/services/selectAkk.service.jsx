@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 import React, { useState } from 'react'
 import css from '../styles/select-akk'
@@ -208,9 +209,7 @@ const SelectAkk = () => {
 
           <Button
             inner={'Подбор акб по марке авто'}
-            params={{
-              background: '#404040'
-            }}
+            params={{ background: '#404040' }}
             css={{
               fontSize: '13px',
               paddingTop: '11px',
@@ -223,9 +222,7 @@ const SelectAkk = () => {
           />
           <Button
             inner={'Подбор акб по параметрам'}
-            params={{
-              background: 'transparent'
-            }}
+            params={{ background: 'transparent' }}
             css={{
               fontSize: '13px',
               paddingTop: '11px',
@@ -239,7 +236,9 @@ const SelectAkk = () => {
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginTop: '20px' }}>
 
-          {[ null, null, null, null, null, null, null, null, null, null, null, null, null ].map((item, index) => {
+          { ['............'][0].split('.').map((item, index) => {
+
+            false && console.log(item)
 
             return (
               <img 
@@ -541,7 +540,7 @@ const SelectAkk = () => {
           { step === 0 && <React.Fragment>
 
             <ContentColumn>
-              {/* eslint-disable-next-line array-callback-return */}
+
               { carModels && carModels.map((model, index) => {
 
                 if ( index < 8 ) {
@@ -568,7 +567,7 @@ const SelectAkk = () => {
               })}
             </ContentColumn>
             <ContentColumn>
-              {/* eslint-disable-next-line array-callback-return */}
+
               { carModels && carModels.map((model, index) => {
 
                 if ( index > 7 && index < 16 ) {
@@ -595,7 +594,7 @@ const SelectAkk = () => {
               })}
             </ContentColumn>
             <ContentColumn>
-              {/* eslint-disable-next-line array-callback-return */}
+
               { carModels && carModels.map((model, index) => {
 
                 if ( index > 15 && index < 24 ) {
@@ -622,7 +621,7 @@ const SelectAkk = () => {
               })}
             </ContentColumn>
             <ContentColumn>
-              {/* eslint-disable-next-line array-callback-return */}
+
               { carModels && carModels.map((model, index) => {
 
                 if ( index > 23 && index < 32 ) {
@@ -649,7 +648,7 @@ const SelectAkk = () => {
               })}
             </ContentColumn>
             <ContentColumn>
-              {/* eslint-disable-next-line array-callback-return */}
+
               { carModels && carModels.map((model, index) => {
 
                 if ( index > 31 && index < 40 ) {
@@ -677,6 +676,7 @@ const SelectAkk = () => {
             </ContentColumn>
 
           </React.Fragment> }
+
           { step === 1 && <React.Fragment>
             
             <div style={{ width: '100%', position: 'relative' }}>
@@ -739,6 +739,8 @@ const SelectAkk = () => {
 
                 { ['..........'][0].split('.').map((item, index) => {
 
+                  false && console.log(item)
+
                   return (
                     <Button
                       key={index}
@@ -766,6 +768,7 @@ const SelectAkk = () => {
           </React.Fragment> }
 
         </ContentLine>
+        
         { step === 0 && <ContentLine style={{ marginTop: '20px' }}>
           <AlphabetLine>
             <span 

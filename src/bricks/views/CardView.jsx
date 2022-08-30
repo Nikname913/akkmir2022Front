@@ -8,6 +8,7 @@ import Button from '../comps/button/Button.jsx'
 import image from '../../img/category.png'
 import byOneClickImage from '../../img/byOneClick.png'
 import byClickImage from '../../img/byClick.png'
+import likeImg from '../../img/like.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { productPageReducer, 
   setModalContent, 
@@ -51,7 +52,7 @@ const CardView = (props) => {
     const props = properties[0].property
     let returnedPropsArray = []
 
-    props.forEach(prop => {
+    propsRemote && props.forEach(prop => {
 
       const ppropsRemote = JSON.parse(propsRemote)[0].property
       const propID = prop.id[0]
@@ -254,6 +255,7 @@ const CardView = (props) => {
                 }}
               >
                 <span
+                  onClick={() => setTradeinAkkum(prev => !prev)}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -268,14 +270,10 @@ const CardView = (props) => {
                     marginRight: '10px',
                     cursor: 'pointer'
                   }}
-                  onClick={() => {
-
-                    setTradeinAkkum(prev => !prev)
-
-                  }}
                 >
 
                   { tradeinAkkum && <span
+
                     style={{
                       display: 'block',
                       position: 'relative',
@@ -284,6 +282,7 @@ const CardView = (props) => {
                       borderRadius: '6px',
                       backgroundColor: 'rgb(43, 198, 49)',
                     }}
+
                   /> }
 
                 </span>
@@ -296,6 +295,7 @@ const CardView = (props) => {
                 >
                 
                   Сдать свой аккумулятор и получить скидку
+                  
                 </span>
               </div>
               <span 
@@ -408,6 +408,7 @@ const CardView = (props) => {
                 }}
               >
                 <span
+                  onClick={() => setInstallAkkum(prev => !prev)}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -422,14 +423,10 @@ const CardView = (props) => {
                     marginRight: '10px',
                     cursor: 'pointer'
                   }}
-                  onClick={() => {
-
-                    setInstallAkkum(prev => !prev)
-
-                  }}
                 >
 
                   { installAkkum && <span
+
                     style={{
                       display: 'block',
                       position: 'relative',
@@ -438,10 +435,21 @@ const CardView = (props) => {
                       borderRadius: '6px',
                       backgroundColor: 'rgb(43, 198, 49)',
                     }}
+
                   /> }
 
                 </span>
-                <span style={{ fontSize: '13px', width: '190px', lineHeight: '18px' }}>Мне требуется установка</span>
+                <span 
+                  style={{ 
+                    fontSize: '13px', 
+                    width: '190px', 
+                    lineHeight: '18px' 
+                  }}
+                >
+                  
+                  Мне требуется установка
+                  
+                </span>
               </div>
             </div>
           </React.Fragment> }
@@ -464,7 +472,7 @@ const CardView = (props) => {
             children={
               <img 
                 alt={""}
-                src={byOneClickImage}
+                src={likeImg}
                 style={{
                   display: 'block',
                   position: 'absolute',
@@ -472,7 +480,7 @@ const CardView = (props) => {
                   left: 0,
                   marginLeft: '12px',
                   top: '50%',
-                  marginTop: '-10px'
+                  marginTop: '-7px'
                 }}
               />
             }

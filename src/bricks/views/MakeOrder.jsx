@@ -10,10 +10,13 @@ import ReactSelect from '../comps/ReactSelect'
 import Button from '../comps/button/Button.jsx'
 import RequestComponent from '../../services/request.service'
 import OrderItemsLine from '../comps/OrderItemsLine'
+import Fos from '../../services/foz.service'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMessageShow, 
   setMessageContent, 
+  setModalShow,
+  setModalContent,
   setInfoPageTitle,
   setOrdersCount } from '../../appStore/reducers/mainReducer'
 import { setNumber,
@@ -42,6 +45,7 @@ const MakeOrder = () => {
   const [ sendOrderToTelegram, setSendOrderToTelegram ] = useState(false)
   const [ emailFromAuth, setEmailFromAuth ] = useState('') 
   const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
+  const [ isDiscount, setIsDiscount ] = useState(true)
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -53,6 +57,21 @@ const MakeOrder = () => {
 
   const dispatch = useDispatch()
   let navigate = useNavigate()
+
+  function showModal() {
+
+    document.documentElement.style.overflowY = 'hidden'
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    dispatch(setModalShow(true))
+
+  }
+
+  function contentModal() {
+
+    dispatch(setModalContent(<Fos></Fos>))
+
+  }
 
   function dataValidate(param) {
 
@@ -249,9 +268,23 @@ const MakeOrder = () => {
             ]}
           />
 
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '30px' }}>Получить скидку</h5>
+          <ReactSelect 
+            actionType={"DISCOUNT_REDUCER"}
+            actionParams={isDiscount}
+            action={setIsDiscount}
+            params={{ width: 300 }}
+            placeholder={"Сдать старый аккумулятор"}
+            data={[
+              { value: 'card', label: 'сдать аккумулятор' },
+              { value: 'cash', label: 'не сдавать - по умолчанию' },
+            ]}
+          />
+
           <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '30px' }}>Выберите способ получения</h5>
           <ReactSelect 
             params={{ width: 300 }}
+            placeholder={"Доставка или самовывоз"}
             data={[
               { value: 'card', label: 'доставка курьером' },
               { value: 'cash', label: 'самовывоз из магазина' },
@@ -377,7 +410,7 @@ const MakeOrder = () => {
               <h6 style={{ fontSize: '18px', marginBottom: '26px', color: 'grey' }}>{ summaryCoast } RUB</h6>
 
               <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого со скидкой:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ summaryCoast } RUB</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ isDiscount ? ( Number(summaryCoast) - ( summaryCoast * 0.25 ) ).toFixed(0) : summaryCoast } RUB</h6>
 
               <p 
                 style={{ 
@@ -388,9 +421,7 @@ const MakeOrder = () => {
                 }}
               >
                 
-                Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров
-                
-              </p>
+                Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров</p>
 
               <Button  
                 params={{
@@ -424,12 +455,15 @@ const MakeOrder = () => {
                 }}
                 action={() => {
                   
-                  dispatch(setMessageContent({
+                  false && dispatch(setMessageShow(true))
+                  false && dispatch(setMessageContent({
                     title: 'Данная функция в разработке',
                     message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована',
                     type: 'error',
                   }))
-                  dispatch(setMessageShow(true))
+
+                  showModal()
+                  contentModal()
 
                 }}
               />
