@@ -4,7 +4,7 @@
 import React from 'react'
 import css from '../../styles/category-card'
 import image from '../../img/category.png'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
 
@@ -54,11 +54,14 @@ const CatCard = (props) => {
             navigate(`../catalog/${title}`)
             selectCategory()
           }}
-        >{title}</h5>
+        >{ title }</h5>
 
         <CardTags>
 
+          { false && console.log('--------------------------') }
           { tags ? tags.map((item, index) => {
+
+            false && console.log(item)
 
             return (
               <span 
@@ -83,10 +86,14 @@ const CatCard = (props) => {
                     label: item[1],
                   })
                 }}
-              >{item[1]}</span>
+              >
+                
+                { item[1] }
+                
+              </span>
             )
 
-          }) : null }
+          }) : null } { false && console.log('--------------------------') }
 
         </CardTags>
       </Card>

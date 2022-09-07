@@ -20,7 +20,21 @@ const OrderPage = () => {
   let generalCatalog = null
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[])
+  function random(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min)) + min
+  }
+
+  let aaa
+  generalCatalog ? aaa = random(10, generalCatalog.length - 10) : aaa = 0
+
+  useEffect(() => {
+    
+    document.documentElement.scrollTop = 0
+    false && console.log(random(10, generalCatalog.length - 10))
+  
+  },[ generalCatalog ])
 
   return (
     <React.Fragment>
@@ -84,17 +98,15 @@ const OrderPage = () => {
           { generalCatalog ? generalCatalog.map((item, index) => {
 
             return <React.Fragment key={index}>{
-              index < 6 && <React.Fragment key={index}>
+              index > aaa && index < aaa + 7 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}
                   title={item.name}
+                  popular={true}
                   description={[
-                    'Гарантия : 6 месяцев',
-                    'Емкость Ач : 9',
-                    'Полярность : Обратная',
-                    'Пусковой ток (А) : 480',
-                    'Размер (Д*Ш*В) : 207*175*175'
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
                   ]}
                   coast1={
                     +item.pre_order_prices[0].region[0].price[0] === 0
@@ -106,7 +118,7 @@ const OrderPage = () => {
                   }
                   itemID={item.id[0]}
                 />
-                { index < 5 && <span 
+                { index < aaa + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',

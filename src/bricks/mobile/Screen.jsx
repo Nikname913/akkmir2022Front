@@ -41,7 +41,7 @@ const MobileScreen = (props) => {
         element={<CabinetPage screen={screen}/>} 
       />
       <Route 
-        path="/home" 
+        path="/glavnaya" 
         element={<MainPage screen={screen}/>} 
       />
       <Route 

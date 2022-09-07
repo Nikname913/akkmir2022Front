@@ -64,7 +64,12 @@ const RequestActionsComponent = (props) => {
 
       case 'POST':
 
-        reqbody && console.log(reqbody)
+        await fetch(urlstring, {
+          method: 'POST',
+          headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, 
+          body: reqbody
+        })
+
         break
 
       default:

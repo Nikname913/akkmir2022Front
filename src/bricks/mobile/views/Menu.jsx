@@ -21,7 +21,7 @@ const MobileMenu = (props) => {
     <React.Fragment>
       <Wrapper style={{ marginLeft: '20px' }}>
 
-        <Link style={{ textDecoration: 'none', color: 'black' }} to="/home">
+        <Link style={{ textDecoration: 'none', color: 'black' }} to="/glavnaya">
           <MenuItem width={screen}>
             <img 
               src={cabinet} 

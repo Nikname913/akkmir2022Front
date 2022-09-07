@@ -95,6 +95,8 @@ const css = {
     Coast: styled.span`
       font-size: 22px;
       font-weight: 700;
+      width: 60px;
+      text-align: center;
     `,
     Counter: styled.span`
       display: block;

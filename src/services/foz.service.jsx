@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
 import styled from 'styled-components'
 import Input from '../bricks/comps/input/Input.jsx'
 import Button from '../bricks/comps/button/Button.jsx'
 import closeImg from '../img/closePicture.png'
+import { useDispatch } from 'react-redux'
+import { setModalShow } from '../appStore/reducers/mainReducer'
 
 const FOS = {
 
@@ -23,11 +26,21 @@ const FOS = {
 
 const Fos = () => {
 
+  const dispatch = useDispatch()
+
+  function closeModal() {
+
+    document.documentElement.style.overflowY = 'scroll'
+    dispatch(setModalShow(false)) 
+
+  }
+
   return (
     <React.Fragment>
       <FOS.Wrapper>
 
         <img
+          onClick={closeModal}
           alt={""}
           src={closeImg}
           style={{

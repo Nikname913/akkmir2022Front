@@ -32,7 +32,8 @@ const css = {
     min-height: 400px;
     width: calc(50% - 20px);
     box-shadow: 10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%);
-    border-radius: 4px;
+    border-radius: 12px;
+    background-color: white;
   `,
   MainContentLineBanner: styled.div`
     display: block;
@@ -41,7 +42,7 @@ const css = {
     height: auto;
     min-height: 160px;
     background-color: #404040;
-    border-radius: 4px;
+    border-radius: 12px;
   `,
 
 }

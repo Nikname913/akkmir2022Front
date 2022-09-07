@@ -1,7 +1,13 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
-import { Link } from "react-router-dom"
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setActualCategory } from '../../appStore/reducers/mainReducer'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import css from '../../styles/start-catalog'
 import Button from '../comps/button/Button.jsx'
 import closeImg from '../../img/closePicture.png'
@@ -17,12 +23,40 @@ const Close = css.Close
 const StartCatalog = (props) => {
 
   const { type, action = null } = props
+  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
+  const [ selectedPrimenenieIndex, setSelectedPrimenenieIndex ] = useState(null)
+  const [ selectedMarkaIndex, setSelectedMarkaIndex ] = useState(null)
+  const [ selectedEmkostIndex, setSelectedEmkostIndex ] = useState(null)
+  const [ selectedCategoryData, setSelectedCategoryData ] = useState(null)
+  const [ selectedMenu, setSelectedMenu ] = useState(0)
+  const [ menu, setMenu ] = useState([
+
+    'Аккумуляторы',
+    'Автомобильные масла',
+    'Специальные жидкости',
+    'Автоэлектроника, питание',
+    'ИБП, стабилизаторы',
+    'Инструменты',
+    'Автокосметика и автохимия',
+    'Автоаксессуары'
+
+  ])
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function onClose() {
 
     action && action('page')
 
   }
+
+  useEffect(() => {
+
+    false && console.log('from start catalog')
+    false && console.log(mainMenuRemote)
+
+  },[])
 
   return (
     <React.Fragment>
@@ -49,79 +83,136 @@ const StartCatalog = (props) => {
           />
 
         </Close>
-        <Menu>
-          <MenuItem style={{ backgroundColor: '#F7F7F7' }}>Аккумуляторы</MenuItem>
-          <MenuItem>Масла</MenuItem>
-          <MenuItem>Специальные жидкости</MenuItem>
-          <MenuItem>Автоэлектроника, питание</MenuItem>
-          <MenuItem>ИБП, стабилизаторы</MenuItem>
-          <MenuItem>Инструменты</MenuItem>
-          <MenuItem>Автокосметика и автохимия</MenuItem>
-          <MenuItem>Автоаксессуары</MenuItem>
+        <Menu> 
+        
+          { menu.map((item, index) => {
+
+            return (
+              <MenuItem 
+                onClick={() => index < 10 && setSelectedMenu(index)}
+                style={ selectedMenu === index 
+                  ? { backgroundColor: '#F7F7F7' }
+                  : { backgroundColor: 'transparent' }}
+              >{ item }</MenuItem>
+            )
+
+          })}
+          
         </Menu>
 
         <Content>
 
-          <h5 style={{ fontSize: '18px', marginBottom: '14px'  }}>По применению:</h5>
+          <h5 style={{ fontSize: '18px', marginBottom: '20px'  }}>По применению:</h5>
           <ContentTags>
 
-            <Tag>Для легковых автомобилей</Tag>
-            <Tag>Для грузовых автомобилей</Tag>
-            <Tag>Для мотоциклов</Tag>
-            <Tag>Промышленные</Tag>
-            <Tag>Для спецтехники</Tag>
-            <Tag>Для электросамокатов</Tag>
-            <Tag>Для лодок</Tag>
-            <Tag>Тяговые аккумуляторы</Tag>
+            { mainMenuRemote && JSON.parse(mainMenuRemote)[0].group.map((item, index) => {
+
+              if ( selectedMenu === 0 ) {
+
+                if ( item.id[0] === 'f863771b-8620-11e6-a171-14dae9fa0260' ||
+                     item.id[0] === '61e30ada-8c87-11e6-963a-0015179b1da1' ||
+                     item.id[0] === 'aeb1fa1e-8c7d-11e6-963a-0015179b1da1' ) {
+
+                      return (
+                        <React.Fragment key={index}>
+                          <Tag 
+                            onClick={() => {
+                              setSelectedPrimenenieIndex(index)
+                              setSelectedCategoryData({ id: item.id[0], label: item.name[0] })
+                            }}
+                            style={{
+                              backgroundColor: selectedPrimenenieIndex === index 
+                                ? 'rgb(43, 198, 49)'
+                                : 'white',
+                              color: selectedPrimenenieIndex === index 
+                                ? 'white'
+                                : 'grey'
+                            }}>{ item.name[0] }</Tag>
+                        </React.Fragment>
+                      )
+
+                    }
+
+              } else if ( selectedMenu === 1 ) {
+
+                if ( item.id[0] === '7f1bb41b-8c78-11e6-963a-0015179b1da1' ||
+                     item.id[0] === 'bfc502aa-bb81-11e6-963a-0015179b1da1' ||
+                     item.id[0] === '5a7f9ac4-8955-11e6-963a-0015179b1da1' ||
+                     item.id[0] === '03cda08d-74c0-11ea-814a-00155d0bfb06' ||
+                     item.id[0] === 'ae584e59-bb81-11e6-963a-0015179b1da1' ) {
+
+                      return (
+                        <React.Fragment key={index}>
+                          <Tag 
+                            onClick={() => {
+                              setSelectedPrimenenieIndex(index)
+                              setSelectedCategoryData({ id: item.id[0], label: item.name[0] })
+                            }}
+                            style={{
+                              backgroundColor: selectedPrimenenieIndex === index 
+                                ? 'rgb(43, 198, 49)'
+                                : 'white',
+                              color: selectedPrimenenieIndex === index 
+                                ? 'white'
+                                : 'grey'
+                            }}>{ item.name[0] }</Tag>
+                        </React.Fragment>
+                      )
+
+                     }
+
+              }
+
+            })}
+
+            <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>Список дополняется</Tag>
 
           </ContentTags>
 
-          <h5 style={{ fontSize: '18px', marginBottom: '14px'  }}>По маркам:</h5>
+          <h5 style={{ fontSize: '18px', marginBottom: '20px'  }}>По маркам:</h5>
           <ContentTags>
 
-            <Tag>Varta</Tag>
-            <Tag>Bosch</Tag>
-            <Tag>Zeus</Tag>
-            <Tag>Sibbear</Tag>
-            <Tag>Tyumen battery</Tag>
-            <Tag>On asia</Tag>
-            <Tag>Borg</Tag>
-            <Tag>Ventura</Tag>
-            <Tag>Akkom</Tag>
+            <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>Список марок дополняется</Tag>
 
           </ContentTags>
 
-          <h5 style={{ fontSize: '18px', marginBottom: '14px'  }}>По емкости:</h5>
-          <ContentTags>
+          { selectedMenu === 0 && <React.Fragment>
+            <h5 style={{ fontSize: '18px', marginBottom: '20px'  }}>По емкости:</h5>
+            <ContentTags>
 
-            <Tag>55 а*ч</Tag>
-            <Tag>60 а*ч</Tag>
-            <Tag>75 а*ч</Tag>
-            <Tag>90 а*ч</Tag>
-            <Tag>100 а*ч</Tag>
+              <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>55 а*ч</Tag>
+              <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>60 а*ч</Tag>
+              <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>75 а*ч</Tag>
+              <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>90 а*ч</Tag>
+              <Tag style={{ opacity: '0.8', cursor: 'no-drop' }}>100 а*ч</Tag>
 
-          </ContentTags>
+            </ContentTags>
+          </React.Fragment> }
           
-          <Link style={{ textDecoration: 'none', color: 'black' }} to="/catalog">
-            <Button  
-              params={{
-                width: 180,
-                height: 36,
-                background: '#D62E2B'
-              }}
-              inner={"Подбор аккумулятора"}
-              css={{
-                fontSize: '13px',
-                boxShadow: 'none',
-                color: 'white',
-                marginRight: '24px',
-                marginTop: '24px'
-              }}
-            />
-          </Link>
+          <Button  
+            params={{
+              width: 180,
+              height: 36,
+              background: '#D62E2B'
+            }}
+            inner={"Подбор ассортимента"}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              marginRight: '24px',
+              marginTop: '19px'
+            }}
+            action={() => {
+              
+              onClose()
+              dispatch(setActualCategory(selectedCategoryData))
+              navigate(`../catalog/${selectedCategoryData.label}`)
+
+            }}
+          />
 
         </Content>
-
       </Catalog>
     </React.Fragment>
   )

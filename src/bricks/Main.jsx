@@ -17,7 +17,7 @@ const Main = () => {
 
   return (
     <Routes>
-      <Route path="/modal-catalog" element={<ModalCatalogPage/>} />
+      <Route path="/podbor-akkumulyatora" element={<ModalCatalogPage/>} />
       <Route path="/catalog/:category" element={<CatalogPage/>} />
       <Route path="/catalog" element={<CatalogPage/>} />
       <Route path="/search/:query" element={<SearchPage/>} />
@@ -25,7 +25,7 @@ const Main = () => {
       <Route path="/order-success" element={<OrderSuccessPage/>} />
       <Route path="/product" element={<ProductPage/>} />
       <Route path="/cabinet" element={<CabinetPage/>} />
-      <Route path="/home" element={<MainPage/>} />
+      <Route path="/glavnaya" element={<MainPage/>} />
 
       {/* header info pages */}
 

@@ -49,7 +49,7 @@ const NotFround = () => {
         
           Возможно, страница еще находится в разработке</span>
 
-        <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/home">
+        <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/glavnaya">
           <div
             style={{
               display: 'flex',

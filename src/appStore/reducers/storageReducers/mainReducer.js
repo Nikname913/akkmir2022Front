@@ -4,11 +4,8 @@ class Reducer {
     orders: [],
     ordersCount: 0,
     authSuccess: false,
-    authToken: null,
-    authData: {
-      user: null,
-      password: null
-    }
+    authToken: '',
+    authData: ''
   }
 
   // ----------------------------------------------------------------
@@ -114,12 +111,22 @@ class Reducer {
 
   removeAllOrders() {
 
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    store.orders = []
+    store.ordersCount = 0
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
+
+  }
+
+  resetStore() {
+
     localStorage.setItem('akkmirLocalStore', JSON.stringify(this.#startStore))
 
   }
 
   // ----------------------------------------------------------------
-  // методы работы с авторизацией и регистрацией
+  // методы работы с авторизацией и регистрацией - получение auth статуса, токена и даты
   // ----------------------------------------------------------------
 
   getAuthStatus() {
@@ -135,6 +142,65 @@ class Reducer {
     !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
     let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
     return store.authToken
+
+  }
+
+  getAuthData() {
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    return store.authData
+
+  }
+
+  // ----------------------------------------------------------------
+  // методы работы с авторизацией и регистрацией - запись auth статуса, токена и даты
+  // ----------------------------------------------------------------
+
+  setAuthStatus(props) {
+
+    const { status } = props
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    store.authSuccess = status
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
+
+  }
+
+  setAuthToken(props) {
+
+    const { token } = props
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    store.authToken = token
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
+
+  }
+
+  setAuthData(props) {
+
+    // eslint-disable-next-line no-unused-vars
+    const { number, auth, name, email, car } = props
+    const userData = { number, auth, name, email, car }
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore()
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+    store.authData = userData
+
+    localStorage.setItem('akkmirLocalStore', JSON.stringify(store))
+    console.log(localStorage.getItem('akkmirLocalStore'))
+
+    // ------------------------------
+    // { "number": "89068085023",
+    //   "auth": "sms",
+    //   "name": "Николай",
+    //   "email": "nik.shipov@gmail.com",
+    //   "car": "lada vesta" }
+    // ------------------------------
 
   }
 

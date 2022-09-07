@@ -13,17 +13,22 @@ const ModalWindow = (props) => {
   const child = useSelector(state => state.main.modalContent)
   const dispatch = useDispatch()
 
-  function closeModal() { 
+  function closeModal(event) {
     
-    document.documentElement.style.overflowY = 'scroll'
-    dispatch(setModalShow(false)) 
+    if ( event.target.tagName === 'SECTION' ) {
+
+      document.documentElement.style.overflowY = 'scroll'
+      dispatch(setModalShow(false)) 
+
+    }
   
   }
 
   return (
     <React.Fragment>
-      <Shadow>
-        <ShadowClose onClick={closeModal}>
+      <Shadow onClick={closeModal} style={{ cursor: 'pointer' }}>
+      
+        { false && <ShadowClose>
 
           <img 
             alt={""}
@@ -35,7 +40,7 @@ const ModalWindow = (props) => {
             }}
           />
 
-        </ShadowClose>
+        </ShadowClose> }
 
         { children && children }
         { child && child }

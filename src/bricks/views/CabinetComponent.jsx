@@ -1,6 +1,7 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react'
 import css from '../../styles/pages/cabinet-page'
 import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
@@ -59,6 +60,13 @@ const {
 const CabinetComponent = (props) => {
 
   const [ fork, setFork ] = useState('contacts')
+  const { userData, userToken } = props
+
+  useEffect(() => {
+
+    false && console.log(userData)
+
+  },[])
 
   return (
     <React.Fragment>
@@ -121,7 +129,7 @@ const CabinetComponent = (props) => {
             <Input
               params={{ width: 300 }}
               type={"text"}
-              placeholder={"+7800.."}
+              placeholder={userData.number ? userData.number + ' сохранено' : "+7800.."}
               inputCss={{ border: 'none' }}
               title={"Мобильный телефон"}
               css={{ marginTop: '14px' }}
@@ -129,16 +137,16 @@ const CabinetComponent = (props) => {
             <Input
               params={{ width: 300 }}
               type={"text"}
-              placeholder={"Александр"}
-              inputCss={{ border: 'none' }}
+              placeholder={userData.name ? userData.name + ' сохранено' : "Александр"}
+              inputCss={{ border: 'none', paddingBottom: '1px' }}
               title={"Введите ваше имя"}
               css={{ marginTop: '14px' }}
             />
             <Input
               params={{ width: 300 }}
               type={"text"}
-              placeholder={"nik.shipov@gmail.com"}
-              inputCss={{ border: 'none' }}
+              placeholder={userData.email ? userData.email + ' сохранено' : "nik.shipov@gmail.com"}
+              inputCss={{ border: 'none', paddingBottom: '1px' }}
               title={"Введите вашу почту"}
               css={{ marginTop: '14px' }}
             />
@@ -147,23 +155,31 @@ const CabinetComponent = (props) => {
               style={{
                 color: 'grey',
                 fontSize: '13px',
-                marginTop: '14px',
-                marginBottom: '8px',
+                marginTop: '24px',
+                marginBottom: '2px',
                 width: '80%',
-                lineHeight: '18px'
+                lineHeight: '23px'
               }}
             >
               
-              За добавление почты начислено вам 300 бонусных баллов. нажмите, чтобы посмотреть</span>
+              За добавление почты начислено вам 300 бонусных баллов. Нажмите, чтобы посмотреть</span>
 
-            <Input
+            { userToken.indexOf('num') === -1 ? <Input
               params={{ width: 300 }}
               type={"password"}
               placeholder={"qwerty12345 так не надо"}
-              inputCss={{ border: 'none' }}
+              inputCss={{ border: 'none', paddingBottom: '1px' }}
               title={"Придумать или изменить пароль"}
               css={{ marginTop: '14px' }}
-            />
+            /> : <Input
+              params={{ width: 300 }}
+              type={"password"}
+              disabled={true}
+              placeholder={"Авторизация по смс"}
+              inputCss={{ border: 'none', paddingBottom: '2px' }}
+              title={"Пароль задавать не нужно"}
+              css={{ marginTop: '14px' }}
+            /> }
 
             <Button  
               params={{
@@ -177,7 +193,9 @@ const CabinetComponent = (props) => {
                 boxShadow: 'none',
                 color: 'white',
                 marginRight: '24px',
-                marginTop: '20px'
+                marginTop: '20px',
+                cursor: userToken.indexOf('num') === -1
+                  ? 'pointer' : 'no-drop'
               }}
             />
 
@@ -192,11 +210,11 @@ const CabinetComponent = (props) => {
                 marginTop: '2px',
                 marginBottom: '16px',
                 width: '80%',
-                lineHeight: '18px'
+                lineHeight: '23px'
               }}
             >
               
-              Вы можете добавить до трех адресов</span>
+              В будущем вы сможете добавить до трех адресов, в настоящее время доступно сохранение одного адреса для одной учетной записи</span>
             
             <ContentRightContentLine>
 
@@ -225,7 +243,8 @@ const CabinetComponent = (props) => {
                   fontSize: '13px',
                   boxShadow: 'none',
                   color: '#2E2E2E',
-                  marginRight: '10px'
+                  marginRight: '10px',
+                  cursor: 'no-drop'
                 }}
               />
               <Button  
@@ -238,7 +257,8 @@ const CabinetComponent = (props) => {
                 css={{
                   fontSize: '13px',
                   boxShadow: 'none',
-                  color: '#2E2E2E'
+                  color: '#2E2E2E',
+                  cursor: 'no-drop'
                 }}
               />
 
@@ -249,9 +269,10 @@ const CabinetComponent = (props) => {
                 params={{ width: 260 }}
                 type={"password"}
                 placeholder={"Введите город"}
-                inputCss={{ border: 'none' }}
+                disabled={true}
+                inputCss={{ border: 'none', paddingBottom: '1px' }}
                 title={"Введите город"}
-                css={{ marginTop: '14px' }}
+                css={{ marginTop: '19px' }}
               />
 
             </ContentRightContentLine>
@@ -261,7 +282,8 @@ const CabinetComponent = (props) => {
                 params={{ width: 260 }}
                 type={"password"}
                 placeholder={"Введите название улицы"}
-                inputCss={{ border: 'none' }}
+                disabled={true}
+                inputCss={{ border: 'none', paddingBottom: '1px' }}
                 title={"Ваша улица"}
                 css={{ marginTop: '14px', marginRight: '12px' }}
               />
@@ -269,7 +291,8 @@ const CabinetComponent = (props) => {
                 params={{ width: 60 }}
                 type={"password"}
                 placeholder={"13"}
-                inputCss={{ border: 'none' }}
+                disabled={true}
+                inputCss={{ border: 'none', paddingBottom: '1px' }}
                 title={"Дом"}
                 css={{ marginTop: '14px', marginRight: '12px' }}
               />
@@ -277,7 +300,8 @@ const CabinetComponent = (props) => {
                 params={{ width: 60 }}
                 type={"password"}
                 placeholder={"98"}
-                inputCss={{ border: 'none' }}
+                disabled={true}
+                inputCss={{ border: 'none', paddingBottom: '1px' }}
                 title={"Квартира"}
                 css={{ marginTop: '14px' }}
               />
@@ -288,8 +312,8 @@ const CabinetComponent = (props) => {
               <Input
                 params={{ width: 360 }}
                 type={"password"}
-                placeholder={"Toyota Avensis 2005"}
-                inputCss={{ border: 'none' }}
+                placeholder={userData.car ? userData.car + ' сохранено' : "Toyota Avensis 2005"}
+                inputCss={{ border: 'none', paddingBottom: '1px' }}
                 title={"Марка транспортного средства"}
                 css={{ marginTop: '14px', marginRight: '12px' }}
               />
@@ -304,11 +328,11 @@ const CabinetComponent = (props) => {
                 marginTop: '21px',
                 marginBottom: '8px',
                 width: '80%',
-                lineHeight: '18px'
+                lineHeight: '23px'
               }}
             >
               
-              добавьте марку и модель вашего ТС, чтобы мы могли быстро подобрать для вас товар или правильно записать к нам в сервис. вы можете добавить несколько авто</span>
+              Добавьте марку и модель вашего ТС, чтобы мы могли быстро подобрать для вас товар или правильно записать к нам в сервис. Вы можете добавить несколько авто</span>
             
             <Button  
               params={{

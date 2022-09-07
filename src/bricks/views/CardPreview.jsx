@@ -1,6 +1,7 @@
-/* eslint-disable no-dupe-keys */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/style-prop-object */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-dupe-keys */
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import css from '../../styles/card-preview'
@@ -22,6 +23,8 @@ const CardPreview = (props) => {
     params,
     image = null,
     title = null,
+    popular = false,
+    newProduct = false,
     description = null,
     coast1 = null,
     coast2 = null,
@@ -52,7 +55,7 @@ const CardPreview = (props) => {
     <Card 
       styles={params} 
       itemid={itemID}
-      style={ coast1 === '--' ? { filter: 'grayscale(1)', marginBottom: '13px' } : { marginBottom: '13px' }} 
+      style={ coast1 === '--' ? { filter: 'grayscale(0)', marginBottom: '13px' } : { marginBottom: '13px' }} 
     >
 
       { false ? <img src={image} alt={""}/> : 
@@ -62,26 +65,26 @@ const CardPreview = (props) => {
           { itemID.indexOf('oil') < 0 ? <img 
             style={ coast1 !== '--' 
             ? { display: 'block', width: '100%', borderRadius: '8px' }
-            : { display: 'block', width: '100%', filter: 'grayscale(1)', borderRadius: '8px' }} 
+            : { display: 'block', width: '100%', filter: 'grayscale(0)', borderRadius: '8px' }} 
             src={imageItem} 
             alt={""}
           /> : <img 
-            style={{ display: 'block', width: '100%', filter: 'grayscale(1)', borderRadius: '8px' }} 
+            style={{ display: 'block', width: '100%', filter: 'grayscale(0)', borderRadius: '8px' }} 
             src={imageItem} 
             alt={""}
           /> }
 
           { itemID.indexOf('oil') < 0 && <React.Fragment>
 
-            { coast1 !== '--' && <Labels>
+            { popular && <Labels>
 
               <Button  
                 params={{
-                  width: 118,
-                  height: 24,
+                  width: 122,
+                  height: 32,
                   background: 'rgb(43, 198, 49)',
                 }}
-                inner={"наш бестселлер"}
+                inner={"Наш бестселлер"}
                 css={{
                   fontSize: '12px',
                   color: 'white',
@@ -90,28 +93,17 @@ const CardPreview = (props) => {
                   boxShadow: 'none'
                 }}
               />
+
+            </Labels> }
+            { newProduct && <Labels>
+
               <Button  
                 params={{
-                  width: 146,
-                  height: 24,
-                  background: 'rgb(43, 198, 49)',
-                }}
-                inner={"лучший за неделю"}
-                css={{
-                  fontSize: '12px',
-                  color: 'white',
-                  marginBottom: '8px',
-                  borderRadius: '15px',
-                  boxShadow: 'none'
-                }}
-              />
-              <Button  
-                params={{
-                  width: 124,
-                  height: 24,
+                  width: 122,
+                  height: 32,
                   background: 'rgb(214, 46, 43)',
                 }}
-                inner={"хорошая скидка"}
+                inner={"Новинка!"}
                 css={{
                   fontSize: '12px',
                   color: 'white',
@@ -170,8 +162,12 @@ const CardPreview = (props) => {
                 <p key={index + 640} 
                   style={{ color: 'grey', 
                     fontSize: '14px', 
-                    lineHeight: '22px' 
-                  }}>{ item }</p> }
+                    lineHeight: '22px',
+                    display: 'block',
+                    width: '100%',
+                    height: '22px',
+                    overflow: 'hidden'
+                  }}>{ item.split(' : ')[0] } <i style={{ fontStyle: 'normal', fontWeight: 'bold' }}>{ item.split(' : ')[1] }</i></p> }
             
             </React.Fragment>
           )

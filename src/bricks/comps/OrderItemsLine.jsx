@@ -72,7 +72,6 @@ const OrderItemsLine = (props) => {
 
     orderedProducts.split('**').forEach(product => {
 
-      // eslint-disable-next-line use-isnan
       if ( Number(product.split('::')[3]) * Number(product.split('::')[2]) ) {
 
         totalSumm = totalSumm + Number(product.split('::')[3]) * Number(product.split('::')[2])
@@ -106,7 +105,9 @@ const OrderItemsLine = (props) => {
 
           return (
             <React.Fragment key={index}>
+            
               { !removeProductsId.split('**').includes(item.split('::')[0]) && <Item key={index}>
+
                 <Icon>{ index + 1 }</Icon>
                 <ImageWrapper>
 

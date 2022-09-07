@@ -8,14 +8,16 @@ import { setMessageShow } from '../appStore/reducers/mainReducer'
 
 const { MessageWindow, MessageWindowImg } = css
 
-const Message = (props) => {
+const Message = () => {
 
   const dispatch = useDispatch()
-  const { title, message, children = null, type = 'success' } = useSelector(state => state.main.messageContent)
+  const { title, message, children = null, type = 'success', windowHeight = null } = useSelector(state => state.main.messageContent)
 
   return (
     <React.Fragment>
-      <MessageWindow onClick={() => dispatch(setMessageShow(false))}>
+      <MessageWindow 
+        style={ windowHeight && { height: windowHeight } }
+        onClick={() => dispatch(setMessageShow(false))}>
 
         { type === 'success' && <MessageWindowImg>
           <img

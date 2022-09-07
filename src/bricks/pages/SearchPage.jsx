@@ -634,11 +634,8 @@ const SearchPage = () => {
                   image={null}
                   title={item.name}
                   description={[
-                    'Гарантия : 6 месяцев',
-                    'Емкость Ач : 9',
-                    'Полярность : Обратная',
-                    'Пусковой ток (А) : 480',
-                    'Размер (Д*Ш*В) : 207*175*175'
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
                   ]}
                   coast1={
                     +item.pre_order_prices[0].region[0].price[0] === 0

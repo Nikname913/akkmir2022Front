@@ -58,24 +58,35 @@ const Header = () => {
 
     } else { 
       
-      const [ header, payload ] = Rds.getAuthUserToken().split('.')
-      false && console.log(window.atob(header))
-      false && console.log(window.atob(payload))
-      
-      const data = JSON.parse(window.atob(payload))
-      const user = data.name
+      if ( Rds.getAuthUserToken().indexOf('num') === -1 ) {
 
-      console.log(data)
+        alert(Rds.getAuthUserToken())
 
-      setAuthUserName(user)
-      navigate('../cabinet') 
+        const [ header, payload ] = Rds.getAuthUserToken().split('.')
+        false && console.log(window.atob(header))
+        false && console.log(window.atob(payload))
+        
+        const data = JSON.parse(window.atob(payload))
+        const user = data.name
+
+        console.log(data)
+
+        setAuthUserName(user)
+        navigate('../cabinet') 
+
+      } else {
+
+        const userInfo  = Rds.getAuthData()
+        console.log(userInfo)
+        navigate('../cabinet') 
+
+      }
       
     }
 
   }
 
   useEffect(() => { dispatch(setOrdersCount(Rds.getOrdersCount())) },[])
-
   function showCatalog() { setShowModalCatalog('modal') }
 
   return (
@@ -85,7 +96,7 @@ const Header = () => {
         { showModalCatalog === 'modal' ? <StartCatalog type={showModalCatalog} action={setShowModalCatalog}/> : null  }
 
         <HeadMenu>
-          <Link style={{ textDecoration: 'none', color: 'black' }} to="/modal-catalog">
+          <Link style={{ textDecoration: 'none', color: 'black' }} to="/podbor-akkumulyatora">
             <MenuButton style={{ fontWeight: 'bold' }}>
               
               Подбор аккумулятора</MenuButton>
@@ -130,7 +141,7 @@ const Header = () => {
           <LogoContentWrapper>
 
             <React.Fragment>
-              <Link style={{ textDecoration: 'none', color: 'black' }} to="/home">
+              <Link style={{ textDecoration: 'none', color: 'black' }} to="/glavnaya">
                 <LogoTitle style={{ overflow: 'hidden', position: 'relative', width: '600px', height: '60px' }}>
                   <img
                     style={{
@@ -152,7 +163,7 @@ const Header = () => {
           </LogoContentWrapper>
           <LogoContentWrapper style={{ justifyContent: 'space-between' }}>
             
-            { Rds.getAuthStatus() === true ?
+            { Rds.getAuthStatus() === 'NON_STATUS' ?
 
               <Link style={{ textDecoration: 'none', color: 'black' }} to="/cabinet">
                 <Button  

@@ -131,7 +131,7 @@ const MobileHeader = (props) => {
             }}
           />
 
-          <Link style={{ textDecoration: 'none', color: 'black' }} to="/home"><Button  
+          <Link style={{ textDecoration: 'none', color: 'black' }} to="/glavnaya"><Button  
             params={{
               width: 90,
               height: 24,

@@ -6,6 +6,7 @@ import cssMain from '../../styles/pages/main-page'
 import CabinetComponent from '../views/CabinetComponent'
 import CardPreview from '../views/CardPreview'
 import { useSelector } from 'react-redux'
+import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -19,17 +20,36 @@ const CabinetPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[])
+  function random(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min)) + min
+  }
+
+  let aaa
+  generalCatalog ? aaa = random(10, generalCatalog.length - 10) : aaa = 0
+
+  useEffect(() => {
+    
+    document.documentElement.scrollTop = 0
+    false && console.log(random(10, generalCatalog.length - 10))
+  
+  },[ generalCatalog ])
 
   return (
     <Main>
       <ContentLine style={{ marginBottom: '38px', marginTop: '0px' }}>
 
-        <h2>Личный кабинет</h2>
+        { Rds.getAuthData().name ? <h2>Здравствуйте, { Rds.getAuthData().name }</h2> : <h2>Личный кабинет</h2> }
 
       </ContentLine>
       <ContentLine style={{ alignItems: 'flex-start' }}>
-        <CabinetComponent/>
+
+        <CabinetComponent 
+          userData={Rds.getAuthData()}
+          userToken={Rds.getAuthUserToken()}
+        />
+      
       </ContentLine>
       <ContentLine style={{ marginBottom: '30px', marginTop: '14px' }}>
 
@@ -83,17 +103,15 @@ const CabinetPage = () => {
           { generalCatalog ? generalCatalog.map((item, index) => {
 
             return <React.Fragment>{
-              index < 6 && <React.Fragment key={index}>
+              index > aaa && index < aaa + 7 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}
                   title={item.name}
+                  newProduct={true}
                   description={[
-                    'Гарантия : 6 месяцев',
-                    'Емкость Ач : 9',
-                    'Полярность : Обратная',
-                    'Пусковой ток (А) : 480',
-                    'Размер (Д*Ш*В) : 207*175*175'
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
                   ]}
                   coast1={
                     +item.pre_order_prices[0].region[0].price[0] === 0
@@ -105,7 +123,7 @@ const CabinetPage = () => {
                   }
                   itemID={item.id[0]}
                 />
-                { index < 5 && <span 
+                { index < aaa + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',

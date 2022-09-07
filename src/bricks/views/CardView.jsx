@@ -5,8 +5,8 @@ import React, { useState } from 'react'
 import css from '../../styles/card-view'
 import CardInfo from './CardInfo'
 import Button from '../comps/button/Button.jsx'
+import Fos from '../../services/foz.service'
 import image from '../../img/category.png'
-import byOneClickImage from '../../img/byOneClick.png'
 import byClickImage from '../../img/byClick.png'
 import likeImg from '../../img/like.png'
 import { useSelector, useDispatch } from 'react-redux'
@@ -114,6 +114,12 @@ const CardView = (props) => {
         />
       </Photo>
     ))
+
+  }
+
+  function contentModalFos() {
+
+    dispatch(setModalContent(<Fos></Fos>))
 
   }
 
@@ -486,12 +492,15 @@ const CardView = (props) => {
             }
             action={() => {
                   
-              dispatch(setMessageContent({
+              false && dispatch(setMessageContent({
                 title: 'Данная функция в разработке',
                 message: 'Функция "Купить в один клик" находится в стадии формирования тз и скоро будет реализована',
                 type: 'error',
               }))
-              dispatch(setMessageShow(true))
+              false && dispatch(setMessageShow(true))
+
+              showModal()
+              contentModalFos()
 
             }}
           />

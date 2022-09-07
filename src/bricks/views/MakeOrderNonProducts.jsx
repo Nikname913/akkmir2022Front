@@ -45,7 +45,7 @@ const MakeOrderNonProducts = () => {
         >
         
           Корзина пуста</span>
-        <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/home">
+        <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/glavnaya">
           <div
             style={{
               display: 'flex',

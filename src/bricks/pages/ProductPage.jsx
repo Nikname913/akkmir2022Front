@@ -2,6 +2,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 import React, { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import css from '../../styles/pages/product-page'
 import CardView from '../views/CardView'
 import CardPreview from '../views/CardPreview'
@@ -21,10 +22,25 @@ const ProductPage = () => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  useEffect(() => document.documentElement.scrollTop = 0,[])
+  function random(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min)) + min
+  }
+
+  let aaa
+  generalCatalog ? aaa = random(10, generalCatalog.length - 10) : aaa = 0
+
+  useEffect(() => {
+    
+    document.documentElement.scrollTop = 0
+    false && console.log(random(10, generalCatalog.length - 10))
+  
+  },[ generalCatalog ])
 
   return (
     <React.Fragment>
+      { !generalCatalog && <Navigate to="/glavnaya" replace={true}/> }
       <RequestComponent
         make={false}
         callbackAction={'GET_CATALOG'}
@@ -37,7 +53,7 @@ const ProductPage = () => {
       <Main>
         <ContentLine style={{ marginBottom: '38px', marginTop: '0px', position: 'relative' }}>
 
-          { generalCatalog.map(item => {
+          { generalCatalog && generalCatalog.map(item => {
 
             if ( item.id[0] === itemLocal ) {
 
@@ -61,10 +77,11 @@ const ProductPage = () => {
 
         </ContentLine>
         <ContentLine>
-          { generalCatalog.map(item => {
 
-            !false && console.log(item)
-            !false && console.log('--------------------------------')
+          { generalCatalog && generalCatalog.map(item => {
+
+            false && console.log(item)
+            false && console.log('--------------------------------')
 
             if ( item.id[0] === itemLocal ) {
 
@@ -80,6 +97,7 @@ const ProductPage = () => {
               )
 
           }})}
+
         </ContentLine>
         <ContentLine style={{ marginBottom: '38px', marginTop: '16px' }}>
 
@@ -121,17 +139,14 @@ const ProductPage = () => {
           { generalCatalog ? generalCatalog.map((item, index) => {
 
             return <React.Fragment>{
-              index < 6 && <React.Fragment key={index}>
+              index > aaa && index < aaa + 7 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}
                   title={item.name}
                   description={[
-                    'Гарантия : 6 месяцев',
-                    'Емкость Ач : 9',
-                    'Полярность : Обратная',
-                    'Пусковой ток (А) : 480',
-                    'Размер (Д*Ш*В) : 207*175*175'
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
                   ]}
                   coast1={
                     +item.pre_order_prices[0].region[0].price[0] === 0
@@ -143,7 +158,7 @@ const ProductPage = () => {
                   }
                   itemID={item.id[0]}
                 />
-                { index < 5 && <span 
+                { index < aaa + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',
@@ -178,7 +193,7 @@ const ProductPage = () => {
                   coast2={item.coast2}
                   itemID={item.itemID}
                 />
-                { index < 5 && <span 
+                { index < aaa + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',
@@ -198,17 +213,14 @@ const ProductPage = () => {
           { generalCatalog ? generalCatalog.map((item, index) => {
 
             return <React.Fragment>{
-              index < 6 && <React.Fragment key={index}>
+              index > aaa && index < aaa + 7 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}
                   title={item.name}
                   description={[
-                    'Гарантия : 6 месяцев',
-                    'Емкость Ач : 9',
-                    'Полярность : Обратная',
-                    'Пусковой ток (А) : 480',
-                    'Размер (Д*Ш*В) : 207*175*175'
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
                   ]}
                   coast1={
                     +item.pre_order_prices[0].region[0].price[0] === 0
@@ -220,7 +232,7 @@ const ProductPage = () => {
                   }
                   itemID={item.id[0]}
                 />
-                { index < 5 && <span 
+                { index < aaa + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',

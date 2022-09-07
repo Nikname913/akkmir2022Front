@@ -46,6 +46,9 @@ const MakeOrder = () => {
   const [ emailFromAuth, setEmailFromAuth ] = useState('') 
   const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
   const [ isDiscount, setIsDiscount ] = useState(true)
+  const [ createUserCabinet, setCreateUserCabinet ] = useState(true)
+  const [ newUserCabinetRequest, setNewUserCabinetRequest ] = useState(false)
+  const [ newUserCabinetBody, setNewUserCabinetBody ] = useState('')
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -111,6 +114,13 @@ const MakeOrder = () => {
         dataValidate(orderSumm)        +
         dataValidate(orderBody)      
 
+      setNewUserCabinetBody(`?number=${number}&auth=sms&name=${name}&email=${email}&car=${model}`)
+      setNewUserCabinetRequest(true)
+
+      Rds.setAuthData({ number, auth: 'AFTER_ORDER', name, email, car: model })
+      Rds.setAuthStatus({ status: true })
+      Rds.setAuthToken({ token: 'num' + String(number).split('+7')[1] })
+
       dispatch(setNumber(null))
       dispatch(setModel(null))
       dispatch(setName(null))
@@ -143,15 +153,19 @@ const MakeOrder = () => {
 
     } else { 
       
-      const [ header, payload ] = Rds.getAuthUserToken().split('.')
-      false && console.log(window.atob(header))
-      false && console.log(window.atob(payload))
+      if ( Rds.getAuthUserToken().split('.').length === 2 ) {
       
-      const data = JSON.parse(window.atob(payload))
-      const email = data.email
+        const [ header, payload ] = Rds.getAuthUserToken().split('.')
+        false && console.log(window.atob(header))
+        false && console.log(window.atob(payload))
+        
+        const data = JSON.parse(window.atob(payload))
+        const email = data.email
 
-      setEmailFromAuth(email)
-      dispatch(setEmail(email))
+        setEmailFromAuth(email)
+        dispatch(setEmail(email))
+
+      }
       
     }
 
@@ -174,6 +188,15 @@ const MakeOrder = () => {
         requestData={{
           type: 'GET',
           urlstring: `http://tebot.ck23435.tmweb.ru/akkmirbott.php?actionType=SEND_ORDER_TO_AKKMIR&getData=${orderDataTelegram}`,
+        }}
+      /> }
+
+      { newUserCabinetRequest && <RequestComponent
+        make={false}
+        callbackAction={'NON_ACTION'}
+        requestData={{
+          type: 'GET',
+          urlstring: `/newUserGet${newUserCabinetBody}`,
         }}
       /> }
 
@@ -216,7 +239,7 @@ const MakeOrder = () => {
               border: 'none',
               borderRight: '6px solid #F7F7F7'
             }}
-            title={"Марка транспортного средства*"}
+            title={"Марка транспортного средства"}
             css={{ marginTop: '14px' }}
             dispatchType={"model"}
           />
@@ -423,11 +446,62 @@ const MakeOrder = () => {
                 
                 Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров</p>
 
-              <Button  
+              { createUserCabinet ? <Button  
                 params={{
                   width: 190,
                   height: 36,
                   background: '#2E2E2E'
+                }}
+                inner={"К оформлению"}
+                css={{
+                  fontSize: '13px',
+                  boxShadow: 'none',
+                  color: 'white',
+                  marginRight: '24px',
+                  marginBottom: '10px'
+                }}
+                action={() => {
+
+                  number && dispatch(setMessageShow(true))
+                  number && dispatch(setMessageContent({
+                    title: 'Заказ почти оформлен!',
+                    message: 'Мы создадим вам учетную запись в личном кабинете, чтобы при дальнейших покупках вы не вводили снова контактные данные',
+                    type: 'success',
+                    windowHeight: '330px',
+                    children: <Button  
+                      params={{
+                        width: 190,
+                        height: 36,
+                        background: 'rgb(43, 198, 49)'
+                      }}
+                      inner={"Все понятно"}
+                      css={{
+                        fontSize: '13px',
+                        boxShadow: 'none',
+                        color: 'white',
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        marginTop: '20px',
+                      }}
+                      action={() => {
+                        setCreateUserCabinet(false)
+                      }}
+                    />
+                  }))
+
+                  !number && dispatch(setMessageContent({
+                    title: 'Ошибка заполнения формы',
+                    message: 'Пожалуйста, заполните обязательные поля и попробуйте оформить заказ повторно',
+                    type: 'error'
+                  }))
+                  !number && dispatch(setMessageShow(true))
+
+                }}
+              /> : <Button  
+                params={{
+                  width: 190,
+                  height: 36,
+                  background: 'rgb(43,198,49)'
                 }}
                 inner={"Оформить заказ"}
                 css={{
@@ -438,7 +512,7 @@ const MakeOrder = () => {
                   marginBottom: '10px'
                 }}
                 action={orderController}
-              />
+              /> }
               <Button  
                 params={{
                   width: 190,

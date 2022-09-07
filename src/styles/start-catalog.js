@@ -31,11 +31,12 @@ const css = {
     height: 50px;
     font-size: 14px;
     line-height: 48px;
-    padding-left: 15px;
+    padding-left: 16px;
     color: #2E2E2E;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     cursor: pointer;
+    font-weight: 600;
   `,
   CatalogContent: styled.div`
     display: block;
@@ -53,20 +54,20 @@ const css = {
     justify-content: flex-start;
     width: 100%;
     height: auto;
-    margin-bottom: 14px;
+    margin-bottom: 11px;
   `,
   Tag: styled.span`
     display: block;
     background-color: white;
     font-size: 13px;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 12px;
     color: grey;
     box-shadow: 0px 0px 2px grey;
     margin-right: 8px;
     margin-bottom: 8px;
-    padding: 8px;
-    padding-bottom: 9px;
+    padding: 12px;
+    padding-bottom: 14px;
     padding-left: 16px;
     padding-right: 16px;
     cursor: pointer;
