@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import testImg from '../../../img/category.png'
+import likeImg from '../../../img/like.png'
 import { useDispatch } from 'react-redux'
 import { setActualItem, setOrdersCount } from '../../../appStore/reducers/mainReducer'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
@@ -52,7 +53,8 @@ const CardPreview = (props) => {
               display: 'block',
               position: 'relative',
               width: '100px',
-              margin: '0 auto'
+              margin: '0 auto',
+              borderRadius: '6px'
             }}
           />
 
@@ -64,40 +66,43 @@ const CardPreview = (props) => {
               justifyContent: 'flex-start',
               width: '100%',
               height: 'auto',
-              marginTop: '8px'
+              marginTop: '11px',
+              marginBottom: '2px'
             }}
           >
-            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold' }}>1200 Р</span>
-            <span 
-              style={{ 
-                display: 'block', 
-                width: '50%', 
-                fontSize: '16px', 
-                fontWeight: 'bold', 
-                color: 'grey', 
-                textAlign: 'right' 
-              }}
-            >
-              
-              1400 Р
-            </span>
+            <span style={{ display: 'block', width: '100%', fontSize: '16px', fontWeight: 'bold' }}>{ coast1 } руб.</span>
+            <span style={{ display: 'none', width: '50%', fontSize: '16px', fontWeight: 'bold', color: 'grey', textAlign: 'right' }}>{ coast2 } Р</span>
+
           </div>
 
         </ImageBlock>
 
-        <h4 
+        { itemID !== 'not-for-sale' ? <h4 
           style={{
             display: 'block',
             fontSize: '13px',
             lineHeight: '18px',
             marginTop: '8px',
-            marginBottom: '10px'
+            marginBottom: '8px',
+            height: '36px',
+            overflow: 'hidden',
           }}
-          onClick={() => dispatch(setActualItem(itemID))}
+          onClick={() => itemID !== 'not-for-sale' && dispatch(setActualItem(itemID))}
         >
           
           <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/product">
-            Аккумулятор ZEUS RED LB 50 Ач п.п.</Link></h4>
+            { title }</Link></h4> : <h4 
+          style={{
+            display: 'block',
+            fontSize: '13px',
+            lineHeight: '18px',
+            marginTop: '8px',
+            marginBottom: '8px',
+            height: '36px',
+            overflow: 'hidden',
+          }}
+          onClick={() => itemID !== 'not-for-sale' && dispatch(setActualItem(itemID))}
+        >{ title }</h4> }
 
         <div
           style={{
@@ -111,7 +116,7 @@ const CardPreview = (props) => {
           }}
         >
 
-          <Button  
+          { itemID !== 'not-for-sale' ? <Button  
             params={{
               width: 100,
               height: 30,
@@ -128,7 +133,20 @@ const CardPreview = (props) => {
               ordersCount()
               ordersData(itemID)
             }}
-          />
+          /> : <Button  
+            params={{
+              width: 100,
+              height: 30,
+              background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
+            }}
+            inner={makeOrderInner}
+            css={{
+              fontSize: '13px',
+              boxShadow: 'none',
+              color: 'white',
+              borderRadius: '6px'
+            }}
+          /> }
           <Button  
             params={{
               width: 30,
@@ -142,6 +160,22 @@ const CardPreview = (props) => {
               color: 'white',
               borderRadius: '6px'
             }}
+            children={
+              <img 
+                alt={""}
+                src={likeImg}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  boxSizing: 'border-box',
+                  width: '17px',
+                  left: '0',
+                  marginLeft: '7px',
+                  top: '0',
+                  marginTop: '8px'
+                }}
+              />
+            }
           />
           
         </div>

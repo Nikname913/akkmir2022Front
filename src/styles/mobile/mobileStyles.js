@@ -113,21 +113,27 @@ const css = {
     CatalogTagBlock: styled.span`
       display: block;
       position: relative;
-      height: auto;
+      box-sizing: border-box;
+      height: 38px;
+      line-height: 36px;
       border-radius: 12px;
-      margin-right: 12px;
+      margin-right: 10px;
+      margin-bottom: 10px;
       background-color: white;
-      font-size: 13px;
+      font-size: 12px;
       border: 1px solid #D3D3D3;
       color: grey;
       cursor: pointer;
-      padding: 4px 12px 5px;
+      padding: 0px 12px;
+      text-align: center;
+      font-weight: 600;
     `,
     CatalogMenu: styled.div`
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-content: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       width: ${ props => props.width - 24 }px;
       height: auto;
       min-height: 40px;
@@ -142,11 +148,13 @@ const css = {
       align-items: center;
       justify-content: space-around;
       position: relative;
-      width: ${ props => (( props.width - 24 ) / 6 ) - 10 }px;
-      height: ${ props => (( props.width - 24 ) / 6 ) - 10 }px;
+      width: ${ props => (( props.width - 24 ) / 4 ) - 14 }px;
+      height: ${ props => (( props.width - 24 ) / 4 ) - 14 }px;
+      margin-bottom: 52px;
       box-shadow: 22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%);
       border-radius: 4px;
       cursor: pointer;
+      font-weight: 600;
     `,
     PopularScrollWrapper: styled.div`
       display: flex;
@@ -366,8 +374,8 @@ const css = {
       height: auto;
       min-height: 40px;
       border-radius: 4px;
-      margin-right: 14px;
-      margin-bottom: 13px;
+      margin-right: 20px;
+      margin-bottom: 18px;
     `,
     ImageBlock: styled.div`
       display: block;

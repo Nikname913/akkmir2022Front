@@ -5,7 +5,9 @@ import React, { useState } from 'react'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setOrdersCount } from '../../../appStore/reducers/mainReducer'
+import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
 import akkum from '../../../img/category.png'
 
 const { Wrapper, 
@@ -20,9 +22,68 @@ const { Wrapper,
 
 const ProductPage = (props) => {
 
+  const actualItem = useSelector(state => state.main.actualItem)
+  const popularItems = useSelector(state => state.catalog.popular)
+  const propsRemote = useSelector(state => state.main.catalogPropsRemote)
+  const itemLocal = useSelector(state => state.main.actualItem)
+  const [ showCharacteristics, setShowCharacteristics ] = useState(false)
+  const dispatch = useDispatch()
+
+  let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
+  let generalCatalog = null
+  
+  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
+
   const { screen = 420, amperHour = 60 } = props
   const [ amper, setAmper ] = useState(amperHour)
-  const popularItems = useSelector(state => state.catalog.popular)
+  const [ makeOrderInner, setMakeOrderInner ] = useState('Добавить в корзину')
+  const [ makeOrder, setMakeOrder ] = useState(false)
+  const [ productProps, ] = useState(propertiesConfig())
+
+  function propertiesConfig() {
+
+    let properties = []
+
+    generalCatalog && generalCatalog.map(item => {
+
+      if ( item.id[0] === itemLocal ) {
+
+        properties = item.properties
+
+      }
+
+    })
+
+    const props = properties[0].property
+    let returnedPropsArray = []
+
+    propsRemote && props.forEach(prop => {
+
+      const ppropsRemote = JSON.parse(propsRemote)[0].property
+      const propID = prop.id[0]
+      const propValue = prop.value[0]
+
+      ppropsRemote.forEach(pprop => {
+
+        if ( pprop.id[0] === propID ) returnedPropsArray.push({ id: pprop.name[0], value: propValue })
+
+      }) 
+
+    })
+
+    console.log(returnedPropsArray)
+    return returnedPropsArray
+
+  }
+
+  function ordersCount() {
+
+    Rds.setOrdersCount()
+    dispatch(setOrdersCount(Rds.getOrdersCount()))
+
+  }
+
+  function ordersData(param) { Rds.makeNewOrder({ itemID: param }) }
 
   return (
     <React.Fragment>
@@ -43,6 +104,7 @@ const ProductPage = (props) => {
                 display: 'block', 
                 position: 'relative',
                 width: `${screen * 0.6}px`,
+                borderRadius: '6px'
               }} 
               src={akkum} 
               alt={""}
@@ -105,9 +167,17 @@ const ProductPage = (props) => {
           </div>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '0px' }}>
+        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '10px' }}>
 
-          <h4>Аккумулятор ZEUS RED LB 50 Ач п.п.</h4>
+          { generalCatalog && generalCatalog.map(item => {
+
+            if ( item.id[0] === itemLocal ) {
+
+              return (
+                <h4 style={{ fontSize: '18px' }}>{ item.name }</h4>
+              )
+
+          }})}
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '4px', flexWrap: 'wrap' }}>
@@ -285,21 +355,38 @@ const ProductPage = (props) => {
               }}
             >
               
-              <span style={{ fontSize: '13px', color: 'grey' }}>Этот товар купили: 500 раз</span>
+              <span style={{ fontSize: '13px', color: 'grey' }}>Этот товар купили <i style={{ fontWeight: 'bold', fontStyle: 'normal' }}>500 раз</i></span>
             </OrderWrapperContentLine>
+            
+            { generalCatalog && generalCatalog.map(item => {
 
-            <OrderWrapperContentLine 
-              style={{ 
-                justifyContent: 'space-between', 
-                paddingLeft: '14px', 
-                paddingRight: '14px',
-                marginBottom: '14px'
-              }}
-            >
-              
-              <span style={{ fontSize: '23px', fontWeight: 'bold' }}>2550 руб.</span>
-              <span style={{ fontSize: '23px', fontWeight: 'bold' }}>3550 руб.</span>
-            </OrderWrapperContentLine>
+              false && console.log(item)
+              false && console.log('--------------------------------')
+
+              if ( item.id[0] === itemLocal ) {
+
+                return (
+                  <OrderWrapperContentLine 
+                    style={{ 
+                      justifyContent: 'space-between', 
+                      paddingLeft: '14px', 
+                      paddingRight: '14px',
+                      marginBottom: '14px'
+                    }}
+                  >
+                    
+                    <span style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                      { +item.pre_order_prices[0].region[0].price[0] === 0
+                      ? 'Нет в наличии' : item.pre_order_prices[0].region[0].price[0] + ' RUB' }
+                    </span>
+                    <span style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                      { +item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '' : item.pre_order_prices[0].region[0].price[0] + ' RUB' }
+                    </span>
+                  </OrderWrapperContentLine>
+                )
+
+            }})}
             
             <OrderWrapperContentLine>
               <TradeInBlock>
@@ -544,24 +631,34 @@ const ProductPage = (props) => {
               <Button  
                 params={{
                   width: 160,
-                  height: 40,
-                  background: '#565656'
+                  height: 44,
+                  background: makeOrder ? 'rgb(43, 198, 49)' : '#565656'
                 }}
-                inner={"Добавить в корзину"}
+                inner={makeOrderInner}
                 css={{
+                  boxSizing: 'border-box',
+                  lineHeight: '40px',
                   fontSize: '13px',
                   boxShadow: 'none',
                   color: 'white',
-                  border: '1px solid #565656',
+                  border: makeOrder ? '1px solid rgb(43, 198, 49)' : '1px solid #565656',
                   borderRadius: '8px',
-                  marginRight: '12px'
+                  marginRight: '12px',
+                }}
+                action={() => { 
+              
+                  !makeOrder && ordersCount()
+                  !makeOrder && ordersData(actualItem) 
+                  setMakeOrder(true)
+                  setMakeOrderInner('Добавлено')
+                
                 }}
               />
 
               <Button  
                 params={{
                   width: 120,
-                  height: 40,
+                  height: 44,
                   background: 'transparent'
                 }}
                 inner={"Купить в 1 клик"}
@@ -578,23 +675,91 @@ const ProductPage = (props) => {
 
           </OrderWrapper>
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
+        <ContentLine 
+          width={screen} 
+          style={ showCharacteristics 
+            ? { marginTop: '6px', marginBottom: '12px' }
+            : { marginTop: '6px', marginBottom: '12px' }}
+        >
 
           <span
             style={{
-              display: 'block',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
               position: 'relative',
               width: '30px',
               height: '30px',
               backgroundColor: 'grey',
               borderRadius: '8px',
               marginRight: '12px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: '15px'
             }}
-          ></span>
+            onClick={() => setShowCharacteristics(prev => !prev)}
+          >
+
+            { showCharacteristics && <span
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '14px',
+                height: '14px',
+                borderRadius: '8px',
+                backgroundColor: 'rgb(43, 198, 49)'
+              }}
+            /> }
+
+          </span>
           <span>Показать характеристики</span>
 
         </ContentLine>
+        { showCharacteristics && <ContentLine 
+          width={screen} 
+          style={{ 
+            marginTop: '0px', 
+            marginBottom: '12px',
+            flexDirection: 'column' 
+          }}
+        >
+          { productProps.length === 0 ? 
+            
+            <React.Fragment/> : <React.Fragment>
+
+              { productProps.map((prop, index) => {
+
+                let bgc; ( index % 2 === 0 ) ? bgc = 'rgb(247, 247, 247)' : bgc = 'transparent'
+
+                return (
+                  <div
+                    key={index}
+                    style={{ 
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      position: 'relative',
+                      width: '100%',
+                      backgroundColor: bgc,
+                      borderRadius: '4px',
+                      paddingLeft: '10px',
+                      paddingRight: '10px',
+                      paddingBottom: '6px',
+                      paddingTop: index === 0 ? '0px' : '6px' 
+                    }}
+                  >
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '26px' }}>
+                      { prop.id }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '26px', paddingLeft: '24px', fontWeight: 'bold' }}>
+                      { prop.value }</p>
+                  </div>
+                )
+
+              })}
+
+            </React.Fragment> }
+        </ContentLine> }
         <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '0px', flexWrap: 'wrap' }}>
           
           <Button  
@@ -658,12 +823,12 @@ const ProductPage = (props) => {
           />
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '6px' }}>
+        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '7px' }}>
 
           <h4>Популярные товары</h4>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <PopularScrollWrapper>
 
@@ -671,7 +836,7 @@ const ProductPage = (props) => {
 
               if ( index < 2 ) {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <CardPreview itemID={item.itemID}></CardPreview>
                   </React.Fragment>
                 )
@@ -681,13 +846,41 @@ const ProductPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { generalCatalog ? generalCatalog.map((item, index) => {
+
+              index < 2 && console.log(item)
+
+              if ( index === 70 || index === 74 ) {
+                return (
+                  <React.Fragment key={index}>
+                    <CardPreview 
+                      itemID={item.id[0]}
+                      title={item.name[0]}
+                      description={item.description[0]}
+                      coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                      coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                    ></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine> }
         <ContentLine width={screen} style={{ marginTop: '2px', marginBottom: '6px' }}>
 
           <h4>Не забудьте купить</h4>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <PopularScrollWrapper>
 
@@ -695,7 +888,7 @@ const ProductPage = (props) => {
 
               if ( index < 2 ) {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <CardPreview itemID={item.itemID}></CardPreview>
                   </React.Fragment>
                 )
@@ -705,7 +898,35 @@ const ProductPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { generalCatalog ? generalCatalog.map((item, index) => {
+
+              index < 2 && console.log(item)
+
+              if ( index === 70 || index === 74 ) {
+                return (
+                  <React.Fragment key={index}>
+                    <CardPreview 
+                      itemID={item.id[0]}
+                      title={item.name[0]}
+                      description={item.description[0]}
+                      coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                      coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                    ></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine> }
 
       </Wrapper>
     </React.Fragment>

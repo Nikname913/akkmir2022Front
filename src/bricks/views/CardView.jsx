@@ -197,8 +197,10 @@ const CardView = (props) => {
                       paddingTop: '6px' 
                     }}
                   >
-                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>{ prop.id }</p>
-                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px' }}>{ prop.value }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>
+                      { prop.id }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>
+                      { prop.value }</p>
                   </ItemDescriptionLine>
                 )
 

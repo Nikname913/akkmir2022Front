@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import ReactSelect from '../../comps/ReactSelect'
@@ -17,6 +16,10 @@ const ChangePage = (props) => {
 
   const { screen = 420 } = props
   const catalog = useSelector(state => state.catalog.catalog)
+  let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
+  let generalCatalog = null
+  
+  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
   return (
     <React.Fragment>
@@ -243,28 +246,45 @@ const ChangePage = (props) => {
           <h4>Результаты подбора товаров</h4>
 
         </ContentLine>
-        <ContentLine 
-          width={screen} 
-          style={{ 
-            marginTop: '6px', 
-            marginBottom: '0px',
-            flexWrap: 'wrap', 
-          }}
-        >
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           { catalog ? catalog.map((item, index) => {
 
-              if ( index < 20 ) {
-                return (
-                  <React.Fragment>
-                    <CardPreview itemID={item.itemID}></CardPreview>
-                  </React.Fragment>
-                )
-              }
+            if ( index < 2 ) {
+              return (
+                <React.Fragment key={index}>
+                  <CardPreview itemID={item.itemID}></CardPreview>
+                </React.Fragment>
+              )
+            }
 
-            }) : null }
+          }) : null }
 
-        </ContentLine>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          { generalCatalog ? generalCatalog.map((item, index) => {
+
+            index < 2 && console.log(item)
+
+            if ( index === 70 || index === 74 ) {
+              return (
+                <React.Fragment key={index}>
+                  <CardPreview 
+                    itemID={item.id[0]}
+                    title={item.name[0]}
+                    description={item.description[0]}
+                    coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                    ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                    coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                    ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                  ></CardPreview>
+                </React.Fragment>
+              )
+            }
+
+          }) : null }
+
+        </ContentLine> }
         <ContentLine 
           width={screen} 
           style={{ 

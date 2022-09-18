@@ -167,7 +167,7 @@ const CabinetComponent = (props) => {
             { userToken.indexOf('num') === -1 ? <Input
               params={{ width: 300 }}
               type={"password"}
-              placeholder={"qwerty12345 так не надо"}
+              placeholder={"Состоящий из букв и чисел"}
               inputCss={{ border: 'none', paddingBottom: '1px' }}
               title={"Придумать или изменить пароль"}
               css={{ marginTop: '14px' }}

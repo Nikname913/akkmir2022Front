@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
@@ -33,10 +34,19 @@ const CatalogPage = () => {
 
   } else {
 
-  jsonCatalog 
-    ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
-        item => actualCategory.id.includes(item.groups[0].id[0].toLowerCase())
-      ) : generalCatalog = null
+    console.log(actualCategory)
+
+    jsonCatalog 
+      ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
+          item => { 
+
+            if ( actualCategory.id && actualCategory.id.includes(item.groups[0].id[0].toLowerCase()) ) {
+
+              return item
+
+            }
+          }
+        ) : generalCatalog = null
 
   }
 

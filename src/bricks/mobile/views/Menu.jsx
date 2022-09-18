@@ -40,9 +40,7 @@ const MobileMenu = (props) => {
                 width: '100%',
                 display: 'block',
               }}
-            >
-              
-              Главная</span>
+            >Главная</span>
           </MenuItem>
         </Link>
         <Link style={{ textDecoration: 'none', color: 'black' }} to="/shops">
@@ -64,9 +62,7 @@ const MobileMenu = (props) => {
                 width: '100%',
                 display: 'block'
               }}
-            >
-              
-              Магазины</span>
+            >Магазины</span>
           </MenuItem>
         </Link>
         <Link style={{ textDecoration: 'none', color: 'black' }} to="/catalog">
@@ -101,9 +97,7 @@ const MobileMenu = (props) => {
                 width: '100%',
                 display: 'block'
               }}
-            >
-              
-              Каталог</span>
+            >Каталог</span>
           </MenuItem>
         </Link>
         <MenuItem width={screen}>
@@ -137,9 +131,7 @@ const MobileMenu = (props) => {
               width: '100%',
               display: 'block' 
             }}
-          >
-            
-            Сервис</span>
+          >Сервис</span>
         </MenuItem>
         <MenuItem width={screen}>
           <img 
@@ -159,9 +151,7 @@ const MobileMenu = (props) => {
               width: '100%',
               display: 'block' 
             }}
-          >
-            
-            Войти</span>
+          >Войти</span>
         </MenuItem>
         <MenuItem width={screen}>
           <img 
@@ -181,9 +171,7 @@ const MobileMenu = (props) => {
               width: '100%',
               display: 'block' 
             }}
-          >
-            
-            Корзина</span>
+          >Корзина</span>
           <span
             style={{
               display: 'block',
@@ -196,14 +184,12 @@ const MobileMenu = (props) => {
               left: '100%',
               marginLeft: '-32px',
               marginTop: '4px',
-              fontSize: '9px',
+              fontSize: '10px',
               textAlign: 'center',
               lineHeight: '18px',
               color: 'white'
             }}
-          >
-          
-            { orders }</span>
+          >{ orders }</span>
         </MenuItem>
 
       </Wrapper>

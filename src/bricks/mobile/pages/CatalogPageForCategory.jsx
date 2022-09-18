@@ -20,7 +20,7 @@ const { Wrapper,
     CatalogLastItem
   }} = css.ScreenStyles
 
-const CatalogPage = (props) => {
+const CatalogPageForCategory = (props) => {
 
   const { screen = 420 } = props
   const mainMenu = useSelector(state => state.main.catalogMenu)
@@ -41,9 +41,18 @@ const CatalogPage = (props) => {
 
   } else {
 
+    console.log(actualCategory)
+
     jsonCatalog 
       ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
-          item => actualCategory.id && actualCategory.id.includes(item.groups[0].id[0].toLowerCase())
+          item => {
+
+            if ( actualCategory.id.includes(item.groups[0].id[0].toLowerCase()) ) {
+
+              return item
+
+            }
+          }
         ) : generalCatalog = null
 
   }
@@ -187,7 +196,7 @@ const CatalogPage = (props) => {
           }}
         >
 
-          <h4>Каталог всех товаров</h4>
+          <h4>{ catalogCategory }</h4>
           <span
             style={{
               display: 'none',
@@ -222,7 +231,13 @@ const CatalogPage = (props) => {
               if ( index < 2 ) {
                 return (
                   <React.Fragment key={index}>
-                    <CardPreview itemID={item.itemID}></CardPreview>
+                    <CardPreview 
+                      itemID={"not-for-sale"}
+                      title={"Извините, пока нет в продаже"}
+                      description={""}
+                      coast1={0.00}
+                      coast2={0.00}
+                    ></CardPreview>
                   </React.Fragment>
                 )
               }
@@ -268,4 +283,4 @@ const CatalogPage = (props) => {
 
 }
 
-export default CatalogPage 
+export default CatalogPageForCategory

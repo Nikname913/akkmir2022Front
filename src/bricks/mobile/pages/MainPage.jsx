@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import CardPreview from '../views/CardPreview'
@@ -9,6 +9,7 @@ import AdressCard from '../views/AdressCard'
 import AboutCard from '../views/AboutCard'
 import Button from '../../comps/button/Button.jsx'
 import ReactSelect from '../../comps/ReactSelect'
+import RequestComponent from '../../../services/request.service'
 import { useSelector } from 'react-redux'
 
 import caricon from '../../../img/caricon.png'
@@ -33,9 +34,25 @@ const MainPage = (props) => {
 
   const { screen = 420 } = props
   const popularItems = useSelector(state => state.catalog.popular)
+  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
+  
+  let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
+  let generalCatalog = null
+  
+  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
   return (
     <React.Fragment>
+
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_CATEGORIES'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/categories',
+        }}
+      />
+
       <Wrapper 
         style={{ 
           marginLeft: '20px', 
@@ -128,7 +145,8 @@ const MainPage = (props) => {
                 display: 'block',
                 position: 'relative',
                 lineHeight: '17px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                marginBottom: '2px'
               }}
             >
               
@@ -189,7 +207,7 @@ const MainPage = (props) => {
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
           
-          <Link style={{ textDecoration: 'none', color: 'black' }} to="/change">
+          <Link style={{ textDecoration: 'none', color: 'black' }} to="/podbor-akkumulyatora">
             <SelectAkkum width={screen}>
               <img 
                 style={{ 
@@ -216,7 +234,7 @@ const MainPage = (props) => {
           </Link>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        { false && <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <SelectAkkum width={screen}>
             <h4 style={{ marginBottom: '18px', marginTop: '2px' }}>Подбор аккумулятора</h4>
@@ -412,130 +430,121 @@ const MainPage = (props) => {
 
           </SelectAkkum>
 
-        </ContentLine>
+        </ContentLine> }
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '2px', minHeight: '0px' }}>
 
-          <LogoBlock style={{ fontWeight: 'bold' }}>VARTA</LogoBlock>
-          <LogoBlock style={{ fontWeight: 'bold' }}>VARTA AKKUM</LogoBlock>
-          <LogoBlock style={{ fontWeight: 'bold' }}>VARTA</LogoBlock>
+          <LogoBlock style={{ fontWeight: 'bold' }}>NO LOGO</LogoBlock>
+          <LogoBlock style={{ fontWeight: 'bold' }}>NO LOGO</LogoBlock>
+          <LogoBlock style={{ fontWeight: 'bold' }}>NO LOGO</LogoBlock>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '8px', marginBottom: '2px', minHeight: '0px' }}>
+        <ContentLine 
+          width={screen} 
+          style={{
+            marginTop: '8px', 
+            marginBottom: '2px', 
+            minHeight: '0px',
+            overflowX: 'scroll',
+            overflowY: 'hidden' 
+          }}
+        >
 
-          <CatalogTagBlock>для легковых</CatalogTagBlock>
-          <CatalogTagBlock>для грузовых</CatalogTagBlock>
-          <CatalogTagBlock>для мотоциклов</CatalogTagBlock>
+          { mainMenuRemote && JSON.parse(mainMenuRemote)[0].group.map((item, index) => {
+
+            if ( item.parent_id[0] === 'f863771d-8620-11e6-a171-14dae9fa0260' 
+            
+              && item.name[0].indexOf('Rossko') === -1
+              && item.name[0].indexOf('LC-1187') === -1
+              && item.name[0].indexOf('AP182/10') === -1 
+              && item.name[0].indexOf('PCA-035') === -1 ) {
+
+                if ( item.name[0] === 'Клеммы, перемычки, провода')
+                  item.name[0] = 'Клеммы' 
+
+                if ( item.name[0] === 'Аккумуляторы автомобильные')
+                  item.name[0] = 'Автоаккумуляторы'
+
+                if ( item.name[0] === 'Аккумуляторы мотоциклетные')
+                  item.name[0] = 'Мотоаккумуляторы'
+
+                if ( item.name[0] === 'Аккумуляторы промышленные')
+                  item.name[0] = 'Промышленные'   
+
+                if ( item.name[0] === 'Крепление для АКБ')
+                  item.name[0] = 'Крепления' 
+
+                if ( index < 74 ) return <CatalogTagBlock key={index}>{ item.name[0] }</CatalogTagBlock>
+
+              }
+
+          })}
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '30px' }}>
+        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '0px' }}>
 
           <CatalogMenu width={screen}>
 
-            <CatalogMenuItem width={screen}>
-              <img 
-                style={{ 
-                  display: 'block', 
-                  position: 'relative',
-                  width: '30px'
-                }} 
-                src={mobileCatalog} 
-                alt={""}
-              />
-              <span 
-                style={{ 
-                  textAlign: 'center', 
-                  fontSize: '13px',
-                  display: 'block',
-                  position: 'absolute',
-                  top: '100%',
-                  marginTop: '8px' 
-                }}
-              >Масла</span>
-            </CatalogMenuItem>
-            <CatalogMenuItem width={screen}>
-              <img 
-                style={{ 
-                  display: 'block', 
-                  position: 'relative',
-                  width: '30px'
-                }} 
-                src={mobileCatalog} 
-                alt={""}
-              />
-              <span
-                style={{ 
-                  textAlign: 'center', 
-                  fontSize: '13px',
-                  display: 'block',
-                  position: 'absolute',
-                  top: '100%',
-                  marginTop: '8px' 
-                }}
-              >Жидкости</span>
-            </CatalogMenuItem>
-            <CatalogMenuItem width={screen}>
-              <img 
-                style={{ 
-                  display: 'block', 
-                  position: 'relative',
-                  width: '30px'
-                }} 
-                src={mobileCatalog} 
-                alt={""}
-              />
-              <span
-                style={{ 
-                  textAlign: 'center', 
-                  fontSize: '13px',
-                  display: 'block',
-                  position: 'absolute',
-                  top: '100%',
-                  marginTop: '8px' 
-                }}
-              >Электро</span>
-            </CatalogMenuItem>
-            <CatalogMenuItem width={screen}>
-              <img 
-                style={{ 
-                  display: 'block', 
-                  position: 'relative',
-                  width: '30px'
-                }} 
-                src={mobileCatalog} 
-                alt={""}
-              />
-              <span
-                style={{ 
-                  textAlign: 'center', 
-                  fontSize: '13px',
-                  display: 'block',
-                  position: 'absolute',
-                  top: '100%',
-                  marginTop: '8px' 
-                }}
-              >ИБП</span>
-            </CatalogMenuItem>
-            <CatalogMenuItem width={screen}>
-              <img 
-                style={{ 
-                  display: 'block', 
-                  position: 'relative',
-                  width: '30px'
-                }} 
-                src={mobileCatalog} 
-                alt={""}
-              />
-              <span
-                style={{ 
-                  textAlign: 'center', 
-                  fontSize: '13px',
-                  display: 'block',
-                  position: 'absolute',
-                  top: '100%',
-                  marginTop: '8px' 
-                }}
-              >Инструмент</span>
-            </CatalogMenuItem>
+            { mainMenuRemote && JSON.parse(mainMenuRemote)[0].group.map(item => {
+
+              if ( item.parent_id[0] === '' 
+              
+                && item.name[0].indexOf('Rossko') === -1
+                && item.name[0].indexOf('LC-1187') === -1
+                && item.name[0].indexOf('AP182/10') === -1 
+                && item.name[0].indexOf('PCA-035') === -1 ) {
+
+                  let ID = item.id[0]
+                  let NAME = item.name[0]
+                  let tagsArray = []
+
+                  if ( NAME === 'Автоаксессуары' ) NAME = 'Аксессуары'
+                  if ( NAME === 'Масла автомобильные' ) NAME = 'Автомасла'
+
+                  JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
+
+                    if ( itemm.parent_id[0] === ID ) tagsArray.push([itemm.id[0], itemm.name[0]])
+
+                  })
+
+                  // -------------------------------
+                  // item.id[0] === 'f863771d-8620-11e6-a171-14dae9fa0260'
+                  // -------------------------------
+
+                  false && console.log(tagsArray)
+                  false && console.log(item.id[0], item.name[0])
+
+                  return (
+                    <CatalogMenuItem
+                      key={ID} 
+                      width={screen}>
+                      <img 
+                        style={{ 
+                          display: 'block', 
+                          position: 'relative',
+                          width: '30px'
+                        }} 
+                        src={mobileCatalog} 
+                        alt={""}
+                      />
+                      <span 
+                        style={{ 
+                          textAlign: 'center', 
+                          fontSize: '12px',
+                          display: 'block',
+                          position: 'absolute',
+                          top: '100%',
+                          marginTop: '8px',
+                          lineHeight: '16px',
+                          height: '34px',
+                          overflow: 'hidden', 
+                        }}
+                      >{ NAME }</span>
+                    </CatalogMenuItem>
+                  )
+
+                }
+
+            })}
 
           </CatalogMenu>
 
@@ -543,8 +552,8 @@ const MainPage = (props) => {
         <ContentLine 
           width={screen} 
           style={{ 
-            marginTop: '5px', 
-            marginBottom: '6px', 
+            marginTop: '0px', 
+            marginBottom: '12px', 
             justifyContent: 'space-between' 
           }}
         >
@@ -575,7 +584,7 @@ const MainPage = (props) => {
             Смотреть все</span>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <PopularScrollWrapper>
 
@@ -583,7 +592,7 @@ const MainPage = (props) => {
 
               if ( index < 2 ) {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <CardPreview itemID={item.itemID}></CardPreview>
                   </React.Fragment>
                 )
@@ -593,7 +602,35 @@ const MainPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { generalCatalog ? generalCatalog.map((item, index) => {
+
+              index < 2 && console.log(item)
+
+              if ( index === 70 || index === 74 ) {
+                return (
+                  <React.Fragment key={index}>
+                    <CardPreview 
+                      itemID={item.id[0]}
+                      title={item.name[0]}
+                      description={item.description[0]}
+                      coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                      coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                    ></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine> }
         <ContentLine width={screen} style={{ marginTop: '5px', marginBottom: '6px' }}>
 
           <h4>Адреса магазинов и сервисов</h4>
@@ -601,13 +638,10 @@ const MainPage = (props) => {
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
 
-          <PopularScrollWrapper>
-
-            <AdressCard></AdressCard>
-
-          </PopularScrollWrapper>
+          <PopularScrollWrapper><AdressCard/></PopularScrollWrapper>
 
         </ContentLine>
+        
         { false && <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
               
           <AboutCard></AboutCard>

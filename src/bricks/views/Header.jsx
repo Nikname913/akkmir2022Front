@@ -60,8 +60,6 @@ const Header = () => {
       
       if ( Rds.getAuthUserToken().indexOf('num') === -1 ) {
 
-        alert(Rds.getAuthUserToken())
-
         const [ header, payload ] = Rds.getAuthUserToken().split('.')
         false && console.log(window.atob(header))
         false && console.log(window.atob(payload))

@@ -59,6 +59,8 @@ const CatCard = (props) => {
         <CardTags>
 
           { false && console.log('--------------------------') }
+          { false && console.log('--------------------------') }
+          
           { tags ? tags.map((item, index) => {
 
             false && console.log(item)
@@ -93,7 +95,10 @@ const CatCard = (props) => {
               </span>
             )
 
-          }) : null } { false && console.log('--------------------------') }
+          }) : null } 
+          
+          { false && console.log('--------------------------') }
+          { false && console.log('--------------------------') }
 
         </CardTags>
       </Card>

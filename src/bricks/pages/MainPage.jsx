@@ -11,7 +11,6 @@ import CardPreview from '../views/CardPreview'
 import CategoryCard from '../views/CategoryCard'
 import RequestComponent from '../../services/request.service'
 import { useSelector } from 'react-redux'
-import category from '../../img/category.png'
 import creta from '../../img/creta.png'
 
 const Main = css.Main
