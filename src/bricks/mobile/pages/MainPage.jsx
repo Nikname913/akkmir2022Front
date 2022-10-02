@@ -2,7 +2,7 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import CardPreview from '../views/CardPreview'
 import AdressCard from '../views/AdressCard'
@@ -10,7 +10,8 @@ import AboutCard from '../views/AboutCard'
 import Button from '../../comps/button/Button.jsx'
 import ReactSelect from '../../comps/ReactSelect'
 import RequestComponent from '../../../services/request.service'
-import { useSelector } from 'react-redux'
+import { setActualCategory } from '../../../appStore/reducers/mainReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 import caricon from '../../../img/caricon.png'
 import mobileShop from '../../../img/mobileShop.png'
@@ -35,11 +36,19 @@ const MainPage = (props) => {
   const { screen = 420 } = props
   const popularItems = useSelector(state => state.catalog.popular)
   const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
+
+  function selectCategory(catid, title) { 
+    
+    dispatch(setActualCategory({ id: catid, label: title })) 
+  
+  }
 
   return (
     <React.Fragment>
@@ -185,6 +194,9 @@ const MainPage = (props) => {
                 color: 'white',
                 marginRight: '24px',
                 marginTop: '20px'
+              }}
+              action={() => {
+                navigate(`../catalog`)
               }}
             />
 
@@ -473,10 +485,31 @@ const MainPage = (props) => {
                 if ( item.name[0] === 'Крепление для АКБ')
                   item.name[0] = 'Крепления' 
 
-                if ( index < 74 ) return <CatalogTagBlock key={index}>{ item.name[0] }</CatalogTagBlock>
+                if ( index < 74 ) { 
 
+                  const ID = item.id[0]
+                  let idsArray = [ ID ]  
+
+                  JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
+
+                    if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
+
+                  })
+                  
+                  return (
+                    <CatalogTagBlock 
+                      key={index}
+                      onClick={() => {
+                        selectCategory(idsArray, item.name[0])
+                        navigate(`../catalog/${item.name[0]}`)
+                      }}
+                    >
+                      { item.name[0] }
+                    </CatalogTagBlock>
+                  ) 
+                  
+                }
               }
-
           })}
 
         </ContentLine>
@@ -492,31 +525,28 @@ const MainPage = (props) => {
                 && item.name[0].indexOf('LC-1187') === -1
                 && item.name[0].indexOf('AP182/10') === -1 
                 && item.name[0].indexOf('PCA-035') === -1 ) {
-
-                  let ID = item.id[0]
                   let NAME = item.name[0]
-                  let tagsArray = []
 
                   if ( NAME === 'Автоаксессуары' ) NAME = 'Аксессуары'
                   if ( NAME === 'Масла автомобильные' ) NAME = 'Автомасла'
 
+                  const ID = item.id[0]
+                  let idsArray = [ ID ]  
+
                   JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
 
-                    if ( itemm.parent_id[0] === ID ) tagsArray.push([itemm.id[0], itemm.name[0]])
+                    if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
 
                   })
-
-                  // -------------------------------
-                  // item.id[0] === 'f863771d-8620-11e6-a171-14dae9fa0260'
-                  // -------------------------------
-
-                  false && console.log(tagsArray)
-                  false && console.log(item.id[0], item.name[0])
 
                   return (
                     <CatalogMenuItem
                       key={ID} 
-                      width={screen}>
+                      width={screen}
+                      onClick={() => {
+                        selectCategory(idsArray, item.name[0])
+                        navigate(`../catalog/${item.name[0]}`)
+                      }}>
                       <img 
                         style={{ 
                           display: 'block', 

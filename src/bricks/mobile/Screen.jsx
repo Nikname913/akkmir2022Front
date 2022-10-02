@@ -4,6 +4,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import OrderPage from './pages/OrderPage'
+import OrderPageMakeOrder from './pages/OrderPageMakeOrder'
 import ProductPage from './pages/ProductPage'
 import CabinetPage from './pages/CabinetPage'
 import ChangePage from './pages/ChangePage'
@@ -36,6 +37,10 @@ const MobileScreen = (props) => {
       <Route 
         path="/order" 
         element={<OrderPage screen={screen}/>} 
+      />
+      <Route 
+        path="/oformit-zakaz" 
+        element={<OrderPageMakeOrder screen={screen}/>} 
       />
       <Route 
         path="/product" 

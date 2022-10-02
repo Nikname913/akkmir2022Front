@@ -8,6 +8,7 @@ import cabinet from '../../../img/cabinet.png'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount, setMobile, setInfoPageTitle } from '../../../appStore/reducers/mainReducer'
+import { changeActive } from '../../../appStore/reducers/mobileMenuReducer'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
 
 const { Wrapper, MenuItem } = css.MenuStyles
@@ -16,12 +17,20 @@ const MobileMenu = (props) => {
 
   const { screen } = props
   const orders = useSelector(state => state.main.ordersCount)
+  const active = useSelector(state => state.mobileMenu.active)
+  const dispatch = useDispatch()
 
   return (
     <React.Fragment>
       <Wrapper style={{ marginLeft: '20px' }}>
 
-        <Link style={{ textDecoration: 'none', color: 'black' }} to="/glavnaya">
+        <Link 
+          style={ active === 0 
+            ? { textDecoration: 'none', color: 'black', backgroundColor: '#F7F7F7', borderRadius: '6px' }
+            : { textDecoration: 'none', color: 'black' }} 
+          to="/glavnaya"
+          onClick={() => dispatch(changeActive(0))}
+        >
           <MenuItem width={screen}>
             <img 
               src={cabinet} 
@@ -43,7 +52,13 @@ const MobileMenu = (props) => {
             >Главная</span>
           </MenuItem>
         </Link>
-        <Link style={{ textDecoration: 'none', color: 'black' }} to="/shops">
+        <Link 
+          style={ active === 1 
+            ? { textDecoration: 'none', color: 'black', backgroundColor: '#F7F7F7', borderRadius: '6px' }
+            : { textDecoration: 'none', color: 'black' }} 
+          to="/shops"
+          onClick={() => dispatch(changeActive(1))}
+        >
           <MenuItem width={screen}>
             <img 
               src={cabinet} 
@@ -153,44 +168,52 @@ const MobileMenu = (props) => {
             }}
           >Войти</span>
         </MenuItem>
-        <MenuItem width={screen}>
-          <img 
-            src={cabinet} 
-            alt={""}
-            style={{
-              display: 'block',
-              position: 'absolute',
-              width: '20px',
-              marginBottom: '16px'
-            }}
-          />
-          <span 
-            style={{ 
-              fontSize: '11px', 
-              textAlign: 'center',
-              width: '100%',
-              display: 'block' 
-            }}
-          >Корзина</span>
-          <span
-            style={{
-              display: 'block',
-              position: 'absolute',
-              width: '18px',
-              height: '18px',
-              borderRadius: '50%',
-              backgroundColor: '#2BC631',
-              top: '0px',
-              left: '100%',
-              marginLeft: '-32px',
-              marginTop: '4px',
-              fontSize: '10px',
-              textAlign: 'center',
-              lineHeight: '18px',
-              color: 'white'
-            }}
-          >{ orders }</span>
-        </MenuItem>
+        <Link 
+          style={ active === 3 
+            ? { textDecoration: 'none', color: 'black', backgroundColor: '#F7F7F7', borderRadius: '6px' }
+            : { textDecoration: 'none', color: 'black' }} 
+          to="/order"
+          onClick={() => dispatch(changeActive(3))}
+        >
+          <MenuItem width={screen}>
+            <img 
+              src={cabinet} 
+              alt={""}
+              style={{
+                display: 'block',
+                position: 'absolute',
+                width: '20px',
+                marginBottom: '16px'
+              }}
+            />
+            <span 
+              style={{ 
+                fontSize: '11px', 
+                textAlign: 'center',
+                width: '100%',
+                display: 'block' 
+              }}
+            >Корзина</span>
+            <span
+              style={{
+                display: 'block',
+                position: 'absolute',
+                width: '18px',
+                height: '18px',
+                borderRadius: '50%',
+                backgroundColor: '#2BC631',
+                top: '0px',
+                left: '100%',
+                marginLeft: '-32px',
+                marginTop: '4px',
+                fontSize: '10px',
+                textAlign: 'center',
+                lineHeight: '18px',
+                color: 'white'
+              }}
+            >{ orders }</span>
+          </MenuItem>
+        </Link>
 
       </Wrapper>
     </React.Fragment>

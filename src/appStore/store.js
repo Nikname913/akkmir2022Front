@@ -3,6 +3,7 @@ import mainReducer from './reducers/mainReducer'
 import catalogReducer from './reducers/catalogReducer'
 import makeOrderReducer from './reducers/makeOrderReducer'
 import searchDinamicReducer from './reducers/searchDinamicReducer'
+import mobileMenuReducer from './reducers/mobileMenuReducer'
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     catalog: catalogReducer,
     newOrder: makeOrderReducer,
     searchDinamic: searchDinamicReducer,
+    mobileMenu: mobileMenuReducer
   },
 })

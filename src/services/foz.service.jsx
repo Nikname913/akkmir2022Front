@@ -1,12 +1,26 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import Input from '../bricks/comps/input/Input.jsx'
 import Button from '../bricks/comps/button/Button.jsx'
+import RequestComponent from './request.service'
 import closeImg from '../img/closePicture.png'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setModalShow } from '../appStore/reducers/mainReducer'
+import Rds from '../appStore/reducers/storageReducers/mainReducer'
+import { setNumber,
+  setModel,
+  setName,
+  setEmail,
+  setPaytype,
+  setDiliverytype,
+  setAddress } from '../appStore/reducers/makeOrderReducer'
+  import { setInfoPageTitle, setOrdersCount } from '../appStore/reducers/mainReducer'
+import { useEffect } from 'react'
 
 const FOS = {
 
@@ -27,6 +41,61 @@ const FOS = {
 const Fos = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const number = useSelector(state => state.newOrder.number)
+  const model = useSelector(state => state.newOrder.model)
+  const name = useSelector(state => state.newOrder.name)
+
+  const [ sendOrderToTelegram, setSendOrderToTelegram ] = useState(false)
+  const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
+
+  function dataValidate(param) {
+
+    let answer = ''
+    param ? answer = param : answer = ''
+    return answer
+
+  }
+
+  function orderController() {
+
+    if ( number ) {
+
+      let userName
+      let userMail
+      let userPaytype
+      let userDiliverytype
+      let userAddress
+      let orderSumm
+      let orderBody
+
+      let message = `Заявка с сайта, покупка. Номер клиента: ${number}. Модель транспортного средства: ${model}. `
+      name ? userName = `Имя пользователя: ${name}. ` : null
+
+      message = message                + 
+        dataValidate(userName)         + 
+        dataValidate(userMail)         + 
+        dataValidate(userPaytype)      + 
+        dataValidate(userDiliverytype) + 
+        dataValidate(userAddress)      +
+        dataValidate(orderSumm)        +
+        dataValidate(orderBody)      
+
+      dispatch(setNumber(null))
+      dispatch(setModel(null))
+      dispatch(setName(null))
+      dispatch(setEmail(null))
+      dispatch(setPaytype(null))
+      dispatch(setDiliverytype(null))
+      dispatch(setAddress(null))
+
+      setOrderDataTelegram(message)
+      setSendOrderToTelegram(true)
+
+      console.log(message)
+
+    }
+  }
 
   function closeModal() {
 
@@ -35,8 +104,34 @@ const Fos = () => {
 
   }
 
+  useEffect(() => {
+
+    if ( sendOrderToTelegram === true ) {
+
+      document.documentElement.style.overflowY = 'scroll'
+
+      Rds.removeAllOrders()
+      dispatch(setInfoPageTitle('Заказ успешно оформлен'))
+      dispatch(setModalShow(false))
+      dispatch(setOrdersCount(0))
+      navigate('../order-success')
+
+    }
+
+  },[ sendOrderToTelegram ])
+
   return (
     <React.Fragment>
+
+      { sendOrderToTelegram && <RequestComponent
+        make={false}
+        callbackAction={'SEND_ORDER_TO_TELEGRAM'}
+        requestData={{
+          type: 'GET',
+          urlstring: `http://tebot.ck23435.tmweb.ru/akkmirbott.php?actionType=SEND_ORDER_TO_AKKMIR&getData=${orderDataTelegram}`,
+        }}
+      /> }
+
       <FOS.Wrapper>
 
         <img
@@ -75,7 +170,7 @@ const Fos = () => {
             borderRight: '6px solid #F7F7F7'
           }}
           css={{ marginTop: '20px', color: '#565656' }}
-          dispatchType={"address"}
+          dispatchType={"number"}
         />
         <Input
           title={"Марка транспортного средства"}
@@ -88,7 +183,7 @@ const Fos = () => {
             paddingBottom: '1px'
           }}
           css={{ marginTop: '22px', color: '#565656' }}
-          dispatchType={"address"}
+          dispatchType={"model"}
         />
         <Input
           title={"Ваши имя и фамилия"}
@@ -101,7 +196,7 @@ const Fos = () => {
             paddingBottom: '1px'
           }}
           css={{ marginTop: '22px', color: '#565656' }}
-          dispatchType={"address"}
+          dispatchType={"name"}
         />
 
         <span 
@@ -131,6 +226,7 @@ const Fos = () => {
             marginRight: '24px',
             marginTop: '23px',
           }}
+          action={orderController}
         />
 
       </FOS.Wrapper>

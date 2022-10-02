@@ -1,11 +1,12 @@
 /* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react'
 import Button from '../../comps/button/Button.jsx'
 import css from '../../../styles/mobile/mobileStyles'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
 import CardPreview from '../views/CardPreview'
+import OrderItemsLineMobile from '../../comps/OrderItemLineMobile.jsx'
 import category from '../../../img/category.png'
 import like from '../../../img/like.png'
 import trash from '../../../img/trash.png'
@@ -30,7 +31,18 @@ const OrderPage = (props) => {
 
   const { screen = 420 } = props
   const orders = useSelector(state => state.main.ordersCount)
+  const orderedProducts = useSelector(state => state.catalog.orderProducts)
   const popularItems = useSelector(state => state.catalog.popular)
+  const [ summ, setSumm ] = useState(0)
+
+  let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
+  let generalCatalog = null
+  let orderedData 
+
+  if ( orderedProducts.indexOf('**') !== -1 ) orderedData = orderedProducts.split('**')
+  else orderedData = []
+  
+  jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
   return (
     <React.Fragment>
@@ -50,114 +62,10 @@ const OrderPage = (props) => {
         <ContentLine width={screen} style={{ marginTop: '11px', marginBottom: '4px' }}>
           <OrdersWrapper>
 
-            { Rds.getOrdersData().map((item, index) => {
-
-              return (
-                <React.Fragment>
-                  <OrdersWrapperContentLine>
-                    <OrderIndex>{ ++index }</OrderIndex>
-                    <img
-                      alt={""}
-                      src={category}
-                      style={{
-                        display: 'block',
-                        position: 'relative',
-                        width: '80px',
-                        marginRight: '10px'
-                      }}
-                    />
-                    <span
-                      style={{
-                        display: 'block',
-                        position:'relative',
-                        width: '170px',
-                        fontSize: '13px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                      }}
-                    >
-                    
-                      Масло моторное G-Energy Synthetic Active 5W-40 4л</span>
-                    <OrderCoastBlock>
-                      <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#C4C4C4' }}>3550 Р</span>
-                      <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#565656' }}>2550 Р</span>
-                    </OrderCoastBlock>
-                  </OrdersWrapperContentLine>
-                  <OrdersWrapperContentLine style={{ paddingLeft: '14px' }}>
-
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        position: 'relative',
-                        marginRight: '20px'
-                      }}
-                    >
-                      
-                      <img
-                        alt={""}
-                        src={like}
-                        style={{
-                          display: 'block',
-                          position: 'relative',
-                          width: '18px',
-                          marginRight: '6px',
-                          cursor: 'pointer'
-                        }}
-                      />
-                      <span 
-                        style={{ 
-                          fontSize: '13px', 
-                          color: '#C4C4C4',
-                          cursor: 'pointer' 
-                        }}
-                      >В избранное</span>
-
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        position: 'relative',
-                        marginRight: '20px'
-                      }}
-                    >
-
-                      <img
-                        alt={""}
-                        src={trash}
-                        style={{
-                          display: 'block',
-                          position: 'relative',
-                          width: '14px',
-                          marginRight: '6px',
-                          marginTop: '-2px',
-                          cursor: 'pointer'
-                        }}
-                      />
-                      <span 
-                        style={{ 
-                          fontSize: '13px', 
-                          color: '#C4C4C4',
-                          cursor: 'pointer' 
-                        }}
-                      >Отмена покупки</span>
-
-                    </div>
-                    <span
-                      style={{ 
-                        fontSize: '13px', 
-                        color: '#C4C4C4',
-                        cursor: 'pointer' 
-                      }}
-                    >
-                    
-                      { item.count } шт.</span>
-                  </OrdersWrapperContentLine>
-                </React.Fragment>
-              )
-            })}
-
+            <OrderItemsLineMobile 
+              productsData={orderedData}
+              setSC={setSumm}
+            />
             <OrdersWrapperContentLine style={{ marginTop: '20px', paddingLeft: '16px' }}>
               <h5
                 style={{
@@ -166,7 +74,7 @@ const OrderPage = (props) => {
                 }}
               >
               
-                Ваша корзина: { orders } товара</h5>
+                Ваша корзина: { orders } товаров</h5>
             </OrdersWrapperContentLine>
             <OrdersWrapperContentLine style={{ marginTop: '8px', paddingLeft: '16px' }}>
               <span 
@@ -185,7 +93,7 @@ const OrderPage = (props) => {
                 }}
               >
               
-                { 2550 * orders } Р</h5>
+                { summ } рублей</h5>
             </OrdersWrapperContentLine>
 
           </OrdersWrapper>
@@ -259,7 +167,7 @@ const OrderPage = (props) => {
           <h4>Добавьте к вашему заказу</h4>
 
         </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
 
           <PopularScrollWrapper>
 
@@ -267,7 +175,7 @@ const OrderPage = (props) => {
 
               if ( index < 2 ) {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <CardPreview itemID={item.itemID}></CardPreview>
                   </React.Fragment>
                 )
@@ -277,7 +185,33 @@ const OrderPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+
+          <PopularScrollWrapper>
+
+            { generalCatalog ? generalCatalog.map((item, index) => {
+
+              if ( index === 70 || index === 74 ) {
+                return (
+                  <React.Fragment key={index}>
+                    <CardPreview 
+                      itemID={item.id[0]}
+                      title={item.name[0]}
+                      description={item.description[0]}
+                      coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                      coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                    ></CardPreview>
+                  </React.Fragment>
+                )
+              }
+
+            }) : null }
+
+          </PopularScrollWrapper>
+
+        </ContentLine> }
       </Wrapper>
     </React.Fragment>
   )
