@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
 import catalog from '../../../img/menuMenu.png'
 import tools from '../../../img/menuTools.png'
@@ -56,7 +56,7 @@ const MobileMenu = (props) => {
           style={ active === 1 
             ? { textDecoration: 'none', color: 'black', backgroundColor: '#F7F7F7', borderRadius: '6px' }
             : { textDecoration: 'none', color: 'black' }} 
-          to="/shops"
+          to="/magaziny"
           onClick={() => dispatch(changeActive(1))}
         >
           <MenuItem width={screen}>

@@ -220,7 +220,7 @@ const MakeOrder = () => {
           <Input
             params={{ width: 300 }}
             type={"text"}
-            placeholder={"+7950.."}
+            placeholder={"+7900.."}
             inputCss={{ 
               border: 'none',
               borderRight: number 

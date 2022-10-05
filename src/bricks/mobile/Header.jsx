@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import css from '../../styles/mobile/mobileStyles'
 import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
+import ModalWindow from '../../services/modal.service'
+import Message from '../../services/message.service'
 import sravnenieImg from '../../img/sravnenie.png'
 import likeImg from '../../img/like.png'
 import search from '../../img/search.png'
@@ -13,6 +16,8 @@ const { Wrapper, ContentLine } = css.HeaderStyles
 const MobileHeader = (props) => {
 
   const { screen = 420 } = props
+  const showModalWindow = useSelector(state => state.main.modalShow)
+  const showMessageWindow = useSelector(state => state.main.messageShow)
 
   return (
     <React.Fragment>
@@ -24,6 +29,10 @@ const MobileHeader = (props) => {
           borderTopLeftRadius: '4px'  
         }}
       > 
+
+        { showModalWindow && <ModalWindow></ModalWindow> }
+        { showMessageWindow && <Message></Message> }
+
         <ContentLine width={screen}>
 
           <img

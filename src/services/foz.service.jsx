@@ -164,7 +164,7 @@ const Fos = () => {
           title={"Мобильный телефон для связи*"}
           params={{ width: 410 }}
           type={"text"}
-          placeholder={"+7950.."}
+          placeholder={"+7900.."}
           inputCss={{ 
             border: 'none',
             borderRight: '6px solid #F7F7F7'

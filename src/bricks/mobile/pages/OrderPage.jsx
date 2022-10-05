@@ -2,6 +2,7 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Button from '../../comps/button/Button.jsx'
 import css from '../../../styles/mobile/mobileStyles'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
@@ -121,7 +122,7 @@ const OrderPage = (props) => {
           }}
         >
 
-          <Button  
+          <Link style={{ textDecoration: 'none' }} to="/oformit-zakaz"><Button  
             params={{
               width: 232,
               height: 40,
@@ -135,7 +136,7 @@ const OrderPage = (props) => {
               color: 'white',
               fontWeight: 'bold',
             }}
-          />
+          /></Link>
 
           <Button  
             params={{

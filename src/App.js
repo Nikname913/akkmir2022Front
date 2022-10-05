@@ -49,6 +49,13 @@ const App = () => {
         <MobileFooter screen={SCREEN}></MobileFooter>
         <MobileMenu screen={SCREEN}></MobileMenu>
 
+        { false && <React.Fragment>
+
+          { showModalWindow && <ModalWindow></ModalWindow> }
+          { showMessageWindow && <Message></Message> }
+
+        </React.Fragment> }
+
       </React.Fragment> }
 
     </React.Fragment>

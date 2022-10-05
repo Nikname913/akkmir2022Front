@@ -297,7 +297,30 @@ const css = {
         height: auto;
         margin-left: 12px;
       `
-
+    },
+    MakeOrderPage: {
+      LoginForm: styled.div`
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+        min-height: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.11);
+        padding: 18px;
+      `,
+      LoginFormContentLine: styled.div`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+      `
     }
   },
   FooterStyles: {

@@ -11,13 +11,22 @@ const { MessageWindow, MessageWindowImg } = css
 const Message = () => {
 
   const dispatch = useDispatch()
-  const { title, message, children = null, type = 'success', windowHeight = null } = useSelector(state => state.main.messageContent)
+  const { 
+    title, 
+    message, 
+    children = null, 
+    type = 'success', 
+    windowHeight = null,
+    isMobile = false } = useSelector(state => state.main.messageContent)
 
   return (
     <React.Fragment>
       <MessageWindow 
         style={ windowHeight && { height: windowHeight } }
-        onClick={() => dispatch(setMessageShow(false))}>
+        onClick={() => dispatch(setMessageShow(false))}
+        left={ isMobile ? '0%' : null }
+        mleft={ isMobile ? '4px' : null }
+      >
 
         { type === 'success' && <MessageWindowImg>
           <img
