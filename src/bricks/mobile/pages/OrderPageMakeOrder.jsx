@@ -55,6 +55,8 @@ const OrderPageMakeOrder = (props) => {
   const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
   const [ getSale, setGetSale ] = useState(false)
   const [ diliveryType, setDiliveryType ] = useState(false)
+  const [ payTypeActive, setPayTypeActive ] = useState(0)
+  const [ discount, setDiscount ] = useState(0)
   const [ payType, ] = useState([
     'Картой на сайте',
     'При получении',
@@ -186,7 +188,7 @@ const OrderPageMakeOrder = (props) => {
             params={{
               width: 232,
               height: 40,
-              background: 'transparent'
+              background: 'white'
             }}
             inner={"Физическое лицо"}
             css={{
@@ -196,9 +198,10 @@ const OrderPageMakeOrder = (props) => {
               color: '#565656',
               fontWeight: 'bold',
               marginRight: '12px',
+              boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.11)'
             }}
           />
-          <Button  
+          { false ? <Button  
             params={{
               width: 232,
               height: 40,
@@ -212,7 +215,21 @@ const OrderPageMakeOrder = (props) => {
               color: '#565656',
               fontWeight: 'bold',
             }}
-          />
+          /> : <span
+            style={{
+              fontSize: '13px',
+              borderRadius: '10px',
+              border: 'none',
+              color: '#565656',
+              fontWeight: 'bold',
+              marginRight: '12px',
+              width: '232px',
+              textAlign: 'center',
+              cursor: 'pointer'
+            }}
+          >
+            
+            Юридическое лицо</span> }
         
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
@@ -255,6 +272,7 @@ const OrderPageMakeOrder = (props) => {
                 title={"Мобильный телефон*"}
                 css={{ marginTop: '16px' }}
                 dispatchType={"number"}
+                maxlength={12}
               />
               <Input
                 params={{ width: 300 }}
@@ -294,11 +312,11 @@ const OrderPageMakeOrder = (props) => {
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
           
-          <Button  
+          { diliveryType === true && <React.Fragment><Button  
             params={{
-              width: 160,
+              width: 180,
               height: 40,
-              background: 'transparent'
+              background: 'white'
             }}
             inner={"Доставка"}
             css={{
@@ -308,14 +326,47 @@ const OrderPageMakeOrder = (props) => {
               color: '#565656',
               fontWeight: 'bold',
               marginRight: '12px',
+              boxShadow: 'rgb(0 0 0 / 11%) 0px 2px 8px'
             }}
             action={() => setDiliveryType(true)}
-          />
-          <Button  
+          /><span
+            onClick={() => setDiliveryType(false)}
+            style={{
+              fontSize: '13px',
+              borderRadius: '10px',
+              border: 'none',
+              color: '#565656',
+              fontWeight: 'bold',
+              marginRight: '12px',
+              width: '180px',
+              height: '40px',
+              lineHeight: '38px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              boxShadow: '0px 0px 1.5px transparent',
+            }}
+          >Самовывоз</span></React.Fragment> }
+          { diliveryType === false && <React.Fragment><span
+            onClick={() => setDiliveryType(true)}
+            style={{
+              fontSize: '13px',
+              borderRadius: '10px',
+              border: 'none',
+              color: '#565656',
+              fontWeight: 'bold',
+              marginRight: '12px',
+              width: '180px',
+              height: '40px',
+              lineHeight: '38px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              boxShadow: '0px 0px 1.5px transparent'
+            }}
+          >Доставка</span><Button  
             params={{
-              width: 160,
+              width: 180,
               height: 40,
-              background: 'transparent'
+              background: 'white'
             }}
             inner={"Самовывоз"}
             css={{
@@ -324,6 +375,7 @@ const OrderPageMakeOrder = (props) => {
               border: 'none',
               color: '#565656',
               fontWeight: 'bold',
+              boxShadow: 'rgb(0 0 0 / 11%) 0px 2px 8px'
             }}
             action={() => setDiliveryType(false)}
             children={
@@ -346,7 +398,7 @@ const OrderPageMakeOrder = (props) => {
                 }}
               >удобно</span>
             }
-          />
+          /></React.Fragment> }
         
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
@@ -366,7 +418,6 @@ const OrderPageMakeOrder = (props) => {
                 title={""}
                 css={{}}
                 dispatchType={"none"}
-                disabled={true}
               />
             </LoginForm> : <LoginForm>
             <Input
@@ -383,7 +434,6 @@ const OrderPageMakeOrder = (props) => {
               title={""}
               css={{}}
               dispatchType={"none"}
-              disabled={true}
             />
           </LoginForm> }
 
@@ -410,16 +460,16 @@ const OrderPageMakeOrder = (props) => {
               fontSize: '14px',
               textAlign: 'center',
               borderRadius: '10px',
-              backgroundColor: 'white',
+              backgroundColor: payTypeActive !== index ? 'white' : '#565656',
               boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.11)',
-              padding: '10px 34px 11px',
+              padding: '11px 34px 13px',
               marginRight: '12px',
               marginBottom: '12px',
               cursor: 'pointer',
-              color: '#565656'
+              color: payTypeActive === index ? 'white' : '#565656',
             }
 
-            return <span key={index} style={styles}>
+            return <span key={index} style={styles} onClick={() => setPayTypeActive(index)}>
               { item }
               { index === 2 && 
                 <span
@@ -453,14 +503,14 @@ const OrderPageMakeOrder = (props) => {
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '8px', marginBottom: '13px' }}>
 
-          <LoginForm>
+          <LoginForm onClick={() => setDiscount(prev => prev === 0 ? 5 : 0)}>
             <Input
               params={{}}
               type={"text"}
               placeholder={"Я хочу сдать свой аккумулятор"}
               inputCss={{ 
                 border: 'none',
-                borderRight: getSale
+                borderRight: discount !== 0
                   ? '6px solid rgb(43, 198, 49)' 
                   : '6px solid rgb(214, 46, 43)',
                 paddingBottom: '2px',
@@ -483,8 +533,8 @@ const OrderPageMakeOrder = (props) => {
           }}
         >
           
-          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>Скидка: 0 руб</h2>
-          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>К оплате: { totalSumm } руб</h2>
+          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>Скидка: { discount }%</h2>
+          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>К оплате: { totalSumm - ( totalSumm / 100 * discount )} руб</h2>
         
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '24px' }}>

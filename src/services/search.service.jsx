@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import css from '../styles/search-service'
 import image from '../img/category.png'
+import error from '../img/error.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { refreshResults, setShowResults } from '../appStore/reducers/searchDinamicReducer'
 import { setActualItem } from '../appStore/reducers/mainReducer'
@@ -87,7 +88,7 @@ const HeaderSearch = () => {
 
         { JSON.parse(searchResults).map((item, index) => {
 
-          if ( index < 5 ) { return (
+          if ( index < 4 ) { return (
             <ResultProductCard>
               <img 
                 src={image} 
@@ -124,7 +125,7 @@ const HeaderSearch = () => {
                   { item.name[0] && item.name[0] }</span>
 
               </Link>
-              <Button  
+              { false && <Button  
                 params={{
                   height: 36,
                   background: '#2E2E2E'
@@ -137,11 +138,57 @@ const HeaderSearch = () => {
                   paddingRight: '20px',
                   paddingLeft: '20px'
                 }}
-              />
+              /> }
+              
+              <span
+                style={{
+                  boxShadow: 'none',
+                  color: 'white',
+                  paddingRight: '20px',
+                  paddingLeft: '20px',
+                  border: '1px dashed grey',
+                  height: '36px',
+                  width: '100px',
+                  borderRadius: '10px'
+                }}
+              ></span>
+
             </ResultProductCard>
           )}
 
         })}
+
+        <ResultProductCard style={{ height: '110px' }}>
+          <img 
+            src={error} 
+            alt={""} 
+            style={{
+              display: 'block',
+              position: 'relative',
+              width: '46px',
+              marginTop: '10px',
+              marginBottom: '10px',
+              marginLeft: '10px',
+              marginRight: '16px',
+              borderRadius: '8px'
+            }}
+          />
+            <span
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '476px',
+                fontWeight: 'bold',
+                overflow: 'hidden',
+                paddingRight: '44px',
+                lineHeight: '20px',
+                color: 'grey'
+              }}
+            >
+              
+              {"Модуль модального окна поиска нужно согласовать и добавить в макет, данная реализация - примерная, сделана для отражения функционала"}</span>
+
+        </ResultProductCard>
 
       </ResultsWindow> }
     </React.Fragment>

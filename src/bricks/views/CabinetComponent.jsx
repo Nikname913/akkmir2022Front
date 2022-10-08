@@ -382,7 +382,8 @@ const CabinetComponent = (props) => {
                     position: 'absolute',
                     left: '0',
                     top: '50%',
-                    marginTop: '-20px'
+                    marginTop: '-20px',
+                    borderRadius: '10px'
                   }} 
                   src={akkum} 
                   alt={""}
@@ -409,7 +410,8 @@ const CabinetComponent = (props) => {
                     position: 'absolute',
                     left: '0',
                     top: '50%',
-                    marginTop: '-20px'
+                    marginTop: '-20px',
+                    borderRadius: '10px'
                   }} 
                   src={akkum} 
                   alt={""}
@@ -436,7 +438,8 @@ const CabinetComponent = (props) => {
                     position: 'absolute',
                     left: '0',
                     top: '50%',
-                    marginTop: '-20px'
+                    marginTop: '-20px',
+                    borderRadius: '10px'
                   }} 
                   src={akkum} 
                   alt={""}
@@ -463,7 +466,8 @@ const CabinetComponent = (props) => {
                     position: 'absolute',
                     left: '0',
                     top: '50%',
-                    marginTop: '-20px'
+                    marginTop: '-20px',
+                    borderRadius: '10px'
                   }} 
                   src={akkum} 
                   alt={""}

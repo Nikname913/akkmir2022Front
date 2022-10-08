@@ -3,9 +3,11 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import RequestComponent from '../../services/request.service'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
+import { setActualItem } from '../../appStore/reducers/mainReducer'
 import css from '../../styles/mobile/mobileStyles'
 import category from '../../img/category.png'
 import like from '../../img/like.png'
@@ -21,6 +23,7 @@ function OrderItemsLineMobile(props) {
 
   const { productsData, setSC } = props
   const orderedProducts = useSelector(state => state.catalog.orderProducts)
+  const dispatch = useDispatch()
 
   {/* технический долг, потом все вынестии в стейт */}
   {/* либо в глобальный стор приложения */}
@@ -98,9 +101,12 @@ function OrderItemsLineMobile(props) {
                     cursor: 'pointer',
                     lineHeight: '20px'
                   }}
+                  onClick={() => dispatch(setActualItem(item.split('::')[0]))}
                 >
                 
-                  { String(item).split('::')[1] }</span>
+                <Link style={{ width: '100%', textDecoration: 'none', color: 'black' }} to="/product">
+                  { String(item).split('::')[1] }</Link></span>
+                  
                 <OrderCoastBlock>
                   <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#C4C4C4', marginBottom: '4px' }}>{ String(item).split('::')[3] } Р</span>
                   <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#565656' }}>{ String(item).split('::')[3] } Р</span>

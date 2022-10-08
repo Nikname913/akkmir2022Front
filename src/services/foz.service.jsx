@@ -9,6 +9,7 @@ import Input from '../bricks/comps/input/Input.jsx'
 import Button from '../bricks/comps/button/Button.jsx'
 import RequestComponent from './request.service'
 import closeImg from '../img/closePicture.png'
+import error from '../img/error.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModalShow } from '../appStore/reducers/mainReducer'
 import Rds from '../appStore/reducers/storageReducers/mainReducer'
@@ -29,7 +30,7 @@ const FOS = {
     position: relative;
     box-sizing: border-box;
     width: 470px;
-    height: 570px;
+    height: auto;
     background: #FFFFFF;
     border-radius: 12px;
     padding: 30px;
@@ -228,6 +229,44 @@ const Fos = () => {
           }}
           action={orderController}
         />
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            position: 'relative',
+            width: '100%', 
+            marginTop: '20px'
+          }}
+        >
+
+          <img
+            alt={""}
+            src={error}
+            style={{
+              display: 'block',
+              position: 'relative',
+              width: '32px'
+            }}
+          />
+          <span 
+            style={{ 
+              display: 'block', 
+              position: 'relative',
+              marginLeft: '20px',
+              paddingRight: '30px',
+              lineHeight: '20px',
+              fontSize: '14px',
+              fontWeight: '500',
+              color: 'grey' 
+            }}
+          >
+          
+            На момент начала разработки формы ее дизайна не было в общем списке макетов в Figma, поэтому внешний вид на 06.10.22 может отличаться - временно</span>
+
+        </div>
 
       </FOS.Wrapper>
     </React.Fragment>

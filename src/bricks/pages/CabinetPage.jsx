@@ -33,6 +33,7 @@ const CabinetPage = () => {
     
     document.documentElement.scrollTop = 0
     false && console.log(random(10, generalCatalog.length - 10))
+    console.log(Rds.getAuthData())
   
   },[ generalCatalog ])
 
@@ -102,8 +103,8 @@ const CabinetPage = () => {
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
-            return <React.Fragment>{
-              index > aaa && index < aaa + 7 && <React.Fragment key={index}>
+            return <React.Fragment key={index}>{
+              index > aaa && index < aaa + 7 && <React.Fragment>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}

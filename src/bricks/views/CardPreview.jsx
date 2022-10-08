@@ -8,6 +8,7 @@ import css from '../../styles/card-preview'
 import Button from '../comps/button/Button.jsx'
 import imageItem from '../../img/category.png'
 import likeImg from '../../img/like.png'
+import error from '../../img/error.png'
 import { useDispatch } from 'react-redux'
 import { setActualItem, setOrdersCount } from '../../appStore/reducers/mainReducer'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
@@ -91,6 +92,26 @@ const CardPreview = (props) => {
                   marginBottom: '8px',
                   borderRadius: '15px',
                   boxShadow: 'none'
+                }}
+              />
+              <Button  
+                params={{
+                  background: 'transparent',
+                }}
+                inner={"Новые фото не сделаны"}
+                css={{
+                  fontSize: '12px',
+                  color: 'white',
+                  marginBottom: '8px',
+                  borderRadius: '15px',
+                  boxShadow: 'none',
+                  lineHeight: '15px',
+                  padding: '6px 12px 7px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  color: 'grey',
+                  fontWeight: 'bold',
+                  marginTop: '66px'
                 }}
               />
 
@@ -401,6 +422,29 @@ const CardPreview = (props) => {
             </React.Fragment>
           }
         />
+
+      </CoastWrapper>
+      <CoastWrapper style={{ marginTop: '18px', justifyContent: 'space-between' }}>
+
+        <img
+          alt={""}
+          src={error}
+          style={{
+            display: 'block',
+            position: 'relative',
+            width: '16%'
+          }}
+        />
+        <span 
+          style={{ 
+            display: 'block',
+            fontSize: '12px',
+            color: 'grey',
+            lineHeight: '18px',
+            width: '74%' }}
+        >
+          
+          Нажатие кнопки В корзину, а также функционал добавления в избранное внести в макет</span>
 
       </CoastWrapper>
     </Card>

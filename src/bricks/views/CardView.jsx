@@ -128,6 +128,21 @@ const CardView = (props) => {
       <LevelOne>
         <Photo style={{ padding: '14px', paddingBottom: '12px' }}>
 
+          <span
+            style={{
+              display: 'block',
+              position: 'absolute',
+              width: '100%',
+              color: 'grey',
+              textAlign: 'center',
+              top: '100%',
+              marginTop: '-54px',
+              fontSize: '14px'
+            }}
+          >
+            
+            Новые фото пока не сделаны</span>
+
           <img 
             style={{ 
               display: 'block', 
@@ -172,6 +187,16 @@ const CardView = (props) => {
               marginRight: '24px',
               boxShadow: '0px 0px 1.5px grey',
               marginBottom: '16px'
+            }}
+            action={() => {
+
+              dispatch(setMessageContent({
+                title: 'Необходимо тз на функционал',
+                message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+                type: 'error'
+              }))
+              dispatch(setMessageShow(true))
+
             }}
           />
 
@@ -306,7 +331,7 @@ const CardView = (props) => {
                   
                 </span>
               </div>
-              <span 
+              { false && <React.Fragment><span 
                 style={{ 
                   display: 'block',
                   fontSize: '13px', 
@@ -404,7 +429,7 @@ const CardView = (props) => {
                   <span style={{ fontSize: '13px' }}>Скидка: </span>
                   <span style={{ fontSize: '13px' }}>400р</span>
                 </div>
-              </div>
+              </div></React.Fragment> }
               <div
                 style={{
                   position: 'relative',
@@ -632,6 +657,16 @@ const CardView = (props) => {
             boxShadow: '0px 0px 1.5px grey',
             boxSizing: 'border-box'
           }}
+          action={() => {
+
+            dispatch(setMessageContent({
+              title: 'Необходимо тз на функционал',
+              message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+              type: 'error'
+            }))
+            dispatch(setMessageShow(true))
+
+          }}
         />
         <Button  
           params={{
@@ -646,6 +681,16 @@ const CardView = (props) => {
             marginRight: '12px',
             boxShadow: '0px 0px 1.5px grey',
             boxSizing: 'border-box'
+          }}
+          action={() => {
+
+            dispatch(setMessageContent({
+              title: 'Необходимо тз на функционал',
+              message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+              type: 'error'
+            }))
+            dispatch(setMessageShow(true))
+
           }}
         />
 

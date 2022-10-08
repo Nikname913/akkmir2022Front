@@ -13,6 +13,7 @@ import corola from '../img/corola.png'
 import lancer from '../img/lancer.png'
 import creta from '../img/creta.png'
 import hondalogo from '../img/autologo/honda.png'
+import error from '../img/error.png'
 
 const Wrapper = css.SelectTable
 const ContentLine = css.SelectTableContentLine
@@ -101,6 +102,22 @@ const SelectAkk = () => {
         <ContentLine style={{ marginTop: '20px', marginBottom: '10px' }}>
 
           <h4>Часто ищут следующие модели</h4>
+
+        </ContentLine>
+        <ContentLine style={{ marginTop: '20px', marginBottom: '10px' }}>
+
+          <img
+            alt={""}
+            src={error}
+            style={{
+              display: 'block',
+              position: 'relative',
+              width: '42px'
+            }}
+          />
+          <span style={{ fontWeight: 'bold', width: '70%', lineHeight: '22px', marginLeft: '22px', fontStyle: 'italic' }}>
+          
+            Модуль подбора аккумуляторов был запланирован, как отдельный плагин, который можно было бы использовать со сторонних сайтов. Верстка реализована, рабочий скрипт проходит модерацию на сайте пакетного менеджера npm после прохождения которой станет доступен к работе. Официальный сайт https://www.npmjs.com/</span>
 
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between' }}>

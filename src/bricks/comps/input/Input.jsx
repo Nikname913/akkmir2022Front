@@ -33,15 +33,31 @@ const Input = (props) => {
 
       case 'number':
 
-        if ( event.target.value.length === 0 ) event.target.value = '+7'
+        false && console.log(event)
+
+        if ( event.target.value.length < 2 ) event.target.value = '+7' + event.target.value
         if ( event.target.value === '+' ) event.target.value = '+7'
+
+        // ------------------------------
+        // обнаружен баг в некоторых пк или или браузерах
+        // ------------------------------
+
         if ( /\D/.test(event.key) ) {
-          
+
           if ( event.key !== 'Backspace' ) { event.preventDefault() }
-          else { if ( event.target.value === '+7') event.target.value = '' }
+          else {
+            
+            if ( event.target.value === '+7') event.target.value = ''
+            if ( event.target.value === '+') event.target.value = '' 
+          
+          }
         
         }
 
+        // ------------------------------
+        // обнаружен баг в некоторых пк или или браузерах
+        // ------------------------------
+        
         dispatch(setNumber(event.target.value))
         break
 
@@ -88,7 +104,7 @@ const Input = (props) => {
         placeholder={placeholder}
         maxLength={maxlength}
         disabled={disabled}
-        onKeyPress={dispatcher}
+        onKeyUp={dispatcher}
         style={ !inputCss ? {
           display: 'block',
           width: '100%',

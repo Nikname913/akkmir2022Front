@@ -100,12 +100,6 @@ const ReactSelect = (props) => {
         onChange={inputValue => {
 
           action && actionsReducer(actionParams)
-          if ( action == true ) {
-
-            if ( inputValue.label === 'сдать аккумулятор' ) actionsReducer(true)
-            if ( inputValue.label === 'не сдавать - по умолчанию' ) actionsReducer(false)
-
-          }
 
         }}
       />

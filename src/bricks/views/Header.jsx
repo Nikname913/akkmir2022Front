@@ -25,7 +25,9 @@ import glushImg from '../../img/glushka.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount, 
   setMobile, 
-  setInfoPageTitle } from '../../appStore/reducers/mainReducer'
+  setInfoPageTitle,
+  setMessageShow, 
+  setMessageContent } from '../../appStore/reducers/mainReducer'
 import { useNavigate } from 'react-router-dom'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 
@@ -61,13 +63,14 @@ const Header = () => {
       if ( Rds.getAuthUserToken().indexOf('num') === -1 ) {
 
         const [ header, payload ] = Rds.getAuthUserToken().split('.')
-        false && console.log(window.atob(header))
-        false && console.log(window.atob(payload))
+        !false && console.log(window.atob(header))
+        !false && console.log(window.atob(payload))
         
         const data = JSON.parse(window.atob(payload))
         const user = data.name
 
         console.log(data)
+        console.log(user)
 
         setAuthUserName(user)
         navigate('../cabinet') 
@@ -246,6 +249,16 @@ const Header = () => {
                   alt={""}
                 />
               }
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Выбор города ограничен',
+                  message: 'На этапе тестирования сайта город по умолчанию установлен Екатеринбург. При загрузке боевой версии будет добавлено распознавание',
+                  type: 'success'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
             <Button  
               params={{
@@ -351,6 +364,16 @@ const Header = () => {
                   alt={""}
                 />
               }
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Сервис доступен локально',
+                  message: 'Платформа сервиса лежит на отдельном локальном сервере, в данный момент нецелесообразно выкладывать ее',
+                  type: 'success'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
           </div>
 
@@ -411,6 +434,16 @@ const Header = () => {
                   />
                 </React.Fragment>
               }
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Модуль находится в планировании',
+                  message: 'Данный функционал необходимо согласовать и добавить в общий макет сайта',
+                  type: 'error'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
 
             <Button  
@@ -463,6 +496,16 @@ const Header = () => {
                   ><span style={{ marginTop: '2px' }}>{ sravnenie }</span></span>
                 </React.Fragment>
               }
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Модуль находится в планировании',
+                  message: 'Данный функционал необходимо согласовать и добавить в общий макет сайта',
+                  type: 'error'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
 
             <Link style={{ textDecoration: 'none', color: 'black' }} to="/order"><Button  

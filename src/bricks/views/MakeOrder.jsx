@@ -45,7 +45,7 @@ const MakeOrder = () => {
   const [ sendOrderToTelegram, setSendOrderToTelegram ] = useState(false)
   const [ emailFromAuth, setEmailFromAuth ] = useState('') 
   const [ orderDataTelegram, setOrderDataTelegram ] = useState('test order')
-  const [ isDiscount, setIsDiscount ] = useState(true)
+  const [ isDiscount, setIsDiscount ] = useState(false)
   const [ createUserCabinet, setCreateUserCabinet ] = useState(true)
   const [ newUserCabinetRequest, setNewUserCabinetRequest ] = useState(false)
   const [ newUserCabinetBody, setNewUserCabinetBody ] = useState('')
@@ -223,13 +223,15 @@ const MakeOrder = () => {
             placeholder={"+7900.."}
             inputCss={{ 
               border: 'none',
-              borderRight: number 
+              borderRight: number
                 ? '6px solid rgb(43, 198, 49)' 
-                : '6px solid rgb(214, 46, 43)'
+                : '6px solid rgb(214, 46, 43)',
             }}
             title={"Мобильный телефон*"}
             css={{ marginTop: '22px' }}
             dispatchType={"number"}
+            maxlength={12}
+            inpValue={number}
           />
           <Input
             params={{ width: 300 }}
@@ -285,9 +287,9 @@ const MakeOrder = () => {
           <ReactSelect 
             params={{ width: 300 }}
             data={[
-              { value: 'card', label: 'банковская карта' },
-              { value: 'cash', label: 'наличными курьеру' },
-              { value: 'online', label: 'оплата онлайн на сайте' }
+              { value: 'card', label: 'Банковская карта' },
+              { value: 'cash', label: 'Наличными курьеру' },
+              { value: 'online', label: 'Оплата онлайн на сайте' }
             ]}
           />
 
@@ -299,8 +301,8 @@ const MakeOrder = () => {
             params={{ width: 300 }}
             placeholder={"Сдать старый аккумулятор"}
             data={[
-              { value: 'card', label: 'сдать аккумулятор' },
-              { value: 'cash', label: 'не сдавать - по умолчанию' },
+              { value: 'card', label: 'Сдать аккумулятор' },
+              { value: 'cash', label: 'Не сдавать - по умолчанию' },
             ]}
           />
 
@@ -309,9 +311,9 @@ const MakeOrder = () => {
             params={{ width: 300 }}
             placeholder={"Доставка или самовывоз"}
             data={[
-              { value: 'card', label: 'доставка курьером' },
-              { value: 'cash', label: 'самовывоз из магазина' },
-              { value: 'online', label: 'самовывоз со склада' }
+              { value: 'card', label: 'Доставка курьером' },
+              { value: 'cash', label: 'Самовывоз из магазина' },
+              { value: 'online', label: 'Самовывоз со склада' }
             ]}
           />
 
@@ -357,6 +359,16 @@ const MakeOrder = () => {
               boxShadow: 'none',
               lineHeight: '35px'
             }}
+            action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Необходимо тз на функционал',
+                  message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+                  type: 'error'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
           />
         
         </Form>
@@ -393,6 +405,16 @@ const MakeOrder = () => {
                 color: '#2E2E2E',
                 marginRight: '24px'
               }}
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Необходимо тз на функционал',
+                  message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+                  type: 'error'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
             <Button  
               params={{
@@ -408,6 +430,16 @@ const MakeOrder = () => {
                 marginRight: '24px',
                 paddingTop: '1px'
               }}
+              action={() => {
+
+                dispatch(setMessageContent({
+                  title: 'Необходимо тз на функционал',
+                  message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
+                  type: 'error'
+                }))
+                dispatch(setMessageShow(true))
+
+              }}
             />
 
           </OrderDataTitleLine>
@@ -422,7 +454,7 @@ const MakeOrder = () => {
               <DiliveryCoast>
 
                 <p style={{ display: 'block', fontSize: '14px' }}>Доставка</p>
-                <p style={{ display: 'block', fontSize: '20px', fontWeight: 'bold' }}>450 RUB</p>
+                <p style={{ display: 'block', fontSize: '20px', fontWeight: 'bold' }}>0 RUB</p>
 
               </DiliveryCoast>
             </Items>
@@ -432,8 +464,8 @@ const MakeOrder = () => {
               <h6 style={{ fontSize: '15px', marginBottom: '10px', color: 'grey' }}>Итого:</h6>
               <h6 style={{ fontSize: '18px', marginBottom: '26px', color: 'grey' }}>{ summaryCoast } RUB</h6>
 
-              <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого со скидкой:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ isDiscount ? ( Number(summaryCoast) - ( summaryCoast * 0.25 ) ).toFixed(0) : summaryCoast } RUB</h6>
+              <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого со скидкой 5%:</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ isDiscount ? ( Number(summaryCoast) - ( summaryCoast * 0.05 ) ).toFixed(0) : summaryCoast } RUB</h6>
 
               <p 
                 style={{ 

@@ -4,7 +4,7 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import css from '../../styles/make-order'
 import image from '../../img/category.png'
 import trash from '../../img/trash.png'
@@ -125,7 +125,42 @@ const OrderItemsLine = (props) => {
                   </Link>
                 </h6>
                 <Coast>{ item.split('::')[3] }</Coast>
-                <Counter>{ item.split('::')[2] }</Counter>
+                <Counter>
+
+                  { item.split('::')[2] }
+                
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '16px',
+                      height: '16px',
+                      borderRadius: '13px',
+                      backgroundColor: '#D62E2B',
+                      left: '0%',
+                      marginLeft: '0px',
+                      top: '100%',
+                      marginTop: '10px',
+                      cursor: 'pointer'
+                    }}
+                  />
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '16px',
+                      height: '16px',
+                      borderRadius: '13px',
+                      backgroundColor: 'rgb(43, 198, 49)',
+                      left: '100%',
+                      marginLeft: '-15px',
+                      top: '100%',
+                      marginTop: '10px',
+                      cursor: 'pointer'
+                    }}
+                  />
+                
+                </Counter>
                 <Icon 
                   style={{
                     backgroundColor: 'transparent',
