@@ -94,26 +94,6 @@ const CardPreview = (props) => {
                   boxShadow: 'none'
                 }}
               />
-              <Button  
-                params={{
-                  background: 'transparent',
-                }}
-                inner={"Новые фото не сделаны"}
-                css={{
-                  fontSize: '12px',
-                  color: 'white',
-                  marginBottom: '8px',
-                  borderRadius: '15px',
-                  boxShadow: 'none',
-                  lineHeight: '15px',
-                  padding: '6px 12px 7px',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  color: 'grey',
-                  fontWeight: 'bold',
-                  marginTop: '66px'
-                }}
-              />
 
             </Labels> }
             { newProduct && <Labels>

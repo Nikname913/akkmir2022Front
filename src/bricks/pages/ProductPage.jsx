@@ -89,6 +89,8 @@ const ProductPage = () => {
                 <CardView 
                   title={item.name[0]}
                   descr={item.description[0]}
+                  tech={item.tech[0]}
+                  manufacturer={item.about_brand[0]}
                   properties={item.properties}
                   group={item.groups[0].id[0]}
                   coast={+item.pre_order_prices[0].region[0].price[0] === 0

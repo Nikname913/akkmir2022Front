@@ -6,11 +6,18 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { setDefault } from '../../appStore/reducers/desktopPaginationReducer'
 import css from '../../styles/start-catalog'
 import Button from '../comps/button/Button.jsx'
 import closeImg from '../../img/closePicture.png'
+
+import img1 from '../../img/selection/podborakkum.png'
+import img2 from '../../img/selection/podbormaslo.png'
+import img3 from '../../img/selection/podborzhidkost.png'
+import img4 from '../../img/selection/podborelectro.png'
+import img5 from '../../img/selection/podboribp.png'
+import img6 from '../../img/selection/podbortools.png'
 
 const Catalog = css.Catalog
 const Menu = css.CatalogMenu
@@ -29,16 +36,16 @@ const StartCatalog = (props) => {
   const [ selectedEmkostIndex, setSelectedEmkostIndex ] = useState(null)
   const [ selectedCategoryData, setSelectedCategoryData ] = useState(null)
   const [ selectedMenu, setSelectedMenu ] = useState(0)
-  const [ menu, setMenu ] = useState([
+  const [ menu, ] = useState([
 
-    'Аккумуляторы',
-    'Автомобильные масла',
-    'Специальные жидкости',
-    'Автоэлектроника, питание',
-    'ИБП, стабилизаторы',
-    'Инструменты',
-    'Автокосметика и автохимия',
-    'Автоаксессуары'
+    [ img1, 'Аккумуляторы' ],
+    [ img2, 'Автомобильные масла' ],
+    [ img3, 'Специальные жидкости' ],
+    [ img4, 'Автоэлектроника, питание' ],
+    [ img5, 'ИБП, стабилизаторы' ],
+    [ img6, 'Инструменты' ],
+    [ img3, 'Автокосметика и автохимия' ],
+    [ img3, 'Автоаксессуары' ]
 
   ])
 
@@ -65,7 +72,7 @@ const StartCatalog = (props) => {
           position: 'fixed',
           left: '0px',
           top: '0px',
-          zIndex: '30',
+          zIndex: '200',
           marginTop: '20px',
           marginLeft: '20px'
         } : null}
@@ -93,7 +100,20 @@ const StartCatalog = (props) => {
                 style={ selectedMenu === index 
                   ? { backgroundColor: '#F7F7F7' }
                   : { backgroundColor: 'transparent' }}
-              >{ item }</MenuItem>
+              >
+
+                <img
+                  alt={item[1]}
+                  src={item[0]}
+                  style={{
+                    display: 'block',
+                    position: 'relative',
+                    marginRight: '14px',
+                    marginBottom: '2px'
+                  }}
+                />
+                { item[1] }
+              </MenuItem>
             )
 
           })}
@@ -195,7 +215,7 @@ const StartCatalog = (props) => {
               height: 36,
               background: '#D62E2B'
             }}
-            inner={"Подбор ассортимента"}
+            inner={"Подбор по автомобилям"}
             css={{
               fontSize: '13px',
               boxShadow: 'none',
@@ -206,8 +226,9 @@ const StartCatalog = (props) => {
             action={() => {
               
               onClose()
+              dispatch(setDefault())
               dispatch(setActualCategory(selectedCategoryData))
-              navigate(`../catalog/${selectedCategoryData.label}`)
+              navigate(`../catalog/${selectedCategoryData.label}/20`)
 
             }}
           />

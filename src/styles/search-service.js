@@ -4,17 +4,12 @@ const css = {
   ResultsWindow: styled.article`
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
-    width: 600px;
+    width: 55%;
     height: auto;
-    min-height: 66px;
     background-color: white;
     border-radius: 12px;
-    top: 0;
-    margin-top: 52px;
-    margin-left: 30px;
-    padding: 12px;
     padding-bottom: 0px;
     z-index: 10;
     box-shadow: 10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%);
@@ -27,9 +22,7 @@ const css = {
     width: 100%;
     height: auto;
     min-height: 40px;
-    background-color: #F7F7F7;
     border-radius: 12px;
-    margin-bottom: 12px;
   `
 
 }

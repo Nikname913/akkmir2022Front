@@ -24,7 +24,8 @@ const Input = (props) => {
     maxlength = 100,
     title = null,
     disabled = false,
-    dispatchType = null } = props
+    dispatchType = null,
+    action = null } = props
   const dispatch = useDispatch()
 
   function dispatcher(event) {
@@ -85,6 +86,9 @@ const Input = (props) => {
         dispatch(setAddress(event.target.value))
         break
 
+      case 'order-checker':
+        break
+
       default:
         break
 
@@ -95,6 +99,7 @@ const Input = (props) => {
     <InputWrapper
       styles={params}
       style={ css && css }
+      onClick={ dispatchType === 'order-checker' && action }
     >
       
       { title && <span style={{ display: 'block', fontSize: '14px', marginBottom: '8px' }}>{ title }</span> }

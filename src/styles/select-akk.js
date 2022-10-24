@@ -19,13 +19,14 @@ const css = {
     justify-content: flex-start;
     position: relative;
     width: 100%;
-    hieght: auto;
+    height: auto;
   `,
   CarCard: styled.div`
     display: block;
     position: relative;
     width: 12%;
     height: auto;
+    cursor: pointer;
   `,
   AlphabetLine: styled.div`
     display: flex;

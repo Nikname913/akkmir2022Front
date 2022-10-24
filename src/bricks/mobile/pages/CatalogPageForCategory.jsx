@@ -1,7 +1,8 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState, useRef } from 'react'
+import LinearProgress from '@mui/material/LinearProgress'
 import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
@@ -23,13 +24,16 @@ const { Wrapper,
 const CatalogPageForCategory = (props) => {
 
   const { screen = 420 } = props
-  const mainMenu = useSelector(state => state.main.catalogMenu)
+  const [ pagi, setPagi ] = useState(20)
+  const [ showProgress, setShowProgress ] = useState(false)
+
   const popularItems = useSelector(state => state.catalog.popular)
   const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
   const actualCategory = useSelector(state => state.main.actualCategory)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
+  const startRef = useRef()
   const catalogCategory = params.category
 
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -63,6 +67,12 @@ const CatalogPageForCategory = (props) => {
   
   }
 
+  function scrollStart() {
+
+    startRef.current.scrollIntoView({ behavior: 'smooth' })
+
+  }
+
   return (
     <React.Fragment>
       <Wrapper 
@@ -79,6 +89,7 @@ const CatalogPageForCategory = (props) => {
         
         </ContentLine>
         <ContentLine 
+          ref={startRef}
           width={screen} 
           style={{ 
             marginTop: '12px', 
@@ -250,7 +261,7 @@ const CatalogPageForCategory = (props) => {
           width={screen} 
           style={{ 
             marginTop: '7px', 
-            marginBottom: '6px',
+            marginBottom: '12px',
             flexWrap: 'wrap' }}>
 
             { generalCatalog ? generalCatalog.map((item, index) => {
@@ -260,20 +271,72 @@ const CatalogPageForCategory = (props) => {
               if ( +item.pre_order_prices[0].region[0].price[0] !== 0 ) {
                 return (
                   <React.Fragment key={index}>
-                    <CardPreview 
-                      itemID={item.id[0]}
-                      title={item.name[0]}
-                      description={item.description[0]}
-                      coast1={+item.pre_order_prices[0].region[0].price[0] === 0
-                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
-                      coast2={+item.pre_order_prices[0].region[0].price[0] === 0
-                      ? '--' : item.pre_order_prices[0].region[0].price[0]}
-                    ></CardPreview>
+                    { index < pagi && <React.Fragment>
+                      <CardPreview 
+                        itemID={item.id[0]}
+                        title={item.name[0]}
+                        description={item.description[0]}
+                        coast1={+item.pre_order_prices[0].region[0].price[0] === 0
+                        ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                        coast2={+item.pre_order_prices[0].region[0].price[0] === 0
+                        ? '--' : item.pre_order_prices[0].region[0].price[0]}
+                      ></CardPreview>
+                    </React.Fragment> }
                   </React.Fragment>
                 )
               }
 
             }) : null }
+            
+            <span
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '100%',
+                height: '40px',
+                marginBottom: '10px',
+                backgroundColor: 'rgb(43, 198, 49)',
+                color: showProgress === 1000 ? 'rgb(43, 198, 49)' : '#2E2E2E',
+                fontSize: '14px',
+                textAlign: 'center',
+                lineHeight: '40px',
+                fontWeight: 'bold',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                boxShadow: '22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%)'
+              }}
+              onClick={() => {
+                setShowProgress(true) 
+                setTimeout(() => { 
+                  setShowProgress(false)
+                  setPagi(prev => prev + 20) 
+                }, 1200)
+              }}
+            >
+
+              Показать еще
+              { false && <LinearProgress style={{ marginTop: '-22px' }}/> }</span>
+
+            <span
+              onClick={scrollStart}
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '100%',
+                height: '40px',
+                backgroundColor: 'white',
+                color: '#565656',
+                fontSize: '14px',
+                textAlign: 'center',
+                lineHeight: '40px',
+                fontWeight: 'bold',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                boxShadow: '22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%)'
+              }}
+            >
+            
+              Вернуться в начало</span>
 
         </ContentLine> }
 

@@ -106,9 +106,9 @@ const css = {
       border-radius: 4px;
       box-shadow: 0px 0px 2px grey;
       background-color: #F7F7F7;
-      line-height: 42px;
+      line-height: 43px;
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
       padding-top: 1px;
       font-weight: bold;
     `

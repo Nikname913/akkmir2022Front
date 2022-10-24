@@ -14,6 +14,10 @@ export const mainReducer = createSlice({
     productPageDiscriptionFork: 0,
     catalogMenuRemote: '',
     catalogPropsRemote: '',
+    catalogMarksRemote: '',
+    catalogModelsRemote: '',
+    catalogGenerationsRemote: '',
+    catalogEnginesRemote: '',
     catalogMenu: [],
     ordersCount: 0,
     sravnenieCount: 2,
@@ -106,6 +110,18 @@ export const mainReducer = createSlice({
     },
     setCatalogPropsRemote: (state, action) => {
       state.catalogPropsRemote = action.payload
+    },
+    setCatalogMarksRemote: (state, action) => {
+      state.catalogMarksRemote = action.payload
+    },
+    setCatalogModelsRemote: (state, action) => {
+      state.catalogModelsRemote = action.payload
+    },
+    setCatalogGenerationsRemote: (state, action) => {
+      state.catalogGenerationsRemote = action.payload
+    },
+    setCatalogEnginesRemote: (state, action) => {
+      state.catalogEnginesRemote = action.payload
     }
     
   }
@@ -123,5 +139,9 @@ export const { productPageReducer,
   setMobile,
   setInfoPageTitle,
   setCatalogMenuRemote,
-  setCatalogPropsRemote } = mainReducer.actions
+  setCatalogPropsRemote,
+  setCatalogMarksRemote,
+  setCatalogModelsRemote,
+  setCatalogGenerationsRemote,
+  setCatalogEnginesRemote } = mainReducer.actions
 export default mainReducer.reducer

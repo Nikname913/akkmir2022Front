@@ -25,7 +25,10 @@ const css = {
     padding-left: 10px;
   `,
   CatalogMenuItem: styled.span`
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     position: relative;
     width: 100%;
     height: 50px;

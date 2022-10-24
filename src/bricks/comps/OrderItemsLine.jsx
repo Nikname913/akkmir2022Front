@@ -109,7 +109,9 @@ const OrderItemsLine = (props) => {
               { !removeProductsId.split('**').includes(item.split('::')[0]) && <Item key={index}>
 
                 <Icon>{ index + 1 }</Icon>
-                <ImageWrapper>
+                <ImageWrapper style={{
+                  boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px'
+                }}>
 
                   <img style={{ display: 'block', width: '60px', borderRadius: '4px' }} src={image} alt={""}/>
 

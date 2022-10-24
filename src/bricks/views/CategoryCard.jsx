@@ -7,6 +7,7 @@ import image from '../../img/category.png'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
+import { setDefault } from '../../appStore/reducers/desktopPaginationReducer'
 
 const Card = css.Card
 const CardTags = css.CardTags
@@ -51,7 +52,8 @@ const CatCard = (props) => {
             lineHeight: '26px'
           }}
           onClick={() => {
-            navigate(`../catalog/${title}`)
+            dispatch(setDefault())
+            navigate(`../catalog/${title}/20`)
             selectCategory()
           }}
         >{ title }</h5>
@@ -82,7 +84,8 @@ const CatCard = (props) => {
                   cursor: 'pointer'
                 }}
                 onClick={() => {
-                  navigate(`../catalog/${item[1]}`)
+                  dispatch(setDefault())
+                  navigate(`../catalog/${item[1]}/20`)
                   selectSubCategory({
                     id: item[0],
                     label: item[1],

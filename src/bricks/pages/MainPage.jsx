@@ -12,6 +12,7 @@ import CategoryCard from '../views/CategoryCard'
 import RequestComponent from '../../services/request.service'
 import { useSelector } from 'react-redux'
 import creta from '../../img/creta.png'
+import flame from '../../img/flame.png'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -22,6 +23,10 @@ const MainPage = () => {
 
   const mainMenu = useSelector(state => state.main.catalogMenu)
   const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
+  const mainMarksRemote = useSelector(state => state.main.catalogMarksRemote)
+  const mainModelsRemote = useSelector(state => state.main.catalogModelsRemote)
+  const mainGenerationsRemote = useSelector(state => state.main.catalogGenerationsRemote)
+  const mainEnginesRemote = useSelector(state => state.main.catalogEnginesRemote)
   const popularItems = useSelector(state => state.catalog.popular)
   
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -42,42 +47,16 @@ const MainPage = () => {
     
     document.documentElement.scrollTop = 0
     false && console.log(random(10, generalCatalog.length - 10))
+    console.log(mainMarksRemote)
   
   },[ generalCatalog ])
 
   return (
     <React.Fragment>
-      <RequestComponent
-        make={false}
-        callbackAction={'GET_CATALOG'}
-        requestData={{
-          type: 'GET',
-          urlstring: '/products',
-        }}
-      />
-
-      <RequestComponent
-        make={false}
-        callbackAction={'GET_CATEGORIES'}
-        requestData={{
-          type: 'GET',
-          urlstring: '/categories',
-        }}
-      />
-
-      <RequestComponent
-        make={false}
-        callbackAction={'GET_PROPS'}
-        requestData={{
-          type: 'GET',
-          urlstring: '/props',
-        }}
-      />
-
       <Main>
-        <ContentLine style={{ justifyContent: 'space-between', marginBottom: '32px' }}>
+        <ContentLine style={{ justifyContent: 'flex-start', marginBottom: '32px' }}>
 
-          <Model3D>
+          <Model3D style={{ marginRight: '20px' }}>
             <h3
               style={{
                 marginTop: '36px',
@@ -106,7 +85,7 @@ const MainPage = () => {
             />
             
           </Model3D>
-          <Model3D>
+          <Model3D style={{ marginRight: '20px' }}>
             <h3
               style={{
                 marginTop: '36px',
@@ -126,15 +105,148 @@ const MainPage = () => {
                 display: 'block',
                 position: 'absolute',
                 width: '240px',
-                left: '50%',
+                left: '100%',
                 top: '100%',
                 borderRadius: '12px',
                 marginTop: '-220px',
-                marginLeft: '-120px',
+                marginLeft: '-290px'
               }}
             />
 
           </Model3D>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              position: 'relative',
+              width: '27.900%',
+              height: '400px',
+            }}
+          >
+
+            <div
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '100%',
+                height: '58%',
+                padding: '16px',
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
+              }}
+            >
+
+              <div>
+                <span style={{ fontSize: '14px' }}>13.10.2022</span>
+                <img
+                  alt={""}
+                  src={flame}
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '22px',
+                    top: '0%',
+                    left: '100%',
+                    marginLeft: '-40px',
+                    marginTop: '14px'
+                  }}
+                />
+              </div>
+              <div style={{ marginTop: '10px' }}>
+                <span 
+                  style={{ 
+                    fontSize: '22px', 
+                    fontWeight: 'bold', 
+                    paddingRight: '30px', 
+                    lineHeight: '24px' 
+                  }}
+                >Откроем даный сезон вместе!</span>
+              </div>
+              <div style={{ marginTop: '8px' }}>
+                <span 
+                  style={{ 
+                    fontSize: '14px',
+                    lineHeight: '20px' 
+                  }}
+                >Приятный бонус! При покупке аккумуляторной батареи у нас вы всегда сможете пройти ее бесплатную диагностику и обслуживание в наших сервисных центрах. Достаточно захватить с собой чек и гарантийный талон</span>
+              </div>
+              <div 
+                style={{ 
+                  marginTop: '8px',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '60px',
+                  marginLeft: 'auto',
+                  marginRight: 'auto', 
+                }}
+              >
+
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '10px',
+                      height: '10px',
+                      border: '1px solid #565656',
+                      backgroundColor: '#565656',
+                      borderRadius: '50%'
+                    }}
+                  />
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '10px',
+                      height: '10px',
+                      border: '1px solid #565656',
+                      backgroundColor: 'transparent',
+                      borderRadius: '50%'
+                    }}
+                  />
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '10px',
+                      height: '10px',
+                      border: '1px solid #565656',
+                      backgroundColor: 'transparent',
+                      borderRadius: '50%'
+                    }}
+                  />
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '10px',
+                      height: '10px',
+                      border: '1px solid #565656',
+                      backgroundColor: 'transparent',
+                      borderRadius: '50%'
+                    }}
+                  />
+
+              </div>
+
+            </div>
+            <div
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '100%',
+                height: '38%',
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
+              }}
+            ></div>
+
+          </div>
 
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginBottom: '32px' }}>
@@ -183,7 +295,13 @@ const MainPage = () => {
         </ContentLine>
         <ContentLine>
 
-          <SelectAkk/>
+          <SelectAkk 
+            categories={mainMenuRemote}
+            marks={mainMarksRemote} 
+            models={mainModelsRemote}
+            gens={mainGenerationsRemote}
+            engines={mainEnginesRemote}
+          />
 
         </ContentLine>
         <ContentLine style={{ marginBottom: '35px', marginTop: '9px', position: 'relative' }}>

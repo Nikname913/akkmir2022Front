@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import css from '../../styles/mobile/mobileStyles'
@@ -16,12 +16,27 @@ const { Wrapper, ContentLine } = css.HeaderStyles
 const MobileHeader = (props) => {
 
   const { screen = 420 } = props
+  const startRef = useRef()
   const showModalWindow = useSelector(state => state.main.modalShow)
   const showMessageWindow = useSelector(state => state.main.messageShow)
+  const mobScroll = useSelector(state => state.mobileScroll.active)
+
+  function scrollStart() {
+
+    startRef.current.scrollIntoView({ behavior: 'smooth' })
+
+  }
+
+  useEffect(() => {
+
+    mobScroll && scrollStart()
+
+  },[ mobScroll ])
 
   return (
     <React.Fragment>
       <Wrapper 
+        ref={startRef}
         style={{ 
           marginTop: '20px', 
           marginLeft: '20px',

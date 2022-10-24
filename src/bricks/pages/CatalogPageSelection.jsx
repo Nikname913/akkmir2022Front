@@ -10,9 +10,11 @@ import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
+import SelectAkk from '../../services/selectAkk.service'
 import arrowImg from '../../img/arrow.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement } from '../../appStore/reducers/desktopPaginationReducer'
+import { setActualCategory } from '../../appStore/reducers/mainReducer'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -24,6 +26,13 @@ const CatalogPage = () => {
   const items = useSelector(state => state.catalog.catalog)
   const actualCategory = useSelector(state => state.main.actualCategory)
   const paginationCount = useSelector(state => state.desktopPagination.count)
+  const selectionData = useSelector(state => state.selectionSettings.settings)
+  const mainMenuRemote = useSelector(state => state.main.catalogMenuRemote)
+  const mainMarksRemote = useSelector(state => state.main.catalogMarksRemote)
+  const mainModelsRemote = useSelector(state => state.main.catalogModelsRemote)
+  const mainGenerationsRemote = useSelector(state => state.main.catalogGenerationsRemote)
+  const mainEnginesRemote = useSelector(state => state.main.catalogEnginesRemote)
+
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -33,13 +42,11 @@ const CatalogPage = () => {
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
   
-  if ( !catalogCategory ) {
+  if ( catalogCategory ) {
 
     jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
   } else {
-
-    console.log(actualCategory)
 
     jsonCatalog 
       ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
@@ -55,6 +62,13 @@ const CatalogPage = () => {
 
   }
 
+  function selectSubCategory(props) {
+
+    const { id, label } = props
+    dispatch(setActualCategory({ id, label}))
+
+  }
+
   function scrollStart() {
 
     startRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -63,9 +77,8 @@ const CatalogPage = () => {
 
   useEffect(() => document.documentElement.scrollTop = 0,[])
   useEffect(() => false && console.log(catalogCategory),[])
-  useEffect(() => console.log(actualCategory),[])
-
-  // бренд продукта - id - brand
+  useEffect(() => false && console.log(actualCategory),[])
+  useEffect(() => false && console.log(selectionData),[])
 
   return (
     <React.Fragment>
@@ -81,6 +94,87 @@ const CatalogPage = () => {
 
       <Main>
         <ContentLine ref={startRef} style={{ justifyContent: 'space-between' }}>
+
+          <SelectAkk 
+            categories={mainMenuRemote}
+            marks={mainMarksRemote} 
+            models={mainModelsRemote}
+            gens={mainGenerationsRemote}
+            engines={mainEnginesRemote}
+          />
+
+        </ContentLine>
+        <ContentLine style={{ justifyContent: 'space-between', marginTop: '6px', marginBottom: '27px' }}>
+
+          <h2>{ JSON.parse(selectionData).car } { JSON.parse(selectionData).model } { JSON.parse(selectionData).generation }</h2>
+          <div 
+            style={{
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row'
+            }}
+          >
+            <Button
+              inner={"по цене"}
+              params={{
+                background: 'transparent'
+              }}
+              css={{
+                fontSize: '13px',
+                paddingTop: '7px',
+                paddingBottom: '8px',
+                paddingLeft: '34px',
+                paddingRight: '10px',
+                marginRight: '14px'
+              }}
+              children={
+                <img
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '14px',
+                    top: '50%',
+                    left: '0%',
+                    marginTop: '-8px',
+                    marginLeft: '10px'
+                  }}
+                  src={arrowImg}
+                  alt={""}
+                />
+              }
+            />
+            <Button
+              inner={"по популярности"}
+              params={{
+                background: 'transparent'
+              }}
+              css={{
+                fontSize: '13px',
+                paddingTop: '7px',
+                paddingBottom: '8px',
+                paddingLeft: '34px',
+                paddingRight: '10px',
+              }}
+              children={
+                <img
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '14px',
+                    top: '50%',
+                    left: '0%',
+                    marginTop: '-8px',
+                    marginLeft: '10px'
+                  }}
+                  src={arrowImg}
+                  alt={""}
+                />
+              }
+            />
+          </div>
+
+        </ContentLine>
+        <ContentLine style={{ justifyContent: 'space-between' }}>
           <PodborWindow width={'65%'}>
 
             <PodborWindowContentLine>
@@ -427,199 +521,7 @@ const CatalogPage = () => {
 
           </PodborWindow>
         </ContentLine>
-        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap', marginTop: '6px' }}>
-
-          <Button
-            inner={"для Nexia"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Kia Optima"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Solaris"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Solaris"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Nexia"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Kia Optima"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Solaris"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-          <Button
-            inner={"для Solaris"}
-            params={{
-              background: 'transparent'
-            }}
-            css={{
-              fontSize: '13px',
-              paddingTop: '7px',
-              paddingBottom: '8px',
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              marginRight: '14px'
-            }}
-          />
-
-        </ContentLine>
-        <ContentLine style={{ justifyContent: 'space-between', marginTop: '2px', marginBottom: '27px' }}>
-
-          <h2>{ catalogCategory ? catalogCategory : 'Все товары' }</h2>
-          <div 
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'row'
-            }}
-          >
-            <Button
-              inner={"по цене"}
-              params={{
-                background: 'transparent'
-              }}
-              css={{
-                fontSize: '13px',
-                paddingTop: '7px',
-                paddingBottom: '8px',
-                paddingLeft: '34px',
-                paddingRight: '10px',
-                marginRight: '14px'
-              }}
-              children={
-                <img
-                  style={{
-                    display: 'block',
-                    position: 'absolute',
-                    width: '14px',
-                    top: '50%',
-                    left: '0%',
-                    marginTop: '-8px',
-                    marginLeft: '10px'
-                  }}
-                  src={arrowImg}
-                  alt={""}
-                />
-              }
-            />
-            <Button
-              inner={"по популярности"}
-              params={{
-                background: 'transparent'
-              }}
-              css={{
-                fontSize: '13px',
-                paddingTop: '7px',
-                paddingBottom: '8px',
-                paddingLeft: '34px',
-                paddingRight: '10px',
-              }}
-              children={
-                <img
-                  style={{
-                    display: 'block',
-                    position: 'absolute',
-                    width: '14px',
-                    top: '50%',
-                    left: '0%',
-                    marginTop: '-8px',
-                    marginLeft: '10px'
-                  }}
-                  src={arrowImg}
-                  alt={""}
-                />
-              }
-            />
-          </div>
-
-        </ContentLine>
+        
         { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
 
           { items ? items.map((item, index) => {
@@ -650,12 +552,12 @@ const CatalogPage = () => {
           }) : null }
 
         </ContentLine> : 
-        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap', marginBottom: '8px' }}>
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
             return <React.Fragment key={index}>{
-              index < paginationCount && <React.Fragment key={index}>
+              index < paginationCount + 2 && <React.Fragment key={index}>
                 <CardPreview
                   params={{ width: 15.833333, mleft: 0 }}
                   image={null}
@@ -741,7 +643,7 @@ const CatalogPage = () => {
           }) : null }
 
         </ContentLine> }
-        <ContentLine style={{ justifyContent: 'space-around', marginTop: '0px', marginBottom: '12px' }}>
+        { false && <ContentLine style={{ justifyContent: 'space-around', marginTop: '0px', marginBottom: '33px' }}>
 
           <div
             style={{
@@ -756,14 +658,14 @@ const CatalogPage = () => {
 
             <span 
               style={{ 
-                color: paginationCount > 20 ? '#2E2E2E' : 'grey', 
+                color: '#2E2E2E', 
                 fontSize: '13px', 
                 fontWeight: 'bold', 
                 cursor: 'pointer' 
               }}
               onClick={() => {
                 dispatch(decrement(20))
-                navigate(`/catalog/${catalogCategory}/${paginationCount > 20 ? paginationCount - 20 : 20}`)
+                navigate(`/catalog/${catalogCategory}/${paginationCount - 20}`)
               }}
             >Меньше</span>
             <div>
@@ -798,8 +700,8 @@ const CatalogPage = () => {
 
           </div>
 
-        </ContentLine>
-        <ContentLine style={{ justifyContent: 'space-around', marginTop: '0px', marginBottom: '12px' }}>
+        </ContentLine> }
+        <ContentLine style={{ justifyContent: 'space-around', marginTop: '0px', marginBottom: '20px' }}>
 
           <div
             style={{

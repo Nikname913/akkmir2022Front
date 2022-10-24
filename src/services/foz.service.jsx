@@ -230,7 +230,7 @@ const Fos = () => {
           action={orderController}
         />
 
-        <div
+        { false === true && <div
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -266,7 +266,7 @@ const Fos = () => {
           
             На момент начала разработки формы ее дизайна не было в общем списке макетов в Figma, поэтому внешний вид на 06.10.22 может отличаться - временно</span>
 
-        </div>
+        </div> }
 
       </FOS.Wrapper>
     </React.Fragment>

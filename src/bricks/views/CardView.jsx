@@ -31,7 +31,14 @@ const LevelThree = css.CardWrapperDowmMiddleLevel
 
 const CardView = (props) => {
 
-  const { coast = null, descr = '', title = '', properties = [], group = '' } = props
+  const { 
+    coast = null, 
+    descr = '',
+    tech = '',
+    manufacturer = '', 
+    title = '', 
+    properties = [], 
+    group = '', } = props
 
   const discrFork = useSelector(state => state.main.productPageDiscriptionFork)
   const actualItem = useSelector(state => state.main.actualItem)
@@ -51,6 +58,8 @@ const CardView = (props) => {
 
     const props = properties[0].property
     let returnedPropsArray = []
+
+    true && console.log(props)
 
     propsRemote && props.forEach(prop => {
 
@@ -81,6 +90,8 @@ const CardView = (props) => {
   function ordersData(param) { Rds.makeNewOrder({ itemID: param }) }
   function addressItem() { dispatch(productPageReducer(0)) }
   function discrItem() { dispatch(productPageReducer(1)) }
+  function techItem() { dispatch(productPageReducer(2)) }
+  function manufacturerItem() { dispatch(productPageReducer(3)) }
 
   function showModal() {
 
@@ -128,21 +139,6 @@ const CardView = (props) => {
       <LevelOne>
         <Photo style={{ padding: '14px', paddingBottom: '12px' }}>
 
-          <span
-            style={{
-              display: 'block',
-              position: 'absolute',
-              width: '100%',
-              color: 'grey',
-              textAlign: 'center',
-              top: '100%',
-              marginTop: '-54px',
-              fontSize: '14px'
-            }}
-          >
-            
-            Новые фото пока не сделаны</span>
-
           <img 
             style={{ 
               display: 'block', 
@@ -185,7 +181,7 @@ const CardView = (props) => {
               fontSize: '13px',
               color: 'white',
               marginRight: '24px',
-              boxShadow: '0px 0px 1.5px grey',
+              boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)',
               marginBottom: '16px'
             }}
             action={() => {
@@ -208,6 +204,9 @@ const CardView = (props) => {
 
               { productProps.map((prop, index) => {
 
+                false && console.log(prop.id)
+                false && console.log(prop.value)
+
                 let bgc; ( index % 2 === 0 ) ? bgc = 'rgb(247, 247, 247)' : bgc = 'transparent'
 
                 return (
@@ -222,10 +221,8 @@ const CardView = (props) => {
                       paddingTop: '6px' 
                     }}
                   >
-                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>
-                      { prop.id }</p>
-                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>
-                      { prop.value }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>{ prop.id }</p>
+                    <p style={{ display: 'block', fontSize: '14px', lineHeight: '32px', height: '32px', overflow: 'hidden' }}>{ prop.value }</p>
                   </ItemDescriptionLine>
                 )
 
@@ -497,10 +494,11 @@ const CardView = (props) => {
             css={{
               fontSize: '13px',
               color: '#2E2E2E',
-              marginRight: '24px',
-              boxShadow: '0px 0px 1.5px grey',
+              marginLeft: 'auto',
+              marginRight: 'auto',
               marginBottom: '10px',
-              marginTop: '16px'
+              marginTop: '16px',
+              boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
             }}
             children={
               <img 
@@ -531,7 +529,7 @@ const CardView = (props) => {
 
             }}
           />
-          <Button  
+          { makeOrder === false ? <Button  
             params={{
               width: 200,
               height: 36,
@@ -540,10 +538,11 @@ const CardView = (props) => {
             inner={makeOrderInner}
             css={{
               fontSize: '13px',
-              boxShadow: 'none',
               color: 'white',
-              marginRight: '24px',
-              marginBottom: '23px'
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginBottom: '23px',
+              boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
             }}
             action={() => { 
               
@@ -602,7 +601,110 @@ const CardView = (props) => {
 
               </React.Fragment>
             }
-          />
+          /> : <Button  
+            params={{
+              width: 200,
+              height: 42,
+              background: !makeOrder ? '#2E2E2E' : 'rgb(43, 198, 49);'
+            }}
+            inner={"Товар в корзине"}
+            css={{
+              fontSize: '13px',
+              color: 'white',
+              marginBottom: '23px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
+            }}
+            action={() => { 
+              
+              !makeOrder && ordersCount()
+              !makeOrder && ordersData(actualItem) 
+              setMakeOrder(true)
+              setMakeOrderInner('Добавлено')
+            
+            }}
+            children={
+              <React.Fragment>
+
+                <span
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '28px',
+                    height: '39px',
+                    backgroundColor: 'rgb(247, 247, 247)',
+                    borderRadius: '8px',
+                    left: '0%',
+                    marginLeft: '-38px',
+                    paddingRight: '1px',
+                    top: '0%',
+                    marginTop: '1px',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    lineHeight: '35px',
+                    color: 'grey',
+                    boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
+                  }}
+                >{"-"}</span>
+
+                { Rds.getOrdersData().map((item, index) => {
+
+                  if ( item.id === actualItem ) {
+
+                    return (
+                      <span
+                        key={index}
+                        style={{
+                          display: 'block',
+                          position: 'absolute',
+                          width: '24px',
+                          height: '24px',
+                          backgroundColor: 'rgb(247, 247, 247)',
+                          borderRadius: '50%',
+                          left: '0%',
+                          marginLeft: '12px',
+                          top: '50%',
+                          marginTop: '-12px',
+                          fontSize: '11px',
+                          textAlign: 'center',
+                          lineHeight: '24px',
+                          color: 'grey'
+                        }}
+                      >
+                        
+                        { item.count }
+                      
+                      </span>
+                    )}
+                })}
+
+                <span
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '28px',
+                    height: '39px',
+                    backgroundColor: 'rgb(247, 247, 247)',
+                    borderRadius: '8px',
+                    left: '100%',
+                    marginLeft: '9px',
+                    top: '0%',
+                    marginTop: '1px',
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    lineHeight: '39px',
+                    color: 'grey',
+                    boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
+                  }}
+                >{"+"}</span>
+
+              </React.Fragment>
+            }
+
+          /> }
 
           <p style={{ color: 'grey', lineHeight: '22px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
           <p style={{ color: 'grey', lineHeight: '22px', fontSize: '13px' }}>Доставка в екатеринбург сегодня</p>
@@ -615,14 +717,14 @@ const CardView = (props) => {
           params={{
             width: 190,
             height: 36,
-            background: discrFork === 0 ? '#2E2E2E' : 'transparent'
+            background: discrFork === 0 ? '#2E2E2E' : 'rgb(247, 247, 247)'
           }}
           inner={"Наличие в магазинах"}
           css={{
             fontSize: '13px',
             color: discrFork === 0 ? 'white' : '#2E2E2E',
             marginRight: '12px',
-            boxShadow: '0px 0px 1.5px grey',
+            boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)',
             boxSizing: 'border-box'
           }}
           action={addressItem}
@@ -631,14 +733,14 @@ const CardView = (props) => {
           params={{
             width: 190,
             height: 36,
-            background: discrFork === 1 ? '#2E2E2E' : 'transparent'
+            background: discrFork === 1 ? '#2E2E2E' : 'rgb(247, 247, 247)'
           }}
           inner={"Описание товара"}
           css={{
             fontSize: '13px',
             color: discrFork === 1 ? 'white' : '#2E2E2E',
             marginRight: '12px',
-            boxShadow: '0px 0px 1.5px grey',
+            boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)',
             boxSizing: 'border-box'
           }}
           action={discrItem}
@@ -647,61 +749,48 @@ const CardView = (props) => {
           params={{
             width: 190,
             height: 36,
-            background: 'transparent'
+            background: discrFork === 2 ? '#2E2E2E' : 'rgb(247, 247, 247)'
           }}
           inner={"Применяемые технологии"}
           css={{
             fontSize: '13px',
-            color: '#2E2E2E',
+            color: discrFork === 2 ? 'white' : '#2E2E2E',
             marginRight: '12px',
-            boxShadow: '0px 0px 1.5px grey',
+            boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)',
             boxSizing: 'border-box'
           }}
-          action={() => {
-
-            dispatch(setMessageContent({
-              title: 'Необходимо тз на функционал',
-              message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
-              type: 'error'
-            }))
-            dispatch(setMessageShow(true))
-
-          }}
+          action={techItem}
         />
         <Button  
           params={{
             width: 190,
             height: 36,
-            background: 'transparent'
+            background: discrFork === 3 ? '#2E2E2E' : 'rgb(247, 247, 247)'
           }}
           inner={"Производитель"}
           css={{
             fontSize: '13px',
-            color: '#2E2E2E',
+            color: discrFork === 3 ? 'white' : '#2E2E2E',
             marginRight: '12px',
-            boxShadow: '0px 0px 1.5px grey',
+            boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)',
             boxSizing: 'border-box'
           }}
-          action={() => {
-
-            dispatch(setMessageContent({
-              title: 'Необходимо тз на функционал',
-              message: 'Данный раздел необходимо согласовать и добавить в общий макет для реализации',
-              type: 'error'
-            }))
-            dispatch(setMessageShow(true))
-
-          }}
+          action={manufacturerItem}
         />
 
       </LevelTwo>
       <LevelThree 
-        style={ discrFork === 1
+        style={ discrFork > 0
           ? { flexDirection: 'column' }
           : { flexDirection: 'row' }}
       >
         
-        <CardInfo descr={descr} title={title}/>
+        <CardInfo 
+          descr={descr} 
+          title={title}
+          tech={tech}
+          manufacturer={manufacturer}
+        />
 
       </LevelThree>
     </Card>

@@ -18,8 +18,11 @@ const CellButton = css.CardInfo.Cell4Button
 
 const CardInfo = (props) => {
 
-  const { descr = '', title = '' } = props
+  const { descr = '', title = '', tech = '', manufacturer = '' } = props
+
   const descrTag = useRef()
+  const techTag = useRef()
+  const manufacturerTag = useRef()
 
   const productPageDiscriptionFork = useSelector(state => state.main.productPageDiscriptionFork)
   useEffect(() => {
@@ -31,6 +34,26 @@ const CardInfo = (props) => {
       const content = descrHTML.body.innerHTML
 
       productPageDiscriptionFork === 1 ? descrTag.current.innerHTML = content : null
+
+    }
+
+    if ( tech !== '' ) {
+
+      const parcer = new DOMParser()
+      const descrHTML = parcer.parseFromString(tech, 'text/html')
+      const content = descrHTML.body.innerHTML
+
+      productPageDiscriptionFork === 2 ? techTag.current.innerHTML = content : null
+
+    }
+
+    if ( manufacturer !== '' ) {
+
+      const parcer = new DOMParser()
+      const descrHTML = parcer.parseFromString(manufacturer, 'text/html')
+      const content = descrHTML.body.innerHTML
+
+      productPageDiscriptionFork === 3 ? manufacturerTag.current.innerHTML = content : null
 
     }
 
@@ -51,6 +74,44 @@ const CardInfo = (props) => {
           <p ref={descrTag} style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
 
             { descr ? <React.Fragment></React.Fragment> : <React.Fragment>
+              
+              Описание этого товара пока отсутствует
+
+            </React.Fragment> }
+          
+          </p>
+
+        </React.Fragment> 
+        : productPageDiscriptionFork === 2 ?
+        <React.Fragment>
+
+          <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>
+            
+            { title ? title : 'Аккумуляторы ZEUS RED' }
+            
+          </h5>
+          <p ref={techTag} style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
+
+            { tech ? <React.Fragment></React.Fragment> : <React.Fragment>
+              
+              Описание этого товара пока отсутствует
+
+            </React.Fragment> }
+          
+          </p>
+
+        </React.Fragment> 
+        : productPageDiscriptionFork === 3 ?
+        <React.Fragment>
+
+          <h5 style={{ fontSize: '20px', marginBottom: '20px'  }}>
+            
+            { title ? title : 'Аккумуляторы ZEUS RED' }
+            
+          </h5>
+          <p ref={manufacturerTag} style={{ fontSize: '14px', lineHeight: '30px', width: '86%' }}>
+
+            { manufacturer ? <React.Fragment></React.Fragment> : <React.Fragment>
               
               Описание этого товара пока отсутствует
 

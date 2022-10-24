@@ -5,6 +5,7 @@ export const searchDinamicReducer = createSlice({
   initialState: {
     products: '[]',
     showResults: false,
+    history: '[{"text": "Похожие запросы"},{"text": "Аккумуляторы varta"},{"text": "Моторное масло"}]'
   },
   reducers: {
 
@@ -17,11 +18,16 @@ export const searchDinamicReducer = createSlice({
 
       state.showResults = action.payload
 
+    },
+    setHistory: (state, action) => {
+
+      state.history = action.payload
+
     }
 
   }
 
 })
 
-export const { refreshResults, setShowResults } = searchDinamicReducer.actions
+export const { refreshResults, setShowResults, setHistory } = searchDinamicReducer.actions
 export default searchDinamicReducer.reducer

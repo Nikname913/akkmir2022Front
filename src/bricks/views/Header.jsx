@@ -396,7 +396,8 @@ const Header = () => {
                 position: 'absolute',
                 width: '19px',
                 left: '0px',
-                marginLeft: '40px'
+                marginLeft: '10px',
+                zIndex: '100'
               }}
               src={search}
               alt={""}

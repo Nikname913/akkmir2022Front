@@ -4,7 +4,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { generalCatalogReducer, orderProductsReducer } from '../appStore/reducers/catalogReducer'
-import { setCatalogMenuRemote, setCatalogPropsRemote } from '../appStore/reducers/mainReducer'
+import { setCatalogMenuRemote, 
+  setCatalogPropsRemote,
+  setCatalogMarksRemote,
+  setCatalogModelsRemote,
+  setCatalogGenerationsRemote,
+  setCatalogEnginesRemote } from '../appStore/reducers/mainReducer'
 
 const RequestActionsComponent = (props) => {
 
@@ -55,6 +60,14 @@ const RequestActionsComponent = (props) => {
             ? setCatalogMenuRemote(JSON.stringify(data))
             : callbackAction === 'GET_PROPS'
             ? setCatalogPropsRemote(JSON.stringify(data))
+            : callbackAction === 'GET_MARKS'
+            ? setCatalogMarksRemote(JSON.stringify(data))
+            : callbackAction === 'GET_MODELS'
+            ? setCatalogModelsRemote(JSON.stringify(data))
+            : callbackAction === 'GET_GENERATIONS'
+            ? setCatalogGenerationsRemote(JSON.stringify(data))
+            : callbackAction === 'GET_ENGINES'
+            ? setCatalogEnginesRemote(JSON.stringify(data))
             : null
           )
       

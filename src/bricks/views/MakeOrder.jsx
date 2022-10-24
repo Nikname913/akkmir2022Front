@@ -49,6 +49,7 @@ const MakeOrder = () => {
   const [ createUserCabinet, setCreateUserCabinet ] = useState(true)
   const [ newUserCabinetRequest, setNewUserCabinetRequest ] = useState(false)
   const [ newUserCabinetBody, setNewUserCabinetBody ] = useState('')
+  const [ agree, setAgree ] = useState(false)
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -84,9 +85,21 @@ const MakeOrder = () => {
 
   }
 
+  function actionAgree() {
+
+    setAgree(prev => !prev)
+
+  }
+
+  function actionDiscount() {
+
+    setIsDiscount(prev => !prev)
+
+  }
+
   function orderController() {
 
-    if ( number ) {
+    if ( number && agree ) {
 
       let userName
       let userMail
@@ -215,7 +228,7 @@ const MakeOrder = () => {
 
         <Form>
           <h5 style={{ fontSize: '18px', marginBottom: '12px'  }}>Контактная информация</h5>
-          <p style={{ fontSize: '13px', lineHeight: '24px' }}>Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохраниться в личном кабинете</p>
+          <p style={{ fontSize: '13px', lineHeight: '24px' }}>Уже регистрировались на сайте? Войдите и вам не придется заполнять форму снова, а заказ сохранится в личном кабинете</p>
 
           <Input
             params={{ width: 300 }}
@@ -254,9 +267,43 @@ const MakeOrder = () => {
               borderRight: '6px solid #F7F7F7'
             }}
             title={"Ваше имя"}
-            css={{ marginTop: '14px ' }}
+            css={{ marginTop: '14px' }}
             dispatchType={"name"}
           />
+          <Input
+            params={{ width: 300 }}
+            type={"text"}
+            placeholder={ agree ? "Согласие на обработку данных" : "Нажмите для согласия"}
+            inputCss={{ 
+              border: 'none',
+              borderRight: agree ? '6px solid rgb(43, 198, 49)' : '6px solid rgb(214, 46, 43)',
+              paddingBottom: '3px',
+              cursor: 'pointer',
+              backgroundColor: agree && 'rgba(43, 198, 49, 0.4)',
+              fontWeight: agree && 'bold',
+            }}
+            title={"Согласие на обработку персональных данных. Ознакомиться с политикой конфиденциальности можно по ссылке ниже. Нажмите на кнопку ниже, чтобы принять условия"}
+            css={{ marginTop: '14px', lineHeight: '22px', fontWeight: 'bold' }}
+            dispatchType={"order-checker"}
+            action={actionAgree}
+            disabled={true}
+          />
+
+          <span
+            style={{
+              display: 'block',
+              position: 'relative',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              marginTop: '16px',
+              color: '#2E2E2E',
+              textDecoration: 'underline',
+              cursor: 'pointer'
+            }}
+          >
+          
+            Политика конфиденциальности</span>
+
           <Input
             params={{ width: 300 }}
             type={"text"}
@@ -275,7 +322,8 @@ const MakeOrder = () => {
               fontSize: '13px', 
               marginTop: '16px',
               marginBottom: '16px',
-              display: 'block' 
+              display: 'block',
+              fontWeight: 'bold'
             }}
           >
             
@@ -283,30 +331,38 @@ const MakeOrder = () => {
             
           </span>
 
-          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '30px' }}>Выберите способ оплаты</h5>
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '44px' }}>Выберите способ оплаты</h5>
           <ReactSelect 
             params={{ width: 300 }}
             data={[
-              { value: 'card', label: 'Банковская карта' },
+              { value: 'card', label: 'Банковской картой курьеру' },
               { value: 'cash', label: 'Наличными курьеру' },
-              { value: 'online', label: 'Оплата онлайн на сайте' }
+              { value: 'online', label: 'Оплата онлайн на сайте' },
+              { value: 'code', label: 'Оплата по QR коду' }
             ]}
           />
 
-          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '30px' }}>Получить скидку</h5>
-          <ReactSelect 
-            actionType={"DISCOUNT_REDUCER"}
-            actionParams={isDiscount}
-            action={setIsDiscount}
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '20px' }}>Получить скидку</h5>
+          <Input
             params={{ width: 300 }}
-            placeholder={"Сдать старый аккумулятор"}
-            data={[
-              { value: 'card', label: 'Сдать аккумулятор' },
-              { value: 'cash', label: 'Не сдавать - по умолчанию' },
-            ]}
+            type={"text"}
+            placeholder={ isDiscount ? "Сдаю старый аккумулятор" : "Не буду сдавать аккумулятор"}
+            inputCss={{ 
+              border: 'none',
+              borderRight: isDiscount ? '6px solid rgb(43, 198, 49)' : '6px solid rgb(247, 247, 247)',
+              paddingBottom: '3px',
+              cursor: 'pointer',
+              backgroundColor: isDiscount && 'rgba(43, 198, 49, 0.4)',
+              fontWeight: isDiscount && 'bold',
+            }}
+            title={"Вы можете получить скидку на заказ, сдав нам свой старый аккумулятор"}
+            css={{ marginTop: '14px', lineHeight: '22px' }}
+            dispatchType={"order-checker"}
+            action={actionDiscount}
+            disabled={true}
           />
 
-          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '30px' }}>Выберите способ получения</h5>
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '22px' }}>Выберите способ получения</h5>
           <ReactSelect 
             params={{ width: 300 }}
             placeholder={"Доставка или самовывоз"}
@@ -323,7 +379,8 @@ const MakeOrder = () => {
             placeholder={"Введите адрес вашей доставки"}
             inputCss={{ 
               border: 'none',
-              borderRight: '6px solid #F7F7F7'
+              borderRight: '6px solid #F7F7F7',
+              paddingBottom: '2px'
             }}
             css={{ marginTop: '14px' }}
             dispatchType={"address"}
@@ -387,7 +444,7 @@ const MakeOrder = () => {
               inner={"Физическое лицо"}
               css={{
                 fontSize: '13px',
-                boxShadow: 'none',
+                boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                 color: 'white',
                 marginRight: '24px'
               }}
@@ -401,7 +458,7 @@ const MakeOrder = () => {
               inner={"Юридическое лицо"}
               css={{
                 fontSize: '13px',
-                boxShadow: 'none',
+                boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                 color: '#2E2E2E',
                 marginRight: '24px'
               }}
@@ -425,7 +482,7 @@ const MakeOrder = () => {
               inner={"ИП"}
               css={{
                 fontSize: '13px',
-                boxShadow: 'none',
+                boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                 color: '#2E2E2E',
                 marginRight: '24px',
                 paddingTop: '1px'
@@ -462,9 +519,9 @@ const MakeOrder = () => {
             <OrderForm>
 
               <h6 style={{ fontSize: '15px', marginBottom: '10px', color: 'grey' }}>Итого:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '26px', color: 'grey' }}>{ summaryCoast } RUB</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '12px', color: 'grey' }}>{ summaryCoast } RUB</h6>
 
-              <h6 style={{ fontSize: '15px', marginBottom: '10px' }}>Итого со скидкой 5%:</h6>
+              <h6 style={{ fontSize: '15px', marginBottom: '13px', lineHeight: '22px' }}>Итого со скидкой от сданного аккумулятора:</h6>
               <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ isDiscount ? ( Number(summaryCoast) - ( summaryCoast * 0.05 ) ).toFixed(0) : summaryCoast } RUB</h6>
 
               <p 
@@ -478,16 +535,16 @@ const MakeOrder = () => {
                 
                 Цена с учетом скидки при сдаче вашего аккумулятора аналогичных размеров</p>
 
-              { createUserCabinet ? <Button  
+              { createUserCabinet === false ? <Button  
                 params={{
                   width: 190,
-                  height: 36,
+                  height: 42,
                   background: '#2E2E2E'
                 }}
                 inner={"К оформлению"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
+                  boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                   color: 'white',
                   marginRight: '24px',
                   marginBottom: '10px'
@@ -503,13 +560,13 @@ const MakeOrder = () => {
                     children: <Button  
                       params={{
                         width: 190,
-                        height: 36,
+                        height: 42,
                         background: 'rgb(43, 198, 49)'
                       }}
                       inner={"Все понятно"}
                       css={{
                         fontSize: '13px',
-                        boxShadow: 'none',
+                        boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                         color: 'white',
                         marginRight: 'auto',
                         marginLeft: 'auto',
@@ -532,13 +589,13 @@ const MakeOrder = () => {
               /> : <Button  
                 params={{
                   width: 190,
-                  height: 36,
+                  height: 42,
                   background: 'rgb(43,198,49)'
                 }}
                 inner={"Оформить заказ"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
+                  boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                   color: 'white',
                   marginRight: '24px',
                   marginBottom: '10px'
@@ -549,14 +606,14 @@ const MakeOrder = () => {
                 params={{
                   width: 190,
                   height: 36,
-                  background: 'transparent'
+                  background: '#F7F7F7'
                 }}
                 inner={"Купить в один клик"}
                 css={{
                   fontSize: '13px',
                   color: '#2E2E2E',
                   marginRight: '24px',
-                  boxShadow: '0px 0px 1.5px grey',
+                  boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px',
                   marginBottom: '18px'
                 }}
                 action={() => {
