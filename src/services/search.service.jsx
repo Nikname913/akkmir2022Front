@@ -49,6 +49,7 @@ const HeaderSearch = () => {
         if ( item.name[0].toLowerCase().indexOf(val.toLowerCase()) !== -1 ) {
 
           resultsArray.push(item)
+          false && console.log(item)
 
         }
 
@@ -82,7 +83,7 @@ const HeaderSearch = () => {
             height: '36px',
             width: '100%',
             paddingLeft: '40px',
-            paddingBottom: '1px',
+            paddingBottom: '2px',
             boxSizing: 'border-box',
             border: 'none',
             borderBottomLeftRadius: showResults ? '0px' : '12px',
@@ -225,15 +226,16 @@ const HeaderSearch = () => {
               /> : <span
                 style={{
                   boxShadow: 'none',
-                  color: 'white',
-                  paddingRight: '20px',
-                  paddingLeft: '20px',
-                  border: '1px dashed grey',
                   height: '36px',
-                  width: '100px',
-                  borderRadius: '10px'
+                  width: '120px',
+                  borderRadius: '10px',
+                  color: '#C4C4C4',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  lineHeight: '33px',
+                  textAlign: 'center',
                 }}
-              ></span> }
+              >от { item.pre_order_prices[0].region[0].price[0] } ₽</span> }
 
             </ResultProductCard>
           )}
@@ -305,15 +307,16 @@ const HeaderSearch = () => {
           /> : <span
             style={{
               boxShadow: 'none',
-              color: 'white',
-              paddingRight: '20px',
-              paddingLeft: '20px',
-              border: '1px dashed grey',
               height: '36px',
-              width: '100px',
-              borderRadius: '10px'
+              width: '120px',
+              borderRadius: '10px',
+              color: '#C4C4C4',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              lineHeight: '33px',
+              textAlign: 'center',
             }}
-          ></span> }
+          >бренд</span> }
 
         </ResultProductCard>
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import testImg from '../../../img/category.png'
-import likeImg from '../../../img/like.png'
+import likeImg from '../../../img/like.svg'
 import { useDispatch } from 'react-redux'
 import { setActualItem, setOrdersCount } from '../../../appStore/reducers/mainReducer'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'

@@ -18,56 +18,19 @@ export const mainReducer = createSlice({
     catalogModelsRemote: '',
     catalogGenerationsRemote: '',
     catalogEnginesRemote: '',
+    catalogDirsRemote: '',
+    catalogShopsRemote: '',
     catalogMenu: [],
     ordersCount: 0,
     sravnenieCount: 2,
+    tradeInCount: 0,
     actualItem: null,
     actualCategory: { 
       id: null, 
       label: null 
     },
     mobile: false,
-    models: [
-      'Acura',
-      'AlfaRomeo',
-      'Audi',
-      'BMW',
-      'Geely',
-      'GMC',
-      'GreatWall',
-      'Hafei',
-      'Brilliance',
-      'Cadillac',
-      'Chery',
-      'Chevrolet',
-      'Honda',
-      'Hummer',
-      'Hyundai',
-      'Infiniti',
-      'Chrysler',
-      'Citroen',
-      'Daewoo',
-      'Datsun',
-      'IranKhodro',
-      'Jaguar',
-      'Jeep',
-      'Kia',
-      'Dodge',
-      'Fiat',
-      'Ford',
-      'Geely',
-      'Land Rover',
-      'Lexus',
-      'Lifan',
-      'Lincoln',
-      'GMC',
-      'GreatWall',
-      'Hafei',
-      'Honda',
-      'Maserati',
-      'Mazda',
-      'Mercedes-Benz'
-    ],
+    models: [ null ],
     infoPageTitle: ''
   },
   reducers: {
@@ -80,6 +43,9 @@ export const mainReducer = createSlice({
     },
     setOrdersCount: (state, action) => {
       state.ordersCount = action.payload
+    },
+    setTadeInCount: (state, action) => {
+      state.tradeInCount = action.payload
     },
     setSravnenieCount: (state, action) => {
       state.sravnenieCount = action.payload
@@ -122,6 +88,12 @@ export const mainReducer = createSlice({
     },
     setCatalogEnginesRemote: (state, action) => {
       state.catalogEnginesRemote = action.payload
+    },
+    setCatalogDirsRemote: (state, action) => {
+      state.catalogDirsRemote = action.payload
+    },
+    setCatalogShopsRemote: (state, action) => {
+      state.catalogShopsRemote = action.payload
     }
     
   }
@@ -129,6 +101,7 @@ export const mainReducer = createSlice({
 
 export const { productPageReducer,
   setOrdersCount,
+  setTadeInCount,
   setSravnenieCount,
   setActualItem,
   setActualCategory,
@@ -143,5 +116,7 @@ export const { productPageReducer,
   setCatalogMarksRemote,
   setCatalogModelsRemote,
   setCatalogGenerationsRemote,
-  setCatalogEnginesRemote } = mainReducer.actions
+  setCatalogEnginesRemote,
+  setCatalogDirsRemote,
+  setCatalogShopsRemote } = mainReducer.actions
 export default mainReducer.reducer

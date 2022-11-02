@@ -5,6 +5,7 @@ import MakeOrder from '../views/MakeOrder'
 import MakeOrderNonProducts from '../views/MakeOrderNonProducts'
 import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
+import MAPAAX from '../../services/mainpageAccii.service'
 import css from '../../styles/pages/order-page'
 import { useSelector } from 'react-redux'
 
@@ -135,14 +136,12 @@ const OrderPage = () => {
         </ContentLine> }
         <ContentLine style={{ marginBottom: '38px', marginTop: '3px' }}>
 
-          <h2>Посмотрите наши акции</h2>
+          <h2>Акции</h2>
 
         </ContentLine>
         <ContentLine style={{ justifyContent: 'space-between', marginBottom: '32px' }}>
 
-          <Banner/>
-          <Banner/>
-          <Banner/>
+          <MAPAAX></MAPAAX>
 
         </ContentLine>
       </Main>

@@ -30,19 +30,24 @@ const css = {
     position: relative;
     height: auto;
     min-height: 400px;
-    width: calc(36% - 20px);
+    width: calc(33% - 20px);
     box-shadow: 10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%);
     border-radius: 12px;
     background-color: white;
   `,
   MainContentLineBanner: styled.div`
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
     position: relative;
-    width: 30%;
+    width: 32%;
     height: auto;
     min-height: 160px;
     background-color: #404040;
     border-radius: 12px;
+    padding: 18px;
+    padding-left: 20px;
   `,
 
 }

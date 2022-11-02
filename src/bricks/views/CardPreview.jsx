@@ -7,8 +7,8 @@ import { Link } from "react-router-dom"
 import css from '../../styles/card-preview'
 import Button from '../comps/button/Button.jsx'
 import imageItem from '../../img/category.png'
-import likeImg from '../../img/like.png'
-import error from '../../img/error.png'
+import likeImg from '../../img/likeWhite.svg'
+import sravnenieImg from '../../img/sravnenieWhite.svg'
 import { useDispatch } from 'react-redux'
 import { setActualItem, setOrdersCount } from '../../appStore/reducers/mainReducer'
 import Rds from '../../appStore/reducers/storageReducers/mainReducer'
@@ -225,27 +225,28 @@ const CardPreview = (props) => {
           <span 
             style={{ 
               display: 'block', 
-              fontSize: '20px', 
+              fontSize: '19px', 
               fontWeight: 'bold',
-              marginRight: '30px',
-              width: '90%'
+              marginRight: '0px',
+              width: '48%'
             }}
           >
             
-            { coast1 && coast1 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}> Рублей</i>
+            { coast1 && coast1 } <i style={{ fontStyle: 'normal', fontSize: '18px' }}>₽</i>
             
           </span>
           <span 
             style={{ 
               display: 'block', 
-              fontSize: '20px', 
+              fontSize: '19px', 
               fontWeight: 'bold', 
               color: 'grey',
-              width: '90%'
+              width: '48%',
+              textAlign: 'right',
             }}
           >
             
-            { coast2 && coast2 } <i style={{ fontStyle: 'normal', fontSize: '16px' }}>Рублей</i>
+            { coast2 && coast2 } <i style={{ fontStyle: 'normal', fontSize: '18px' }}>₽</i>
             
           </span>
 
@@ -303,7 +304,7 @@ const CardPreview = (props) => {
 
       </React.Fragment> }
 
-      <CoastWrapper style={{ marginTop: '20px', justifyContent: 'space-between' }}>
+      <CoastWrapper style={{ marginTop: '20px', justifyContent: 'flex-start' }}>
 
         { itemID.indexOf('oil') < 0 ? <React.Fragment>
 
@@ -330,8 +331,9 @@ const CardPreview = (props) => {
               fontSize: '13px',
               boxShadow: 'none',
               color: 'white',
-              paddingRight: '20px',
-              paddingLeft: '20px'
+              paddingRight: '14px',
+              paddingLeft: '14px',
+              boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px'
             }}
             action={() => {
               ordersCount()
@@ -364,9 +366,10 @@ const CardPreview = (props) => {
               fontSize: '13px',
               boxShadow: 'none',
               color: 'white',
-              paddingRight: '20px',
-              paddingLeft: '20px',
-              color: 'transparent'
+              paddingRight: '14px',
+              paddingLeft: '14px',
+              color: 'transparent',
+              boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px'
             }}
           />}
 
@@ -374,15 +377,52 @@ const CardPreview = (props) => {
 
         <Button  
           params={{
-            width: 36,
-            height: 36,
-            background: '#F4F4F4'
+            width: 34,
+            height: 34,
+            background: '#C4C4C4'
           }}
           inner={""}
           css={{
             fontSize: '13px',
             boxShadow: 'none',
             color: '#858585',
+            borderRadius: '8px',
+            marginLeft: '6px',
+            boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px'
+          }}
+          children={
+            <React.Fragment>
+              <img 
+                alt={""}
+                src={sravnenieImg}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '22px',
+                  height: '18px',
+                  left: 0,
+                  marginLeft: '6px',
+                  top: '50%',
+                  marginTop: '-10px'
+                }}
+              />
+            </React.Fragment>
+          }
+        />
+        <Button  
+          params={{
+            width: 34,
+            height: 34,
+            background: '#C4C4C4'
+          }}
+          inner={""}
+          css={{
+            fontSize: '13px',
+            boxShadow: 'none',
+            color: '#858585',
+            borderRadius: '8px',
+            marginLeft: '6px',
+            boxShadow: 'rgb(163 163 163 / 2%) 10px 18px 8px, rgb(163 163 163 / 7%) 6px 10px 7px, rgb(163 163 163 / 11%) 2px 4px 5px, rgb(163 163 163 / 13%) 1px 1px 3px, rgb(163 163 163 / 13%) 0px 0px 0px'
           }}
           children={
             <React.Fragment>
@@ -392,39 +432,17 @@ const CardPreview = (props) => {
                 style={{
                   display: 'block',
                   position: 'absolute',
-                  width: '17px',
+                  width: '19px',
+                  height: '17px',
                   left: 0,
-                  marginLeft: '10px',
+                  marginLeft: '7px',
                   top: '50%',
-                  marginTop: '-7px'
+                  marginTop: '-8px'
                 }}
               />
             </React.Fragment>
           }
         />
-
-      </CoastWrapper>
-      <CoastWrapper style={{ marginTop: '18px', justifyContent: 'space-between' }}>
-
-        <img
-          alt={""}
-          src={error}
-          style={{
-            display: 'block',
-            position: 'relative',
-            width: '16%'
-          }}
-        />
-        <span 
-          style={{ 
-            display: 'block',
-            fontSize: '12px',
-            color: 'grey',
-            lineHeight: '18px',
-            width: '74%' }}
-        >
-          
-          Нажатие кнопки В корзину, а также функционал добавления в избранное внести в макет</span>
 
       </CoastWrapper>
     </Card>

@@ -2,15 +2,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import css from '../../styles/pages/catalog-page'
-import ReactSelect from '../comps/ReactSelect'
+import ReactSelect from '../comps/ReactSelectNoIcons'
 import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
 import arrowImg from '../../img/arrow.png'
+import successSort from '../../img/success.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement } from '../../appStore/reducers/desktopPaginationReducer'
 
@@ -24,6 +25,7 @@ const CatalogPage = () => {
   const items = useSelector(state => state.catalog.catalog)
   const actualCategory = useSelector(state => state.main.actualCategory)
   const paginationCount = useSelector(state => state.desktopPagination.count)
+  const [ priceSort, setPriceSort ] = useState(false)
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -32,6 +34,14 @@ const CatalogPage = () => {
 
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
+
+  function sortOfPrice(item1, item2) {
+
+    if ( +item1.pre_order_prices[0].region[0].price[0] > +item2.pre_order_prices[0].region[0].price[0] ) return 1
+    if ( +item1.pre_order_prices[0].region[0].price[0] === +item2.pre_order_prices[0].region[0].price[0] ) return 0
+    if ( +item1.pre_order_prices[0].region[0].price[0] < +item2.pre_order_prices[0].region[0].price[0] ) return -1
+
+  }
   
   if ( !catalogCategory ) {
 
@@ -52,6 +62,12 @@ const CatalogPage = () => {
             }
           }
         ) : generalCatalog = null
+
+    if ( priceSort === true ) {
+
+      generalCatalog = generalCatalog.sort(sortOfPrice)
+
+    }
 
   }
 
@@ -561,43 +577,82 @@ const CatalogPage = () => {
             }}
           >
             <Button
-              inner={"по цене"}
+              inner={"По цене"}
               params={{
                 background: 'transparent'
               }}
               css={{
                 fontSize: '13px',
-                paddingTop: '7px',
-                paddingBottom: '8px',
+                paddingTop: '8px',
+                paddingBottom: '9px',
                 paddingLeft: '34px',
                 paddingRight: '10px',
                 marginRight: '14px'
               }}
+              action={() => setPriceSort(prev => !prev)}
               children={
-                <img
-                  style={{
-                    display: 'block',
-                    position: 'absolute',
-                    width: '14px',
-                    top: '50%',
-                    left: '0%',
-                    marginTop: '-8px',
-                    marginLeft: '10px'
-                  }}
-                  src={arrowImg}
-                  alt={""}
-                />
+                <React.Fragment>
+                  { !priceSort ? <img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '14px',
+                      top: '50%',
+                      left: '0%',
+                      marginTop: '-8px',
+                      marginLeft: '10px'
+                    }}
+                    src={arrowImg}
+                    alt={""}
+                  /> : <React.Fragment><img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '14px',
+                      top: '50%',
+                      left: '0%',
+                      marginTop: '-8px',
+                      marginLeft: '10px'
+                    }}
+                    src={arrowImg}
+                    alt={""}
+                  /><span
+                      style={{
+                        display: 'block',
+                        position: 'absolute',
+                        width: '32px',
+                        height: '32px',
+                        backgroundColor: 'rgb(43, 198, 49)',
+                        borderRadius: '16px',
+                        top: '0%',
+                        left: '0%',
+                        marginLeft: '-40px'
+                      }}
+                    ><img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      width: '14px',
+                      top: '50%',
+                      left: '0%',
+                      marginTop: '-5px',
+                      marginLeft: '9px'
+                    }}
+                    src={successSort}
+                    alt={""}
+                  /></span></React.Fragment> } 
+                </React.Fragment>
               }
             />
             <Button
-              inner={"по популярности"}
+              inner={"По популярности"}
               params={{
                 background: 'transparent'
               }}
               css={{
                 fontSize: '13px',
-                paddingTop: '7px',
-                paddingBottom: '8px',
+                paddingTop: '8px',
+                paddingBottom: '9px',
                 paddingLeft: '34px',
                 paddingRight: '10px',
               }}
@@ -669,8 +724,8 @@ const CatalogPage = () => {
                       ? '--' : item.pre_order_prices[0].region[0].price[0]
                   }
                   coast2={
-                    +item.pre_order_prices[0].region[0].price_discount[0] === 0
-                      ? '--' : item.pre_order_prices[0].region[0].price_discount[0]
+                    !item.pre_order_prices[0].region[0].price_discount
+                      ? item.pre_order_prices[0].region[0].price[0] : item.pre_order_prices[0].region[0].price_discount[0]
                   }
                   itemID={item.id[0]}
                 />

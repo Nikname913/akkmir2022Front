@@ -45,7 +45,7 @@ const css = {
     display: block;
     width: 66%;
     height: auto;
-    min-height: 500px;
+    min-height: 520px;
     background-color: #F7F7F7;
     padding: 24px;
   `,

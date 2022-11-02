@@ -42,7 +42,7 @@ const AlphabetLine = css.AlphabetLine
 const SelectLang = css.SelectLang
 const ContentColumn = css.ContentColumn
 const Image = styled.img`
-  filter: grayscale(1);
+  filter: grayscale(0);
   cursor: pointer;
   :hover {
     filter: grayscale(0);
@@ -548,7 +548,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 1 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 1 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'a' ? setLetter('a') : setLetter('')
@@ -564,7 +565,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 2 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 2 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'b' ? setLetter('b') : setLetter('')
@@ -580,7 +582,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 3 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 3 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'c' ? setLetter('c') : setLetter('')
@@ -596,7 +599,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 4 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 4 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'd' ? setLetter('d') : setLetter('')
@@ -612,7 +616,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 5 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 5 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'e' ? setLetter('e') : setLetter('')
@@ -628,7 +633,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 6 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 6 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'f' ? setLetter('f') : setLetter('')
@@ -644,7 +650,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 7 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 7 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'g' ? setLetter('g') : setLetter('')
@@ -660,7 +667,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 8 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 8 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'h' ? setLetter('h') : setLetter('')
@@ -676,7 +684,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 9 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 9 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'i' ? setLetter('i') : setLetter('')
@@ -692,7 +701,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 10 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 10 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'j' ? setLetter('j') : setLetter('')
@@ -708,7 +718,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 11 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 11 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'k' ? setLetter('k') : setLetter('')
@@ -724,7 +735,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 12 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 12 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'l' ? setLetter('l') : setLetter('')
@@ -740,7 +752,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 13 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 13 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'm' ? setLetter('m') : setLetter('')
@@ -756,7 +769,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 14 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 14 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'n' ? setLetter('n') : setLetter('')
@@ -772,7 +786,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 15 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 15 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'o' ? setLetter('o') : setLetter('')
@@ -788,7 +803,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 16 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 16 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'p' ? setLetter('p') : setLetter('')
@@ -804,7 +820,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 17 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 17 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'q' ? setLetter('q') : setLetter('')
@@ -820,7 +837,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 18 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 18 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'r' ? setLetter('r') : setLetter('')
@@ -836,7 +854,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 19 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 19 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 's' ? setLetter('s') : setLetter('')
@@ -852,7 +871,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 20 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 20 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 't' ? setLetter('t') : setLetter('')
@@ -868,7 +888,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 21 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 21 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'u' ? setLetter('u') : setLetter('')
@@ -884,7 +905,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 22 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 22 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'v' ? setLetter('v') : setLetter('')
@@ -900,7 +922,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 23 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 23 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'w' ? setLetter('w') : setLetter('')
@@ -916,7 +939,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 24 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 24 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'x' ? setLetter('x') : setLetter('')
@@ -932,7 +956,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 25 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 25 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'y' ? setLetter('y') : setLetter('')
@@ -948,7 +973,8 @@ const SelectAkk = (props) => {
                 paddingBottom: '6px',
                 paddingRight: '10px',
                 paddingLeft: '10px', 
-                color: selectedLetter === 26 ? 'rgb(43,198,49)' : 'black'
+                color: selectedLetter === 26 ? 'rgb(43,198,49)' : 'black',
+                fontSize: '24px'
               }}
               onClick={() => {
                 letter !== 'z' ? setLetter('z') : setLetter('')
@@ -1687,7 +1713,7 @@ const SelectAkk = (props) => {
                 fontWeight: 'bold',
               }}>
 
-                <span>Отлично, теперь выберите поколение</span>
+                <span>Поколение</span>
 
               </div>
               <div style={{
@@ -1875,7 +1901,7 @@ const SelectAkk = (props) => {
                 fontWeight: 'bold',
               }}>
 
-                <span>Почти закончили! Осталось выбрать двигатель</span>
+                <span>Выберите двигатель</span>
 
               </div>
               <div style={{
@@ -1985,7 +2011,7 @@ const SelectAkk = (props) => {
                 setMarksDiapazon10(75)
                 setList('long')
               }}
-            >Посмотреть все марки - { marks ? JSON.parse(marks)[0].mark.length : 0 }</span> : <span 
+            >Показать все марки - { marks ? JSON.parse(marks)[0].mark.length : 0 }</span> : <span 
               style={{ 
                 display: 'block',
                 fontSize: '13px',

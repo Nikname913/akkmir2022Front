@@ -9,7 +9,9 @@ import { setCatalogMenuRemote,
   setCatalogMarksRemote,
   setCatalogModelsRemote,
   setCatalogGenerationsRemote,
-  setCatalogEnginesRemote } from '../appStore/reducers/mainReducer'
+  setCatalogEnginesRemote,
+  setCatalogDirsRemote,
+  setCatalogShopsRemote } from '../appStore/reducers/mainReducer'
 
 const RequestActionsComponent = (props) => {
 
@@ -68,6 +70,10 @@ const RequestActionsComponent = (props) => {
             ? setCatalogGenerationsRemote(JSON.stringify(data))
             : callbackAction === 'GET_ENGINES'
             ? setCatalogEnginesRemote(JSON.stringify(data))
+            : callbackAction === 'GET_DIRS'
+            ? setCatalogDirsRemote(JSON.stringify(data))
+            : callbackAction === 'GET_SHOPS'
+            ? setCatalogShopsRemote(JSON.stringify(data))
             : null
           )
       

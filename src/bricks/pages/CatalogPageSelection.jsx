@@ -5,7 +5,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import css from '../../styles/pages/catalog-page'
-import ReactSelect from '../comps/ReactSelect'
+import ReactSelect from '../comps/ReactSelectNoIcons'
 import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'

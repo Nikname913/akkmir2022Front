@@ -9,6 +9,15 @@ import { useDispatch } from 'react-redux'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
 import { setDefault } from '../../appStore/reducers/desktopPaginationReducer'
 
+import akkum from '../../img/catalog/akkum.png'
+import aksessuar from '../../img/catalog/aksessuar.png'
+import freeze from '../../img/catalog/freeze.png'
+import ibp from '../../img/catalog/ibp.png'
+import kosmetik from '../../img/catalog/kosmetik.png'
+import oil from '../../img/catalog/oil.png'
+import tools from '../../img/catalog/tools.png'
+import zaradka from '../../img/catalog/zaradka.png'
+
 const Card = css.Card
 const CardTags = css.CardTags
 
@@ -30,7 +39,25 @@ const CatCard = (props) => {
   return (
     <React.Fragment>
       <Card>
-        <img src={img} 
+        <img 
+          src={
+            title === 'Аккумуляторы и клеммы'
+            ? akkum
+            : title === 'Автоаксессуары'
+            ? aksessuar
+            : title === 'Специальные жидкости'
+            ? freeze
+            : title === 'Автотовары'
+            ? aksessuar
+            : title === 'Автохимия и автокосметика'
+            ? kosmetik
+            : title === 'Масла автомобильные'
+            ? oil
+            : title === 'Инструменты'
+            ? tools
+            : title === 'Зарядные и пусковые устройства'
+            ? zaradka : null
+          } 
           alt={""}
           style={{
             display: 'block',

@@ -9,15 +9,28 @@ const { Wrapper, ContentLine } = css.AdressCard
 
 const AdressCard = (props) => {
 
-  const { marbottom = 0 } = props
+  const { marbottom = 0, shopID = '', regionID = '', name = '', isService = false, } = props
 
   return (
     <React.Fragment>
       <Wrapper marbo={marbottom}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
+      <a 
+        href="tel: (343) 261-61-62"
+        style={{
+          display: 'block',
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          top: '0%',
+          left: '0%',
+          zIndex: 10
+        }}
+      ></a>
 
         <ContentLine>
           
-          <h5 style={{ fontSize: '14px', paddingTop: '18px', paddingBottom: '18px' }}>Адрес: Раевского 9/1</h5>
+          <h5 style={{ fontSize: '14px', paddingTop: '18px', paddingBottom: '18px' }}>{ name }</h5>
           <Button  
             params={{
               width: 130,
@@ -40,7 +53,8 @@ const AdressCard = (props) => {
         </ContentLine>
         { true && <ContentLine style={{ marginTop: '-13px' }}>
 
-          <span style={{ color: 'grey', fontSize: '12px' }}>Магазин и сервис</span>
+          { isService ? <span style={{ color: 'grey', fontSize: '12px' }}>Магазин и сервис</span> 
+            : <span style={{ color: 'grey', fontSize: '12px' }}>Магазин</span> }
         
         </ContentLine> }
         <ContentLine style={{ marginTop: '10px' }}>

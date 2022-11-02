@@ -65,6 +65,17 @@ class Reducer {
 
   }
 
+  getOneOrder(props) {
+
+    const { itemID } = props
+
+    !JSON.parse(localStorage.getItem('akkmirLocalStore')) && this.initStore() 
+    let store = JSON.parse(localStorage.getItem('akkmirLocalStore'))
+
+    return store.orders.find(item => item.id === itemID)
+
+  }
+
   makeNewOrder(props) {
 
     const { itemID } = props

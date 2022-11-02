@@ -55,31 +55,31 @@ const ChangePage = (props) => {
               <Button  
                 params={{
                   width: 154,
-                  height: 35,
+                  height: 38,
                   background: '#2E2E2E'
                 }}
-                inner={"По характеристикам"}
+                inner={"По марке авто"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
                   color: 'white',
                   borderRadius: '12px',
-                  marginRight: '10px'
+                  marginRight: '10px',
+                  lineHeight: '36px'
                 }}
               />
 
               <Button  
                 params={{
                   width: 154,
-                  height: 35,
-                  background: '#2E2E2E'
+                  height: 38,
+                  background: 'transparent'
                 }}
                 inner={"По характеристикам"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
-                  color: 'white',
-                  borderRadius: '12px'
+                  color: '#2E2E2E',
+                  borderRadius: '12px',
+                  lineHeight: '36px',
                 }}
               />
 
@@ -98,31 +98,31 @@ const ChangePage = (props) => {
               <Button  
                 params={{
                   width: 154,
-                  height: 35,
+                  height: 38,
                   background: '#2E2E2E'
                 }}
                 inner={"Автомобильные"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
                   color: 'white',
                   borderRadius: '12px',
-                  marginRight: '10px'
+                  marginRight: '10px',
+                  lineHeight: '36px'
                 }}
               />
 
               <Button  
                 params={{
                   width: 154,
-                  height: 35,
-                  background: '#2E2E2E'
+                  height: 38,
+                  background: 'transparent'
                 }}
                 inner={"Грузовые авто"}
                 css={{
                   fontSize: '13px',
-                  boxShadow: 'none',
-                  color: 'white',
-                  borderRadius: '12px'
+                  color: '#2E2E2E',
+                  borderRadius: '12px',
+                  lineHeight: '36px'
                 }}
               />
 
@@ -134,7 +134,8 @@ const ChangePage = (props) => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 position: 'relative',
-                marginBottom: '12px'
+                marginBottom: '12px',
+                marginTop: '26px',
               }}
             >
               <ReactSelect 
@@ -164,7 +165,7 @@ const ChangePage = (props) => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 position: 'relative',
-                marginBottom: '12px'
+                marginBottom: '26px'
               }}
             >
               <ReactSelect 

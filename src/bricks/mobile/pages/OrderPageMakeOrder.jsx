@@ -507,12 +507,20 @@ const OrderPageMakeOrder = (props) => {
             <Input
               params={{}}
               type={"text"}
-              placeholder={"Я хочу сдать свой аккумулятор"}
+              placeholder={
+                discount === 5
+                  ? 'Я хочу сдать свой аккумулятор'
+                  : 'Не буду сдавать аккумулятор'
+              }
               inputCss={{ 
                 border: 'none',
                 borderRight: discount !== 0
                   ? '6px solid rgb(43, 198, 49)' 
                   : '6px solid rgb(214, 46, 43)',
+                backgroundColor: discount !== 0 
+                  ? 'rgba(43, 198, 49, 0.4)'
+                  : 'transparent', 
+                fontWeight: discount !== 0 ? 'bold' : 'normal',
                 paddingBottom: '2px',
                 cursor: 'pointer'
               }}
@@ -533,8 +541,17 @@ const OrderPageMakeOrder = (props) => {
           }}
         >
           
-          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>Скидка: { discount }%</h2>
-          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>К оплате: { totalSumm - ( totalSumm / 100 * discount )} руб</h2>
+          <h2 style={{ color: '#565656', fontSize: '18px', display: 'block' }}>
+            { discount === 5 ? 'Со скидкой' : 'Без скидки' }
+          </h2>
+          <h2 
+            style={{ 
+              color: discount === 5 ? 'rgb(43, 198, 49)' : '#565656', 
+              fontSize: '18px', 
+              display: 'block' 
+            }}
+          >К оплате: { totalSumm - ( totalSumm / 100 * discount )} руб
+          </h2>
         
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '24px' }}>

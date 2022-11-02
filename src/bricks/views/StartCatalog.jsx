@@ -69,12 +69,12 @@ const StartCatalog = (props) => {
     <React.Fragment>
       <Catalog
         style={ type === 'modal' ? {
-          position: 'fixed',
+          position: 'absolute',
           left: '0px',
           top: '0px',
           zIndex: '200',
-          marginTop: '20px',
-          marginLeft: '20px'
+          marginTop: '-32px',
+          marginLeft: '-19px',
         } : null}
       >
         <Close onClick={onClose}>
@@ -139,12 +139,15 @@ const StartCatalog = (props) => {
                             onClick={() => {
                               setSelectedPrimenenieIndex(index)
                               setSelectedCategoryData({ id: item.id[0], label: item.name[0] })
+                              dispatch(setActualCategory({ id: item.id[0], label: item.name[0] }))
+                              onClose()
+                              navigate(`../catalog/${item.name[0]}/20`)
                             }}
                             style={{
-                              backgroundColor: selectedPrimenenieIndex === index 
+                              backgroundColor: selectedPrimenenieIndex === 10000 
                                 ? 'rgb(43, 198, 49)'
                                 : 'white',
-                              color: selectedPrimenenieIndex === index 
+                              color: selectedPrimenenieIndex === 10000 
                                 ? 'white'
                                 : 'grey'
                             }}>{ item.name[0] }</Tag>
@@ -167,12 +170,15 @@ const StartCatalog = (props) => {
                             onClick={() => {
                               setSelectedPrimenenieIndex(index)
                               setSelectedCategoryData({ id: item.id[0], label: item.name[0] })
+                              dispatch(setActualCategory({ id: item.id[0], label: item.name[0] }))
+                              onClose()
+                              navigate(`../catalog/${item.name[0]}/20`)
                             }}
                             style={{
-                              backgroundColor: selectedPrimenenieIndex === index 
+                              backgroundColor: selectedPrimenenieIndex === 10000
                                 ? 'rgb(43, 198, 49)'
                                 : 'white',
-                              color: selectedPrimenenieIndex === index 
+                              color: selectedPrimenenieIndex === 10000 
                                 ? 'white'
                                 : 'grey'
                             }}>{ item.name[0] }</Tag>
@@ -227,8 +233,7 @@ const StartCatalog = (props) => {
               
               onClose()
               dispatch(setDefault())
-              dispatch(setActualCategory(selectedCategoryData))
-              navigate(`../catalog/${selectedCategoryData.label}/20`)
+              navigate(`/podbor-akkumulyatora`)
 
             }}
           />

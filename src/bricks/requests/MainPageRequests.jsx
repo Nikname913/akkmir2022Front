@@ -68,6 +68,24 @@ const MAPAR = () => {
           urlstring: '/engines',
         }}
       />
+
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_DIRS'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/directions',
+        }}
+      />
+
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_SHOPS'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/shops',
+        }}
+      />
     </React.Fragment>
   )
 

@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import css from '../../styles/make-order'
 import image from '../../img/category.png'
-import trash from '../../img/trash.png'
+import trash from '../../img/trash.svg'
 import RequestComponent from '../../services/request.service'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActualItem, setOrdersCount } from '../../appStore/reducers/mainReducer'
@@ -182,7 +182,7 @@ const OrderItemsLine = (props) => {
                   }}
                 >
 
-                  <img style={{ display: 'block', width: '14px' }} src={trash} alt={""}/>
+                  <img style={{ display: 'block', width: '18px' }} src={trash} alt={""}/>
 
                 </Icon>
 

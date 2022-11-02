@@ -7,7 +7,11 @@ import styled from 'styled-components'
 const Decorate = {
   SelectWrapper: styled.div`
     display: block;
+    position: relative;
     width: ${ props => props.styles.width }px;
+    margin-top: ${ props => props.styles.mt };
+    margin-bottom: ${ props => props.styles.mb };
+    border-radius: ${ props => props.styles.borra };
   `
 }
 
@@ -20,7 +24,9 @@ const selectStyles = {
     boxShadow: '0px 0px 1.5px grey',
     height: '44px',
     fontSize: '13px',
-    paddingBottom: '1px'
+    paddingBottom: '1px',
+    borderRadius: '10px',
+    paddingLeft: '30px'
   }),
   placeholder: (theme) => ({
 		...theme,
@@ -32,7 +38,7 @@ const selectStyles = {
   }),
   input: (theme) => ({
     ...theme,
-    paddingLeft: '4px'
+    paddingLeft: '4px',
   }),
   menu: (theme) => ({
     ...theme,
@@ -64,7 +70,10 @@ const ReactSelect = (props) => {
     data = null,
     action = null,
     actionType = null,
-    actionParams = null } = props
+    actionParams = null,
+    showIcon = false,
+    icon = false,
+    iconStyles = null } = props
 
     function actionsReducer(param) {
 
@@ -84,6 +93,21 @@ const ReactSelect = (props) => {
 
   return (
     <Decorate.SelectWrapper styles={params}>
+
+      { showIcon && <img
+
+        alt={""}
+        src={icon}
+        style={{
+          ...iconStyles,
+          display: 'block',
+          position: 'absolute',
+          zIndex: '10',
+          top: '50%',
+          left: '0%',
+        }}
+
+      /> }
       
       <Select 
         options={ data && data }

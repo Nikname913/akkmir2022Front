@@ -40,11 +40,11 @@ const css = {
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    width: 460px;
+    width: 400px;
     height: auto;
     top: 100%;
     left: 0;
-    margin-top: 12px;
+    margin-top: 10px;
     box-sizing: border-box;
   `,
   ItemPhotoGalleryItem: styled.div`
@@ -52,16 +52,16 @@ const css = {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 88px;
-    height: 88px;
+    width: 70px;
+    height: 70px;
     border-radius: 4px;
     box-shadow: 10px 18px 8px rgba(163, 163, 163, 0.02), 6px 10px 7px rgba(163, 163, 163, 0.07), 2px 4px 5px rgba(163, 163, 163, 0.11), 1px 1px 3px rgba(163, 163, 163, 0.13), 0px 0px 0px rgba(163, 163, 163, 0.13);
     box-sizing: border-box;
-    margin-right: 13px;
+    margin-right: 10px;
   `,
   ItemDescription: styled.div`
     display: block;
-    width: 540px;
+    width: calc(100% - 780px);
     height: auto;
     padding-left: 24px;
   `,
@@ -75,13 +75,14 @@ const css = {
   `,
   OrderForm: styled.div`
     display: block;
-    width: calc(100% - 940px);
+    width: 328px;
     height: auto;
     min-height: 100px;
     box-shadow: 10px 18px 8px rgba(163, 163, 163, 0.02), 6px 10px 7px rgba(163, 163, 163, 0.07), 2px 4px 5px rgba(163, 163, 163, 0.11), 1px 1px 3px rgba(163, 163, 163, 0.13), 0px 0px 0px rgba(163, 163, 163, 0.13);
     margin-left: 24px;
-    padding: 26px;
+    padding: 20px;
     border-radius: 4px;
+    overflow: hidden;
   `,
   CardWrapperMiddleLevel: styled.div`
     display: flex;

@@ -66,7 +66,7 @@ const css = {
     height: auto;
     padding-left: 90px;
     padding-right: 90px;
-    padding-top: 24px;
+    padding-top: 16px;
     padding-bottom: 34px;
   `
 }

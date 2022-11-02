@@ -7,6 +7,7 @@ import mobileMenuReducer from './reducers/mobileMenuReducer'
 import mobileScrollReducer from './reducers/mobileScrollReducer'
 import desktopPaginationReducer from './reducers/desktopPaginationReducer'
 import selectionSettingsReducer from './reducers/selectionSettingsReducer'
+import actualRegionReducer from './reducers/actualRegionReducer'
 
 export default configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
     mobileMenu: mobileMenuReducer,
     mobileScroll: mobileScrollReducer,
     desktopPagination: desktopPaginationReducer,
-    selectionSettings: selectionSettingsReducer
+    selectionSettings: selectionSettingsReducer,
+    actualRegion: actualRegionReducer
   },
 })

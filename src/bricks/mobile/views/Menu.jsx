@@ -2,9 +2,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
-import catalog from '../../../img/menuMenu.png'
-import tools from '../../../img/menuTools.png'
-import cabinet from '../../../img/cabinet.png'
+import catalog from '../../../img/menuMenu.svg'
+import tools from '../../../img/menuTools.svg'
+import cabinet from '../../../img/cabinet.svg'
+import home from '../../../img/home.svg'
+import shops from '../../../img/shops.svg'
+import mobileShop from '../../../img/mobileShop.svg'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount, setMobile, setInfoPageTitle } from '../../../appStore/reducers/mainReducer'
@@ -22,7 +25,7 @@ const MobileMenu = (props) => {
 
   return (
     <React.Fragment>
-      <Wrapper style={{ marginLeft: '20px' }}>
+      <Wrapper style={{ marginLeft: '20px', zIndex: 40 }}>
 
         <Link 
           style={ active === 0 
@@ -33,12 +36,12 @@ const MobileMenu = (props) => {
         >
           <MenuItem width={screen}>
             <img 
-              src={cabinet} 
+              src={home} 
               alt={""}
               style={{
                 display: 'block',
                 position: 'absolute',
-                width: '20px',
+                width: '23px',
                 marginBottom: '16px'
               }}
             />
@@ -61,12 +64,12 @@ const MobileMenu = (props) => {
         >
           <MenuItem width={screen}>
             <img 
-              src={cabinet} 
+              src={shops} 
               alt={""}
               style={{
                 display: 'block',
                 position: 'absolute',
-                width: '20px',
+                width: '19px',
                 marginBottom: '16px'
               }}
             />
@@ -155,7 +158,7 @@ const MobileMenu = (props) => {
             style={{
               display: 'block',
               position: 'absolute',
-              width: '20px',
+              width: '22px',
               marginBottom: '16px'
             }}
           />
@@ -177,12 +180,12 @@ const MobileMenu = (props) => {
         >
           <MenuItem width={screen}>
             <img 
-              src={cabinet} 
+              src={mobileShop} 
               alt={""}
               style={{
                 display: 'block',
                 position: 'absolute',
-                width: '20px',
+                width: '22px',
                 marginBottom: '16px'
               }}
             />

@@ -3,7 +3,8 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { Helmet } from 'react-helmet'
 import css from '../../styles/make-order'
 import Input from '../comps/input/Input.jsx'
 import ReactSelect from '../comps/ReactSelect'
@@ -27,6 +28,10 @@ import { setNumber,
   setDiliverytype,
   setAddress } from '../../appStore/reducers/makeOrderReducer'
 import { useNavigate } from 'react-router-dom'
+import lepestok from '../../img/orderLepestok.svg'
+import bankCard from '../../img/bankCard.svg'
+import molniya from '../../img/molniya.svg'
+import dilivery from '../../img/dilivery.svg'
 
 const MakeOrderWrapper = css.OrderWrapper
 const Form = css.OrderWrapperForm
@@ -50,6 +55,8 @@ const MakeOrder = () => {
   const [ newUserCabinetRequest, setNewUserCabinetRequest ] = useState(false)
   const [ newUserCabinetBody, setNewUserCabinetBody ] = useState('')
   const [ agree, setAgree ] = useState(false)
+  const [ installAkkum, setInstallAkkum ] = useState(false)
+  const mapElement = useRef()
 
   const number = useSelector(state => state.newOrder.number)
   const model = useSelector(state => state.newOrder.model)
@@ -239,6 +246,7 @@ const MakeOrder = () => {
               borderRight: number
                 ? '6px solid rgb(43, 198, 49)' 
                 : '6px solid rgb(214, 46, 43)',
+              borderRadius: '10px'
             }}
             title={"Мобильный телефон*"}
             css={{ marginTop: '22px' }}
@@ -252,7 +260,8 @@ const MakeOrder = () => {
             placeholder={"Lada Vesta"}
             inputCss={{ 
               border: 'none',
-              borderRight: '6px solid #F7F7F7'
+              borderRight: '6px solid #F7F7F7',
+            borderRadius: '10px'
             }}
             title={"Марка транспортного средства"}
             css={{ marginTop: '14px' }}
@@ -264,13 +273,70 @@ const MakeOrder = () => {
             placeholder={"Иван Иванов"}
             inputCss={{ 
               border: 'none',
-              borderRight: '6px solid #F7F7F7'
+              borderRight: '6px solid #F7F7F7',
+            borderRadius: '10px'
             }}
-            title={"Ваше имя"}
+            title={"Введите ваше имя"}
             css={{ marginTop: '14px' }}
             dispatchType={"name"}
           />
-          <Input
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              width: '100%',
+              marginTop: '16px'
+            }}
+          >
+            <span
+              onClick={() => setInstallAkkum(prev => !prev)}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '26px',
+                height: '26px',
+                borderRadius: '4px',
+                border: '1px solid #D3D3D3',
+                backgroundColor: 'white',
+                marginRight: '10px',
+                cursor: 'pointer'
+              }}
+            >
+
+              { installAkkum && <span
+
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '15px',
+                  height: '15px',
+                  borderRadius: '4px',
+                  backgroundColor: '#565656',
+                }}
+
+              /> }
+
+            </span>
+            <span 
+              style={{ 
+                fontSize: '13px', 
+                width: '190px', 
+                lineHeight: '20px' 
+              }}
+            >
+              
+              Принимаю условия обработки персональных данных
+              
+            </span>
+          </div>
+
+          { false && <Input
             params={{ width: 300 }}
             type={"text"}
             placeholder={ agree ? "Согласие на обработку данных" : "Нажмите для согласия"}
@@ -281,13 +347,14 @@ const MakeOrder = () => {
               cursor: 'pointer',
               backgroundColor: agree && 'rgba(43, 198, 49, 0.4)',
               fontWeight: agree && 'bold',
+              borderRadius: '10px'
             }}
-            title={"Согласие на обработку персональных данных. Ознакомиться с политикой конфиденциальности можно по ссылке ниже. Нажмите на кнопку ниже, чтобы принять условия"}
-            css={{ marginTop: '14px', lineHeight: '22px', fontWeight: 'bold' }}
+            title={"Согласие на обработку данных"}
+            css={{ marginTop: '14px' }}
             dispatchType={"order-checker"}
             action={actionAgree}
             disabled={true}
-          />
+          /> }
 
           <span
             style={{
@@ -295,7 +362,7 @@ const MakeOrder = () => {
               position: 'relative',
               fontSize: '14px',
               fontWeight: 'bold',
-              marginTop: '16px',
+              marginTop: '10px',
               color: '#2E2E2E',
               textDecoration: 'underline',
               cursor: 'pointer'
@@ -310,10 +377,12 @@ const MakeOrder = () => {
             placeholder={ emailFromAuth ? emailFromAuth : "example@mail.com"}
             inputCss={{ 
               border: 'none',
-              borderRight: '6px solid #F7F7F7'
+              borderRight: '6px solid #F7F7F7',
+              paddingBottom: '2px',
+              borderRadius: '10px'
             }}
             title={"Адрес электронной почты"}
-            css={{ marginTop: '14px' }}
+            css={{ marginTop: '18px' }}
             dispatchType={"email"}
           />
 
@@ -331,7 +400,7 @@ const MakeOrder = () => {
             
           </span>
 
-          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '44px' }}>Выберите способ оплаты</h5>
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '22px' }}>Выберите способ оплаты</h5>
           <ReactSelect 
             params={{ width: 300 }}
             data={[
@@ -340,26 +409,71 @@ const MakeOrder = () => {
               { value: 'online', label: 'Оплата онлайн на сайте' },
               { value: 'code', label: 'Оплата по QR коду' }
             ]}
+            showIcon={true}
+            icon={bankCard}
+            iconStyles={{
+              marginTop: '-9px',
+              marginLeft: '10px',
+              width: '24px',
+            }}
+          />
+          <ReactSelect 
+            params={{ width: 300, mt: '14px', borra: '12px' }}
+            placeholder={"Используйте ваши бонусы"}
+            data={[
+              { value: 'card', label: 'Потратить бонусы' },
+              { value: 'cash', label: 'Накопить бонусы' },
+            ]}
+            showIcon={true}
+            icon={molniya}
+            iconStyles={{
+              marginTop: '-12px',
+              marginLeft: '16px',
+              width: '14px',
+            }}
           />
 
-          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '20px' }}>Получить скидку</h5>
-          <Input
+          { false && <React.Fragment>
+
+            <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '20px' }}>Получить скидку</h5>
+            <Input
+              params={{ width: 300 }}
+              type={"text"}
+              placeholder={ isDiscount ? "Сдаю старый аккумулятор" : "Не буду сдавать аккумулятор"}
+              inputCss={{ 
+                border: 'none',
+                borderRight: isDiscount ? '6px solid rgb(43, 198, 49)' : '6px solid rgb(247, 247, 247)',
+                paddingBottom: '3px',
+                cursor: 'pointer',
+                backgroundColor: isDiscount && 'rgba(43, 198, 49, 0.4)',
+                fontWeight: isDiscount && 'bold',
+                borderRadius: '10px'
+              }}
+              title={"Вы можете получить скидку на заказ, сдав нам свой старый аккумулятор"}
+              css={{ marginTop: '14px', lineHeight: '22px' }}
+              dispatchType={"order-checker"}
+              action={actionDiscount}
+              disabled={true}
+            />
+
+          </React.Fragment> }
+
+          <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '22px' }}>Получить скидку</h5>
+          <ReactSelect 
             params={{ width: 300 }}
-            type={"text"}
-            placeholder={ isDiscount ? "Сдаю старый аккумулятор" : "Не буду сдавать аккумулятор"}
-            inputCss={{ 
-              border: 'none',
-              borderRight: isDiscount ? '6px solid rgb(43, 198, 49)' : '6px solid rgb(247, 247, 247)',
-              paddingBottom: '3px',
-              cursor: 'pointer',
-              backgroundColor: isDiscount && 'rgba(43, 198, 49, 0.4)',
-              fontWeight: isDiscount && 'bold',
+            placeholder={"Сдать свой АКБ"}
+            data={[
+              { value: 'card', label: 'Доставка курьером' },
+              { value: 'cash', label: 'Самовывоз из магазина' },
+              { value: 'online', label: 'Самовывоз со склада' }
+            ]}
+            showIcon={true}
+            icon={bankCard}
+            iconStyles={{
+              marginTop: '-9px',
+              marginLeft: '10px',
+              width: '24px',
             }}
-            title={"Вы можете получить скидку на заказ, сдав нам свой старый аккумулятор"}
-            css={{ marginTop: '14px', lineHeight: '22px' }}
-            dispatchType={"order-checker"}
-            action={actionDiscount}
-            disabled={true}
           />
 
           <h5 style={{ fontSize: '16px', marginBottom: '14px', marginTop: '22px' }}>Выберите способ получения</h5>
@@ -371,6 +485,13 @@ const MakeOrder = () => {
               { value: 'cash', label: 'Самовывоз из магазина' },
               { value: 'online', label: 'Самовывоз со склада' }
             ]}
+            showIcon={true}
+            icon={bankCard}
+            iconStyles={{
+              marginTop: '-9px',
+              marginLeft: '10px',
+              width: '24px',
+            }}
           />
 
           <Input
@@ -380,7 +501,8 @@ const MakeOrder = () => {
             inputCss={{ 
               border: 'none',
               borderRight: '6px solid #F7F7F7',
-              paddingBottom: '2px'
+              paddingBottom: '2px',
+              borderRadius: '10px'
             }}
             css={{ marginTop: '14px' }}
             dispatchType={"address"}
@@ -510,8 +632,28 @@ const MakeOrder = () => {
               />
               <DiliveryCoast>
 
-                <p style={{ display: 'block', fontSize: '14px' }}>Доставка</p>
-                <p style={{ display: 'block', fontSize: '20px', fontWeight: 'bold' }}>0 RUB</p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    alt={""}
+                    src={dilivery}
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      width: '52px',
+                      marginRight: '20px'
+                    }}
+                  />
+                  <p style={{ display: 'block', fontSize: '16px', fontWeight: 'bold', color: '#2E2E2E' }}>Доставка</p>
+                </div>
+                <p style={{ display: 'block', fontSize: '20px', fontWeight: 'bold', color: '#2E2E2E' }}>0 RUB</p>
 
               </DiliveryCoast>
             </Items>
@@ -522,12 +664,27 @@ const MakeOrder = () => {
               <h6 style={{ fontSize: '18px', marginBottom: '12px', color: 'grey' }}>{ summaryCoast } RUB</h6>
 
               <h6 style={{ fontSize: '15px', marginBottom: '13px', lineHeight: '22px' }}>Итого со скидкой от сданного аккумулятора:</h6>
-              <h6 style={{ fontSize: '18px', marginBottom: '10px' }}>{ isDiscount ? ( Number(summaryCoast) - ( summaryCoast * 0.05 ) ).toFixed(0) : summaryCoast } RUB</h6>
+              <h6 style={{ fontSize: '18px', marginBottom: '14px', display: 'block', position: 'relative' }}>
+                { ( Number(summaryCoast) - ( summaryCoast * 0.05 ) ).toFixed(0) } RUB
+                <img
+                  alt={""}
+                  src={lepestok}
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    width: '24px',
+                    top: '0%',
+                    left: '100%',
+                    marginTop: '-4px',
+                    marginLeft: '-30%'
+                  }}
+                />
+              </h6>
 
               <p 
                 style={{ 
                   color: 'grey', 
-                  lineHeight: '18px', 
+                  lineHeight: '20px', 
                   fontSize: '13px',
                   marginBottom: '50px' 
                 }}
@@ -631,13 +788,15 @@ const MakeOrder = () => {
                 }}
               />
 
-              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
-              <p style={{ color: 'grey', lineHeight: '18px', fontSize: '13px' }}>Доставка в Екатеринбург сегодня</p>
+              <p style={{ color: 'grey', lineHeight: '20px', fontSize: '13px' }}>В наличии в 3 магазинах</p>
+              <p style={{ color: 'grey', lineHeight: '20px', fontSize: '13px' }}>Доставка в Екатеринбург сегодня</p>
 
             </OrderForm>
 
           </OrderItems>
-          <MapWrapper/>
+          <MapWrapper ref={mapElement} id="map-element">
+            <Helmet></Helmet>
+          </MapWrapper>
 
         </OrderData>
 

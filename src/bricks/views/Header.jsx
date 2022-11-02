@@ -12,15 +12,15 @@ import HeaderSearch from '../../services/search.service'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
-import cabinet from '../../img/cabinet.png'
-import geonumber from '../../img/geonumber.png'
-import catalog from '../../img/menuMenu.png'
-import tools from '../../img/menuTools.png'
-import search from '../../img/search.png'
-import byClickImage from '../../img/byClickGrey.png'
-import sravnenieImg from '../../img/sravnenie.png'
-import likeImg from '../../img/like.png'
-import glushImg from '../../img/glushka.png'
+import cabinet from '../../img/cabinet.svg'
+import geonumber from '../../img/geonumber.svg'
+import catalog from '../../img/menuMenu.svg'
+import tools from '../../img/menuTools.svg'
+import search from '../../img/search.svg'
+import logo from '../../img/logo.svg'
+import logotitle from '../../img/logotitle.svg'
+import logosubtitle from '../../img/logosubtitle.svg'
+import likeImg from '../../img/like.svg'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount, 
@@ -94,8 +94,6 @@ const Header = () => {
     <React.Fragment>
       <Head>
 
-        { showModalCatalog === 'modal' ? <StartCatalog type={showModalCatalog} action={setShowModalCatalog}/> : null  }
-
         <HeadMenu>
           <Link style={{ textDecoration: 'none', color: 'black' }} to="/podbor-akkumulyatora">
             <MenuButton style={{ fontWeight: 'bold' }}>
@@ -148,13 +146,36 @@ const Header = () => {
                     style={{
                       display: 'block',
                       position: 'absolute',
-                      width: '800px',
+                      width: '60px',
                       top: '0px',
                       left: '0px',
-                      marginLeft: '-114px',
-                      marginTop: '-4px'
+                      marginLeft: '-4px'
                     }}
-                    src={glushImg}
+                    src={logo}
+                    alt={""}
+                  />
+                  <img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      top: '0px',
+                      left: '0px',
+                      marginLeft: '56px',
+                      marginTop: '2px'
+                    }}
+                    src={logosubtitle}
+                    alt={""}
+                  />
+                  <img
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      top: '0px',
+                      left: '0px',
+                      marginLeft: '58px',
+                      marginTop: '20px'
+                    }}
+                    src={logotitle}
                     alt={""}
                   />
                 </LogoTitle>
@@ -299,6 +320,9 @@ const Header = () => {
               alignItems: 'center',
             }}
           >
+
+            { showModalCatalog === 'modal' ? <StartCatalog type={showModalCatalog} action={setShowModalCatalog}/> : null  }
+
             <Button  
               params={{
                 width: 154,
@@ -320,7 +344,7 @@ const Header = () => {
                   style={{
                     display: 'block',
                     position: 'absolute',
-                    width: '16px',
+                    width: '18px',
                     height: '16px',
                     top: '50%',
                     marginTop: '-8px',
@@ -397,7 +421,7 @@ const Header = () => {
                 width: '19px',
                 left: '0px',
                 marginLeft: '10px',
-                zIndex: '100'
+                zIndex: '20'
               }}
               src={search}
               alt={""}

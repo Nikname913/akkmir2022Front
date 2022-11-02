@@ -9,10 +9,17 @@ import Button from '../comps/button/Button.jsx'
 import SelectAkk from '../../services/selectAkk.service'
 import CardPreview from '../views/CardPreview'
 import CategoryCard from '../views/CategoryCard'
-import RequestComponent from '../../services/request.service'
+import MAPAAX from '../../services/mainpageAccii.service'
 import { useSelector } from 'react-redux'
-import creta from '../../img/creta.png'
+import mainBlueAkkum from '../../img/mainBlueAkkum.png'
+import mainYellowAkkum from '../../img/mainYellowAkkum.png'
+import mainBlueCar from '../../img/mainBlueCar.png'
 import flame from '../../img/flame.png'
+import hand from '../../img/promo/promoHand.png'
+import akkum from '../../img/promo/promoAkkum.png'
+import shield from '../../img/promo/promoShield.png'
+import shieldText from '../../img/promo/promoShieldText.png'
+import eco from '../../img/promo/promoEco.png'
 
 const Main = css.Main
 const ContentLine = css.MainContentLine
@@ -27,6 +34,7 @@ const MainPage = () => {
   const mainModelsRemote = useSelector(state => state.main.catalogModelsRemote)
   const mainGenerationsRemote = useSelector(state => state.main.catalogGenerationsRemote)
   const mainEnginesRemote = useSelector(state => state.main.catalogEnginesRemote)
+  const mainDirsRemote = useSelector(state => state.main.catalogDirsRemote)
   const popularItems = useSelector(state => state.catalog.popular)
   
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -41,14 +49,19 @@ const MainPage = () => {
   }
 
   let aaa
+  let bbb
+
   generalCatalog ? aaa = random(10, generalCatalog.length - 10) : aaa = 0
+  generalCatalog ? bbb = random(10, generalCatalog.length - 10) : bbb = 0
 
   useEffect(() => {
     
     document.documentElement.scrollTop = 0
     false && console.log(random(10, generalCatalog.length - 10))
-    console.log(mainMarksRemote)
-  
+    
+    false && console.log(mainMarksRemote)
+    console.log(mainDirsRemote)
+
   },[ generalCatalog ])
 
   return (
@@ -59,8 +72,8 @@ const MainPage = () => {
           <Model3D style={{ marginRight: '20px' }}>
             <h3
               style={{
-                marginTop: '36px',
-                marginLeft: '40px',
+                marginTop: '20px',
+                marginLeft: '24px',
                 fontSize: '30px',
                 width: '70%',
                 lineHeight: '38px',
@@ -68,50 +81,80 @@ const MainPage = () => {
               }}
             >
               Интернет-магазин аккумуляторов и автотоваров</h3>
-
-            <img
-              alt={""}
-              src={creta}
+            
+            <div
               style={{
-                display: 'block',
-                position: 'absolute',
-                width: '240px',
-                left: '100%',
-                top: '100%',
-                borderRadius: '12px',
-                marginTop: '-220px',
-                marginLeft: '-290px'
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '100%',
+                paddingRight: '10%',
+                paddingLeft: '10%',
+                marginTop: '40px'
               }}
-            />
+            >
+              <img
+                alt={""}
+                src={mainBlueAkkum}
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '160px',
+                  borderRadius: '12px',
+                }}
+              />
+              <img
+                alt={""}
+                src={mainYellowAkkum}
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '180px',
+                  borderRadius: '12px',
+                }}
+              />
+            </div>
             
           </Model3D>
           <Model3D style={{ marginRight: '20px' }}>
             <h3
               style={{
-                marginTop: '36px',
-                marginLeft: '40px',
+                marginTop: '20px',
+                marginLeft: '24px',
                 fontSize: '30px',
                 width: '90%',
                 lineHeight: '38px',
                 color: '#2E2E2E'
               }}
             >
-              Сеть надежных автосервисов</h3>
+              Сеть надежных автосервисов и СТО</h3>
 
-            <img
-              alt={""}
-              src={creta}
+            <div
               style={{
-                display: 'block',
-                position: 'absolute',
-                width: '240px',
-                left: '100%',
-                top: '100%',
-                borderRadius: '12px',
-                marginTop: '-220px',
-                marginLeft: '-290px'
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '100%',
+                paddingRight: '10%',
+                paddingLeft: '10%',
+                marginTop: '30px'
               }}
-            />
+            >
+              <img
+                alt={""}
+                src={mainBlueCar}
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '280px',
+                  borderRadius: '12px',
+                }}
+              />
+            </div>
 
           </Model3D>
           <div
@@ -121,7 +164,7 @@ const MainPage = () => {
               alignItems: 'center',
               justifyContent: 'space-between',
               position: 'relative',
-              width: '27.900%',
+              width: '33.3333%',
               height: '400px',
             }}
           >
@@ -131,7 +174,7 @@ const MainPage = () => {
                 display: 'block',
                 position: 'relative',
                 width: '100%',
-                height: '58%',
+                height: '47.4444%',
                 padding: '16px',
                 backgroundColor: 'white',
                 borderRadius: '12px',
@@ -239,8 +282,8 @@ const MainPage = () => {
                 display: 'block',
                 position: 'relative',
                 width: '100%',
-                height: '38%',
-                backgroundColor: 'white',
+                height: '47.4444%',
+                background: 'radial-gradient(99.52% 532.85% at 84.55% 19.23%, #E3FFEC 0%, #E0FFFC 100%)',
                 borderRadius: '12px',
                 boxShadow: '10px 18px 8px rgb(163 163 163 / 2%), 6px 10px 7px rgb(163 163 163 / 7%), 2px 4px 5px rgb(163 163 163 / 11%), 1px 1px 3px rgb(163 163 163 / 13%), 0px 0px 0px rgb(163 163 163 / 13%)'
               }}
@@ -249,46 +292,7 @@ const MainPage = () => {
           </div>
 
         </ContentLine>
-        <ContentLine style={{ justifyContent: 'space-between', marginBottom: '32px' }}>
-
-          <Banner/>
-          <Banner/>
-          <Banner/>
-
-        </ContentLine>
-        <ContentLine>
-
-          {['для легковых автомобилей', 
-            'для грузовых', 
-            'для мотоциклов', 
-            'для лодок', 
-            'тяговые аккумуляторы', 
-            'промышленные', 
-            'для спецтехники', 
-            'для электросамокатов'].map((item, index) => {
-
-            return (
-              <Button
-                key={index}
-                inner={item}
-                params={{
-                  background: 'transparent'
-                }}
-                css={{
-                  fontSize: '13px',
-                  paddingTop: '7px',
-                  paddingBottom: '8px',
-                  paddingLeft: '10px',
-                  paddingRight: '10px',
-                  marginRight: '14px'
-                }}
-              />
-            )
-
-          })}
-
-        </ContentLine>
-        <ContentLine style={{ marginBottom: '35px', marginTop: '9px' }}>
+        <ContentLine style={{ marginBottom: '35px', marginTop: '0px' }}>
 
           <h2>Подбор аккумулятора</h2>
 
@@ -302,6 +306,207 @@ const MainPage = () => {
             gens={mainGenerationsRemote}
             engines={mainEnginesRemote}
           />
+
+        </ContentLine>
+        <ContentLine style={{ flexWrap: 'wrap', marginTop: '14px' }}>
+
+          { mainDirsRemote && JSON.parse(mainDirsRemote)[0].direction.map((item, index) => {
+
+            return (
+              <Button
+                key={index}
+                inner={item.name[0]}
+                params={{
+                  background: 'white'
+                }}
+                css={{
+                  fontSize: '13px',
+                  paddingTop: '7px',
+                  paddingBottom: '10px',
+                  paddingLeft: '14px',
+                  paddingRight: '14px',
+                  marginRight: '14px',
+                  marginBottom: '14px'
+                }}
+              />
+            )
+
+          })}
+
+        </ContentLine>
+        <ContentLine style={{ justifyContent: 'space-between', marginBottom: '22px' }}>
+
+          <Banner 
+            style={{ 
+              background: 'radial-gradient(110.83% 1056.5% at -4.45% 15.94%, #2E2E2E 36.97%, #201C51 100%)',
+              boxShadow: '22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18)'
+            }}
+          >
+            <h3
+              style={{
+                display: 'block',
+                position: 'relative',
+                color: 'white',
+                fontSize: '28px',
+                width: '76%',
+                lineHeight: '36px'
+              }}
+            >
+            
+              Бесплатная установка в сервисных центрах</h3>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '24%'
+              }}
+            >
+              <img
+                alt={""}
+                src={hand}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '150%',
+                  top: '0%',
+                  left: '0%',
+                  marginLeft: '-23px',
+                  marginTop: '-160px'
+                }}
+              />
+            </div>
+          </Banner>
+          <Banner 
+            style={{ 
+              background: 'radial-gradient(100.31% 865.46% at 13.16% 77.19%, #2E2E2E 41.64%, #30704A 100%)',
+              boxShadow: '22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18)',
+              flexWrap: 'wrap',
+            }}
+          >
+            <h3
+              style={{
+                display: 'block',
+                position: 'relative',
+                color: 'white',
+                fontSize: '28px',
+                width: '70%',
+                lineHeight: '36px'
+              }}
+            >
+            
+              Скидка за ваш аккумулятор</h3>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '24%'
+              }}
+            >
+
+              <img
+                alt={""}
+                src={akkum}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '204%',
+                  marginBottom: '2px',
+                  marginTop: '-20px',
+                  marginLeft: '-66px',
+                }}
+              />
+            </div>
+            <div>
+              <img
+                alt={""}
+                src={eco}
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '80px',
+                  marginBottom: '2px',
+                }}
+              />
+            </div>
+          </Banner>
+          <Banner 
+            style={{ 
+              background: 'radial-gradient(129.66% 1235.96% at 0% 10.31%, #2E2E2E 32.05%, #6C0808 100%)',
+              boxShadow: '22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18)',
+              flexWrap: 'wrap', 
+            }}
+          >
+            <h3
+              style={{
+                display: 'block',
+                position: 'relative',
+                color: 'white',
+                fontSize: '28px',
+                width: '70%',
+                lineHeight: '36px'
+              }}
+            >
+            
+              Расширенная гарантия</h3>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '24%'
+              }}
+            >
+
+              <img
+                alt={""}
+                src={shield}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '218%',
+                  marginBottom: '2px',
+                  marginTop: '-40px',
+                  marginLeft: '-66px',
+                }}
+              />
+              <img
+                alt={""}
+                src={shieldText}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  width: '50%',
+                  marginBottom: '2px',
+                  marginTop: '-58px',
+                  marginLeft: '-66px',
+                }}
+              />
+            </div>
+            <div>
+              <img
+                alt={""}
+                src={eco}
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '80px',
+                  marginBottom: '2px',
+                  opacity: '0'
+                }}
+              />
+            </div>
+          </Banner>
 
         </ContentLine>
         <ContentLine style={{ marginBottom: '35px', marginTop: '9px', position: 'relative' }}>
@@ -351,7 +556,7 @@ const MainPage = () => {
           }) : null }
 
         </ContentLine> : 
-        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap', marginBottom: '0px', marginTop: '-2px' }}>
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
@@ -375,12 +580,86 @@ const MainPage = () => {
                       ? '--' : item.pre_order_prices[0].region[0].price[0]
                   }
                   coast2={
-                    +item.pre_order_prices[0].region[0].price[0] === 0
-                      ? '--' : item.pre_order_prices[0].region[0].price[0]
+                    !item.pre_order_prices[0].region[0].price_discount
+                      ? item.pre_order_prices[0].region[0].price[0] : item.pre_order_prices[0].region[0].price_discount[0]
                   }
                   itemID={item.id[0]}
                 />
                 { index < aaa + 6 && <span 
+                  style={{ 
+                    display: 'block',
+                    position: 'relative',
+                    width: '1%',
+                    height: '300px',
+                    boxSizing: 'border-box'
+                  }}
+                ></span> }
+              </React.Fragment>
+            }</React.Fragment>
+
+          }) : null }
+
+        </ContentLine> }
+        { generalCatalog === null || generalCatalog.length === 0 ? <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+
+          { popularItems ? popularItems.map((item, index) => {
+
+            return (
+              <React.Fragment key={index}>
+                <CardPreview
+                  params={{ width: 15.833333, mleft: 0 }}
+                  image={null}
+                  title={item.name}
+                  description={item.discr}
+                  coast1={item.coast1}
+                  coast2={item.coast2}
+                  itemID={item.itemID}
+                />
+                { index < 5 && <span 
+                  style={{ 
+                    display: 'block',
+                    position: 'relative',
+                    width: '1%',
+                    height: '300px',
+                    boxSizing: 'border-box'
+                  }}
+                ></span> }
+              </React.Fragment>
+            )
+
+          }) : null }
+
+        </ContentLine> : 
+        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap', marginBottom: '18px' }}>
+
+          { generalCatalog ? generalCatalog.map((item, index) => {
+
+            false && console.log('--------------------------------')
+            false && console.log(item)
+            false && console.log('--------------------------------')
+
+            return <React.Fragment key={index}>{
+              index > bbb && index < bbb + 7 && <React.Fragment key={index}>
+                <CardPreview
+                  params={{ width: 15.833333, mleft: 0 }}
+                  image={null}
+                  title={item.name}
+                  popular={true}
+                  description={[
+                    `Бренд : ${item.properties[0].property[0].value[0]}`,
+                    `Производитель : ${item.properties[0].property[1].value[0]}`,
+                  ]}
+                  coast1={
+                    +item.pre_order_prices[0].region[0].price[0] === 0
+                      ? '--' : item.pre_order_prices[0].region[0].price[0]
+                  }
+                  coast2={
+                    !item.pre_order_prices[0].region[0].price_discount
+                      ? item.pre_order_prices[0].region[0].price[0] : item.pre_order_prices[0].region[0].price_discount[0]
+                  }
+                  itemID={item.id[0]}
+                />
+                { index < bbb + 6 && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',
@@ -402,9 +681,7 @@ const MainPage = () => {
         </ContentLine>
         <ContentLine style={{ marginBottom: '32px', justifyContent: 'space-between' }}>
 
-          <Banner/>
-          <Banner/>
-          <Banner/>
+          <MAPAAX></MAPAAX>
 
         </ContentLine>
         <ContentLine style={{ marginBottom: '36px' }}>
@@ -435,19 +712,34 @@ const MainPage = () => {
                 && item.name[0].indexOf('Rossko') === -1
                 && item.name[0].indexOf('LC-1187') === -1
                 && item.name[0].indexOf('AP182/10') === -1 
-                && item.name[0].indexOf('PCA-035') === -1 ) {
+                && item.name[0].indexOf('PCA-035') === -1
+                && item.name[0] !== 'Трансстартер'
+                && item.name[0] !== 'Акции и уценка'
+                && item.name[0] !== 'Шины и диски'
+                && item.name[0] !== 'Элементы питания' ) {
 
                 const ID = item.id[0]
                 let idsArray = [ ID ]  
                 let tagsArray = []
 
                 false && console.log('--------------------------------')
+                false && console.log(item.name[0])
+                false && console.log(item.id[0])
                 false && console.log('--------------------------------')
 
                 JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
 
                   if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
                   if ( itemm.parent_id[0] === ID ) tagsArray.push([itemm.id[0], itemm.name[0]])
+
+                  if ( itemm.parent_id[0] === 'f863771d-8620-11e6-a171-14dae9fa0260') {
+
+                    false && console.log('--------------------------------')
+                    false && console.log(itemm.name[0])
+                    false && console.log(itemm.id[0])
+                    false && console.log('--------------------------------')
+
+                  }
 
                 })
 
