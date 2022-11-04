@@ -14,7 +14,7 @@
 > src - основной каталог проекта akkmir
   >> admin - в данную папку планировалось размещение админ-части проекта
   >> appStore - папка со стейтом приложения и редюсерами
-    >>> firebaseDBconnector - папка для работы с Firebase Realtime Database, через взаимодействие с api приложения
+    >>> firebaseDBconnector - папка для работы с Firebase Realtime Database
     >>> indexDBstore - рассматривался запасной вариант на случай нестабильной работы localStorage
     >>> reducers - здесь лежат все редюсеры
     >>> store.js
