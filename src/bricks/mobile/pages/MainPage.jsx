@@ -19,6 +19,14 @@ import mobileService from '../../../img/mobileService.png'
 import mobileCatalog from '../../../img/mobileCatalog.png'
 import arrowRight from '../../../img/arrowRight.png'
 import change from '../../../img/change.png'
+import akkum from '../../../img/catalog/akkum.png'
+import aksessuar from '../../../img/catalog/aksessuar.png'
+import freeze from '../../../img/catalog/freeze.png'
+import ibp from '../../../img/catalog/ibp.png'
+import kosmetik from '../../../img/catalog/kosmetik.png'
+import oil from '../../../img/catalog/oil.png'
+import tools from '../../../img/catalog/tools.png'
+import zaradka from '../../../img/catalog/zaradka.png'
 
 const { Wrapper, 
   ContentLine, 
@@ -524,7 +532,12 @@ const MainPage = (props) => {
                 && item.name[0].indexOf('Rossko') === -1
                 && item.name[0].indexOf('LC-1187') === -1
                 && item.name[0].indexOf('AP182/10') === -1 
-                && item.name[0].indexOf('PCA-035') === -1 ) {
+                && item.name[0].indexOf('PCA-035') === -1
+                && item.name[0] !== 'Трансстартер'
+                && item.name[0] !== 'Акции и уценка'
+                && item.name[0] !== 'Шины и диски'
+                && item.name[0] !== 'Элементы питания' ) {
+
                   let NAME = item.name[0]
 
                   if ( NAME === 'Автоаксессуары' ) NAME = 'Аксессуары'
