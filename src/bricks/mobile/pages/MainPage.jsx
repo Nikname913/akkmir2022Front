@@ -1,7 +1,8 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import css from '../../../styles/mobile/mobileStyles'
 import CardPreview from '../views/CardPreview'
@@ -18,7 +19,7 @@ import mobileShop from '../../../img/mobileShop.png'
 import mobileService from '../../../img/mobileService.png'
 import mobileCatalog from '../../../img/mobileCatalog.png'
 import arrowRight from '../../../img/arrowRight.png'
-import change from '../../../img/change.png'
+import change from '../../../img/change.svg'
 import akkum from '../../../img/catalog/akkum.png'
 import aksessuar from '../../../img/catalog/aksessuar.png'
 import freeze from '../../../img/catalog/freeze.png'
@@ -552,8 +553,18 @@ const MainPage = (props) => {
 
                   })
 
+                  {/* import akkum from '../../../img/catalog/akkum.png' */}
+                  {/* import aksessuar from '../../../img/catalog/aksessuar.png' */}
+                  {/* import freeze from '../../../img/catalog/freeze.png' */}
+                  {/* import ibp from '../../../img/catalog/ibp.png' */}
+                  {/* import kosmetik from '../../../img/catalog/kosmetik.png' */}
+                  {/* import oil from '../../../img/catalog/oil.png' */}
+                  {/* import tools from '../../../img/catalog/tools.png' */}
+                  {/* import zaradka from '../../../img/catalog/zaradka.png' */}
+
                   return (
                     <CatalogMenuItem
+                      style={{ backgroundColor: 'white', borderRadius: '10px' }}
                       key={ID} 
                       width={screen}
                       onClick={() => {
@@ -564,9 +575,27 @@ const MainPage = (props) => {
                         style={{ 
                           display: 'block', 
                           position: 'relative',
-                          width: '30px'
+                          width: '50px',
+                          backgroundColor: 'white'
                         }} 
-                        src={mobileCatalog} 
+                        src={
+                          item.name[0] === 'Специальные жидкости'
+                          ? freeze
+                          : item.name[0] === 'Масла автомобильные'
+                          ? oil
+                          : item.name[0] === 'Автотовары'
+                          ? aksessuar
+                          : item.name[0] === 'Автоаксессуары'
+                          ? aksessuar
+                          : item.name[0] === 'Инструменты'
+                          ? tools
+                          : item.name[0] === 'Зарядные и пусковые устройства'
+                          ? zaradka
+                          : item.name[0] === 'Автохимия и автокосметика'
+                          ? kosmetik
+                          : item.name[0] === 'Аккумуляторы и клеммы'
+                          ? akkum : null
+                        } 
                         alt={""}
                       />
                       <span 
@@ -645,7 +674,7 @@ const MainPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
 
           <PopularScrollWrapper>
 
@@ -674,16 +703,6 @@ const MainPage = (props) => {
           </PopularScrollWrapper>
 
         </ContentLine> }
-        <ContentLine width={screen} style={{ marginTop: '5px', marginBottom: '6px' }}>
-
-          <h4>Адреса магазинов и сервисов</h4>
-
-        </ContentLine>
-        <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
-
-          <PopularScrollWrapper><AdressCard/></PopularScrollWrapper>
-
-        </ContentLine>
         
         { false && <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
               

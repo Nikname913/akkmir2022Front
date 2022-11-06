@@ -70,8 +70,8 @@ const CardPreview = (props) => {
               marginBottom: '2px'
             }}
           >
-            <span style={{ display: 'block', width: '100%', fontSize: '16px', fontWeight: 'bold' }}>{ coast1 } руб.</span>
-            <span style={{ display: 'none', width: '50%', fontSize: '16px', fontWeight: 'bold', color: 'grey', textAlign: 'right' }}>{ coast2 } Р</span>
+            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold' }}>{ coast1 } ₽</span>
+            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold', color: 'grey', textAlign: 'right' }}>{ coast2 } ₽</span>
 
           </div>
 

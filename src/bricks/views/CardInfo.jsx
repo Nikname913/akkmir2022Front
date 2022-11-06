@@ -180,7 +180,7 @@ const CardInfo = (props) => {
                           ? item.name[0].slice(4).split(' Склад')[0]
                           : item.name[0].slice(4) }
                       </p>
-                      <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните: +7(343)261-61-62</p>
+                      <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните (343)261-61-62</p>
                       <p style={{ fontSize: '13px' }}>Мы работаем: с 09:00 до 19:00</p>
                     </Cell1>
                     <Cell2>

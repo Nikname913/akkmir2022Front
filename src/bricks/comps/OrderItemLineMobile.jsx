@@ -10,8 +10,8 @@ import Rds from '../../appStore/reducers/storageReducers/mainReducer'
 import { setActualItem } from '../../appStore/reducers/mainReducer'
 import css from '../../styles/mobile/mobileStyles'
 import category from '../../img/category.png'
-import like from '../../img/like.png'
-import trash from '../../img/trash.png'
+import like from '../../img/like.svg'
+import trash from '../../img/trash.svg'
 
 const { OrderPage: {
     OrdersWrapperContentLine,

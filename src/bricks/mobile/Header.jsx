@@ -7,9 +7,9 @@ import Input from '../comps/input/Input.jsx'
 import Button from '../comps/button/Button.jsx'
 import ModalWindow from '../../services/modal.service'
 import Message from '../../services/message.service'
-import sravnenieImg from '../../img/sravnenie.png'
-import likeImg from '../../img/like.png'
-import search from '../../img/search.png'
+import sravnenieImg from '../../img/sravnenie.svg'
+import likeImg from '../../img/like.svg'
+import search from '../../img/search.svg'
 
 const { Wrapper, ContentLine } = css.HeaderStyles
 
@@ -88,11 +88,11 @@ const MobileHeader = (props) => {
                 style={{
                   display: 'block',
                   position: 'absolute',
-                  width: '17px',
+                  width: '20px',
                   left: 0,
-                  marginLeft: '12px',
+                  marginLeft: '11px',
                   top: '50%',
-                  marginTop: '-9px'
+                  marginTop: '-10px'
                 }}
               />
             }
@@ -116,11 +116,11 @@ const MobileHeader = (props) => {
                 style={{
                   display: 'block',
                   position: 'absolute',
-                  width: '17px',
+                  width: '20px',
                   left: 0,
-                  marginLeft: '13px',
+                  marginLeft: '11px',
                   top: '50%',
-                  marginTop: '-7px'
+                  marginTop: '-8px'
                 }}
               />
             }

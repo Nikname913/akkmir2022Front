@@ -4,7 +4,7 @@
 import React from 'react'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
-import ReactSelect from '../../comps/ReactSelect'
+import ReactSelect from '../../comps/ReactSelectNoIcons'
 import CardPreview from '../views/CardPreview'
 import { useSelector } from 'react-redux'
 
@@ -91,7 +91,6 @@ const ChangePage = (props) => {
                 alignItems: 'center',
                 justifyContent: 'flex-start',
                 position: 'relative',
-                marginBottom: '12px'
               }}
             >
 
@@ -132,10 +131,25 @@ const ChangePage = (props) => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
+                justifyContent: 'space-between',
+                position: 'relative',
+                marginTop: '16px',
+                marginBottom: '10px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+              }}
+            >
+              <span style={{ width: '50%' }}>1. Марка</span>
+              <span style={{ width: '50%' }}>2. Модель</span>
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
                 justifyContent: 'flex-start',
                 position: 'relative',
-                marginBottom: '12px',
-                marginTop: '26px',
+                marginBottom: '14px'
               }}
             >
               <ReactSelect 
@@ -157,6 +171,21 @@ const ChangePage = (props) => {
                   { value: 'online', label: '---' }
                 ]}
               />
+            </div>
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                position: 'relative',
+                marginBottom: '10px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+              }}
+            >
+              <span style={{ width: '50%' }}>3. Поколение</span>
+              <span style={{ width: '50%' }}>4. Объем двигателя</span>
             </div>
             <div 
               style={{
@@ -202,7 +231,7 @@ const ChangePage = (props) => {
               <Button  
                 params={{
                   width: 154,
-                  height: 35,
+                  height: 40,
                   background: '#2E2E2E'
                 }}
                 inner={"Показать"}
@@ -218,7 +247,7 @@ const ChangePage = (props) => {
               <Button  
                 params={{
                   width: 174,
-                  height: 35,
+                  height: 40,
                   background: '#2BC631'
                 }}
                 inner={"Подбор специалистом"}

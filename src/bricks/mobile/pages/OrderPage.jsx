@@ -186,7 +186,7 @@ const OrderPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
 
           <PopularScrollWrapper>
 

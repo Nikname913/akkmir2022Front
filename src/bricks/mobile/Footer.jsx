@@ -115,14 +115,14 @@ const MobileFooter = () => {
 
           <Button  
             params={{
-              width: 140,
+              width: 150,
               height: 34,
               background: 'white'
             }}
             inner={"Написать директору"}
             css={{
               fontSize: '12px',
-              borderRadius: '8px',
+              borderRadius: '12px',
               marginTop: '10px',
               marginBottom: '10px',
             }}

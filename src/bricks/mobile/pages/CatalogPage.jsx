@@ -1,16 +1,26 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+/* eslint-disable no-lone-blocks */
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import CardPreview from '../views/CardPreview'
 import { setActualCategory } from '../../../appStore/reducers/mainReducer'
+
 import image from '../../../img/category.png'
-import changeWhite from '../../../img/changeWhite.png'
+import changeWhite from '../../../img/changeWhite.svg'
 import arrowRight from '../../../img/arrowRight.png'
+import akkum from '../../../img/catalog/akkum.png'
+import aksessuar from '../../../img/catalog/aksessuar.png'
+import freeze from '../../../img/catalog/freeze.png'
+import ibp from '../../../img/catalog/ibp.png'
+import kosmetik from '../../../img/catalog/kosmetik.png'
+import oil from '../../../img/catalog/oil.png'
+import tools from '../../../img/catalog/tools.png'
+import zaradka from '../../../img/catalog/zaradka.png'
 
 const { Wrapper, 
   ContentLine,
@@ -30,6 +40,7 @@ const CatalogPage = (props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
+  const startRef = useRef()
   const catalogCategory = params.category
 
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
@@ -53,6 +64,11 @@ const CatalogPage = (props) => {
     dispatch(setActualCategory({ id: catid, label: title })) 
   
   }
+  function scrollStart() {
+
+    startRef.current.scrollIntoView({ behavior: 'smooth' })
+
+  }
 
   return (
     <React.Fragment>
@@ -70,6 +86,7 @@ const CatalogPage = (props) => {
         
         </ContentLine>
         <ContentLine 
+          ref={startRef}
           width={screen} 
           style={{ 
             marginTop: '12px', 
@@ -83,59 +100,98 @@ const CatalogPage = (props) => {
 
             if ( index > 3 && item.parent_id[0] === '' && item.name[0].indexOf('уценка') === -1 ) {
 
-              const ID = item.id[0]
-              let idsArray = [ ID ]  
+              if ( item.parent_id[0] === '' 
+              
+                && item.name[0].indexOf('Rossko') === -1
+                && item.name[0].indexOf('LC-1187') === -1
+                && item.name[0].indexOf('AP182/10') === -1 
+                && item.name[0].indexOf('PCA-035') === -1
+                && item.name[0] !== 'Трансстартер'
+                && item.name[0] !== 'Акции и уценка'
+                && item.name[0] !== 'Шины и диски'
+                && item.name[0] !== 'Элементы питания' ) {
 
-              JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
+                const ID = item.id[0]
+                let idsArray = [ ID ]  
 
-                if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
+                JSON.parse(mainMenuRemote)[0].group.forEach(itemm => {
 
-              })
+                  if ( itemm.parent_id[0] === ID ) idsArray.push(itemm.id[0])
 
-              return (
-                <React.Fragment key={index}>
-                  <CatalogItem 
-                    width={screen * 0.3} 
-                    height={screen * 0.3}
-                    marginBottom={(screen - (screen * 0.93)) / 3}
-                    onClick={() => {
+                })
 
-                      selectCategory(idsArray, item.name[0])
-                      navigate(`../catalog/${item.name[0]}`)
+                {/* import akkum from '../../../img/catalog/akkum.png' */}
+                {/* import aksessuar from '../../../img/catalog/aksessuar.png' */}
+                {/* import freeze from '../../../img/catalog/freeze.png' */}
+                {/* import ibp from '../../../img/catalog/ibp.png' */}
+                {/* import kosmetik from '../../../img/catalog/kosmetik.png' */}
+                {/* import oil from '../../../img/catalog/oil.png' */}
+                {/* import tools from '../../../img/catalog/tools.png' */}
+                {/* import zaradka from '../../../img/catalog/zaradka.png' */}
 
-                    }}
-                  >
+                return (
+                  <React.Fragment key={index}>
+                    <CatalogItem 
+                      width={screen * 0.3} 
+                      height={screen * 0.3}
+                      marginBottom={(screen - (screen * 0.93)) / 3}
+                      onClick={() => {
 
-                    <img 
-                      src={image} 
-                      alt={""}
-                      style={{
-                        display: 'block',
-                        width: '60px',
-                        margin: '0 auto',
-                        marginBottom: '9px',
-                        borderRadius: '6px',
-                      }}
-                    />
+                        selectCategory(idsArray, item.name[0])
+                        navigate(`../catalog/${item.name[0]}`)
 
-                    <span
-                      style={{
-                        display: 'block',
-                        position: 'relative',
-                        width: '100%',
-                        height: '33px',
-                        overflow: 'hidden',
-                        lineHeight: '16px',
-                        fontSize: '12px',
-                        textAlign: 'center',
-                        fontWeight: 'bold',
                       }}
                     >
-                    
-                      { item.name[0] }</span>
-                  </CatalogItem>
-                </React.Fragment>
-              )
+
+                      <img 
+                        src={
+                          item.name[0] === 'Специальные жидкости'
+                          ? freeze
+                          : item.name[0] === 'Масла автомобильные'
+                          ? oil
+                          : item.name[0] === 'Автотовары'
+                          ? aksessuar
+                          : item.name[0] === 'Автоаксессуары'
+                          ? aksessuar
+                          : item.name[0] === 'Инструменты'
+                          ? tools
+                          : item.name[0] === 'Зарядные и пусковые устройства'
+                          ? zaradka
+                          : item.name[0] === 'Автохимия и автокосметика'
+                          ? kosmetik
+                          : item.name[0] === 'Аккумуляторы и клеммы'
+                          ? akkum : null
+                        }
+                        alt={""}
+                        style={{
+                          display: 'block',
+                          width: '63px',
+                          margin: '0 auto',
+                          marginBottom: '9px',
+                          borderRadius: '6px',
+                        }}
+                      />
+
+                      <span
+                        style={{
+                          display: 'block',
+                          position: 'relative',
+                          width: '100%',
+                          height: '33px',
+                          overflow: 'hidden',
+                          lineHeight: '16px',
+                          fontSize: '12px',
+                          textAlign: 'center',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                      
+                        { item.name[0] }</span>
+                    </CatalogItem>
+                  </React.Fragment>
+                )
+
+              }
 
             }
 
@@ -271,6 +327,7 @@ const CatalogPage = (props) => {
                 backgroundColor: 'rgb(43, 198, 49)',
                 fontSize: '14px',
                 textAlign: 'center',
+                marginBottom: '10px',
                 lineHeight: '40px',
                 fontWeight: 'bold',
                 borderRadius: '8px',
@@ -281,6 +338,27 @@ const CatalogPage = (props) => {
             >
             
               Показать еще</span>
+            
+            <span
+              onClick={scrollStart}
+              style={{
+                display: 'block',
+                position: 'relative',
+                width: '100%',
+                height: '40px',
+                backgroundColor: 'white',
+                color: '#565656',
+                fontSize: '14px',
+                textAlign: 'center',
+                lineHeight: '40px',
+                fontWeight: 'bold',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                boxShadow: '22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%)'
+              }}
+            >
+            
+              Вернуться в начало</span>
 
         </ContentLine> }
 

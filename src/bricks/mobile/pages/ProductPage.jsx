@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
@@ -9,6 +10,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount } from '../../../appStore/reducers/mainReducer'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
 import akkum from '../../../img/category.png'
+import eco from '../../../img/eco.svg'
+import quest from '../../../img/quest.svg'
+import more from '../../../img/showMore.svg'
 
 const { Wrapper, 
   PopularScrollWrapper,
@@ -25,6 +29,7 @@ const ProductPage = (props) => {
   const actualItem = useSelector(state => state.main.actualItem)
   const popularItems = useSelector(state => state.catalog.popular)
   const propsRemote = useSelector(state => state.main.catalogPropsRemote)
+  const shopsRemote = useSelector(state => state.main.catalogShopsRemote)
   const itemLocal = useSelector(state => state.main.actualItem)
   const [ showCharacteristics, setShowCharacteristics ] = useState(false)
   const dispatch = useDispatch()
@@ -34,11 +39,12 @@ const ProductPage = (props) => {
   
   jsonCatalog ? generalCatalog = JSON.parse(jsonCatalog)[0].product : generalCatalog = null
 
-  const { screen = 420, amperHour = 60 } = props
+  const { screen = 420, amperHour = 60, shops = [] } = props
   const [ amper, setAmper ] = useState(amperHour)
   const [ makeOrderInner, setMakeOrderInner ] = useState('Добавить в корзину')
   const [ makeOrder, setMakeOrder ] = useState(false)
   const [ productProps, ] = useState(propertiesConfig())
+  const [ productShops, setProductShops ] = useState(shopsConfig())
 
   function propertiesConfig() {
 
@@ -76,6 +82,83 @@ const ProductPage = (props) => {
 
   }
 
+  function shopsConfig() {
+
+    let wrhss = []
+
+    generalCatalog && generalCatalog.map(item => {
+
+      if ( item.id[0] === itemLocal ) {
+
+        wrhss = item.warehouses
+
+      }
+
+    })
+
+    const shops = wrhss[0].warehouse
+    let returnedPropsArray = []
+
+    shopsRemote && shops.forEach(shop => {
+
+      false && console.log(shop)
+
+      const sshopsRemote = JSON.parse(shopsRemote)[0].warehouse
+      const shopID = shop.id[0]
+      const shopCount = shop.count[0]
+      const ekbRegion = 'f662faa5-029b-11e8-8dcf-0015179b1da1'
+
+      sshopsRemote.forEach(sshop => {
+
+        if ( sshop.region_id[0] === ekbRegion && sshop.id[0] === shopID ) returnedPropsArray.push({
+          id: shopID,
+          count: shopCount,
+          value: sshop.name[0]
+        })
+
+      }) 
+
+    })
+
+    console.log(returnedPropsArray)
+    return returnedPropsArray
+
+  }
+
+  function shopsConfigRes() {
+
+    const warehouses = shops[0].warehouse
+    let returnedWarehousesArray = []
+
+    false && console.log(shopsRemote)
+    false && console.log(shops)
+    false && console.log(warehouses)
+
+    shopsRemote && warehouses.forEach(warehouse => {
+
+      const sshopsRemote = JSON.parse(shopsRemote)[0].warehouse
+      const shopID = warehouse.id[0]
+      const itemsCount = warehouse.count[0]
+      const ekbRegion = 'f662faa5-029b-11e8-8dcf-0015179b1da1'
+
+      sshopsRemote.forEach(sshop => {
+
+        if ( sshop.region_id[0] === ekbRegion && sshop.id[0] === shopID ) {
+
+          sshop.count = [ itemsCount ]
+          returnedWarehousesArray.push(sshop)        
+
+        }
+
+      })
+
+    })
+
+    false && console.log(returnedWarehousesArray)
+    return returnedWarehousesArray
+
+  }
+
   function ordersCount() {
 
     Rds.setOrdersCount()
@@ -84,6 +167,7 @@ const ProductPage = (props) => {
   }
 
   function ordersData(param) { Rds.makeNewOrder({ itemID: param }) }
+  useEffect(() => setProductShops(shopsConfig()), [])
 
   return (
     <React.Fragment>
@@ -340,7 +424,7 @@ const ProductPage = (props) => {
             }}
           >
             
-            В наличии в 5 магазинах</span>
+            В наличии в { productShops.length } магазинах</span>
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
@@ -348,14 +432,19 @@ const ProductPage = (props) => {
 
             <OrderWrapperContentLine 
               style={{ 
-                justifyContent: 'flex-end', 
+                justifyContent: 'space-between', 
                 paddingLeft: '14px', 
                 paddingRight: '14px',
                 marginBottom: '12px' 
               }}
             >
               
+              <img
+                alt={""}
+                src={eco}
+              />
               <span style={{ fontSize: '13px', color: 'grey' }}>Этот товар купили <i style={{ fontWeight: 'bold', fontStyle: 'normal' }}>500 раз</i></span>
+            
             </OrderWrapperContentLine>
             
             { generalCatalog && generalCatalog.map(item => {
@@ -375,13 +464,13 @@ const ProductPage = (props) => {
                     }}
                   >
                     
-                    <span style={{ fontSize: '20px', fontWeight: 'bold' }}>
+                    <span style={{ fontSize: '24px', fontWeight: 'bold' }}>
                       { +item.pre_order_prices[0].region[0].price[0] === 0
-                      ? 'Нет в наличии' : item.pre_order_prices[0].region[0].price[0] + ' RUB' }
+                      ? 'Нет в наличии' : item.pre_order_prices[0].region[0].price[0] + ' ₽/шт' }
                     </span>
-                    <span style={{ fontSize: '20px', fontWeight: 'bold' }}>
-                      { +item.pre_order_prices[0].region[0].price[0] === 0
-                      ? '' : item.pre_order_prices[0].region[0].price[0] + ' RUB' }
+                    <span style={{ fontSize: '24px', fontWeight: 'bold', color: 'grey' }}>
+                      { !item.pre_order_prices[0].region[0].price_discount
+                      ? item.pre_order_prices[0].region[0].price[0] : item.pre_order_prices[0].region[0].price_discount[0] + ' ₽/шт' }
                     </span>
                   </OrderWrapperContentLine>
                 )
@@ -605,7 +694,10 @@ const ProductPage = (props) => {
 
                   <span
                     style={{
-                      display: 'block',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
                       position: 'relative',
                       width: '26px',
                       height: '26px',
@@ -614,7 +706,17 @@ const ProductPage = (props) => {
                       marginLeft: '20px',
                       cursor: 'pointer'
                     }}
-                  ></span>
+                  >
+                    <img
+                      alt={""}
+                      src={quest}
+                      style={{
+                        display: 'block',
+                        position: 'relative', 
+                        width: '9px' 
+                      }}
+                    />
+                  </span>
 
                 </div>
                 
@@ -682,37 +784,93 @@ const ProductPage = (props) => {
             : { marginTop: '6px', marginBottom: '12px' }}
         >
 
-          <span
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              position: 'relative',
-              width: '30px',
-              height: '30px',
-              backgroundColor: 'grey',
-              borderRadius: '8px',
-              marginRight: '12px',
-              cursor: 'pointer',
-              fontSize: '15px'
-            }}
-            onClick={() => setShowCharacteristics(prev => !prev)}
-          >
-
-            { showCharacteristics && <span
+          { !showCharacteristics ? <React.Fragment>
+            <span
               style={{
-                display: 'block',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
                 position: 'relative',
-                width: '14px',
-                height: '14px',
+                width: '30px',
+                height: '30px',
                 borderRadius: '8px',
-                backgroundColor: 'rgb(43, 198, 49)'
+                marginRight: '4px',
+                cursor: 'pointer',
+                fontSize: '16px',
               }}
-            /> }
+              onClick={() => setShowCharacteristics(prev => !prev)}
+            >
 
-          </span>
-          <span>Показать характеристики</span>
+              <img
+                alt={""}
+                src={more}
+              />
+              <img
+                alt={""}
+                src={more}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  transform: 'rotate(90deg)'
+                }}
+              />
+
+              { showCharacteristics && <span
+                style={{
+                  display: 'block',
+                  position: 'relative',
+                  width: '14px',
+                  height: '14px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgb(43, 198, 49)'
+                }}
+              /> }
+
+            </span>
+            <span
+              onClick={() => setShowCharacteristics(prev => !prev)}
+              style={{ cursor: 'pointer' }}
+            >Показать характеристики</span>
+          </React.Fragment> : <React.Fragment>
+            <span
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                position: 'relative',
+                width: '30px',
+                height: '30px',
+                borderRadius: '8px',
+                marginRight: '4px',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
+              onClick={() => setShowCharacteristics(prev => !prev)}
+            >
+
+              <img
+                alt={""}
+                src={more}
+                style={{ transform: 'rotate(-45deg)' }}
+              />
+              <img
+                alt={""}
+                src={more}
+                style={{
+                  display: 'block',
+                  position: 'absolute',
+                  transform: 'rotate(45deg)'
+                }}
+              />
+
+            </span>
+            <span 
+              onClick={() => setShowCharacteristics(prev => !prev)}
+              style={{ cursor: 'pointer' }}
+            >Скрыть характеристики</span>
+          </React.Fragment> }
 
         </ContentLine>
         { showCharacteristics && <ContentLine 
@@ -765,27 +923,28 @@ const ProductPage = (props) => {
           <Button  
             params={{
               width: '',
-              height: 30,
-              background: 'white'
+              height: 34,
+              background: '#565656'
             }}
             inner={"Наличие в магазинах"}
             css={{
               fontSize: '13px',
               boxShadow: 'none',
-              color: '#858585',
+              color: 'white',
               border: '1px solid #858585',
               borderRadius: '15px',
-              paddingRight: '8px',
-              paddingLeft: '8px',
+              paddingRight: '12px',
+              paddingLeft: '12px',
               marginRight: '10px',
-              marginBottom: '10px'
+              marginBottom: '10px',
+              lineHeight: '32px'
             }}
           />
 
           <Button  
             params={{
               width: '',
-              height: 30,
+              height: 34,
               background: 'white'
             }}
             inner={"Описание"}
@@ -795,17 +954,18 @@ const ProductPage = (props) => {
               color: '#858585',
               border: '1px solid #858585',
               borderRadius: '15px',
-              paddingRight: '8px',
-              paddingLeft: '8px',
+              paddingRight: '12px',
+              paddingLeft: '12px',
               marginRight: '10px',
-              marginBottom: '10px'
+              marginBottom: '10px',
+              lineHeight: '32px'
             }}
           />
 
           <Button  
             params={{
               width: '',
-              height: 30,
+              height: 34,
               background: 'white'
             }}
             inner={"Технологии"}
@@ -815,12 +975,84 @@ const ProductPage = (props) => {
               color: '#858585',
               border: '1px solid #858585',
               borderRadius: '15px',
-              paddingRight: '8px',
-              paddingLeft: '8px',
+              paddingRight: '12px',
+              paddingLeft: '12px',
               marginRight: '10px',
-              marginBottom: '10px'
+              marginBottom: '10px',
+              lineHeight: '32px'
             }}
           />
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '7px' }}>
+
+          <h4>Наличие в магазинах</h4>
+
+        </ContentLine>
+        <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '7px', flexWrap: 'wrap' }}>
+
+          { productShops.length > 0 && productShops.map((item, index) => {
+
+            return (
+              <React.Fragment key={index}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    position: 'relative',
+                    width: '100%',
+                    marginBottom: index !== productShops.length - 1
+                      ? '18px' : '0px'
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      marginRight: '16px'
+                    }}
+                  >
+                    <p style={{ fontWeight: 'bold', fontSize: '13px', marginBottom: '10px' }}>
+                      { item.value.indexOf('Склад') !== -1 
+                        ? item.value.slice(4).split(' Склад')[0]
+                        : item.value.slice(4) }
+                    </p>
+                    <p style={{ fontSize: '13px', marginBottom: '10px' }}>Звоните (343)261-61-62</p>
+                    <p style={{ fontSize: '13px' }}>Работаем 09:00 до 19:00</p>
+                  </span>
+                  <span
+                    style={{
+                      display: 'block',
+                      position: 'relative',
+                      marginRight: '12px'
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'block',
+                        position: 'absolute',
+                        width: '12px',
+                        height: '12px',
+                        borderRadius: '50%',
+                        backgroundColor: '#2BC631',
+                        top: '50%',
+                        marginTop: '-6px',
+                        left: 0
+                      }}
+                    ></span>
+                    <p style={{ fontSize: '13px', paddingLeft: '17px' }}>Открыто</p>
+                  </span>
+                  <span>
+                    <p style={{ fontSize: '13px', color: 'grey' }}>В наличии 
+                    <i style={{ textDecoration: 'none', color: 'black', fontStyle: 'normal' }}> { item.count[0] } шт</i></p>
+                  </span>
+                </div>
+              </React.Fragment>
+            )
+
+          })}
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '0px', marginBottom: '7px' }}>
@@ -898,7 +1130,7 @@ const ProductPage = (props) => {
 
           </PopularScrollWrapper>
 
-        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
+        </ContentLine> : <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '12px' }}>
 
           <PopularScrollWrapper>
 
