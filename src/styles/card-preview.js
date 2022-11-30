@@ -2,7 +2,7 @@ import styled from 'styled-components'
 const css = {
 
   Card: styled.div`
-    display: block;
+    display: ${ props => props.styles.display ? props.styles.display : 'block' };
     position: relative;
     box-sizing: border-box;
     width: ${ props => props.styles.width }%;
@@ -12,6 +12,7 @@ const css = {
     box-shadow: 22px 53px 23px rgba(163, 163, 163, 0.03), 12px 30px 19px rgba(163, 163, 163, 0.09), 5px 13px 14px rgba(163, 163, 163, 0.15), 1px 3px 8px rgba(163, 163, 163, 0.18), 0px 0px 0px rgba(163, 163, 163, 0.18);
     padding: 20px;
     margin-left: ${ props => props.styles.mleft }px;
+    margin-right: ${ props => props.styles.mright }px;
     background-color: white;
   `,
   FakeImage: styled.div`

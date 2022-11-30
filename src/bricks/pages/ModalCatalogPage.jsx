@@ -27,6 +27,7 @@ const ModalCatalogPage = () => {
           models={mainModelsRemote}
           gens={mainGenerationsRemote}
           engines={mainEnginesRemote}
+          isPresentation={true}
         />
 
       </ContentLine>

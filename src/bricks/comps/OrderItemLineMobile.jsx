@@ -108,8 +108,8 @@ function OrderItemsLineMobile(props) {
                   { String(item).split('::')[1] }</Link></span>
                   
                 <OrderCoastBlock>
-                  <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#C4C4C4', marginBottom: '4px' }}>{ String(item).split('::')[3] } Р</span>
-                  <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#565656' }}>{ String(item).split('::')[3] } Р</span>
+                  <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#C4C4C4', marginBottom: '4px' }}>{ String(item).split('::')[3] } ₽</span>
+                  <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#565656' }}>{ String(item).split('::')[3] } ₽</span>
                 </OrderCoastBlock>
               </OrdersWrapperContentLine>
               <OrdersWrapperContentLine style={{ paddingLeft: '14px' }}>

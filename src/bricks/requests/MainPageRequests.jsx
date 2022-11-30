@@ -71,6 +71,24 @@ const MAPAR = () => {
 
       <RequestComponent
         make={false}
+        callbackAction={'GET_CARPROPS'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/carProps',
+        }}
+      />
+
+      <RequestComponent
+        make={false}
+        callbackAction={'GET_CARS'}
+        requestData={{
+          type: 'GET',
+          urlstring: '/cars',
+        }}
+      />
+
+      <RequestComponent
+        make={false}
         callbackAction={'GET_DIRS'}
         requestData={{
           type: 'GET',

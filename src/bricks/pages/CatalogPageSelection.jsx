@@ -12,6 +12,7 @@ import CardPreview from '../views/CardPreview'
 import RequestComponent from '../../services/request.service'
 import SelectAkk from '../../services/selectAkk.service'
 import arrowImg from '../../img/arrow.png'
+import minus from '../../img/minus.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, decrement } from '../../appStore/reducers/desktopPaginationReducer'
 import { setActualCategory } from '../../appStore/reducers/mainReducer'
@@ -32,6 +33,8 @@ const CatalogPage = () => {
   const mainModelsRemote = useSelector(state => state.main.catalogModelsRemote)
   const mainGenerationsRemote = useSelector(state => state.main.catalogGenerationsRemote)
   const mainEnginesRemote = useSelector(state => state.main.catalogEnginesRemote)
+  const catalogSelectionParams = useSelector(state => state.main.catalogSelectionParams)
+  const catalogSelectionSettings = useSelector(state => state.selectionSettings.settings)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -79,7 +82,9 @@ const CatalogPage = () => {
   useEffect(() => false && console.log(catalogCategory),[])
   useEffect(() => false && console.log(actualCategory),[])
   useEffect(() => false && console.log(selectionData),[])
-
+  useEffect(() => !false && console.log(catalogSelectionParams),[])
+  useEffect(() => !false && console.log(catalogSelectionSettings),[])
+  
   return (
     <React.Fragment>
 
@@ -473,20 +478,28 @@ const CatalogPage = () => {
             <PodborWindowContentLine>
 
               <ReactSelect 
+                isDisabled={true}
                 placeholder={"Выбор марки"}
                 params={{ width: 160 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
                 ]}
+                defaultValue={[
+                  { value: '002', label: JSON.parse(catalogSelectionSettings).car }
+                ]}
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
+                isDisabled={true}
                 placeholder={"Выбор модели"}
                 params={{ width: 160 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
+                ]}
+                defaultValue={[
+                  { value: '002', label: JSON.parse(catalogSelectionSettings).model }
                 ]}
               />
 
@@ -500,20 +513,28 @@ const CatalogPage = () => {
             <PodborWindowContentLine style={{ marginBottom: '0px' }}>
 
               <ReactSelect 
+                isDisabled={true}
                 placeholder={"Двигатель"}
                 params={{ width: 160 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
                 ]}
+                defaultValue={[
+                  { value: '002', label: JSON.parse(catalogSelectionSettings).engine }
+                ]}
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
+                isDisabled={true}
                 placeholder={"Поколение"}
                 params={{ width: 160 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
+                ]}
+                defaultValue={[
+                  { value: '002', label: JSON.parse(catalogSelectionSettings).generation }
                 ]}
               />
 
@@ -552,14 +573,86 @@ const CatalogPage = () => {
           }) : null }
 
         </ContentLine> : 
-        <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap', marginBottom: '8px' }}>
+        <ContentLine 
+          style={{ 
+            justifyContent: 'flex-start', 
+            flexWrap: 'wrap', 
+            marginBottom: '8px',
+            paddingRight: '15.833333%' ,
+            position: 'relative',
+          }}
+        >
+
+          {/* ---------------------------------- */}
+          {/* ответвление от макета */}
+          {/* ---------------------------------- */}
+
+          <div
+            style={{
+              display: 'block',
+              position: 'absolute',
+              width: '24%',
+              height: '90%',
+              minHeight: '60px',
+              borderRadius: '4px',
+              boxShadow: '22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%)',
+              background: 'linear-gradient(to right, transparent, white)',
+              top: '5%',
+              left: '76%',
+            }}
+          ></div>
 
           { generalCatalog ? generalCatalog.map((item, index) => {
 
-            return <React.Fragment key={index}>{
-              index < paginationCount + 2 && <React.Fragment key={index}>
+            const { params, mount, terminal, tech } = JSON.parse(catalogSelectionParams)
+            const itemProps = item.properties[0].property
+            let success = 0
+
+            itemProps.forEach(property => {
+
+              if ( property.id[0] === '474b3fff-bb81-11e6-963a-0015179b1da1' ) {
+                if ( property.value[0] === params ) {
+
+                  false && console.log(params)
+                  false && console.log(property.value[0])
+                  success++
+
+                }
+              }
+              if ( property.id[0] === 'a6b1161c-3c7a-11e7-be29-0015179b1da1' ) {
+                if ( property.value[0] === terminal[0] ) {
+
+                  false && console.log(terminal[0])
+                  false && console.log(property.value[0])
+                  success++
+
+                }
+              }
+              if ( property.id[0] === 'dbcfce83-e01b-11e9-8100-00155d0bfb06' ) {
+                if ( property.value[0] === mount[0] ) {
+
+                  false && console.log(mount[0])
+                  false && console.log(property.value[0])
+                  success++
+
+                }
+              }
+              if ( property.id[0] === 'ce2db260-3c7a-11e7-be29-0015179b1da1' ) {
+                if ( tech.includes(property.value[0]) ) {
+
+                  false && console.log(tech)
+                  false && console.log(property.value[0])
+                  success++
+
+                }
+              }
+
+            })
+
+            if ( success === 4 ) { return <React.Fragment key={index}>{
+              index < /* paginationCount + 2 */ 10000 && <React.Fragment key={index}>
                 <CardPreview
-                  params={{ width: 15.833333, mleft: 0 }}
+                  params={{ width: 18.833333, mleft: 0, mright: 12 }}
                   image={null}
                   title={item.name}
                   description={[
@@ -576,58 +669,7 @@ const CatalogPage = () => {
                   }
                   itemID={item.id[0]}
                 />
-                
-                { (( index < 5 ) || 
-                   ( index > 5 && index < 11 )  ||
-                   ( index > 11 && index < 17 ) ||
-                   ( index > 17 && index < 23 ) ||
-                   ( index > 23 && index < 29 ) ||
-                   ( index > 29 && index < 35 ) ||
-                   ( index > 35 && index < 41 ) ||
-                   ( index > 41 && index < 47 ) ||
-                   ( index > 47 && index < 53 ) ||
-                   ( index > 53 && index < 59 ) ||
-                   ( index > 59 && index < 65 ) ||
-                   ( index > 65 && index < 71 ) ||
-                   ( index > 71 && index < 77 ) ||
-                   ( index > 77 && index < 83 ) ||
-                   ( index > 83 && index < 89 ) ||
-                   ( index > 89 && index < 95 ) ||
-                   ( index > 95 && index < 101 ) ||
-                   ( index > 101 && index < 107 ) ||
-                   ( index > 107 && index < 113 ) ||
-                   ( index > 113 && index < 119 ) ||
-                   ( index > 119 && index < 125 ) ||
-                   ( index > 125 && index < 131 ) ||
-                   ( index > 131 && index < 137 ) ||
-                   ( index > 137 && index < 143 ) ||
-                   ( index > 143 && index < 149 ) ||
-                   ( index > 149 && index < 155 ) ||
-                   ( index > 155 && index < 161 ) ||
-                   ( index > 161 && index < 167 ) ||
-                   ( index > 167 && index < 173 ) ||
-                   ( index > 173 && index < 179 ) ||
-                   ( index > 179 && index < 185 ) ||
-                   ( index > 185 && index < 191 ) ||
-                   ( index > 191 && index < 197 ) ||
-                   ( index > 197 && index < 203 ) ||
-                   ( index > 203 && index < 209 ) ||
-                   ( index > 209 && index < 215 ) ||
-                   ( index > 215 && index < 221 ) ||
-                   ( index > 221 && index < 227 ) ||
-                   ( index > 227 && index < 233 ) ||
-                   ( index > 233 && index < 239 ) || 
-                   ( index > 239 && index < 245 ) ||
-                   ( index > 245 && index < 251 ) ||
-                   ( index > 251 && index < 257 ) ||
-                   ( index > 257 && index < 263 ) ||
-                   ( index > 263 && index < 269 ) ||
-                   ( index > 269 && index < 275 ) ||
-                   ( index > 275 && index < 281 ) ||
-                   ( index > 281 && index < 287 ) ||
-                   ( index > 287 && index < 293 ) ||
-                   ( index > 293 && index < 299 ) ||
-                   ( index > 299 && index < 305 )) && <span 
+                { false && <span 
                   style={{ 
                     display: 'block',
                     position: 'relative',
@@ -638,7 +680,7 @@ const CatalogPage = () => {
                 ></span> }
 
               </React.Fragment>
-            }</React.Fragment>
+            }</React.Fragment> }
 
           }) : null }
 

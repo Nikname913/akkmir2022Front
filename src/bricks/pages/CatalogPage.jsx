@@ -25,6 +25,7 @@ const CatalogPage = () => {
   const items = useSelector(state => state.catalog.catalog)
   const actualCategory = useSelector(state => state.main.actualCategory)
   const paginationCount = useSelector(state => state.desktopPagination.count)
+  const propsRemote = useSelector(state => state.main.catalogPropsRemote)
   const [ priceSort, setPriceSort ] = useState(false)
   const params = useParams()
   const navigate = useNavigate()
@@ -32,8 +33,26 @@ const CatalogPage = () => {
   const startRef = useRef()
   const catalogCategory = params.category
 
+  // ------------------------------
+  // 474b3fff-bb81-11e6-963a-0015179b1da1 - размеры аккумулятора
+  // ------------------------------
+
+  const [ brandFilter, setBrandFilter ] = useState('')
+  const [ sizeFilter, setSizeFilter ] = useState('')
+  const [ polyarFilter, setPolyarFilter ] = useState('')
+  const [ tokFilter, setTokFilter ] = useState('')
+  const [ terminalFilter, setTerminalFilter ] = useState('')
+  const [ emkostFilter, setEmkostFilter ] = useState('')
+  const [ priceFilter, setPriceFilter ] = useState([null, null])
+
+  const [ modelDisabled, setModelDisabled ] = useState(true)
+  const [ engineDisabled, setEngineDisabled ] = useState(true)
+  const [ generationDisabled, setGenerationDisabled ] = useState(true)
+
   let jsonCatalog = useSelector(state => state.catalog.generalCatalog)
   let generalCatalog = null
+  let brands = []
+  let sizes = []
 
   function sortOfPrice(item1, item2) {
 
@@ -49,7 +68,7 @@ const CatalogPage = () => {
 
   } else {
 
-    console.log(actualCategory)
+    !false && console.log(actualCategory)
 
     jsonCatalog 
       ? generalCatalog = JSON.parse(jsonCatalog)[0].product.filter(
@@ -69,6 +88,38 @@ const CatalogPage = () => {
 
     }
 
+    generalCatalog.forEach((item, index) => {
+
+      if ( brands.includes(item.properties[0].property[0].value[0]) === false ) {
+
+        brands.push(
+          { value: index, label: item.properties[0].property[0].value[0] },
+        )
+
+      }
+
+      item.properties[0].property.forEach(prop => {
+
+        if ( prop.id[0] === '474b3fff-bb81-11e6-963a-0015179b1da1' ) sizes.push(
+
+          { value: index, label: prop.value[0] },
+
+        )
+
+      })
+
+      if ( index === 10 ) {
+
+        console.log(item.properties[0].property)
+
+      }
+
+      false && console.log(sizes)
+      false && console.log(brands)
+      false && console.log(item.properties[0].property[0].value[0])
+
+    })
+
   }
 
   function scrollStart() {
@@ -80,8 +131,6 @@ const CatalogPage = () => {
   useEffect(() => document.documentElement.scrollTop = 0,[])
   useEffect(() => false && console.log(catalogCategory),[])
   useEffect(() => console.log(actualCategory),[])
-
-  // бренд продукта - id - brand
 
   return (
     <React.Fragment>
@@ -115,19 +164,21 @@ const CatalogPage = () => {
               <ReactSelect 
                 placeholder={"Выберите бренд"}
                 params={{ width: 180 }}
-                data={[
-                  { value: '001', label: 'no brand' },
-                  { value: '002', label: 'no brand' },
-                ]}
+                data={
+                  brands.length > 0 
+                    ? brands
+                    : [{ value: '001', label: 'Загрузка данных' }]
+                }
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
                 placeholder={"Выберите размер"}
                 params={{ width: 180 }}
-                data={[
-                  { value: '001', label: 'no size' },
-                  { value: '002', label: 'no size' },
-                ]}
+                data={
+                  sizes.length > 0 
+                    ? sizes
+                    : [{ value: '001', label: 'Загрузка данных' }]
+                }
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
@@ -388,15 +439,15 @@ const CatalogPage = () => {
             </PodborWindowContentLine>
             <PodborWindowContentLine>
 
-              <span style={{ display: 'block', width: '160px', fontSize: '13px', fontWeight: 'bold', marginRight: '10px' }}>Марка автомобиля</span>
-              <span style={{ display: 'block', width: '160px', fontSize: '13px', fontWeight: 'bold' }}>Модель автомобиля</span>
+              <span style={{ display: 'block', width: '180px', fontSize: '13px', fontWeight: 'bold', marginRight: '10px' }}>Марка автомобиля</span>
+              <span style={{ display: 'block', width: '180px', fontSize: '13px', fontWeight: 'bold' }}>Модель автомобиля</span>
 
             </PodborWindowContentLine>
             <PodborWindowContentLine>
 
               <ReactSelect 
                 placeholder={"Выбор марки"}
-                params={{ width: 160 }}
+                params={{ width: 180 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
@@ -404,8 +455,9 @@ const CatalogPage = () => {
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
+                isDisabled={modelDisabled}
                 placeholder={"Выбор модели"}
-                params={{ width: 160 }}
+                params={{ width: 180 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
@@ -415,15 +467,16 @@ const CatalogPage = () => {
             </PodborWindowContentLine>
             <PodborWindowContentLine>
 
-              <span style={{ display: 'block', width: '160px', fontSize: '13px', fontWeight: 'bold', marginRight: '10px' }}>Объем двигателя</span>
-              <span style={{ display: 'block', width: '160px', fontSize: '13px', fontWeight: 'bold' }}>Поколение</span>
+              <span style={{ display: 'block', width: '180px', fontSize: '13px', fontWeight: 'bold', marginRight: '10px' }}>Объем двигателя</span>
+              <span style={{ display: 'block', width: '180px', fontSize: '13px', fontWeight: 'bold' }}>Поколение</span>
 
             </PodborWindowContentLine>
             <PodborWindowContentLine style={{ marginBottom: '0px' }}>
 
               <ReactSelect 
+                isDisabled={engineDisabled}
                 placeholder={"Двигатель"}
-                params={{ width: 160 }}
+                params={{ width: 180 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
@@ -431,8 +484,9 @@ const CatalogPage = () => {
               />
               <span style={{ width: '10px' }}></span>
               <ReactSelect 
+                isDisabled={generationDisabled}
                 placeholder={"Поколение"}
-                params={{ width: 160 }}
+                params={{ width: 180 }}
                 data={[
                   { value: '001', label: 'no params' },
                   { value: '002', label: 'no params' },
@@ -708,6 +762,8 @@ const CatalogPage = () => {
         <ContentLine style={{ justifyContent: 'flex-start', flexWrap: 'wrap' }}>
 
           { generalCatalog ? generalCatalog.map((item, index) => {
+
+            false && console.log(JSON.stringify(item))
 
             return <React.Fragment key={index}>{
               index < paginationCount && <React.Fragment key={index}>

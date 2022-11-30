@@ -10,6 +10,8 @@ import { setCatalogMenuRemote,
   setCatalogModelsRemote,
   setCatalogGenerationsRemote,
   setCatalogEnginesRemote,
+  setCatalogCarPropsRemote,
+  setCatalogCarsRemote,
   setCatalogDirsRemote,
   setCatalogShopsRemote } from '../appStore/reducers/mainReducer'
 
@@ -70,6 +72,10 @@ const RequestActionsComponent = (props) => {
             ? setCatalogGenerationsRemote(JSON.stringify(data))
             : callbackAction === 'GET_ENGINES'
             ? setCatalogEnginesRemote(JSON.stringify(data))
+            : callbackAction === 'GET_CARPROPS'
+            ? setCatalogCarPropsRemote(JSON.stringify(data))
+            : callbackAction === 'GET_CARS'
+            ? setCatalogCarsRemote(JSON.stringify(data))
             : callbackAction === 'GET_DIRS'
             ? setCatalogDirsRemote(JSON.stringify(data))
             : callbackAction === 'GET_SHOPS'

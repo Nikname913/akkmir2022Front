@@ -64,14 +64,15 @@ const CardPreview = (props) => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'flex-start',
+              flexWrap: 'wrap',
               width: '100%',
               height: 'auto',
               marginTop: '11px',
               marginBottom: '2px'
             }}
           >
-            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold' }}>{ coast1 } ₽</span>
-            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold', color: 'grey', textAlign: 'right' }}>{ coast2 } ₽</span>
+            <span style={{ display: 'block', width: '60%', fontSize: '16px', fontWeight: 'bold', marginBottom: '2px' }}>{ coast1 } ₽</span>
+            <span style={{ display: 'block', width: '50%', fontSize: '16px', fontWeight: 'bold', color: 'grey' }}>{ coast2 } ₽</span>
 
           </div>
 
@@ -118,8 +119,8 @@ const CardPreview = (props) => {
 
           { itemID !== 'not-for-sale' ? <Button  
             params={{
-              width: 100,
-              height: 30,
+              width: 94,
+              height: 36,
               background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
             }}
             inner={makeOrderInner}
@@ -135,8 +136,8 @@ const CardPreview = (props) => {
             }}
           /> : <Button  
             params={{
-              width: 100,
-              height: 30,
+              width: 94,
+              height: 36,
               background: !makeOrder ? '#2E2E2E' : 'rgb(43,198,49)'
             }}
             inner={makeOrderInner}
@@ -149,8 +150,8 @@ const CardPreview = (props) => {
           /> }
           <Button  
             params={{
-              width: 30,
-              height: 30,
+              width: 36,
+              height: 36,
               background: 'grey'
             }}
             inner={""}
@@ -168,11 +169,11 @@ const CardPreview = (props) => {
                   display: 'block',
                   position: 'absolute',
                   boxSizing: 'border-box',
-                  width: '17px',
+                  width: '19px',
                   left: '0',
-                  marginLeft: '7px',
+                  marginLeft: '8px',
                   top: '0',
-                  marginTop: '8px'
+                  marginTop: '9px'
                 }}
               />
             }

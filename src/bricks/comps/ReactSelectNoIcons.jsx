@@ -50,6 +50,11 @@ const selectStyles = {
     border: 'none',
     zIndex: 20
   }),
+  menuList: (theme) => ({
+    ...theme,
+    width: '120%',
+    color: 'black'
+  }),
   option: (theme) => ({
     ...theme,
     fontSize: '13px',
@@ -73,7 +78,9 @@ const ReactSelectNoIcons = (props) => {
     actionParams = null,
     showIcon = false,
     icon = false,
-    iconStyles = null } = props
+    iconStyles = null,
+    defaultValue = null,
+    isDisabled = null } = props
 
     function actionsReducer(param) {
 
@@ -110,6 +117,8 @@ const ReactSelectNoIcons = (props) => {
       /> }
       
       <Select 
+        isDisabled={ isDisabled && isDisabled }
+        defaultValue={ defaultValue && defaultValue }
         options={ data && data }
         placeholder={placeholder}
         styles={selectStyles}
@@ -124,6 +133,7 @@ const ReactSelectNoIcons = (props) => {
         onChange={inputValue => {
 
           action && actionsReducer(actionParams)
+          false && console.log(inputValue)
 
         }}
       />

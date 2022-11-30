@@ -1,13 +1,14 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import css from '../styles/select-akk'
 import styled from 'styled-components'
 import Button from '../bricks/comps/button/Button.jsx'
 import { setSettings } from '../appStore/reducers/selectionSettingsReducer'
-import { setActualCategory } from '../appStore/reducers/mainReducer'
+import { setActualCategory, setCatalogSelectionParams } from '../appStore/reducers/mainReducer'
 
 import solaris from '../img/solaris.png'
 import vesta from '../img/vesta.png'
@@ -51,7 +52,10 @@ const Image = styled.img`
 
 const SelectAkk = (props) => {
 
-  const { categories, marks, models, gens, engines } = props
+  const { categories, marks, models, gens, engines, isPresentation = false } = props
+  const carsArray = useSelector(state => state.main.catalogCarsRemote)
+  const carsProps = useSelector(state => state.main.catalogCarPropsRemote)
+  const selectionParams = useSelector(state => state.main.catalogSelectionParams)
   const [ step, setStep ] = useState(0)
   const [ selectedCar, setSelectedCar ] = useState('Honda')
   const [ selectedCarID, setSelectedCarID ] = useState(null)
@@ -1665,7 +1669,7 @@ const SelectAkk = (props) => {
                     display: 'block',
                     width: selectedLogo === 10
                     ? '3.6%' : selectedLogo === 7
-                    ? '6%' : selectedLogo === 8
+                    ? '3%' : selectedLogo === 8
                     ? '6%' : selectedLogo === 5
                     ? '3.6%' : selectedLogo === 2
                     ? '3%' : '4%',
@@ -1748,7 +1752,8 @@ const SelectAkk = (props) => {
                             position: 'relative',
                             marginLeft: 'auto',
                             marginRight: 'auto',
-                            width: '160px'
+                            width: '160px',
+                            filter: 'grayscale(0.3)'
                           }}
                         />
                         <Button
@@ -1832,7 +1837,7 @@ const SelectAkk = (props) => {
                     display: 'block',
                     width: selectedLogo === 10
                     ? '3.6%' : selectedLogo === 7
-                    ? '6%' : selectedLogo === 8
+                    ? '3%' : selectedLogo === 8
                     ? '6%' : selectedLogo === 5
                     ? '3.6%' : selectedLogo === 2
                     ? '3%' : '4%',
@@ -1968,8 +1973,108 @@ const SelectAkk = (props) => {
                               label: 'Аккумуляторы автомобильные',
                             })
 
-                            console.log(sendedData)
-                            navigate('/resultaty-podbora')
+                            let MOUNTTYPE = []
+                            let TERMINALTYPE = []
+                            let TECH = []
+                            let GABARITES = ''
+                            let ENGINEID = item.id[0]
+
+                            JSON.parse(carsArray)[0].car.forEach(item => {
+
+                              if ( item.mark_id[0] === selectedCarID ) {
+                                
+                                let models = item.models[0].model
+
+                                models.forEach(model => {
+
+                                  if ( model.model_id[0] === selectedModelID ) {
+
+                                    false && console.log(model)
+                                    let gens = model.generations[0].generation
+
+                                    gens.forEach(generation => {
+
+                                      if ( generation.generation_id[0] === selectedGenerationID ) {
+
+                                        false && console.log(generation)
+                                        let engines = generation.engines[0].engine
+
+                                        engines.forEach(engine => {
+
+                                          if ( engine.engine_id[0] === ENGINEID ) {
+
+                                            false && console.log(JSON.stringify(engine))
+                                            GABARITES = engine.gabarites[0].value[0]
+
+                                          }
+
+                                        })
+
+                                        MOUNTTYPE = generation.mount_types
+                                        TERMINALTYPE = generation.terminal_types
+                                        TECH = generation.tehnologys
+
+                                      }
+
+                                    })
+
+                                  }
+
+                                })
+
+                              }
+
+                            })
+
+                            false && console.log(MOUNTTYPE)
+                            false && console.log(TERMINALTYPE)
+                            false && console.log(GABARITES)
+
+                            let MOUNTTYPE_VALUES = []
+                            let TERMINALTYPE_VALUES = []
+                            let TECH_VALUES = []
+                            
+                            for ( let i = 0; i < JSON.parse(carsProps)[0].property.length; i++ ) {
+
+                              let item = JSON.parse(carsProps)[0].property[i]
+
+                              if ( item.id[0] === GABARITES ) GABARITES = item.name[0]
+                              MOUNTTYPE.forEach(mty => {
+
+                                if ( item.id[0] === mty.value[0] ) MOUNTTYPE_VALUES.push(item.name[0]) 
+
+                              })
+                              TERMINALTYPE.forEach(tety => {
+
+                                if ( item.id[0] === tety.value[0] ) TERMINALTYPE_VALUES.push(item.name[0]) 
+
+                              })
+                              TECH[0].value.forEach(tecty => {
+
+                                if ( item.id[0] === tecty ) TECH_VALUES.push(item.name[0]) 
+
+                              })
+
+                            }
+
+                            const SELECTION_DATA = JSON.stringify({
+
+                              params: GABARITES,
+                              mount: MOUNTTYPE_VALUES,
+                              terminal: TERMINALTYPE_VALUES,
+                              tech: TECH_VALUES
+
+                            })
+
+                            false && console.log(MOUNTTYPE_VALUES)
+                            false && console.log(TERMINALTYPE_VALUES)
+                            false && console.log(GABARITES)
+                            false && console.log(TECH_VALUES)
+                            false && console.log(sendedData)
+                            false && console.log(carsArray)
+                            !false && console.log(SELECTION_DATA)
+                            !false && dispatch(setCatalogSelectionParams(SELECTION_DATA))
+                            !isPresentation && navigate('/resultaty-podbora')
 
                           }}
                         />
@@ -2036,6 +2141,79 @@ const SelectAkk = (props) => {
             >Свернуть список</span> }
           </AlphabetLine>
         </ContentLine> }
+      
+
+      { selectionParams.length > 0 && isPresentation && <React.Fragment>
+
+        <h3 
+          style={{
+            display: 'block',
+            position: 'relative', 
+            color: '#404040',
+            marginTop: '22px',
+            marginBottom: '13px',
+          }}
+        >Сформированные данные подбора</h3>
+        <p
+          style={{
+            display: 'block',
+            position: 'relative', 
+            color: '#404040',
+            lineHeight: '22px',
+            fontSize: '14px'
+          }}
+        >Данный модуль на выходе формирует JSON строку в которую помещаются характеристики всех подходящих аккумуляторов. Объект, из которого формируется JSON называется SELECTION_DATA, в примере он закидывается в стейт ( Redux Toolkit ) но с ним можно делать любые произвольные действия</p>
+
+        <div 
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            position: 'relative',
+            width: '1000px',
+            height: 'auto',
+            minHeight: '80px',
+            borderRadius: '10px',
+            backgroundColor: 'rgb(244, 244, 244)',
+            marginTop: '20px'
+          }}
+        >
+
+          <p style={{ display: 'none' }}>{ selectionParams }</p>
+          <p style={{ display: 'block', position: 'relative', color: '#fae01e', fontWeight: 'bold', letterSpacing: '1px', fontStyle: 'normal' }}>{"{ "}
+            <i style={{ color: '#8c25db', fontStyle: 'normal' }}>
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+              params
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+            </i><i style={{ color: 'grey', fontStyle: 'normal' }}>:</i>
+            <i style={{ color: '#28b03b', fontStyle: 'normal' }}>"{ JSON.parse(selectionParams).params }"</i>
+            <i style={{ color: 'grey', fontStyle: 'normal' }}>,</i>
+            <i style={{ color: '#8c25db', fontStyle: 'normal' }}>
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+              mount
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+            </i><i style={{ color: 'grey', fontStyle: 'normal' }}>:</i>
+            <i style={{ color: '#28b03b', fontStyle: 'normal' }}>{ JSON.stringify(JSON.parse(selectionParams).mount) }</i>
+            <i style={{ color: 'grey', fontStyle: 'normal' }}>,</i>
+            <i style={{ color: '#8c25db', fontStyle: 'normal' }}>
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+              terminal
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+            </i><i style={{ color: 'grey', fontStyle: 'normal' }}>:</i>
+            <i style={{ color: '#28b03b', fontStyle: 'normal' }}>{ JSON.stringify(JSON.parse(selectionParams).terminal) }</i>
+            <i style={{ color: 'grey', fontStyle: 'normal' }}>,</i>
+            <i style={{ color: '#8c25db', fontStyle: 'normal' }}>
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+              tech
+              <i style={{ color: 'grey', fontStyle: 'normal' }}>"</i>
+            </i><i style={{ color: 'grey', fontStyle: 'normal' }}>:</i>
+            <i style={{ color: '#28b03b', fontStyle: 'normal' }}>{ JSON.stringify(JSON.parse(selectionParams).tech) }</i>
+          {" }"}</p>
+
+        </div>
+
+      </React.Fragment> }
 
       </Wrapper>
     </React.Fragment>

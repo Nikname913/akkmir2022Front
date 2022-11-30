@@ -7,6 +7,7 @@ import tools from '../../../img/menuTools.svg'
 import cabinet from '../../../img/cabinet.svg'
 import home from '../../../img/home.svg'
 import shops from '../../../img/shops.svg'
+import dialog from '../../../img/dialog.svg'
 import mobileShop from '../../../img/mobileShop.svg'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -217,6 +218,32 @@ const MobileMenu = (props) => {
             >{ orders }</span>
           </MenuItem>
         </Link>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            position: 'absolute',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            backgroundColor: '#565656',
+            left: '100%',
+            top: '0%',
+            marginTop: '-80px',
+            zIndex: 20,
+            marginLeft: '-80px',
+            cursor: 'pointer',
+            boxShadow: '22px 53px 23px rgb(163 163 163 / 3%), 12px 30px 19px rgb(163 163 163 / 9%), 5px 13px 14px rgb(163 163 163 / 15%), 1px 3px 8px rgb(163 163 163 / 18%), 0px 0px 0px rgb(163 163 163 / 18%)'
+          }}
+        >
+          <img
+            alt={""}
+            src={dialog}
+          />
+        </div>
 
       </Wrapper>
     </React.Fragment>

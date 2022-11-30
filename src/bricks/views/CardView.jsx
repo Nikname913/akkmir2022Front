@@ -11,7 +11,7 @@ import quest from '../../img/quest.svg'
 import byClickImage from '../../img/byClick.svg'
 import likeImg from '../../img/like.svg'
 import likeImgWhite from '../../img/likeWhite.svg'
-import minus from '../../img/minus.png'
+import more from '../../img/showMore.svg'
 import eco from '../../img/eco.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { productPageReducer, 
@@ -77,13 +77,19 @@ const CardView = (props) => {
 
       ppropsRemote.forEach(pprop => {
 
-        if ( pprop.id[0] === propID ) returnedPropsArray.push({ id: pprop.name[0], value: propValue })
+        if ( pprop.id[0] === propID ) returnedPropsArray.push({ 
+          
+          id: pprop.name[0], 
+          value: propValue,
+          hiddenID: propID 
+          
+        })
 
       }) 
 
     })
     
-    false && console.log(returnedPropsArray)
+    !false && console.log(returnedPropsArray)
     return returnedPropsArray
 
   }
@@ -187,7 +193,7 @@ const CardView = (props) => {
             style={{ 
               display: 'block', 
               cursor: 'pointer', 
-              width: '100%', 
+              width: '83%', 
               boxSizing: 'border-box',
               borderRadius: '8px' }}  
             src={image} 
@@ -198,19 +204,19 @@ const CardView = (props) => {
 
           <PhotoGallery>
             <GalleryItem style={{ boxShadow: 'none' }}>
-              <img style={{ display: 'block', width: '70px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '66px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem style={{ boxShadow: 'none' }}>
-              <img style={{ display: 'block', width: '70px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '66px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem style={{ boxShadow: 'none' }}>
-              <img style={{ display: 'block', width: '70px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '66px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem style={{ boxShadow: 'none' }}>
-              <img style={{ display: 'block', width: '70px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '66px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
             <GalleryItem style={{ boxShadow: 'none' }}>
-              <img style={{ display: 'block', width: '70px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
+              <img style={{ display: 'block', width: '66px', cursor: 'pointer', borderRadius: '8px' }} src={image} alt={""}/>
             </GalleryItem>
           </PhotoGallery>
 
@@ -792,8 +798,13 @@ const CardView = (props) => {
                 >{""}
                   <img
                     alt={""}
-                    src={minus}
-                    style={{ display: 'none' }}
+                    src={more}
+                    style={{
+                      display: 'block',
+                      position: 'absolute',
+                      transform: 'rotate(-0deg)',
+                      width: '17px'
+                    }}
                   />
                 </span>
 
@@ -807,18 +818,18 @@ const CardView = (props) => {
                         style={{
                           display: 'block',
                           position: 'absolute',
-                          width: '24px',
-                          height: '24px',
+                          width: '28px',
+                          height: '28px',
                           backgroundColor: 'rgb(247, 247, 247)',
                           borderRadius: '50%',
                           left: '0%',
-                          marginLeft: '12px',
+                          marginLeft: '10px',
                           paddingRight: '0px',
                           top: '50%',
-                          marginTop: '-12px',
+                          marginTop: '-14px',
                           fontSize: '12px',
                           textAlign: 'center',
-                          lineHeight: '24px',
+                          lineHeight: '28px',
                           color: 'grey'
                         }}
                       >
@@ -855,16 +866,17 @@ const CardView = (props) => {
                 >{""}
                   <img
                     alt={""}
-                    src={minus}
-                    style={{ display: 'none' }}
+                    src={more}
+                    style={{ display: 'block', width: '17px' }}
                   />
                   <img
                     alt={""}
-                    src={minus}
+                    src={more}
                     style={{
-                      display: 'none',
+                      display: 'block',
                       position: 'absolute',
-                      transform: 'rotate(90deg)'
+                      transform: 'rotate(90deg)',
+                      width: '17px'
                     }}
                   />
                 </span>

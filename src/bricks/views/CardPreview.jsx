@@ -44,7 +44,7 @@ const CardPreview = (props) => {
   function ordersData(param) {
     if ( coast1 !== '--' ) {
       Rds.makeNewOrder({ itemID: param })
-      setMakeOrderInner('Добавлено')
+      setMakeOrderInner('В корзине')
       setMakeOrder(true)
     }
 

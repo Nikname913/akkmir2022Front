@@ -18,8 +18,11 @@ export const mainReducer = createSlice({
     catalogModelsRemote: '',
     catalogGenerationsRemote: '',
     catalogEnginesRemote: '',
+    catalogCarPropsRemote: '',
+    catalogCarsRemote: '',
     catalogDirsRemote: '',
     catalogShopsRemote: '',
+    catalogSelectionParams: '',
     catalogMenu: [],
     ordersCount: 0,
     sravnenieCount: 2,
@@ -89,11 +92,20 @@ export const mainReducer = createSlice({
     setCatalogEnginesRemote: (state, action) => {
       state.catalogEnginesRemote = action.payload
     },
+    setCatalogCarPropsRemote: (state, action) => {
+      state.catalogCarPropsRemote = action.payload
+    },
+    setCatalogCarsRemote: (state, action) => {
+      state.catalogCarsRemote = action.payload
+    },
     setCatalogDirsRemote: (state, action) => {
       state.catalogDirsRemote = action.payload
     },
     setCatalogShopsRemote: (state, action) => {
       state.catalogShopsRemote = action.payload
+    },
+    setCatalogSelectionParams: (state, action) => {
+      state.catalogSelectionParams = action.payload
     }
     
   }
@@ -117,6 +129,9 @@ export const { productPageReducer,
   setCatalogModelsRemote,
   setCatalogGenerationsRemote,
   setCatalogEnginesRemote,
+  setCatalogCarPropsRemote,
+  setCatalogCarsRemote,
   setCatalogDirsRemote,
-  setCatalogShopsRemote } = mainReducer.actions
+  setCatalogShopsRemote,
+  setCatalogSelectionParams } = mainReducer.actions
 export default mainReducer.reducer

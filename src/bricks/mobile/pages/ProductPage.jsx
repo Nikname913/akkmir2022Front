@@ -3,11 +3,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import css from '../../../styles/mobile/mobileStyles'
 import Button from '../../comps/button/Button.jsx'
 import CardPreview from '../views/CardPreview'
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrdersCount } from '../../../appStore/reducers/mainReducer'
+import { setList } from '../../../appStore/reducers/mobileShopsListReducer'
 import Rds from '../../../appStore/reducers/storageReducers/mainReducer'
 import akkum from '../../../img/category.png'
 import eco from '../../../img/eco.svg'
@@ -121,41 +123,8 @@ const ProductPage = (props) => {
     })
 
     console.log(returnedPropsArray)
+    dispatch(setList(JSON.stringify(returnedPropsArray)))
     return returnedPropsArray
-
-  }
-
-  function shopsConfigRes() {
-
-    const warehouses = shops[0].warehouse
-    let returnedWarehousesArray = []
-
-    false && console.log(shopsRemote)
-    false && console.log(shops)
-    false && console.log(warehouses)
-
-    shopsRemote && warehouses.forEach(warehouse => {
-
-      const sshopsRemote = JSON.parse(shopsRemote)[0].warehouse
-      const shopID = warehouse.id[0]
-      const itemsCount = warehouse.count[0]
-      const ekbRegion = 'f662faa5-029b-11e8-8dcf-0015179b1da1'
-
-      sshopsRemote.forEach(sshop => {
-
-        if ( sshop.region_id[0] === ekbRegion && sshop.id[0] === shopID ) {
-
-          sshop.count = [ itemsCount ]
-          returnedWarehousesArray.push(sshop)        
-
-        }
-
-      })
-
-    })
-
-    false && console.log(returnedWarehousesArray)
-    return returnedWarehousesArray
 
   }
 
@@ -420,11 +389,15 @@ const ProductPage = (props) => {
               position: 'relative',
               fontSize: '13px',
               lineHeight: '18px',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              paddingRight: '2px'
             }}
           >
             
-            В наличии в { productShops.length } магазинах</span>
+            <Link 
+              to={"/magaziny"}
+              style={{ color: 'inherit' }}>
+              В наличии в { productShops.length } магазинах</Link></span>
 
         </ContentLine>
         <ContentLine width={screen} style={{ marginTop: '6px', marginBottom: '6px' }}>
@@ -515,7 +488,8 @@ const ProductPage = (props) => {
                     Сдать свой аккумулятор и получить скидку</span>
 
                 </div>
-                <div 
+
+                { false && <div 
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -538,8 +512,9 @@ const ProductPage = (props) => {
                     
                     Выберите емкость сдаваемого аккумулятора</span>
 
-                </div>
-                <div 
+                </div> }
+                
+                { false && <div 
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -657,7 +632,7 @@ const ProductPage = (props) => {
                     
                     Скидка 1000 руб.</span>
 
-                </div>
+                </div> }
                 <div 
                   style={{
                     display: 'flex',

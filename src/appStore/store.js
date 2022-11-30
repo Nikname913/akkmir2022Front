@@ -8,6 +8,7 @@ import mobileScrollReducer from './reducers/mobileScrollReducer'
 import desktopPaginationReducer from './reducers/desktopPaginationReducer'
 import selectionSettingsReducer from './reducers/selectionSettingsReducer'
 import actualRegionReducer from './reducers/actualRegionReducer'
+import mobileShopsListReducer from './reducers/mobileShopsListReducer'
 
 export default configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export default configureStore({
     mobileScroll: mobileScrollReducer,
     desktopPagination: desktopPaginationReducer,
     selectionSettings: selectionSettingsReducer,
-    actualRegion: actualRegionReducer
+    actualRegion: actualRegionReducer,
+    mobileShopsList: mobileShopsListReducer
   },
 })
